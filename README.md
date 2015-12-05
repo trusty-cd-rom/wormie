@@ -7,6 +7,7 @@
   - __Product Owner__: Sunyoung Kim
   - __Scrum Master__: Nick Fujita
   - __DevOps__: Charlie Harrington
+  - __Development Team__: Sunyoung Kim, Nick Fujita, Charlie Harrington
 
 ## Table of Contents
 
@@ -27,8 +28,9 @@ Current usecases involve capturing a subject or moment of interest at a specific
 ## Requirements
 
 ### Backend
-- Python 2.7 or 3.4 (TBD) 
-- Django or Flask (TBD)
+- Python 3.5 
+- Django
+- Django REST framework
 - Postgres
 
 ### Frontend
@@ -42,7 +44,6 @@ Current usecases involve capturing a subject or moment of interest at a specific
 - Facebook API
 
 ### Dev tools
-- Gulp
 - Webpack
 - Babel 5
 
