@@ -23,6 +23,8 @@ class WormholeList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
     queryset = Wormhole.objects.all()
     serializer_class = WormholeSerializer
 
@@ -74,6 +76,8 @@ class SubmissionList(generics.ListCreateAPIView):
     """
     List all submissions, or create a new submission
     """
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     queryset = Submission.objects.all()
     serializer_class = SubmissionSerializer

@@ -5,25 +5,28 @@ from django.contrib.auth.models import User
 
 class WormholeSerializer(serializers.ModelSerializer):
 
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner_name = serializers.ReadOnlyField(source='owner.username')
     submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
 
     class Meta:
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude',
-            'deadline', 'notes', 'status', 'owner',
+            'deadline', 'notes', 'status', 'owner', 'owner_name',
             'created_at', 'updated_at', 'submissions')
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
 
+    owner_name = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Submission
         field = ('id', 'created_at', 'updated_at', 'notes', 'video_url',
-            'wormhole_id', 'owner')
+            'wormhole_id', 'owner', 'owner_name')
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     wormholes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wormhole.objects.all())
     submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
 
