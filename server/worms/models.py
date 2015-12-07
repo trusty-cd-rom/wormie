@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
-        
 class Request(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -13,7 +12,6 @@ class Request(models.Model):
     notes = models.CharField(max_length=2000)
     status = models.CharField(max_length=100)
     requestor_id = models.ForeignKey(User)
-    # submissions = models.OnetoManyField(Submission, related_name='submissions')
 
     class Meta:
         ordering = ('created_at',)
@@ -39,8 +37,6 @@ class Account(models.Model):
     email = models.CharField(max_length=100)
     about_me = models.CharField(max_length=255)
     wormie_color = models.CharField(max_length=100)
-    requests = models.OneToManyField(Request, related_name='requests')
-    submissions = models.OneToManyField(Submission, related_name='submissions')
 
     class Meta:
         ordering = ('created_at',)
