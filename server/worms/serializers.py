@@ -2,15 +2,16 @@ from rest_framework import serializers
 from worms.models import Wormhole, Submission, Account
 from django.contrib.auth.models import User
 
+
 class WormholeSerializer(serializers.ModelSerializer):
 
-    requestor = serializers.ReadOnlyField(source='requestor_id.username')
+    owner = serializers.ReadOnlyField(source='owner.username')
     submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
 
     class Meta:
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude',
-            'deadline', 'notes', 'status', 'requestor_id', 'requestor',
+            'deadline', 'notes', 'status', 'owner',
             'created_at', 'updated_at', 'submissions')
 
 
@@ -19,7 +20,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submission
         field = ('id', 'created_at', 'updated_at', 'notes', 'video_url',
-            'wormhole_id', 'submitter_id')
+            'wormhole_id', 'owner')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,7 +30,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'wormholes', 'submissions')
-
 
 
 class AccountSerializer(serializers.ModelSerializer):
