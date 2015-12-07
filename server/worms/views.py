@@ -17,6 +17,9 @@ class WormholeList(APIView):
     List all wormholes, or create a new wormhole
     """
 
+    def perform_create(self, serializer):
+        serializer.save(requestor_id=self.request.user)
+
     def get(self, request, format=None):
         wormholes = Wormhole.objects.all()
         serializer = WormholeSerializer(wormholes, many=True)

@@ -4,10 +4,13 @@ from django.contrib.auth.models import User
 
 class WormholeSerializer(serializers.ModelSerializer):
 
+    requestor = serializers.ReadOnlyField(source='requestor_id.username')
+    submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
+
     class Meta:
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude',
-            'deadline', 'notes', 'status', 'requestor_id',
+            'deadline', 'notes', 'status', 'requestor_id', 'requestor',
             'created_at', 'updated_at', 'submissions')
 
 
@@ -21,10 +24,11 @@ class SubmissionSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     wormholes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wormhole.objects.all())
+    submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'wormholes')
+        fields = ('id', 'username', 'wormholes', 'submissions')
 
 
 
