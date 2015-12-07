@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
-class Request(models.Model):
+class Wormhole(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=100)
@@ -21,7 +21,7 @@ class Submission(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     notes = models.TextField(max_length=2000)
     video_url = models.TextField(max_length=255)
-    request_id = models.ForeignKey(Request)
+    wormhole_id = models.ForeignKey(Wormhole)
     submitter_id = models.ForeignKey(User)
 
     class Meta:
