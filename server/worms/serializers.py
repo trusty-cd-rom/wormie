@@ -8,7 +8,7 @@ class WormholeSerializer(serializers.ModelSerializer):
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude',
             'deadline', 'notes', 'status', 'requestor_id',
-            'created_at', 'updated_at')
+            'created_at', 'updated_at', 'submissions')
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
@@ -25,4 +25,4 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         field = ('id', 'created_at', 'updated_at', 'user',
             'name', 'picture_url', 'location', 'email', 'about_me',
-            'wormie_color')
+            'wormie_color', 'wormholes', 'submissions')

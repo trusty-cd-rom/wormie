@@ -11,7 +11,7 @@ class Wormhole(models.Model):
     deadline = models.DateTimeField()
     notes = models.CharField(max_length=2000)
     status = models.CharField(max_length=100)
-    requestor_id = models.ForeignKey(User)
+    requestor_id = models.ForeignKey(User, related_name='wormholes')
 
     class Meta:
         ordering = ('created_at',)
@@ -21,8 +21,8 @@ class Submission(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     notes = models.TextField(max_length=2000)
     video_url = models.TextField(max_length=255)
-    wormhole_id = models.ForeignKey(Wormhole)
-    submitter_id = models.ForeignKey(User)
+    wormhole_id = models.ForeignKey(Wormhole, related_name='submissions')
+    submitter_id = models.ForeignKey(User, related_name='submissions')
 
     class Meta:
         ordering = ('created_at',)
