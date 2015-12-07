@@ -1,9 +1,10 @@
 from worms.models import Wormhole, Submission, Account
-from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountSerializer
+from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountSerializer, UserSerializer
 from django.http import Http404
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 
 #############################
 # WORMHOLES
@@ -113,6 +114,23 @@ class SubmissionDetail(APIView):
         submission = self.get_object(pk)
         submission.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#############################
+# USERS
+#############################
+
+
+class UserList(generics.ListAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 #############################
