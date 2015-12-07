@@ -5,4 +5,4 @@ class WormholeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude', 
-            'deadline', 'notes', 'status', 'requestor_id')
+            'deadline', 'notes', 'status', 'requestor_id', 'created_at', 'updated_at')
