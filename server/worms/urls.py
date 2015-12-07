@@ -1,7 +1,6 @@
-from django.conf.urls import url 
+from django.conf.urls import url
+from worms import views
 
 urlpatterns = [
-    
-    #TBD
-
+    url(r'^wormholes/$', views.wormhole_list),
 ]

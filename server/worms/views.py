@@ -13,7 +13,7 @@ class JSONResponse(HttpResponse):
     """
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
-        kwargs['content-type'] = 'application/json'
+        kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
@@ -21,4 +21,15 @@ def wormhole_list(request):
     """
     List all open wormholes, or create a new wormhole
     """ 
+    if request.method == 'GET':
+        wormholes = Wormhole.objects.all()
+        serializer = WormholeSerializer(wormholes, many=True)
+        return JSONResponse(serializer.data)
 
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = WormholeSerializer(data=data)
+        if serializer_is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
