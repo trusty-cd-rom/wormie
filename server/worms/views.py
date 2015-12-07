@@ -1,14 +1,21 @@
-from worms.models import Wormhole
-from worms.serializers import WormholeSerializer
+from worms.models import Wormhole, Submission, Account
+from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+#############################
+# WORMHOLES
+#############################
+
+
 class WormholeList(APIView):
+
     """
     List all wormholes, or create a new wormhole
     """
+
     def get(self, request, format=None):
         wormholes = Wormhole.objects.all()
         serializer = WormholeSerializer(wormholes, many=True)
@@ -21,10 +28,13 @@ class WormholeList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class WormholeDetail(APIView):
+
     """
     Retrieve, update, or a delete a wormhole instance
     """
+
     def get_object(self, pk):
         try:
             return Wormhole.objects.get(pk=pk)
@@ -48,3 +58,32 @@ class WormholeDetail(APIView):
         wormhole = self.get_object(pk)
         wormhole.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#############################
+# SUBMISSIONS
+#############################
+
+
+class SubmissionList(APIView):
+
+    """
+    List all submissions, or create a new submission
+    """
+
+    def get(self, request, format=None):
+        submissions = Submission.objects.all()
+        serializer = SubmissionSerializer(submissions, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SubmissionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#############################
+# ACCOUNTS
+#############################
