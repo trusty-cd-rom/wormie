@@ -1,35 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from worms.models import Wormhole
 from worms.serializers import WormholeSerializer
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-# Create your views here.
-class JSONResponse(HttpResponse):
+class WormholeList(APIView):
     """
-    An HTTPResponse that renders its content into JSON
+    List all wormholes, or create a new wormhole
     """
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
-
-@csrf_exempt
-def wormhole_list(request):
-    """
-    List all open wormholes, or create a new wormhole
-    """ 
-    if request.method == 'GET':
+    def get(self, request, format=None):
         wormholes = Wormhole.objects.all()
         serializer = WormholeSerializer(wormholes, many=True)
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = WormholeSerializer(data=data)
-        if serializer_is_valid():
+    def post(self, request, format=None):
+        serializer = WormholeSerializer(data=request.data)
+        if serializer.is_valid():
             serializer.save()
-            return JSONResponse(serializer.data, status=201)
-        return JSONResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
