@@ -1,43 +1,41 @@
 from worms.models import Wormhole, Submission, Account
 from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountSerializer, UserSerializer
+from worms.permissions import IsOwnerOrReadOnly
 from django.http import Http404
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
 
 #############################
 # WORMHOLES
 #############################
 
 
-class WormholeList(APIView):
+class WormholeList(generics.ListCreateAPIView):
+
+    # Uses 'generic' class based views from REST framework
 
     """
     List all wormholes, or create a new wormhole
     """
 
     def perform_create(self, serializer):
-        serializer.save(requestor_id=self.request.user)
+        serializer.save(owner=self.request.user)
 
-    def get(self, request, format=None):
-        wormholes = Wormhole.objects.all()
-        serializer = WormholeSerializer(wormholes, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = WormholeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    queryset = Wormhole.objects.all()
+    serializer_class = WormholeSerializer
 
 
 class WormholeDetail(APIView):
 
+    # Uses normal class based views
+
     """
     Retrieve, update, or a delete a wormhole instance
     """
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def get_object(self, pk):
         try:
@@ -69,30 +67,27 @@ class WormholeDetail(APIView):
 #############################
 
 
-class SubmissionList(APIView):
+class SubmissionList(generics.ListCreateAPIView):
+
+    # Uses 'generic' class based views from REST framework
 
     """
     List all submissions, or create a new submission
     """
 
-    def get(self, request, format=None):
-        submissions = Submission.objects.all()
-        serializer = SubmissionSerializer(submissions, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = SubmissionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    queryset = Submission.objects.all()
+    serializer_class = SubmissionSerializer
 
 
 class SubmissionDetail(APIView):
 
+    # Uses class based views
+
     """
     Retrieve, update, or delete a submission instance.
     """
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
     def get_object(self, pk):
         try:
@@ -126,11 +121,15 @@ class SubmissionDetail(APIView):
 
 class UserList(generics.ListAPIView):
 
+    # Uses 'generic' class based views from REST framework
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveAPIView):
+
+    # Uses 'generic' class based views from REST framework
 
     queryset = User.objects.all()
     serializer_class = UserSerializer

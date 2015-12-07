@@ -2,6 +2,7 @@ from rest_framework import permissions
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
+
     """
     Custom permission to only allow owner of an object to edit it
     """
@@ -13,4 +14,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Write permissions are only allowed to the owner of the snippet
-        return obj.owner = request.user
+        return obj.owner == request.user
