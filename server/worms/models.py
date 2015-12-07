@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
+
 class Wormhole(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -16,6 +17,7 @@ class Wormhole(models.Model):
     class Meta:
         ordering = ('created_at',)
 
+
 class Submission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,6 +28,7 @@ class Submission(models.Model):
 
     class Meta:
         ordering = ('created_at',)
+
 
 class Account(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
