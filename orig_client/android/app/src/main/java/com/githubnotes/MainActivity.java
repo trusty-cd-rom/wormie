@@ -1,4 +1,4 @@
-package com.githubnotes;
+package com.wormie;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        mReactRootView.startReactApplication(mReactInstanceManager, "githubNotes", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "wormie", null);
 
         setContentView(mReactRootView);
     }

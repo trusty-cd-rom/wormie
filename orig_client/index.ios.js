@@ -9,14 +9,14 @@ import configureStore from './src/store/configureStore';
 
 const store = configureStore();
 
-class githubNotes extends React.Component{
+class wormie extends React.Component{
   render() {
     return (
       <Provider store={store}>
         {() => <NavigatorIOS
           style={styles.container}
           initialRoute = {{
-            title: "githubNotes",
+            title: "wormie",
             component: Login
           }} />}
       </Provider>
@@ -30,4 +30,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('githubNotes', () => githubNotes);
+AppRegistry.registerComponent('wormie', () => wormie);
