@@ -13,12 +13,15 @@ class wormie extends React.Component{
   render() {
     return (
       <Provider store={store}>
-        {() => <NavigatorIOS
-          style={styles.container}
-          initialRoute = {{
-            title: "wormie",
-            component: Login
-          }} />}
+        {() =>
+          <NavigatorIOS
+            style={styles.container}
+            initialRoute = {{
+              title: "wormie",
+              component: Login
+            }}
+            navigationBarHidden = "true"
+          />}
       </Provider>
     );
   }

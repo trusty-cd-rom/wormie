@@ -3,14 +3,30 @@ import React, {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from 'react-native';
+import Signup from '../components/Signup';
 
 class Login extends Component {
+  goToSignup() {
+    this.props.navigator.push({
+      component: Signup
+    });
+  }
   render() {
-    var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> This is the Login Page</Text>
+        <View style={styles.splashImage}>
+          <Text style={styles.buttonText}> WORMIE</Text>
+        </View>
+        <TouchableHighlight
+          style = {styles.loginButton}
+          onPress = {this.goToSignup.bind(this)}
+          underlayColor = '#88D4f5'
+        >
+          <Text style = {styles.buttonText}> Login </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -28,6 +44,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  splashImage: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 4,
+    backgroundColor: 'black'
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#48BBEC'
+  },
+  buttonText: {
+    fontSize: 24,
+    color: 'white',
+    alignSelf: 'center'
+  }
 });
 
 export default Login;
