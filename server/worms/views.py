@@ -191,6 +191,9 @@ class Signup(APIView):
             return Response('Invalid: {0}'.format(error.detail), status=status.HTTP_400_BAD_REQUEST)
         if "username" not in data or "password" not in data:
             return Response('Username or password not provided', status=status.HTTP_400_BAD_REQUEST)
+
+        print(data)
+
         username = data["username"]
         password = data["password"]
 
@@ -268,3 +271,12 @@ class AccountDetail(generics.RetrieveAPIView):
 
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+
+
+#############################
+# TRUEUSERS - this is temporary for testing and deleting user accounts
+#############################
+
+class TrueUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
