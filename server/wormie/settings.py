@@ -83,26 +83,25 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_FACEBOOK_KEY = facebook["APP_ID"]
 SOCIAL_AUTH_FACEBOOK_SECRET = facebook["APP_SECRET"]
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'name, email'
+}
 
-# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
-# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-#     'fields': 'name, email'
-# }
-
-# SOCIAL_AUTH_PIPELINE = (
-#     'social.pipeline.social_auth.social_details',
-#     'social.pipeline.social_auth.social_uid',
-#     'social.pipeline.social_auth.auth_allowed',
-#     'social.pipeline.social_auth.social_user',
-#     'social.pipeline.user.get_username',
-#     'social.pipeline.user.create_user',
-#     # 'save_profile',
-#     'social.pipeline.social_auth.associate_user',
-#     'social.pipeline.social_auth.load_extra_data',
-#     'social.pipeline.user.user_details',
-# )
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    # 'save_profile',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
 
 LOGIN_REDIRECT_URL = ('/api/users/')
 
