@@ -9,7 +9,7 @@ import Signup from '../components/Signup';
 
 class Login extends Component {
   goToSignup() {
-    this.props.navigator.push({
+    this.props.navigator.replace({
       component: Signup
     });
   }

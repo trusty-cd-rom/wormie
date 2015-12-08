@@ -7,6 +7,8 @@ import React, {
   TextInput,
 } from 'react-native';
 import Badge from '../components/Badge';
+// import FeedList from './FeedList';
+import Navbar from './Navbar';
 
 class Signup extends Component {
   constructor(props) {
@@ -19,8 +21,8 @@ class Signup extends Component {
     }
   }
   goToFeed() {
-    this.props.navigator.push({
-      component: Feed
+    this.props.navigator.replace({
+      component: Navbar
     });
   }
   handleUsernameChange(event) {
