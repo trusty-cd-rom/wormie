@@ -5,12 +5,13 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
-import Signup from '../components/Signup';
+// import Signup from '../components/Signup';
+import Navbar from './Navbar';
 
-class Login extends Component {
-  goToSignup() {
+class Location extends Component {
+  goToHome() {
     this.props.navigator.replace({
-      component: Signup
+      component: Navbar
     });
   }
   render() {
@@ -18,14 +19,14 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.buttonText}> WORMIE</Text>
+          <Text style={styles.buttonText}> Can i has location? </Text>
         </View>
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.goToSignup.bind(this)}
+          onPress = {this.goToHome.bind(this)}
           underlayColor = '#88D4f5'
         >
-          <Text style = {styles.buttonText}> Login </Text>
+          <Text style = {styles.buttonText}> Location OK~! </Text>
         </TouchableHighlight>
       </View>
     );
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default Location;

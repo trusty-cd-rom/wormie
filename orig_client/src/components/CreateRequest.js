@@ -6,12 +6,8 @@ import React, {
   TouchableHighlight,
   TextInput,
 } from 'react-native';
-import Badge from '../components/Badge';
-// import FeedList from './FeedList';
-// import Navbar from './Navbar';
-import Location from './Location';
 
-class Signup extends Component {
+class CreateRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,59 +17,91 @@ class Signup extends Component {
       error: false
     }
   }
-  goToLocation() {
-    this.props.navigator.replace({
-      component: Location
-    });
+  submitRequest() {
+    this.props.navigator.pop();
   }
-  handleUsernameChange(event) {
+  handleTitleChange(event) {
     //input has the value nativeElement
     this.setState({
-      username: event.nativeEvent.text
+      title: event.nativeEvent.text
     });
   }
-  handleAboutMeChange(event) {
+  handleLocationChange(event) {
     //input has the value nativeElement
     this.setState({
-      aboutMe: event.nativeEvent.text
+      location: event.nativeEvent.text
     });
+  }
+  handleDeadlineChange(event) {
+    //input has the value nativeElement
+    this.setState({
+      deadline: event.nativeEvent.text
+    });
+  }
+  handleNotesChange(event) {
+    //input has the value nativeElement
+    this.setState({
+      notes: event.nativeEvent.text
+    });
+  }
+  back() {
+    this.props.navigator.pop();
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
       <View style={styles.container}>
 
-        <Badge />
+        <TouchableHighlight
+          style = {styles.loginButton}
+          onPress = {this.back.bind(this)}
+          underlayColor = '#88D4f5'
+        >
+          <Text style = {styles.buttonText}> Back </Text>
+        </TouchableHighlight>
 
         <Text style={styles.title}>
-          Username
+          Title
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.username}
-          onChange = {this.handleUsernameChange.bind(this)}
+          value = {this.state.title}
+          onChange = {this.handleTitleChange.bind(this)}
         />
 
         <Text style={styles.title}>
-          Tell us about yourself
+          Location
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.aboutMe}
-          onChange = {this.handleAboutMeChange.bind(this)}
+          value = {this.state.location}
+          onChange = {this.handleLocationChange.bind(this)}
         />
 
+        <Text style={styles.title}>
+          Deadline
+        </Text>
+        <TextInput
+          style = {styles.searchInput}
+          value = {this.state.deadline}
+          onChange = {this.handleDeadlineChange.bind(this)}
+        />
 
-        <View style={styles.splashImage}>
-          <Text style={styles.buttonText}> COLOR PICKER </Text>
-        </View>
+        <Text style={styles.title}>
+          Description
+        </Text>
+        <TextInput
+          style = {styles.searchInput}
+          value = {this.state.notes}
+          onChange = {this.handleNotesChange.bind(this)}
+        />
 
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.goToLocation.bind(this)}
+          onPress = {this.submitRequest.bind(this)}
           underlayColor = '#88D4f5'
         >
-          <Text style = {styles.buttonText}> Explore </Text>
+          <Text style = {styles.buttonText}> Request! </Text>
         </TouchableHighlight>
       </View>
     );
@@ -86,6 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
+    marginTop: 20
   },
   text: {
     fontSize: 20,
@@ -129,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signup;
+export default CreateRequest;
