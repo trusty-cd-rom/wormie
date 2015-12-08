@@ -3,6 +3,7 @@ from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountS
 from worms.permissions import IsOwnerOrReadOnly
 from django.http import Http404
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
@@ -131,7 +132,7 @@ class UserList(generics.ListAPIView):
     # Uses 'generic' class based views from REST framework
 
     """
-    List all users
+    List all Users
     """
 
     queryset = User.objects.all()
@@ -142,12 +143,9 @@ class UserDetail(APIView):
 
     # Uses class-based view
 
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # TBD - Currently returning Account instances !!
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     """
-    Retrieve, update, or delete a user instance
+    Retrieve, update, or delete an ACCOUNT instance.
+    Note: User instance will be included in the Account.
     """
 
     def get_object(self, pk):
@@ -204,20 +202,47 @@ class Signup(APIView):
             account = AccountSerializer(Account.objects.create(user=user)).data
             return Response({'token': token.key, 'account': account})
 
-        # user = authenticate(username=username, password=password)
 
-        # if user is not None:
-        #     token = Token.objects.get_or_create(user=user)[0]
-        #     account = AccountSerializer(Account.objects.get(user=user)).data
-        #     return Response({'token': token.key, 'account': account})
+class Signin(APIView):
+
+    """
+    Log in existing user
+    """
+
+    def post(self, request, format=None):
+        try:
+            data = request.data
+        except ParseError as error:
+            return Response('Invalid: {0}'.format(error.detail), status=status.HTTP_400_BAD_REQUEST)
+        if "username" not in data or "password" not in data:
+            return Response('Username or password not provided', status=status.HTTP_400_BAD_REQUEST)
+
+        username = data["username"]
+        password = data["password"]
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            token = Token.objects.get_or_create(user=user)[0]
+            account = AccountSerializer(Account.objects.get(user=user)).data
+            return Response({'token': token.key, 'account': account})
+        else:
+            return Response('Username or password is invalid', status.HTTP_400_BAD_REQUEST)
 
 
+class TokenCheck(APIView):
 
-# class Signin(APIView):
+    """
+    Check token
+    """
 
-
-
-# class TokenCheck(APIView):
+    def get(self, request, token, format=None):
+        if Token.objects.filter(key=token).exists():
+            userid = Token.objects.get(key=token).user_id
+            account = AccountSerializer(Account.objects.get(user=userid)).data
+            return Response(account)
+        else:
+            return Response('Invalid token', status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -225,21 +250,21 @@ class Signup(APIView):
 # ACCOUNTS
 #############################
 
-class AccountList(generics.ListCreateAPIView):
+# class AccountList(generics.ListCreateAPIView):
 
-    """
-    List all accounts or create an account
-    """
+#     """
+#     List all accounts or create an account
+#     """
 
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+#     queryset = Account.objects.all()
+#     serializer_class = AccountSerializer
 
 
-class AccountDetail(generics.RetrieveAPIView):
+# class AccountDetail(generics.RetrieveAPIView):
 
-    """
-    Retrieve an account instance
-    """
+#     """
+#     Retrieve an account instance
+#     """
 
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+#     queryset = Account.objects.all()
+#     serializer_class = AccountSerializer
