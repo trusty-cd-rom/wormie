@@ -151,3 +151,22 @@ class UserDetail(generics.RetrieveAPIView):
 #############################
 # ACCOUNTS
 #############################
+
+class AccountList(generics.ListCreateAPIView):
+
+    """
+    List all accounts or create an account
+    """
+
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+
+
+class AccountDetail(generics.RetrieveAPIView):
+
+    """
+    Retrieve an account instance
+    """
+
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
