@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics, permissions
 
+
 #############################
 # WORMHOLES
 #############################
@@ -127,6 +128,10 @@ class UserList(generics.ListAPIView):
 
     # Uses 'generic' class based views from REST framework
 
+    """
+    List all users
+    """
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -134,6 +139,10 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
 
     # Uses 'generic' class based views from REST framework
+
+    """
+    Retrieve a user instance
+    """
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
