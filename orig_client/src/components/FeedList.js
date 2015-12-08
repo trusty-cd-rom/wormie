@@ -4,9 +4,11 @@ import React, {
   View,
   StyleSheet,
   ScrollView,
-  Component
+  Component,
+  TouchableHighlight,
 } from 'react-native';
-// import Navbar from './Navbar';
+import ViewRequest from '../containers/ViewRequest';
+// import Separator from './separator';
 
 var styles = StyleSheet.create({
   container:{
@@ -21,15 +23,49 @@ var styles = StyleSheet.create({
     fontSize: 24,
     color: 'white',
     alignSelf: 'center'
-  }
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#48BBEC'
+  },
 });
 
 class FeedList extends React.Component{
+  viewRequest() {
+    this.props.navigator.push({
+      component: ViewRequest,
+    });
+  }
   render() {
+    // var { wormholes } = this.props;
+    // var list = wormholes.map((item, index) => {
+    //   // console.log(item);
+    //   return (
+    //     <View key = {index}>
+    //       <TouchableHighlight
+    //         style = {styles.loginButton}
+    //         onPress = {this.viewRequest.bind(this)}
+    //         underlayColor = 'purple'
+    //       >
+    //         <Text style = {styles.buttonText}> Request: {index} </Text>
+    //       </TouchableHighlight>
+    //       <Separator />
+    //     </View>
+    //   );
+    // });
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}> 
-        <Text style={styles.buttonText}> BUTTS</Text>    
+        <TouchableHighlight
+            style = {styles.loginButton}
+            onPress = {this.viewRequest.bind(this)}
+            underlayColor = 'purple'
+          >
+            <Text style = {styles.buttonText}> View Request</Text>
+          </TouchableHighlight>
       </View>
     );
   }

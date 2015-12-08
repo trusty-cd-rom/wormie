@@ -44,7 +44,7 @@ class Navbar extends Component{
             });
             // this.goToFeedList.bind(this)
           }}>
-          <FeedList />
+          <FeedList navigator={this.props.navigator} />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -57,7 +57,7 @@ class Navbar extends Component{
             });
             // this.goToProfile.bind(this)
           }}>
-          <Profile />
+          <Profile navigator={this.props.navigator} />
         </TabBarIOS.Item>
 
       </TabBarIOS>

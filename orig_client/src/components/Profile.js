@@ -4,9 +4,11 @@ import React, {
   View,
   StyleSheet,
   ScrollView,
-  Component
+  Component,
+  TouchableHighlight,
 } from 'react-native';
-// import Navbar from './Navbar';
+import CreateRequest from '../containers/CreateRequest';
+import ViewRequest from '../containers/ViewRequest';
 
 var styles = StyleSheet.create({
   container:{
@@ -21,15 +23,47 @@ var styles = StyleSheet.create({
     fontSize: 24,
     color: 'white',
     alignSelf: 'center'
-  }
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#48BBEC'
+  },
 });
 
-class Profile extends React.Component{
+class Profile extends Component{
+  createRequest() {
+    this.props.navigator.push({
+      component: CreateRequest
+    });
+  }
+  viewRequest() {
+    this.props.navigator.push({
+      component: ViewRequest,
+    });
+  }
   render() {
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
-        <Text style={styles.buttonText}> WORMIE</Text>
+        <TouchableHighlight
+          style = {styles.loginButton}
+          onPress = {this.createRequest.bind(this)}
+          underlayColor = '#88D4f5'
+        >
+          <Text style = {styles.buttonText}> New Request </Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          style = {[styles.loginButton,{backgroundColor: 'orange'}]}
+          onPress = {this.viewRequest.bind(this)}
+          underlayColor = 'purple'
+        >
+          <Text style = {styles.buttonText}> View Request </Text>
+        </TouchableHighlight>
+
       </View>
     );
   }

@@ -4,7 +4,7 @@ import React, {
   NavigatorIOS,
 } from 'react-native';
 import { Provider } from 'react-redux/native';
-import Login from './src/containers/Login';
+import Login from './src/components/Login';
 import configureStore from './src/store/configureStore';
 
 const store = configureStore();

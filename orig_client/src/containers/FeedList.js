@@ -5,7 +5,7 @@ import * as FeedListActions from '../actions/feedList';
 
 function mapStateToProps(state) {
   return {
-    // counter: state.counter
+    wormholes: state.wormholes
   };
 }
 
