@@ -9,8 +9,9 @@ urlpatterns = [
     url(r'^api/submissions/(?P<pk>[0-9]+)/$', views.SubmissionDetail.as_view()),
     url(r'^api/users/$', views.UserList.as_view()),
     url(r'^api/users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-    url(r'^api/accounts/$', views.AccountList.as_view()),
-    url(r'^api/accounts/(?P<pk>[0-9]+)/$', views.AccountDetail.as_view()),
+    url(r'^api/signup/$', views.Signup.as_view()),
+    # url(r'^api/accounts/$', views.AccountList.as_view()),
+    # url(r'^api/accounts/(?P<pk>[0-9]+)/$', views.AccountDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -5,7 +5,9 @@ from django.http import Http404
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
 from rest_framework import status, generics, permissions
+from rest_framework.authtoken.models import Token
 
 
 #############################
@@ -136,16 +138,87 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
 
 
-class UserDetail(generics.RetrieveAPIView):
+class UserDetail(APIView):
 
-    # Uses 'generic' class based views from REST framework
+    # Uses class-based view
+
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TBD - Currently returning Account instances !!
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     """
-    Retrieve a user instance
+    Retrieve, update, or delete a user instance
     """
 
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    def get_object(self, pk):
+        try:
+            return Account.objects.get(pk=pk)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        account = self.get_object(pk)
+        serializer = AccountSerializer(account)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        account = self.get_object(pk)
+        serializer = AccountSerializer(account, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        account = self.get_object(pk)
+        account.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#############################
+# SIGNUP AND SIGNIN
+#############################
+
+
+class Signup(APIView):
+
+    """
+    Signup new user
+    """
+
+    def post(self, request, format=None):
+        try:
+            data = request.data
+        except ParseError as error:
+            return Response('Invalid: {0}'.format(error.detail), status=status.HTTP_400_BAD_REQUEST)
+        if "username" not in data or "password" not in data:
+            return Response('Username or password not provided', status=status.HTTP_400_BAD_REQUEST)
+        username = data["username"]
+        password = data["password"]
+
+        if User.objects.filter(username=username).exists():
+            return Response('Username already taken', status.HTTP_400_BAD_REQUEST)
+        else:
+            user = User.objects.create_user(username=username, password=password)
+            token = Token.objects.create(user=user)
+            account = AccountSerializer(Account.objects.create(user=user)).data
+            return Response({'token': token.key, 'account': account})
+
+        # user = authenticate(username=username, password=password)
+
+        # if user is not None:
+        #     token = Token.objects.get_or_create(user=user)[0]
+        #     account = AccountSerializer(Account.objects.get(user=user)).data
+        #     return Response({'token': token.key, 'account': account})
+
+
+
+# class Signin(APIView):
+
+
+
+# class TokenCheck(APIView):
+
 
 
 #############################
