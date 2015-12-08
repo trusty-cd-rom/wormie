@@ -1,7 +1,10 @@
 .DS_Store
 
+server/wormie/config.py
+
+
 ############################################
-### PYTHON GITIGNORE
+### PYTHON GITIGNORE FROM GITHUB
 ############################################
 # Byte-compiled / optimized / DLL files
 __pycache__/

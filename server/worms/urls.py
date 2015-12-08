@@ -11,8 +11,8 @@ urlpatterns = [
     url(r'^api/signup/$', views.Signup.as_view()),
     url(r'^api/signin/$', views.Signin.as_view()),
     url(r'^api/token-check/(?P<token>.+)/$', views.TokenCheck.as_view()),
-    # url(r'^api/users/$', views.UserList.as_view()),
-    # url(r'^api/accounts/$', views.AccountList.as_view()),
+    url(r'^api/users/$', views.UserList.as_view()),
+    url(r'^api/accounts/$', views.AccountList.as_view()),
     # url(r'^api/accounts/(?P<pk>[0-9]+)/$', views.AccountDetail.as_view()),
 ]
 
