@@ -11,8 +11,7 @@ class WormholeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wormhole
         fields = ('id', 'title', 'latitude', 'longitude',
-            'deadline', 'notes', 'status', 'owner', 'owner_name',
-            'created_at', 'updated_at', 'submissions')
+            'deadline', 'notes', 'status', 'owner', 'owner_name', 'submissions')
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
@@ -21,8 +20,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Submission
-        field = ('id', 'created_at', 'updated_at', 'notes', 'video_url',
-            'wormhole_id', 'owner', 'owner_name')
+        field = ('id', 'notes', 'video_url', 'wormhole_id', 'owner', 'owner_name')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -32,13 +30,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'wormholes', 'submissions')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'wormholes', 'submissions')
 
 
 class AccountSerializer(serializers.ModelSerializer):
 
+    user = UserSerializer()
+
     class Meta:
         model = Account
-        field = ('id', 'created_at', 'updated_at', 'user',
-            'name', 'picture_url', 'location', 'email', 'about_me',
-            'wormie_color', 'wormholes', 'submissions')
+        field = ('id', 'user', 'picture_url', 'location', 'about_me', 'wormie_color')
