@@ -11,25 +11,36 @@ from rest_framework import status, generics, permissions
 from rest_framework.authtoken.models import Token
 # from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
-
 #############################
 # WORMHOLES
 #############################
 
 
-class WormholeList(generics.ListCreateAPIView):
+class WormholeList(APIView):
 
-    # Uses 'generic' class based views from REST framework
+    # Uses class based views
 
     """
     List all wormholes, or create a new wormhole
     """
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
-    queryset = Wormhole.objects.all()
-    serializer_class = WormholeSerializer
+    # queryset = Wormhole.objects.all()
+    # serializer_class = WormholeSerializer
+
+    def get(self, request, format=None):
+        wormholes = Wormhole.objects.all()
+        serializer = WormholeSerializer(wormholes, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = WormholeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WormholeDetail(APIView):
@@ -70,19 +81,31 @@ class WormholeDetail(APIView):
 #############################
 
 
-class SubmissionList(generics.ListCreateAPIView):
+class SubmissionList(APIView):
 
-    # Uses 'generic' class based views from REST framework
+    # Uses class-based views
 
     """
     List all submissions, or create a new submission
     """
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
-    queryset = Submission.objects.all()
-    serializer_class = SubmissionSerializer
+    # queryset = Submission.objects.all()
+    # serializer_class = SubmissionSerializer
+
+    def get(self, request, format=None):
+        submissions = Submission.objects.all()
+        serializer = SubmissionSerializer(submissions, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SubmissionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SubmissionDetail(APIView):
