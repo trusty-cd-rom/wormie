@@ -3,12 +3,17 @@ import urls from '../constants/urls';
 var api = {
 
 	createWormhole(wormholeData) {
-	  return fetch(urls.wormholes, {
-	    method: 'post',
-	    body: JSON.stringify(wormholeData)
-	  })
-	  .then((res) => res.json())
-	  ;
+	  // return fetch(urls.wormholes, {
+	  //   method: 'post',
+	  //   body: JSON.stringify(wormholeData)
+	  // })
+	  // .then((res) => res.json())
+	  // ;
+	  
+	  //for testing
+	  return setTimeout(() => {
+      return wormholeData;
+    }, 1000);
 	},
 
 	getWormholeList() {

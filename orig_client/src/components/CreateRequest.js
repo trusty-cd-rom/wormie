@@ -5,20 +5,29 @@ import React, {
   View,
   TouchableHighlight,
   TextInput,
+  ActivityIndicatorIOS,
 } from 'react-native';
 
 class CreateRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      aboutMe: '',
-      // isLoading: false,
+      title: '',
+      location: '',
+      deadline: '',
+      notes: '',
       error: false
     }
+    debugger;
   }
-  submitRequest() {
-    this.props.navigator.pop();
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate: ',nextProps, nextState)  
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate: ',nextProps, nextState)
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate: ',prevProps, prevState)  
   }
   handleTitleChange(event) {
     //input has the value nativeElement
@@ -47,8 +56,19 @@ class CreateRequest extends Component {
   back() {
     this.props.navigator.pop();
   }
+  submitRequest() {
+    var { createRequest, currentUser } = this.props;
+    var newRequestData = {
+      title: this.state.title,
+      location: this.state.location,
+      deadline: this.state.deadline,
+      notes: this.state.notes,
+      user: currentUser
+    };
+    createRequest(newRequestData);
+  }
   render() {
-    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    let { isFetching } = this.props;
     return (
       <View style={styles.container}>
 
@@ -95,6 +115,12 @@ class CreateRequest extends Component {
           value = {this.state.notes}
           onChange = {this.handleNotesChange.bind(this)}
         />
+        
+        <ActivityIndicatorIOS
+          animating = {isFetching==='true'}
+          color = 'white'
+          size = 'large'
+        ></ActivityIndicatorIOS>
 
         <TouchableHighlight
           style = {styles.loginButton}

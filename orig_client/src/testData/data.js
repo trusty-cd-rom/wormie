@@ -89,41 +89,38 @@ var data = {
     "owner_name": "wormieadmin",
     "submissions": []
 	},
-	submissionList: {
-		[
-			{
-				"id": 2,
-				"owner_name": "sun",
-				"created_at": "2015-12-07T23:17:23.385998Z",
-				"updated_at": "2015-12-07T23:17:23.386086Z",
-				"notes": "this video quality is bad",
-				"video_url": "https://www.youtube.com/watch?v=nt7gHEEqb4M",
-				"wormhole_id": 10,
-				"owner": 3
-			},
-			{
-				"id": 3,
-				"owner_name": "charlie",
-				"created_at": "2015-12-07T23:43:43.117379Z",
-				"updated_at": "2015-12-07T23:43:43.117432Z",
-				"notes": "Here's my new video",
-				"video_url": "https://www.youtube.com/watch?v=M99AyKrjINI",
-				"wormhole_id": 9,
-				"owner": 2
-			},
-			{
-				"id": 1,
-				"owner_name": "nick",
-				"created_at": "2015-12-07T23:43:43.117379Z",
-				"updated_at": "2015-12-07T23:43:43.117432Z",
-				"notes": "this is a weird request....",
-				"video_url": "https://www.youtube.com/watch?v=3kryJpuVHio",
-				"wormhole_id": 7,
-				"owner": 1
-			}
-		]
-
-	},
+	submissionList: [
+		{
+			"id": 2,
+			"owner_name": "sun",
+			"created_at": "2015-12-07T23:17:23.385998Z",
+			"updated_at": "2015-12-07T23:17:23.386086Z",
+			"notes": "this video quality is bad",
+			"video_url": "https://www.youtube.com/watch?v=nt7gHEEqb4M",
+			"wormhole_id": 10,
+			"owner": 3
+		},
+		{
+			"id": 3,
+			"owner_name": "charlie",
+			"created_at": "2015-12-07T23:43:43.117379Z",
+			"updated_at": "2015-12-07T23:43:43.117432Z",
+			"notes": "Here's my new video",
+			"video_url": "https://www.youtube.com/watch?v=M99AyKrjINI",
+			"wormhole_id": 9,
+			"owner": 2
+		},
+		{
+			"id": 1,
+			"owner_name": "nick",
+			"created_at": "2015-12-07T23:43:43.117379Z",
+			"updated_at": "2015-12-07T23:43:43.117432Z",
+			"notes": "this is a weird request....",
+			"video_url": "https://www.youtube.com/watch?v=3kryJpuVHio",
+			"wormhole_id": 7,
+			"owner": 1
+		}
+	],
 	submissionDetail: {
     "id": 2,
     "owner_name": "sun",
