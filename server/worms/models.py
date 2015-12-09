@@ -34,8 +34,7 @@ class Account(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.OneToOneField(User)
-    picture_url = models.CharField(max_length=255)
-    location = models.CharField(max_length=255)
+    picture_url = models.CharField(max_length=1000)
     about_me = models.CharField(max_length=255)
     wormie_color = models.CharField(max_length=100)
 
