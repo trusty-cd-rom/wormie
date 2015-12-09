@@ -1,6 +1,7 @@
 .DS_Store
 
 server/wormie/config.py
+server/mysite.log
 
 
 ############################################
