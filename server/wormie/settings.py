@@ -55,7 +55,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'oauth2_provider.ext.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     )
+
 }
 
 MIDDLEWARE_CLASSES = [
@@ -71,6 +75,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# TURN THIS OFF BEFORE DEPLOYMENT!
 CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -84,6 +89,13 @@ AUTHENTICATION_BACKENDS = (
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# Attempt to block the resources unless providing a token
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope'}
+}
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = facebook["APP_ID"]
 SOCIAL_AUTH_FACEBOOK_SECRET = facebook["APP_SECRET"]
