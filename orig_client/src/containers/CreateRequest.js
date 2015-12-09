@@ -5,7 +5,8 @@ import * as CreateRequestActions from '../actions/createRequest';
 
 function mapStateToProps(state) {
   return {
-    // counter: state.counter
+    currentUser: state.currentUser,
+    isFetching: state.isFetching
   };
 }
 
