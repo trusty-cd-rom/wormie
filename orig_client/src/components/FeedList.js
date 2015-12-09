@@ -8,6 +8,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewRequest from '../containers/ViewRequest';
+import OpenWormhole from '../containers/OpenWormhole';
 // import Separator from './seperator';
 
 var styles = StyleSheet.create({
@@ -34,10 +35,19 @@ var styles = StyleSheet.create({
 });
 
 class FeedList extends React.Component{
-  viewRequest() {
-    this.props.navigator.push({
-      component: ViewRequest,
-    });
+  viewRequest(e) {
+    var { feed, updateCurrentWormhole } = this.props;
+    console.log('trying to view request: ', e, feed[e]);
+    updateCurrentWormhole(feed[e]);
+    if(feed[e].status === 'open') {
+      this.props.navigator.push({
+        component: OpenWormhole,
+      });
+    } else {
+      this.props.navigator.push({
+        component: ViewRequest,
+      });
+    }
   }
   render() {
     var { feed } = this.props;
@@ -47,10 +57,13 @@ class FeedList extends React.Component{
         <View key = {index}>
           <TouchableHighlight
             style = {styles.loginButton}
-            onPress = {this.viewRequest.bind(this)}
+            onPress = {this.viewRequest.bind(this, index)}
             underlayColor = 'purple'
           >
-            <Text style = {styles.buttonText}> Request: {index} </Text>
+            <View>
+              <Text style = {styles.buttonText}> Request: {index} </Text>
+              <Text > {item.title} </Text>
+            </View>
           </TouchableHighlight>
         </View>
       );

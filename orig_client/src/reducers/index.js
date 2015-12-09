@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
 import userProfile from './createRequest';
+import currentWormhole from './currentWormhole';
 
 const rootReducer = combineReducers({
-	userProfile  
+	userProfile,
+	currentWormhole,
 });
+
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../actions/createRequest';
+import { CREATE_REQUEST, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../constants/actions';;
 import data from '../testData/data';
 
 
@@ -12,8 +12,8 @@ var initialState = {
 		location: '',
 		deadline: '',
 		notes: '',
-		isFetching: 'false'
-	}
+	},
+	isFetching: 'false'
 };
 
 function userProfile(state = initialState, action) {

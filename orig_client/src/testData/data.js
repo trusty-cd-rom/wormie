@@ -7,10 +7,10 @@ var data = {
 			"longitude": "60.0000000",
 			"deadline": "2015-12-07T19:03:50.702834Z",
 			"notes": "now!",
-			"status": "open",
+			"status": "completed",
 			"owner": 1,
 			"owner_name": "wormieadmin",
-			"submissions": []
+			"submissions": [1]
 		},
 		{
 			"id": 4,
@@ -19,10 +19,10 @@ var data = {
 			"longitude": "60.0000000",
 			"deadline": "2015-12-07T20:04:58.456637Z",
 			"notes": "hahahahaha",
-			"status": "forever and ever",
+			"status": "completed",
 			"owner": 1,
 			"owner_name": "wormieadmin",
-			"submissions": []
+			"submissions": [2]
 		},
 		{
 			"id": 6,
@@ -31,10 +31,10 @@ var data = {
 			"longitude": "20.0000000",
 			"deadline": "2015-12-07T20:04:58.456637Z",
 			"notes": "can you walk backwards?",
-			"status": "OPEN!!!",
+			"status": "completed",
 			"owner": 1,
 			"owner_name": "wormieadmin",
-			"submissions": []
+			"submissions": [3]
 		},
 		{
 			"id": 9,
@@ -43,12 +43,10 @@ var data = {
 			"longitude": "40.0000000",
 			"deadline": "2015-10-10T10:10:00Z",
 			"notes": "test",
-			"status": "test",
+			"status": "open",
 			"owner": 6,
 			"owner_name": "sun",
-			"submissions": [
-			3
-			]
+			"submissions": []
 		},
 		{
 			"id": 10,
@@ -57,12 +55,10 @@ var data = {
 			"longitude": "10.0000000",
 			"deadline": "2015-10-10T10:10:00Z",
 			"notes": "IS THIS REAL",
-			"status": "NOT YET",
+			"status": "open",
 			"owner": 6,
 			"owner_name": "sun",
-			"submissions": [
-			2
-			]
+			"submissions": []
 		},
 		{
 			"id": 11,
@@ -71,7 +67,7 @@ var data = {
 			"longitude": "55.0000000",
 			"deadline": "2015-10-10T10:10:00Z",
 			"notes": "Behind the trees",
-			"status": "OPEN",
+			"status": "open",
 			"owner": 6,
 			"owner_name": "sun",
 			"submissions": []
