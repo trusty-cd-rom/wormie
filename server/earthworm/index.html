@@ -8,29 +8,44 @@
 <body>
 
     <h1>EARTHWORM</h1>
+    
+    
+    <button onclick="logIn()">Log In</button>
+
+
+    <h2>List of wormholes</h2>
+    <div id="wormholes"></div>
 
     <script type="text/javascript">
 
-        url = "http://localhost:8000/api/wormholes/";
-
         $(document).ready(function() {
-        
+
           $.ajax({
-            url: url,
+            url: "http://localhost:8000/api/wormholes/",
             method: 'GET',
             crossDomain: true,
             contentType: 'application/json',
-            success: function(data) {
-                console.log(data);
+            success: function(data) {   
+                data.forEach( function(wormhole) {
+                    $('#wormholes').append('<p>' + wormhole.title + "</p>");
+                });
             }
-        
           });
         
         });
 
 
-
-
+        var logIn = function() {
+            $.ajax({
+              url: "http://localhost:8000/auth/login/facebook/",
+              method: 'GET',
+              crossDomain: true,
+              contentType: 'application/json',
+              success: function(data) {
+                console.log(data);
+              }
+            });            
+        };
 
 
     </script>

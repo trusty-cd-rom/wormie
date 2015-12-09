@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
 from rest_framework import status, generics, permissions
 from rest_framework.authtoken.models import Token
-from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
+# from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 
 #############################
@@ -29,7 +29,7 @@ class WormholeList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
     # Put this in any resources that we want to protect
-    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    # permission_classes = [permissions.IsAuthenticated]
 
     queryset = Wormhole.objects.all()
     serializer_class = WormholeSerializer

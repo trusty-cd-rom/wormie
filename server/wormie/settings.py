@@ -56,9 +56,9 @@ REST_FRAMEWORK = {
         'oauth2_provider.ext.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
 
 }
 
@@ -91,10 +91,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Attempt to block the resources unless providing a token
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope'}
-}
+# OAUTH2_PROVIDER = {
+#     # this is the list of available scopes
+#     'SCOPES': {'read': 'Read scope', 'write': 'Write scope'}
+# }
 
 
 SOCIAL_AUTH_FACEBOOK_KEY = facebook["APP_ID"]
