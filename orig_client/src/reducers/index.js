@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import reducerRoute from './createRequest';
+import userProfile from './createRequest';
 
 const rootReducer = combineReducers({
-	reducerRoute  
+	userProfile  
 });
 
 export default rootReducer;

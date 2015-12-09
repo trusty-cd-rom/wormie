@@ -6,8 +6,8 @@ import * as CreateRequestActions from '../actions/createRequest';
 function mapStateToProps(state) {
 	console.log('CreateRequest mapStateToProps: ', state);
   return {
-    currentUser: state.reducerRoute.currentUser,
-    inputText: state.reducerRoute.createRequest,
+    currentUser: state.userProfile.currentUser,
+    inputText: state.userProfile.createRequest,
   };
 }
 

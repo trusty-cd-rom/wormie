@@ -16,7 +16,7 @@ var initialState = {
 	}
 };
 
-function reducerRoute(state = initialState, action) {
+function userProfile(state = initialState, action) {
 	console.log('createRequest>reducerRoute', state)
   switch (action.type) {
 	  case CREATE_REQUEST:
@@ -95,4 +95,4 @@ function userRequestReducerRoute(state = [], action) {
   }
 };
 
-export default reducerRoute;
+export default userProfile;
