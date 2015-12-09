@@ -18,17 +18,17 @@ class CreateRequest extends Component {
       notes: '',
       error: false
     }
-    debugger;
+    // debugger;
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate: ',nextProps, nextState)  
-  }
-  componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate: ',nextProps, nextState)
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate: ',prevProps, prevState)  
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('shouldComponentUpdate: ',nextProps, nextState)  
+  // }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log('componentWillUpdate: ',nextProps, nextState)
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('componentDidUpdate: ',prevProps, prevState)  
+  // }
   handleTitleChange(event) {
     //input has the value nativeElement
     this.setState({

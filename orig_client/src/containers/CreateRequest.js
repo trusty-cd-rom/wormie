@@ -4,9 +4,10 @@ import CreateRequest from '../components/CreateRequest';
 import * as CreateRequestActions from '../actions/createRequest';
 
 function mapStateToProps(state) {
+	console.log('CreateRequest mapStateToProps: ', state);
   return {
-    currentUser: state.currentUser,
-    isFetching: state.isFetching
+    currentUser: state.reducerRoute.currentUser,
+    isFetching: state.reducerRoute.isFetching
   };
 }
 

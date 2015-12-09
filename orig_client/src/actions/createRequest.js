@@ -18,7 +18,7 @@ export function createRequest(requestData) {
 	  	console.log('got successful post back from server');
 	  	dispatch(createRequestAction(requestData))
 	  	dispatch(stopFetching());
-    }, 3000);
+    }, 10);
   }
 };
 
