@@ -18,10 +18,12 @@
 
     <script type="text/javascript">
 
+        root = "http://wormie-3-dev.elasticbeanstalk.com/api/";
+
         $(document).ready(function() {
 
           $.ajax({
-            url: "http://localhost:8000/api/wormholes/",
+            url: root + "wormholes/",
             method: 'GET',
             crossDomain: true,
             contentType: 'application/json',
@@ -37,7 +39,7 @@
 
         var logIn = function() {
             $.ajax({
-              url: "http://localhost:8000/auth/login/facebook/",
+              url: root + "auth/login/facebook/",
               method: 'GET',
               crossDomain: true,
               contentType: 'application/json',
