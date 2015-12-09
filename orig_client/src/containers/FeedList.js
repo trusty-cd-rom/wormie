@@ -4,8 +4,9 @@ import FeedList from '../components/FeedList';
 import * as FeedListActions from '../actions/feedList';
 
 function mapStateToProps(state) {
+	console.log('feed state: ', state);
   return {
-    wormholes: state.wormholes
+    feed: state.reducerRoute.feed
   };
 }
 

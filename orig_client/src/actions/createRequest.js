@@ -2,6 +2,7 @@ import api from '../utils/api';
 
 export const CREATE_REQUEST = 'CREATE_REQUEST';
 export const TOGGLE_FETCH = 'TOGGLE_FETCH';
+export const UPDATE_INPUT_TEST = 'UPDATE_INPUT_TEST';
 
 //this will be called by the create request component when the user submits the form for a new wormhole
 export function createRequest(requestData) {
@@ -18,7 +19,7 @@ export function createRequest(requestData) {
 	  	console.log('got successful post back from server');
 	  	dispatch(createRequestAction(requestData))
 	  	dispatch(stopFetching());
-    }, 3000);
+    }, 10);
   }
 };
 
@@ -44,3 +45,19 @@ function stopFetching() {
 		status: 'false'
 	};
 };
+
+export function updateInputText(field, text) {
+	return {
+		type: UPDATE_INPUT_TEST,
+		field,
+		text
+	};
+};
+
+
+
+
+
+
+
+
