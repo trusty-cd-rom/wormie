@@ -8,7 +8,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewRequest from '../containers/ViewRequest';
-// import Separator from './separator';
+// import Separator from './seperator';
 
 var styles = StyleSheet.create({
   container:{
@@ -40,32 +40,25 @@ class FeedList extends React.Component{
     });
   }
   render() {
-    // var { wormholes } = this.props;
-    // var list = wormholes.map((item, index) => {
-    //   // console.log(item);
-    //   return (
-    //     <View key = {index}>
-    //       <TouchableHighlight
-    //         style = {styles.loginButton}
-    //         onPress = {this.viewRequest.bind(this)}
-    //         underlayColor = 'purple'
-    //       >
-    //         <Text style = {styles.buttonText}> Request: {index} </Text>
-    //       </TouchableHighlight>
-    //       <Separator />
-    //     </View>
-    //   );
-    // });
-    return (
-      //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <View style={styles.container}> 
-        <TouchableHighlight
+    var { feed } = this.props;
+    var list = feed.map((item, index) => {
+      // console.log(item);
+      return (
+        <View key = {index}>
+          <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this)}
             underlayColor = 'purple'
           >
-            <Text style = {styles.buttonText}> View Request</Text>
+            <Text style = {styles.buttonText}> Request: {index} </Text>
           </TouchableHighlight>
+        </View>
+      );
+    });
+    return (
+      //use {} for anything that is not html or text. this allows you to run JS in JSX
+      <View style={styles.container}>
+        {list}
       </View>
     );
   }

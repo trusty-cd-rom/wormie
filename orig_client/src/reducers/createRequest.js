@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, TOGGLE_FETCH} from '../actions/createRequest';
+import { CREATE_REQUEST, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../actions/createRequest';
 import data from '../testData/data';
 
 
@@ -6,11 +6,18 @@ console.log(data, data.userList[0]);
 
 var initialState = {
 	feed: data.wormholeList,
-	currentUser: data.userList[0]
+	currentUser: data.userList[0],
+	createRequest: {
+		title: '',
+		location: '',
+		deadline: '',
+		notes: '',
+		isFetching: 'false'
+	}
 };
 
 function reducerRoute(state = initialState, action) {
-	console.log('createRequest>reducerRoute', JSON.stringify(state))
+	console.log('createRequest>reducerRoute', state)
   switch (action.type) {
 	  case CREATE_REQUEST:
 	    return {
@@ -23,6 +30,11 @@ function reducerRoute(state = initialState, action) {
 	    	...state,
 	    	isFetching: action.status
 	    };
+	   case UPDATE_INPUT_TEST:
+	   	return {
+	   		...state,
+	   		createRequest: createRequestReducerRoute(state.createRequest, action)
+	   	}
 	  default:
 	    return state;
   }
@@ -49,6 +61,21 @@ function userReducerRoute(state, action) {
 	  	return {
 	  		...state,
 	  		wormholes: userRequestReducerRoute(state.wormholes, action)
+	  	}
+	  default:
+	    return state;
+  }
+};
+
+function createRequestReducerRoute(state, action) {
+	console.log('createRequest>reducerRoute>createRequestReducerRoute', state)
+	switch (action.type) {
+	  case UPDATE_INPUT_TEST:
+	  	let newVal = {};
+	  	newVal[action.field] = action.text;
+	  	return {
+	  		...state,
+	  		...newVal 
 	  	}
 	  default:
 	    return state;

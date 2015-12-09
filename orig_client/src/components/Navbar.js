@@ -4,7 +4,7 @@ import React, {
   StyleSheet,
 } from 'react-native';
 import Profile from './Profile';
-import FeedList from './FeedList';
+import FeedList from '../containers/FeedList';
 // import api from '../Utils/api';
 
 

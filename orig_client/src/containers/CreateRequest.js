@@ -7,7 +7,7 @@ function mapStateToProps(state) {
 	console.log('CreateRequest mapStateToProps: ', state);
   return {
     currentUser: state.reducerRoute.currentUser,
-    isFetching: state.reducerRoute.isFetching
+    inputText: state.reducerRoute.createRequest,
   };
 }
 

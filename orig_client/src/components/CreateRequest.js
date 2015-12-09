@@ -7,68 +7,32 @@ import React, {
   TextInput,
   ActivityIndicatorIOS,
 } from 'react-native';
+import FeedList from '../containers/FeedList';
 
 class CreateRequest extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      location: '',
-      deadline: '',
-      notes: '',
-      error: false
-    }
-    // debugger;
-  }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('shouldComponentUpdate: ',nextProps, nextState)  
-  // }
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log('componentWillUpdate: ',nextProps, nextState)
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log('componentDidUpdate: ',prevProps, prevState)  
-  // }
-  handleTitleChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      title: event.nativeEvent.text
-    });
-  }
-  handleLocationChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      location: event.nativeEvent.text
-    });
-  }
-  handleDeadlineChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      deadline: event.nativeEvent.text
-    });
-  }
-  handleNotesChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      notes: event.nativeEvent.text
-    });
+  handleInuptChange(fieldName, event) {
+    var { updateInputText } = this.props;
+    updateInputText(fieldName, event.nativeEvent.text);
   }
   back() {
     this.props.navigator.pop();
   }
   submitRequest() {
-    var { createRequest, currentUser } = this.props;
+    var { createRequest, currentUser, inputText } = this.props;
     var newRequestData = {
-      title: this.state.title,
-      location: this.state.location,
-      deadline: this.state.deadline,
-      notes: this.state.notes,
+      title: inputText.title,
+      location: inputText.location,
+      deadline: inputText.deadline,
+      notes: inputText.notes,
       user: currentUser
     };
-    createRequest(newRequestData);
+    createRequest(newRequestData)
+    this.props.navigator.replace({
+      component: FeedList
+    });
   }
   render() {
-    let { isFetching } = this.props;
+    let { inputText } = this.props;
     return (
       <View style={styles.container}>
 
@@ -85,8 +49,8 @@ class CreateRequest extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.title}
-          onChange = {this.handleTitleChange.bind(this)}
+          value = {inputText.title}
+          onChange = {this.handleInuptChange.bind(this,'title')}
         />
 
         <Text style={styles.title}>
@@ -94,8 +58,8 @@ class CreateRequest extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.location}
-          onChange = {this.handleLocationChange.bind(this)}
+          value = {inputText.location}
+          onChange = {this.handleInuptChange.bind(this,'location')}
         />
 
         <Text style={styles.title}>
@@ -103,8 +67,8 @@ class CreateRequest extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.deadline}
-          onChange = {this.handleDeadlineChange.bind(this)}
+          value = {inputText.deadline}
+          onChange = {this.handleInuptChange.bind(this,'deadline')}
         />
 
         <Text style={styles.title}>
@@ -112,12 +76,12 @@ class CreateRequest extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.notes}
-          onChange = {this.handleNotesChange.bind(this)}
+          value = {inputText.notes}
+          onChange = {this.handleInuptChange.bind(this,'notes')}
         />
         
         <ActivityIndicatorIOS
-          animating = {isFetching==='true'}
+          animating = {inputText.isFetching==='true'}
           color = 'white'
           size = 'large'
         ></ActivityIndicatorIOS>
