@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <title>Earthworm</title>
+</head>
+<body>
+
+    <h1>EARTHWORM</h1>
+
+    <script type="text/javascript">
+
+        url = "http://localhost:8000/api/wormholes/";
+
+        $(document).ready(function() {
+        
+          $.ajax({
+            url: url,
+            method: 'GET',
+            crossDomain: true,
+            contentType: 'application/json',
+            success: function(data) {
+                console.log(data);
+            }
+        
+          });
+        
+        });
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>
