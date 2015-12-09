@@ -7,7 +7,7 @@ import React, {
   TextInput,
   ActivityIndicatorIOS,
 } from 'react-native';
-import FeedList from '../containers/FeedList';
+import Navbar from './Navbar';
 
 class CreateRequest extends Component {
   handleInuptChange(fieldName, event) {
@@ -28,7 +28,7 @@ class CreateRequest extends Component {
     };
     createRequest(newRequestData)
     this.props.navigator.replace({
-      component: FeedList
+      component: Navbar
     });
   }
   render() {

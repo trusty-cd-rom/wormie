@@ -6,7 +6,7 @@ import * as FeedListActions from '../actions/feedList';
 function mapStateToProps(state) {
 	console.log('feed state: ', state);
   return {
-    feed: state.reducerRoute.feed
+    feed: state.userProfile.feed
   };
 }
 
