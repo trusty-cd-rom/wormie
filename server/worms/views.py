@@ -28,9 +28,6 @@ class WormholeList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    # Put this in any resources that we want to protect
-    # permission_classes = [permissions.IsAuthenticated]
-
     queryset = Wormhole.objects.all()
     serializer_class = WormholeSerializer
 
@@ -80,6 +77,9 @@ class SubmissionList(generics.ListCreateAPIView):
     """
     List all submissions, or create a new submission
     """
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
     queryset = Submission.objects.all()
     serializer_class = SubmissionSerializer
