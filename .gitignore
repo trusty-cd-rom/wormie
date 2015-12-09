@@ -2,8 +2,7 @@
 
 server/wormie/config.py
 server/mysite.log
-.elasticbeanstalk/
-
+server/.elasticbeanstalk
 
 ############################################
 ### PYTHON GITIGNORE FROM GITHUB
