@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../constants/actions';;
+import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../constants/actions';;
 import data from '../testData/data';
 
 
@@ -16,6 +16,31 @@ var initialState = {
 	isFetching: 'false'
 };
 
+function createUserProfile(state = initialState, action) {
+  switch(action.type) {
+    case ADD_USER_INFO:
+      return {
+        ...state,
+        about_me: action["about_me"],
+        user: updateName(state.user, action)
+      }
+    default:
+      return state;
+  }
+}
+
+function updateName(state = initialState2, action) {
+  switch(action.type) {
+    case ADD_USER_INFO:
+      return {
+        ...state,
+        username: action.username
+      }
+    default:
+      return state;
+  }
+}
+
 function userProfile(state = initialState, action) {
 	console.log('createRequest>reducerRoute', state)
   switch (action.type) {
@@ -30,11 +55,16 @@ function userProfile(state = initialState, action) {
 	    	...state,
 	    	isFetching: action.status
 	    };
-	   case UPDATE_INPUT_TEST:
+	  case UPDATE_INPUT_TEST:
 	   	return {
 	   		...state,
 	   		createRequest: createRequestReducerRoute(state.createRequest, action)
 	   	}
+	  case ADD_USER_INFO:
+	  	return {
+	  		...state,
+	  		currentUser: createUserProfile(state.currentUser, action)
+	  	}
 	  default:
 	    return state;
   }

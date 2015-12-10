@@ -41,13 +41,12 @@ class CreateRequest extends Component {
     let { inputText } = this.props;
     return (
       <View style={styles.container}>
-
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.back.bind(this)}
           underlayColor = '#88D4f5'
         >
-          <Text style = {styles.buttonText}> Back </Text>
+        <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
 
         <Text style={styles.title}>

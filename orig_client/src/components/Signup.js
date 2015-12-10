@@ -2,32 +2,36 @@ import React, {
   Component,
   StyleSheet,
   Text,
+  Image,
   View,
   TouchableHighlight,
   TextInput,
 } from 'react-native';
 import Badge from '../components/Badge';
-// import FeedList from './FeedList';
-// import Navbar from './Navbar';
 import Location from './Location';
 
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      aboutMe: '',
-      // isLoading: false,
-      error: false
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+
+    // this.state = {
+    //   username: '',
+    //   aboutMe: '',
+    //   // isLoading: false,
+    //   error: false
+    // }
+  // }
+
   goToLocation() {
     this.props.navigator.replace({
       component: Location
     });
   }
-  handleUsernameChange(event) {
+  // TODO: require updateinputtext from signup-containter.js
+  handleInputChange(fieldName, event) {
     //input has the value nativeElement
+    var { updateInputText } = this.props;
+    updateInputText(fieldName, event.nativeEvent.text);
     this.setState({
       username: event.nativeEvent.text
     });
@@ -40,11 +44,20 @@ class Signup extends Component {
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+        // <View style = {styles.badgeContainer}>
+        //   <Image 
+        //     style = {styles.badgeImage}
+        //     source = {{uri: currentUser['picture_url']}}
+        //   />
+        //   <View>
+        //     <Text style = {styles.badgeName}> `${currentUser['first_name']} ${currentUser['last_name']}` </Text>
+        //     <Text style = {styles.badgeHandle}> {currentUser.location} </Text>
+        //   </View>
+        // </View>
+    var { currentUser } = this.props;
     return (
       <View style={styles.container}>
-
-        <Badge />
-
+        <Badge currentUser={this.props.currentUser} />
         <Text style={styles.title}>
           Username
         </Text>
@@ -86,6 +99,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
+  },
+  badgeContainer: {
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 1,
+    paddingTop: 50,
+    paddingBottom: 40
+  },
+  badgeInfoContainer: {
+
+  },
+  badgeName: {
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    fontSize: 21,
+    marginTop: 10,
+    marginBottom: 5,
+    color: 'white'
+  },
+  badgeHandle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: 'white'
+  },
+  badgeImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    marginTop: 10,
+    alignSelf: 'center',
+    marginLeft: 10,
+    marginRight: 30
   },
   text: {
     fontSize: 20,

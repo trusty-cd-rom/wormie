@@ -5,6 +5,7 @@ import React, {
   StyleSheet,
   ScrollView,
   Component,
+  Image,
   TouchableHighlight,
 } from 'react-native';
 import CreateRequest from '../containers/CreateRequest';
@@ -12,12 +13,59 @@ import ViewRequest from '../containers/ViewRequest';
 // import Badge from '../containers/Badge';
 
 var styles = StyleSheet.create({
+  name: {
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    fontSize: 21,
+    marginTop: 10,
+    marginBottom: 5,
+    color: 'white'
+  },
+  handle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: 'white'
+  },
   container:{
     marginTop: 20,
     flex: 1,
     backgroundColor: 'white',
     alignSelf: 'stretch',
     justifyContent: 'center',
+  },
+  badgeContainer: {
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 1,
+    paddingTop: 50,
+    paddingBottom: 40
+  },
+  badgeInfoContainer: {
+
+  },
+  badgeName: {
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    fontSize: 21,
+    marginTop: 10,
+    marginBottom: 5,
+    color: 'white'
+  },
+  badgeHandle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: 'white'
+  },
+  badgeImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    marginTop: 10,
+    alignSelf: 'center',
+    marginLeft: 10,
+    marginRight: 30
   },
   image: {
     height: 350
@@ -114,11 +162,35 @@ class Profile extends Component{
         //   <Text style = {styles.buttonText}> View Request </Text>
         // </TouchableHighlight>
   
+        // <View style = {styles.container}>
+        //   <Image 
+        //     style = {styles.badgeImage}
+        //     source = {{uri: currentUser.picutre_url}}
+        //   />
+        //   <View style={styles.container}>
+        //     <Text style = {styles.name}> {currentUser.name} </Text>
+        //     <Text style = {styles.handle}> {currentUser.location} </Text>
+        //   </View>
+        // </View>
+            // source = {{uri: currentUser[picture_url]}}
   render() {
+    // var profileImage = 'http://innovateelt.com/wp/wp-content/uploads/2015/09/charlie-harrington-headshot-330x330.jpg';
+    // var profileImage = currentUser['picture_url'];
     var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
+
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
+        <View style = {styles.badgeContainer}>
+          <Image 
+            style = {styles.badgeImage}
+            source = {{uri: currentUser['picture_url']}}
+          />
+          <View>
+            <Text style = {styles.badgeName}> {currentUser.name} </Text>
+            <Text style = {styles.badgeHandle}> {currentUser.location} </Text>
+          </View>
+        </View>
         <View>
           <Text>My Requests</Text>
           {this.createList(wormholes, styles.request)}

@@ -50,25 +50,20 @@ var MOCK_USER = {
 }
 
 class Badge extends React.Component{
-
+  componentWillMount() {
+    console.log(this.props.currentUser);
+  }
   render() {
+    var { currentUser } = this.props;
     return (
-      // <View style = {styles.container}>
-      //   <Image 
-      //     style = {styles.image}
-      //     source = {{uri: this.props.userInfo.avatar_url}}
-      //   />
-      //   <Text style = {styles.name}> {this.props.userInfo.name} </Text>
-      //   <Text style = {styles.handle}> {this.props.userInfo.login} </Text>
-      // </View>
       <View style = {styles.container}>
         <Image 
           style = {styles.image}
-          source = {{uri: MOCK_USER.avatar_url}}
+          source = {{uri: currentUser['picture_url']}}
         />
         <View style={styles.infoContainer}>
-          <Text style = {styles.name}> {MOCK_USER.name} </Text>
-          <Text style = {styles.handle}> {MOCK_USER.location} </Text>
+          <Text style = {styles.name}> {currentUser.user.username} </Text>
+          <Text style = {styles.handle}> {currentUser['about_me']} </Text>
         </View>
       </View>
       
