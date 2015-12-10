@@ -6,8 +6,43 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 var Camera = require('react-native-camera');
+import SubmitWormhole from '../containers/SubmitWormhole';
 
 class CameraView extends Component {
+  _switchCamera() {
+    // console.log('someone is trying to switch the camera');
+    let { switchCamera, cameraState } = this.props;
+    let newCameraType = cameraState.cameraType === Camera.constants.Type.back
+      ? Camera.constants.Type.front : Camera.constants.Type.back;
+    switchCamera(newCameraType);
+  }
+  _takeVideo() {
+    let { cameraState, toggleRecording } = this.props;
+    if(!cameraState.isRecording) {
+      console.log('starting the capture');
+      
+      this.refs.cam.capture((err, data) => {
+        console.log('this is the data location from the camera: ', err, data);
+        // youtube.postVideo(data);
+        // .then((data) => {
+        //   console.log(data);
+        // })
+        // .catch((err) => console.log(err))
+        // ;
+        this.props.navigator.push({
+          component: SubmitWormhole 
+        })
+      });
+      toggleRecording();
+    } else {
+      console.log('stopping the capture');
+      this.refs.cam.stopCapture();
+      toggleRecording();
+      this.props.navigator.push({
+          component: SubmitWormhole 
+      });
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +52,22 @@ class CameraView extends Component {
       isRecording: false
     }
   }
+  componentWillMount() {
+    let { initCameraState } = this.props;
+    
+    initCameraState({
+      cameraType: Camera.constants.Type.back,
+      captureMode: Camera.constants.CaptureMode.video,
+      captureTarget: Camera.constants.CaptureTarget.disk,
+      isRecording: false
+    });
+  }
   back() {
     this.props.navigator.pop();
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-    let { currentWormhole } = this.props;
+    let { cameraState } = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -35,9 +80,9 @@ class CameraView extends Component {
         <Camera
           ref="cam"
           style = {this._makeBackground(0)}
-          type = {this.state.cameraType}
-          captureMode = {this.state.captureMode}
-          captureTarget = {this.state.captureTarget}
+          type = {cameraState.cameraType}
+          captureMode = {cameraState.captureMode}
+          captureTarget = {cameraState.captureTarget}
         >
         </Camera>
         <View
@@ -45,14 +90,14 @@ class CameraView extends Component {
         >
           <TouchableHighlight
             style = {this._makeBackground(1)}
-            onPress={this._switchCamera}
+            onPress={this._switchCamera.bind(this)}
             underlayColor = '#88D4f5'
           >
             <Text style={styles.instructions}>The old switcheroo</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style = {this._makeBackground(2)}
-            onPress={this._takeVideo}
+            onPress={this._takeVideo.bind(this)}
             underlayColor = '#88D4f5'
           >
             <Text style={styles.instructions}>Take Video</Text>
@@ -80,34 +125,6 @@ class CameraView extends Component {
 
     return obj;
 
-  }
-  _switchCamera() {
-    var state = this.state;
-    state.cameraType = state.cameraType === Camera.constants.Type.back
-      ? Camera.constants.Type.front : Camera.constants.Type.back;
-    this.setState(state);
-  }
-  _takeVideo() {
-    var state = this.state;
-    if(!state.isRecording) {
-      console.log('starting the capture');
-      
-      this.refs.cam.capture(function(err, data) {
-        console.log(err, data);
-        youtube.postVideo(data);
-        // .then((data) => {
-        //   console.log(data);
-        // })
-        // .catch((err) => console.log(err))
-        // ;
-      });
-      state.isRecording = true;
-    } else {
-      console.log('stopping the capture');
-      this.refs.cam.stopCapture();
-      state.isRecording = false;
-    }
-    this.setState(state);
   }
 }
 

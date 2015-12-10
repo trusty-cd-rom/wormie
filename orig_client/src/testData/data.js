@@ -17,7 +17,7 @@ var data = {
 					"created_at": "2015-12-07T23:17:23.385998Z",
 					"updated_at": "2015-12-07T23:17:23.386086Z",
 					"notes": "this video quality is bad",
-					"video_url": "nt7gHEEqb4M",
+					"video_url": "jxtpUQpAoOQ",
 					"wormhole_id": 10,
 					"owner": 3
 				}

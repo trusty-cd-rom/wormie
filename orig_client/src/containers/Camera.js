@@ -4,7 +4,9 @@ import CameraView from '../components/Camera';
 import * as CameraActions from '../actions/camera';
 
 function mapStateToProps(state) {
-  return state;
+  return {
+  	cameraState: state.camera
+  };
 }
 
 function mapDispatchToProps(dispatch) {
