@@ -6,13 +6,16 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import Navbar from './Navbar';
+import CameraView from '../containers/Camera';
 
 class OpenWormhole extends Component {
   back() {
     this.props.navigator.pop();
   }
   startSubmission() {
-    // this.props.navigator.pop();
+    this.props.navigator.push({
+      component: CameraView
+    });
   }
   render() {
     let { currentWormhole } = this.props;
