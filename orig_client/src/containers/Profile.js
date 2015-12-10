@@ -5,7 +5,7 @@ import * as ProfileActions from '../actions/profile';
 
 function mapStateToProps(state) {
   return {
-    // counter: state.counter
+    currentUser: state.userProfile.currentUser,
   };
 }
 

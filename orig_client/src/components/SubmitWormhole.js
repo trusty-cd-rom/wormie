@@ -4,19 +4,30 @@ import React, {
   Text,
   View,
   TouchableHighlight,
+  TextInput,
+  ScrollView
 } from 'react-native';
 var YouTube = require('react-native-youtube');
+import Navbar from './Navbar';
 
-class ViewRequest extends Component {
+class SubmitWormhole extends Component {
   back() {
     this.props.navigator.pop();
   }
+  submit() {
+    this.props.navigator.replace({
+      component: Navbar
+    });
+  }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-    let { currentWormhole } = this.props;
+    let { currentWormhole, currentUser } = this.props;
     return (
-      <View style={styles.container}>
-
+      <ScrollView 
+        automaticallyAdjustContentInsets={false}
+        onScroll={() => { console.log('onScroll!'); }}
+        scrollEventThrottle={200}
+        style={styles.container}>
         <TouchableHighlight
           style = {styles.back}
           onPress = {this.back.bind(this)}
@@ -24,14 +35,13 @@ class ViewRequest extends Component {
         >
           <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
-
         <YouTube 
-          videoId={currentWormhole.submissions[0].video_url}
+          videoId={currentWormhole.submissions[0] ? currentWormhole.submissions[0].video_url : ''}
           play={false}
-          hidden={false}
+          hidden={!Boolean(currentWormhole.submissions[0])}
           playsInline={true}
-          showinfo={false}
-          modestbranding={true}
+          showinfo={true}
+          // modestbranding={true}
           onError={(e)=>{console.log('youtube error: ', e.error)}}
           style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
         />
@@ -48,12 +58,12 @@ class ViewRequest extends Component {
         </View>
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentWormhole.submissions[0].owner_name}
+            {currentUser.user.username}
           </Text>
         </View>
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentWormhole.submissions[0].created_at}
+            {new Date().toJSON().slice(0,10)}
           </Text>
         </View>
         <View style={styles.loginButton}>
@@ -61,8 +71,19 @@ class ViewRequest extends Component {
             {currentWormhole.notes}
           </Text>
         </View>
-
-      </View>
+        <TextInput
+          style = {styles.searchInput}
+          value = {''}
+          // onChange = {this.handleInuptChange.bind(this,'location')}
+        />
+        <TouchableHighlight
+          style = {styles.back}
+          onPress = {this.submit.bind(this)}
+          underlayColor = 'purple'
+        >
+          <Text style = {styles.buttonText}> Submit </Text>
+        </TouchableHighlight>
+      </ScrollView>
     );
   }
 }
@@ -70,8 +91,6 @@ class ViewRequest extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'black',
     marginTop: 20
   },
@@ -100,6 +119,16 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center'
   },
+  searchInput: {
+    height: 200,
+    padding: 4,
+    marginRight: 5,
+    fontSize: 23,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: 'white'
+  },
 });
 
-export default ViewRequest;
+export default SubmitWormhole;

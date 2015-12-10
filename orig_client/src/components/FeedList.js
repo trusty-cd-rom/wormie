@@ -35,11 +35,11 @@ var styles = StyleSheet.create({
 });
 
 class FeedList extends React.Component{
-  viewRequest(e) {
+  viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
-    console.log('trying to view request: ', e, feed[e]);
-    updateCurrentWormhole(feed[e]);
-    if(feed[e].status === 'open') {
+    console.log('trying to view request: ', index, feed[index]);
+    updateCurrentWormhole(feed[index]);
+    if(feed[index].status === 'open') {
       this.props.navigator.push({
         component: OpenWormhole,
       });

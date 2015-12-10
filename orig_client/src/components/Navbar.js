@@ -3,7 +3,7 @@ import React, {
   TabBarIOS,
   StyleSheet,
 } from 'react-native';
-import Profile from './Profile';
+import Profile from '../containers/Profile';
 import FeedList from '../containers/FeedList';
 // import api from '../Utils/api';
 
