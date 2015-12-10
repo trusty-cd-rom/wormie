@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <title>Earthworm</title>
+</head>
+<body>
+
+    <h1>EARTHWORM</h1>
+    
+    
+    <button onclick="logIn()">Log In</button>
+
+
+    <h2>List of wormholes</h2>
+    <div id="wormholes"></div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+          $.ajax({
+            url: "http://localhost:8000/api/wormholes/",
+            method: 'GET',
+            crossDomain: true,
+            contentType: 'application/json',
+            success: function(data) {   
+                data.forEach( function(wormhole) {
+                    $('#wormholes').append('<p>' + wormhole.title + "</p>");
+                });
+            }
+          });
+        
+        });
+
+
+        var logIn = function() {
+            $.ajax({
+              url: "http://localhost:8000/auth/login/facebook/",
+              method: 'GET',
+              crossDomain: true,
+              contentType: 'application/json',
+              success: function(data) {
+                console.log(data);
+              }
+            });            
+        };
+
+
+    </script>
+
+</body>
+</html>
