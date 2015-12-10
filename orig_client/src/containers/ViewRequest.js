@@ -5,7 +5,7 @@ import * as ViewRequestActions from '../actions/viewRequest';
 
 function mapStateToProps(state) {
   return {
-    // counter: state.counter
+    currentWormhole: state.currentWormhole,
   };
 }
 

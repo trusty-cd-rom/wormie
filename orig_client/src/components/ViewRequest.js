@@ -5,6 +5,7 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
+var YouTube = require('react-native-youtube');
 
 class ViewRequest extends Component {
   back() {
@@ -12,26 +13,52 @@ class ViewRequest extends Component {
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    let { currentWormhole } = this.props;
     return (
       <View style={styles.container}>
 
         <TouchableHighlight
-          style = {styles.loginButton}
+          style = {styles.back}
           onPress = {this.back.bind(this)}
           underlayColor = 'purple'
         >
           <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
 
-        <View style={[styles.loginButton,{backgroundColor:'red'}]}>
-          <Text style={styles.title}>
-            Video
-          </Text>
-        </View>
+        <YouTube 
+          videoId={currentWormhole.submissions[0].video_url}
+          play={false}
+          hidden={false}
+          playsInline={true}
+          showinfo={false}
+          modestbranding={true}
+          onError={(e)=>{console.log('youtube error: ', e.error)}}
+          style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+        />
 
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            Details
+            {currentWormhole.title}
+          </Text>
+        </View>
+        <View style={styles.loginButton}>
+          <Text style={styles.title}>
+            {currentWormhole.owner_name}
+          </Text>
+        </View>
+        <View style={styles.loginButton}>
+          <Text style={styles.title}>
+            {currentWormhole.submissions[0].owner_name}
+          </Text>
+        </View>
+        <View style={styles.loginButton}>
+          <Text style={styles.title}>
+            {currentWormhole.submissions[0].created_at}
+          </Text>
+        </View>
+        <View style={styles.loginButton}>
+          <Text style={styles.title}>
+            {currentWormhole.notes}
           </Text>
         </View>
 
@@ -49,6 +76,13 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   loginButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#48BBEC'
+  },
+  back: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
