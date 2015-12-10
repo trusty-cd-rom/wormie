@@ -12,11 +12,10 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'flex-start',
     flex: 1,
-    paddingTop: 50,
-    paddingBottom: 40
+    paddingTop: 20,
+    paddingBottom: 20
   },
   infoContainer: {
-
   },
   name: {
     alignSelf: 'center',
@@ -35,7 +34,7 @@ var styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 50,
-    marginTop: 10,
+    marginTop: 2,
     alignSelf: 'center',
     marginLeft: 10,
     marginRight: 30
@@ -71,8 +70,8 @@ class Badge extends React.Component{
   }
 }
 
-Badge.propTypes = {
-  userInfo: React.PropTypes.object.isRequired
-}
+// Badge.propTypes = {
+//   userInfo: React.PropTypes.object.isRequired
+// }
 
 export default Badge;

@@ -22,11 +22,11 @@ class Signup extends Component {
     // }
   // }
 
-  // goToLocation() {
-  //   this.props.navigator.replace({
-  //     component: Location
-  //   });
-  // }
+  goToLocation() {
+    this.props.navigator.replace({
+      component: Location
+    });
+  }
   // TODO: require updateinputtext from signup-containter.js
   handleInputChange(fieldName, event) {
     //input has the value nativeElement
@@ -34,6 +34,7 @@ class Signup extends Component {
     updateInputText(fieldName, event.nativeEvent.text);
   }
 
+  // onPress = { this.handleSubmitUserProfile(this)
   // handleSubmitUserProfile(context) {
   //   var { updateUserProfile } = this.props;
   //   updateUserProfile();
@@ -48,10 +49,7 @@ class Signup extends Component {
       },
       'about_me': inputText['about_me']
     };
-    createUserInfo(newUserData)
-    // this.props.navigator.replace({
-    //   component: Location
-    // });
+    createUserInfo(newUserData);
   }
 
   render() {
@@ -94,7 +92,7 @@ class Signup extends Component {
 
         <TouchableHighlight
           style = { styles.loginButton }
-          onPress = { this.handleSubmitUserProfile(this) }
+          onPress = { this.goToLocation.bind(this) }
           underlayColor = '#88D4f5'
         >
           <Text style = {styles.buttonText}> Explore </Text>
