@@ -22,26 +22,38 @@ class Signup extends Component {
     // }
   // }
 
-  goToLocation() {
-    this.props.navigator.replace({
-      component: Location
-    });
-  }
+  // goToLocation() {
+  //   this.props.navigator.replace({
+  //     component: Location
+  //   });
+  // }
   // TODO: require updateinputtext from signup-containter.js
   handleInputChange(fieldName, event) {
     //input has the value nativeElement
     var { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
-    this.setState({
-      username: event.nativeEvent.text
-    });
   }
-  handleAboutMeChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      aboutMe: event.nativeEvent.text
-    });
+
+  // handleSubmitUserProfile(context) {
+  //   var { updateUserProfile } = this.props;
+  //   updateUserProfile();
+  //   this.goToLocation.bind(context);
+  // }
+
+  handleSubmitUserProfile(context) {
+    var { createUserInfo, currentUser, inputText } = this.props;
+    var newUserData = {
+      user: {
+        username: inputText.username
+      },
+      'about_me': inputText['about_me']
+    };
+    createUserInfo(newUserData)
+    // this.props.navigator.replace({
+    //   component: Location
+    // });
   }
+
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
         // <View style = {styles.badgeContainer}>
@@ -54,17 +66,17 @@ class Signup extends Component {
         //     <Text style = {styles.badgeHandle}> {currentUser.location} </Text>
         //   </View>
         // </View>
-    var { currentUser } = this.props;
+    var { currentUser, inputText } = this.props;
     return (
       <View style={styles.container}>
-        <Badge currentUser={this.props.currentUser} />
+        <Badge currentUser={this.props.currentUser} page={'profile'} />
         <Text style={styles.title}>
           Username
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.username}
-          onChange = {this.handleUsernameChange.bind(this)}
+          value = {inputText.username}
+          onChange = {this.handleInputChange.bind(this, "username")}
         />
 
         <Text style={styles.title}>
@@ -72,18 +84,17 @@ class Signup extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.aboutMe}
-          onChange = {this.handleAboutMeChange.bind(this)}
+          value = {inputText['about_me']}
+          onChange = {this.handleInputChange.bind(this, "about_me")}
         />
-
 
         <View style={styles.splashImage}>
           <Text style={styles.buttonText}> COLOR PICKER </Text>
         </View>
 
         <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.goToLocation.bind(this)}
+          style = { styles.loginButton }
+          onPress = { this.handleSubmitUserProfile(this) }
           underlayColor = '#88D4f5'
         >
           <Text style = {styles.buttonText}> Explore </Text>

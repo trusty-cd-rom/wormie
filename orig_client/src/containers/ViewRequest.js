@@ -9,6 +9,7 @@ function mapStateToProps(state) {
   };
 }
 
+// bindActionCreaters
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ViewRequestActions, dispatch);
 }
