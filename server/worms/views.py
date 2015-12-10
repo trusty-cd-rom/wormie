@@ -64,7 +64,7 @@ class WormholeDetail(APIView):
 
     def put(self, request, pk, format=None):
         wormhole = self.get_object(pk)
-        serializer = WormholeSerializer(wormhole, data=request.data)
+        serializer = WormholeSerializer(wormhole, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -129,7 +129,7 @@ class SubmissionDetail(APIView):
 
     def put(self, request, pk, format=None):
         submission = self.get_object(pk)
-        serializer = SubmissionSerializer(submission, data=request.data)
+        serializer = SubmissionSerializer(submission, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -180,7 +180,7 @@ class UserDetail(APIView):
 
     def put(self, request, pk, format=None):
         account = self.get_object(pk)
-        serializer = AccountSerializer(account, data=request.data)
+        serializer = AccountSerializer(account, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -190,82 +190,6 @@ class UserDetail(APIView):
         account = self.get_object(pk)
         account.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-#############################
-# SIGNUP AND SIGNIN
-#############################
-
-
-# class Signup(APIView):
-
-#     """
-#     Signup new user
-#     """
-
-#     def post(self, request, format=None):
-#         try:
-#             data = request.data
-#         except ParseError as error:
-#             return Response('Invalid: {0}'.format(error.detail), status=status.HTTP_400_BAD_REQUEST)
-#         if "username" not in data or "password" not in data:
-#             return Response('Username or password not provided', status=status.HTTP_400_BAD_REQUEST)
-
-#         print(data)
-
-#         username = data["username"]
-#         password = data["password"]
-
-#         if User.objects.filter(username=username).exists():
-#             return Response('Username already taken', status.HTTP_400_BAD_REQUEST)
-#         else:
-#             user = User.objects.create_user(username=username, password=password)
-#             token = Token.objects.create(user=user)
-#             account = AccountSerializer(Account.objects.create(user=user)).data
-#             return Response({'token': token.key, 'account': account})
-
-
-# class Signin(APIView):
-
-#     """
-#     Log in existing user
-#     """
-
-#     def post(self, request, format=None):
-#         try:
-#             data = request.data
-#         except ParseError as error:
-#             return Response('Invalid: {0}'.format(error.detail), status=status.HTTP_400_BAD_REQUEST)
-#         if "username" not in data or "password" not in data:
-#             return Response('Username or password not provided', status=status.HTTP_400_BAD_REQUEST)
-
-#         username = data["username"]
-#         password = data["password"]
-
-#         user = authenticate(username=username, password=password)
-
-#         if user is not None:
-#             token = Token.objects.get_or_create(user=user)[0]
-#             account = AccountSerializer(Account.objects.get(user=user)).data
-#             return Response({'token': token.key, 'account': account})
-#         else:
-#             return Response('Username or password is invalid', status.HTTP_400_BAD_REQUEST)
-
-
-# class TokenCheck(APIView):
-
-#     """
-#     Check token
-#     """
-
-#     def get(self, request, token, format=None):
-#         if Token.objects.filter(key=token).exists():
-#             userid = Token.objects.get(key=token).user_id
-#             account = AccountSerializer(Account.objects.get(user=userid)).data
-#             return Response(account)
-#         else:
-#             return Response('Invalid token', status.HTTP_400_BAD_REQUEST)
-
 
 #############################
 # ACCOUNTS
