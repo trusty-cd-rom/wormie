@@ -22,22 +22,27 @@ class SubmissionSerializer(serializers.ModelSerializer):
         field = ('id', 'notes', 'video_url', 'wormhole_id', 'owner')
 
 
+class AccountSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        field = ('picture_url', 'location', 'about_me', 'wormie_color')
+
+
 class UserSerializer(serializers.ModelSerializer):
 
+    account = AccountSerializer()
+    
+    # Show only the primary keys for wormholes and submissions in User
     wormholes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wormhole.objects.all())
     submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Submission.objects.all())
+
+    # Show all fields for wormholes and submissions in User
     # wormholes = WormholeSerializer(many=True, read_only=True)
     # submissions = SubmissionSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'id', 'first_name', 'last_name', 'email', 'wormholes', 'submissions')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'account', 'wormholes', 'submissions')
 
 
-class AccountSerializer(serializers.ModelSerializer):
-
-    user = UserSerializer()
-
-    class Meta:
-        model = Account
-        field = ('id', 'user', 'picture_url', 'location', 'about_me', 'wormie_color')

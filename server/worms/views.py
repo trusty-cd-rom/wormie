@@ -24,12 +24,6 @@ class WormholeList(APIView):
     List all wormholes, or create a new wormhole
     """
 
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
-
-    # queryset = Wormhole.objects.all()
-    # serializer_class = WormholeSerializer
-
     def get(self, request, format=None):
         wormholes = Wormhole.objects.all()
         serializer = WormholeSerializer(wormholes, many=True)
@@ -163,8 +157,56 @@ class UserDetail(APIView):
     # Uses class-based view
 
     """
+    Retrieve, update, or delete a USER instance.
+    """
+
+    def get_object(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        user = self.get_object(pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#############################
+# ACCOUNTS
+#############################
+
+
+class AccountList(generics.ListCreateAPIView):
+
+    # Uses generics class-based view
+
+    """
+    List all accounts or create an account
+    """
+
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+
+
+class AccountDetail(APIView):
+
+    # Uses class-based view
+
+    """
     Retrieve, update, or delete an ACCOUNT instance.
-    Note: User instance will be included in the Account.
     """
 
     def get_object(self, pk):
@@ -190,36 +232,3 @@ class UserDetail(APIView):
         account = self.get_object(pk)
         account.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-#############################
-# ACCOUNTS
-#############################
-
-
-class AccountList(generics.ListCreateAPIView):
-
-    """
-    List all accounts or create an account
-    """
-
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
-
-
-class AccountDetail(generics.RetrieveAPIView):
-
-    """
-    Retrieve an account instance
-    """
-
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
-
-
-#############################
-# TRUEUSERS - this is temporary for testing and deleting user accounts
-#############################
-
-class TrueUserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
