@@ -1,8 +1,8 @@
-// import { UPDATE_CURRENT_WORMHOLE } from '../constants/actions';
+import { INIT_PENDING_WORMHOLE_SUBMISSION } from '../constants/actions';
 
-// export function updateCurrentWormhole(wormhole) {
-//   return {
-//     type: UPDATE_CURRENT_WORMHOLE,
-//     wormhole
-//   };
-// };
+export function initPendingSubmission(wormhole) {
+  return {
+    type: INIT_PENDING_WORMHOLE_SUBMISSION,
+    wormhole
+  };
+};
