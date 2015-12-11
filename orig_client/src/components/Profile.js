@@ -62,21 +62,25 @@ var styles = StyleSheet.create({
 });
 
 class Profile extends Component{
-  constructor(props) {
-    super(props);
-    console.log('props', props);
-  }
-
-  viewRequest(index, array) {
+  viewRequest(index, array, type) {
     var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
-    var list = array === 'wormholes' ? wormholes : submissions;
     console.log('trying to view request: ', wormholes, wormholes[index]);
     
     // UPDATECURRENTWORMHOLE
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    updateCurrentWormhole(list[index]);
+
+    // TODO: after datastructure change
+    if (type === 'wormholes') {
+      list = wormholes;
+      updateCurrentWormhole({submissions: [list[index]]});
+    } else {
+      list = submissions;
+      updateCurrentWormhole(list[index]);
+    }
+    
+    // debugger;
     if(list[index].status === 'open') {
       this.props.navigator.push({
         component: OpenWormhole,
@@ -94,17 +98,17 @@ class Profile extends Component{
     });
   }
 
-  createList(array, styleButton) {
+  createList(array, styleButton, type) {
     return array.map((item, index) => {
       return (
         <View key = {index}>
           <TouchableHighlight
             style = {styleButton}
-            onPress = {this.viewRequest.bind(this, index, array)}
+            onPress = {this.viewRequest.bind(this, index, array, type)}
             underlayColor = 'purple'
           >
             <View>
-              <Text style = {styles.buttonText}>Request: {index} </Text>
+              <Text style = {styles.buttonText}>Request: {index} Status: {item.status} </Text>
               <Text > {item.title} </Text>
             </View>
           </TouchableHighlight>
@@ -121,11 +125,11 @@ class Profile extends Component{
         <Badge currentUser={this.props.currentUser} />
         <View style = {styles.list}>
           <Text style = {{color: 'white'}}>My Requests</Text>
-          {this.createList(wormholes, styles.request)}
+          {this.createList(wormholes, styles.request, 'wormholes')}
         </View>
         <View style = {styles.list}>
           <Text style = {{color: 'white'}}>My Submissions</Text>
-          {this.createList(submissions, styles.submission)}
+          {this.createList(submissions, styles.submission, 'submissions')}
         </View>
       </View>
     );

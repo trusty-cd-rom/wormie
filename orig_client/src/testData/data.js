@@ -105,7 +105,7 @@ var data = {
 			"owner_name": "sun",
 			"submissions": []
 		}
-		],
+	],
 	wormholeDetail: {
     "id": 6,
     "title": "golden gate",
@@ -165,58 +165,59 @@ var data = {
 			"id": 2,
 			"user": {
 				"username": "dude4",
-				"first_name": "charlie",
-				"last_name": "harrington",
+				"first_name": "Charlie",
+				"last_name": "Harrington",
 				"email": "chdude@gmail.com",
 				"wormholes": [
 					{
+						"id": 2,
+						"owner_name": "sun",
+						"created_at": "2015-12-07T23:17:23.385998Z",
+						"updated_at": "2015-12-07T23:17:23.386086Z",
+						"title": "SUNYOUNG KIM IS AWESOME",
+						"notes": "this video quality is bad",
+						"status": "completed",
+						"video_url": "https://www.youtube.com/watch?v=nt7gHEEqb4M",
+						"wormhole_id": 10,
+						"owner": 3
+					},
+					{
 						"id": 3,
+						"owner_name": "charlie",
+						"created_at": "2015-12-07T23:43:43.117379Z",
+						"updated_at": "2015-12-07T23:43:43.117432Z",
+						"notes": "Here's my new video",
+						"title": "My new girl friend",
+						"status": "completed",
+						"video_url": "https://www.youtube.com/watch?v=M99AyKrjINI",
+						"wormhole_id": 9,
+						"owner": 2
+					},
+					{
+						"id": 4,
 						"title": "McDonalds line right now",
 						"latitude": "50.0000000",
 						"longitude": "60.0000000",
 						"deadline": "2015-12-07T19:03:50.702834Z",
 						"notes": "now!",
 						"status": "open",
-						"owner": 1,
-						"owner_name": "wormieadmin",
-						"submissions": []
-					},
-					{
-						"id": 4,
-						"title": "hiking trail",
-						"latitude": "50.0000000",
-						"longitude": "60.0000000",
-						"deadline": "2015-12-07T20:04:58.456637Z",
-						"notes": "hahahahaha",
-						"status": "forever and ever",
-						"owner": 1,
-						"owner_name": "wormieadmin",
-						"submissions": []
-					},
-					{
-						"id": 6,
-						"title": "golden gate",
-						"latitude": "20.0000000",
-						"longitude": "20.0000000",
-						"deadline": "2015-12-07T20:04:58.456637Z",
-						"notes": "can you walk backwards?",
-						"status": "OPEN!!!",
 						"owner": 1,
 						"owner_name": "wormieadmin",
 						"submissions": []
 					}
 				],
-				"submissions": [{
-						"id": 3,
-						"title": "McDonalds line right now",
-						"latitude": "50.0000000",
-						"longitude": "60.0000000",
-						"deadline": "2015-12-07T19:03:50.702834Z",
-						"notes": "now!",
-						"status": "open",
-						"owner": 1,
-						"owner_name": "wormieadmin",
-						"submissions": []
+				"submissions": [
+					{
+						"id": 1,
+						"owner_name": "nick",
+						"created_at": "2015-12-07T23:43:43.117379Z",
+						"updated_at": "2015-12-07T23:43:43.117432Z",
+						"notes": "this is a weird request....",
+						"title": "SUNYOUNG KIM IS AWESOME",
+						"status": "completed",
+						"video_url": "https://www.youtube.com/watch?v=3kryJpuVHio",
+						"wormhole_id": 7,
+						"owner": 1
 					},
 					{
 						"id": 4,
@@ -225,7 +226,7 @@ var data = {
 						"longitude": "60.0000000",
 						"deadline": "2015-12-07T20:04:58.456637Z",
 						"notes": "hahahahaha",
-						"status": "forever and ever",
+						"status": "open",
 						"owner": 1,
 						"owner_name": "wormieadmin",
 						"submissions": []
@@ -237,11 +238,12 @@ var data = {
 						"longitude": "20.0000000",
 						"deadline": "2015-12-07T20:04:58.456637Z",
 						"notes": "can you walk backwards?",
-						"status": "OPEN!!!",
+						"status": "open",
 						"owner": 1,
 						"owner_name": "wormieadmin",
 						"submissions": []
-					}]
+					}
+				]
 			},
 			"created_at": "2015-12-08T04:22:31.821453Z",
 			"updated_at": "2015-12-08T04:22:31.821523Z",
