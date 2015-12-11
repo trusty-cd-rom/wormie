@@ -11,16 +11,6 @@ import Badge from '../components/Badge';
 import Location from './Location';
 
 class Signup extends Component {
-  // constructor(props) {
-  //   super(props);
-
-    // this.state = {
-    //   username: '',
-    //   aboutMe: '',
-    //   // isLoading: false,
-    //   error: false
-    // }
-  // }
 
   goToLocation() {
     this.props.navigator.replace({
@@ -30,69 +20,38 @@ class Signup extends Component {
   // TODO: require updateinputtext from signup-containter.js
   handleInputChange(fieldName, event) {
     //input has the value nativeElement
-    var { updateInputText } = this.props;
-    updateInputText(fieldName, event.nativeEvent.text);
-  }
-
-  // onPress = { this.handleSubmitUserProfile(this)
-  // handleSubmitUserProfile(context) {
-  //   var { updateUserProfile } = this.props;
-  //   updateUserProfile();
-  //   this.goToLocation.bind(context);
-  // }
-
-  handleSubmitUserProfile(context) {
-    var { createUserInfo, currentUser, inputText } = this.props;
-    var newUserData = {
-      user: {
-        username: inputText.username
-      },
-      'about_me': inputText['about_me']
-    };
-    createUserInfo(newUserData);
+    var { updateSignUpInputText } = this.props;
+    updateSignUpInputText(fieldName, event.nativeEvent.text);
   }
 
   render() {
-    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-        // <View style = {styles.badgeContainer}>
-        //   <Image 
-        //     style = {styles.badgeImage}
-        //     source = {{uri: currentUser['picture_url']}}
-        //   />
-        //   <View>
-        //     <Text style = {styles.badgeName}> `${currentUser['first_name']} ${currentUser['last_name']}` </Text>
-        //     <Text style = {styles.badgeHandle}> {currentUser.location} </Text>
-        //   </View>
-        // </View>
-    var { currentUser, inputText } = this.props;
+    var { currentUser } = this.props;
+
     return (
       <View style={styles.container}>
-        <Badge currentUser={this.props.currentUser} page={'profile'} />
+        <Badge currentUser={this.props.currentUser} />
         <Text style={styles.title}>
           Username
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {inputText.username}
-          onChange = {this.handleInputChange.bind(this, "username")}
+          value = {currentUser.username}
+          onChange = {this.handleInputChange.bind(this, 'username')}
         />
-
         <Text style={styles.title}>
           Tell us about yourself
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {inputText['about_me']}
-          onChange = {this.handleInputChange.bind(this, "about_me")}
+          value = {currentUser['about_me']}
+          onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
-
         <View style={styles.splashImage}>
           <Text style={styles.buttonText}> COLOR PICKER </Text>
         </View>
-
         <TouchableHighlight
-          style = { styles.loginButton }
-          onPress = { this.goToLocation.bind(this) }
+          style = {styles.loginButton}
+          onPress = {this.goToLocation.bind(this)}
           underlayColor = '#88D4f5'
         >
           <Text style = {styles.buttonText}> Explore </Text>

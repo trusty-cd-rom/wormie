@@ -1,13 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import Signup from '../components/Signup';
-import * as CreateRequestActions from '../actions/createRequest';
+import * as UpdateUserProfileActions from '../actions/updateUserProfile';
 
 function mapStateToProps(state) {
   console.log('feed state: ', state);
   return {
     currentUser: state.userProfile.currentUser,
-    inputText: state.userProfile.createUser,
   };
 }
 
@@ -19,7 +18,7 @@ function mapStateToProps(state) {
 
 // createUserInfo, updateInputText
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CreateRequestActions, dispatch);
+  return bindActionCreators(UpdateUserProfileActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

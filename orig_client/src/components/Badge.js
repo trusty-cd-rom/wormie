@@ -41,13 +41,6 @@ var styles = StyleSheet.create({
   }
 });
 
-var MOCK_USER = {
-  name: 'Charlie',
-  avatar_url: 'http://rack.0.mshcdn.com/media/ZgkyMDE0LzA0LzE0LzdhLzk1Y2hhcmxpZWtuLjk2MDdlLmpwZwpwCXRodW1iCTEyMDB4OTYwMD4/a54e8b13/64c/95-charlie-knewton.jpg',
-  location: 'San Francisco, CA',
-  description: 'I love tacos!'
-}
-
 class Badge extends React.Component{
   componentWillMount() {
     console.log(this.props.currentUser);
@@ -61,7 +54,7 @@ class Badge extends React.Component{
           source = {{uri: currentUser['picture_url']}}
         />
         <View style={styles.infoContainer}>
-          <Text style = {styles.name}> {currentUser.user.username} </Text>
+          <Text style = {styles.name}> {currentUser.username}  </Text>
           <Text style = {styles.handle}> {currentUser['about_me']} </Text>
         </View>
       </View>

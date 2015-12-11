@@ -1,6 +1,6 @@
 import api from '../utils/api';
 
-import { CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, UPDATE_INPUT_TEST} from '../constants/actions';
+import { CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, UPDATE_INPUT_TEXT} from '../constants/actions';
 
 //this will be called by the create request component when the user submits the form for a new wormhole
 export function createRequest(requestData, cb) {
@@ -72,18 +72,3 @@ function stopPosting() {
 	};
 };
 
-export function updateInputText(field, text) {
-	return {
-		type: UPDATE_INPUT_TEST,
-		field,
-		text
-	};
-};
-
-export function updateUserProfile(username, aboutme) {
-	return {
-		type: ADD_USER_INFO,
-		username,
-		'about_me': aboutme
-	}
-}

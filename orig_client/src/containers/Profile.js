@@ -6,8 +6,8 @@ import * as ProfileActions from '../actions/profile';
 function mapStateToProps(state) {
   return {
     currentUser: state.userProfile.currentUser,
-    submissions: state.userProfile.currentUser.user.submissions,
-    wormholes: state.userProfile.currentUser.user.wormholes,
+    submissions: state.userProfile.currentUser.submissions,
+    wormholes: state.userProfile.currentUser.wormholes,
   };
 }
 

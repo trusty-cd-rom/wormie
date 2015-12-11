@@ -64,15 +64,9 @@ var styles = StyleSheet.create({
 class Profile extends Component{
 
   goToCreateRequest() {
-    this.props.navigator.replace({
-      component: CreateRequest
-    })
-  }
-
-  createRequest() {
     this.props.navigator.push({
       component: CreateRequest
-    });
+    })
   }
 
   viewRequest(index, array, type) {
@@ -90,7 +84,7 @@ class Profile extends Component{
       updateCurrentWormhole({submissions: [list[index]]});
     } else {
       list = submissions;
-      updateCurrentWormhole(list[index]);
+      updateCurrentWormhole({submissions: [list[index]]});
     }
 
     // debugger;
