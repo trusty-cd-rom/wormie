@@ -3,70 +3,92 @@ from worms.models import Wormhole, Submission, Account
 from django.contrib.auth.models import User
 
 
-class SubmissionSerializer(serializers.ModelSerializer):
+class SubmissionBaseSerializer(serializers.ModelSerializer):
 
-    # Submitter details
-    submitter_id = serializers.ReadOnlyField(source='submitter.id')
-    submitter_username = serializers.ReadOnlyField(source='submitter.username')
-    submitter_first_name = serializers.ReadOnlyField(source='submitter.first_name')
-    submitter_last_name = serializers.ReadOnlyField(source='submitter.last_name')
-    submitter_picture_url = serializers.ReadOnlyField(source='submitter.account.picture_url')
-    submitter_wormiecolor = serializers.ReadOnlyField(source='submitter.account.wormie_color')
-
-    # Wormhole details
-    wormhole_id = serializers.ReadOnlyField(source='wormhole.id')
-    wormhole_title = serializers.ReadOnlyField(source='wormhole.title')
-    wormhole_latitude = serializers.ReadOnlyField(source='wormhole.latitude')
-    wormhole_longitude = serializers.ReadOnlyField(source='wormhole.longitude')
-    wormhole_deadline = serializers.ReadOnlyField(source='wormhole.deadline')
-    wormhole_notes = serializers.ReadOnlyField(source='wormhole.notes')
-    wormhole_status = serializers.ReadOnlyField(source='wormhole.status')
-    
-    # Requestor details
-    requestor_id = serializers.ReadOnlyField(source='wormhole.requestor_id')
-    requestor_username = serializers.ReadOnlyField(source='wormhole.requestor.username')
-    requestor_first_name = serializers.ReadOnlyField(source='wormhole.requestor.first_name')
-    requestor_last_name = serializers.ReadOnlyField(source='wormhole.requestor.last_name')
-    requestor_picture_url = serializers.ReadOnlyField(source='wormhole.requestor.account.picture_url')
-    requestor_wormiecolor = serializers.ReadOnlyField(source='wormhole.requestor.account.wormie_color')
+    """
+    Submission model (this is used for POST requests)
+    """
 
     class Meta:
         model = Submission
-        field = ('id', 'notes', 'video_url', 'submitter_id', 'submitter_username',
-            'submitter_first_name', 'submitter_last_name', 'submitter_picture_url', 'submitter_wormiecolor',
-            'wormhole_id', 'wormhole_title', 'wormhole_latitude', 'wormhole_longitude', 'wormhole_deadline',
-            'wormhole_notes','wormhole_status', 
-            'requestor_id', 'requestor_username',
-            'requestor_first_name', 'requestor_last_name',
-            'requestor_picture_url', 'requestor_wormiecolor')
 
-class WormholeSerializer(serializers.ModelSerializer):
 
-    # Requestor details
-    requestor_id = serializers.ReadOnlyField(source='requestor.id')
-    requestor_username = serializers.ReadOnlyField(source='requestor.username')
-    requestor_first_name = serializers.ReadOnlyField(source='requestor.first_name')
-    requestor_last_name = serializers.ReadOnlyField(source='requestor.last_name')
-    requestor_picture_url = serializers.ReadOnlyField(source='requestor.account.picture_url')
-    requestor_wormiecolor = serializers.ReadOnlyField(source='requestor.account.wormie_color')
+class WormholeBaseSerializer(serializers.ModelSerializer):
 
-    submissions = SubmissionSerializer(many=True, read_only=True)
+    """
+    Wormhole model (this is used for POST requests)
+    """
 
     class Meta:
         model = Wormhole
-        fields = ('id', 'title', 'latitude', 'longitude','deadline', 'notes', 'status', 'requestor_id', 
-            'requestor_username', 'requestor_first_name', 'requestor_last_name', 
-            'requestor_picture_url', 'requestor_wormiecolor', 'submissions')
 
 
 class AccountSerializer(serializers.ModelSerializer):
+
+    """
+    Account model
+    """
 
     class Meta:
         model = Account
         field = ('picture_url', 'location', 'about_me', 'wormie_color')
 
 
+class PersonBaseSerializer(serializers.ModelSerializer):
+
+    """
+    Base User info, including info from the Account model
+    """
+
+    account_id = serializers.ReadOnlyField(source='account.id')
+    picture_url = serializers.ReadOnlyField(source='account.picture_url')
+    wormie_color = serializers.ReadOnlyField(source='account.wormie_color')
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name',
+            'email', 'account_id', 'picture_url', 'wormie_color')
+
+
+class SubmissionSerializer(SubmissionBaseSerializer):
+
+    """
+    Show base user detail and base wormhole detail
+    """
+
+    wormhole = WormholeBaseSerializer()
+    submitter = PersonBaseSerializer()
+
+
+class WormholeSerializer(WormholeBaseSerializer):
+
+    """
+    Show base user detail and full submissions detail
+    """
+
+    requestor = PersonBaseSerializer()
+    submissions = SubmissionSerializer(many=True, read_only=True)
+
+
+class PersonExpandedSerializer(PersonBaseSerializer):
+
+    """
+    Show full wormhole and submission details for a User
+    """
+    wormholes = WormholeSerializer(many=True, read_only=True)
+    submissions = SubmissionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name',
+            'email', 'picture_url', 'wormie_color', 'wormholes', 'submissions')
+
+
 class UserSerializer(serializers.ModelSerializer):
+
+    """
+    Required for the Authorization flow
+    """
 
     account = AccountSerializer()
     # Show all fields for wormholes and submissions in User
