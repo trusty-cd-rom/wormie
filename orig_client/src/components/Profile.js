@@ -124,7 +124,7 @@ class Profile extends Component{
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
-        <View style={{alignSelf: 'stretch', flexDirection: 'row'}}>
+        <View style={{marginTop: 10, alignSelf: 'stretch', flexDirection: 'row'}}>
           <Badge style={{flex: 3}} currentUser={this.props.currentUser} />
           <TouchableHighlight
             onPress = { this.goToCreateRequest.bind(this) }

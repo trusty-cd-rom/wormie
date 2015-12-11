@@ -72,3 +72,10 @@ function stopPosting() {
 	};
 };
 
+export function updateInputText(field, text) {
+  return {
+    type: UPDATE_INPUT_TEXT,
+    field,
+    text
+  };
+};
