@@ -1,4 +1,4 @@
-import { INIT_CAMERA, SWITCH_CAMERA, TOGGLE_CAMERA_RECORDING } from '../constants/actions';
+import { INIT_CAMERA, SWITCH_CAMERA, TOGGLE_CAMERA_RECORDING, TOGGLE_VIDEO_UPLOADING } from '../constants/actions';
 
 var initialState = {};
 

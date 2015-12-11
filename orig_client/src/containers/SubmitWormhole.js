@@ -5,7 +5,7 @@ import * as SubmitWormholeActions from '../actions/submitWormhole';
 
 function mapStateToProps(state) {
   return {
-    currentWormhole: state.currentWormhole,
+    pendingWormholeSubmission: state.pendingWormholeSubmission,
     currentUser: state.userProfile.currentUser,
   };
 }
