@@ -2,75 +2,64 @@ import React, {
   Component,
   StyleSheet,
   Text,
+  Image,
   View,
   TouchableHighlight,
   TextInput,
 } from 'react-native';
 import Badge from '../components/Badge';
-// import FeedList from './FeedList';
-// import Navbar from './Navbar';
+// import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
 
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      aboutMe: '',
-      // isLoading: false,
-      error: false
-    }
-  }
+
   goToLocation() {
     this.props.navigator.replace({
       component: Location
     });
   }
-  handleUsernameChange(event) {
+
+  handleSubmit(cb) {
+    var { updateProfile, updateUserProfile } = this.props;
+    console.log('from signup component');
+    updateUserProfile(updateProfile, cb);
+  };
+
+  // TODO: require updateinputtext from signup-containter.js
+  handleInputChange(fieldName, event) {
     //input has the value nativeElement
-    this.setState({
-      username: event.nativeEvent.text
-    });
+    var { updateSignUpInputText } = this.props;
+    updateSignUpInputText(fieldName, event.nativeEvent.text);
   }
-  handleAboutMeChange(event) {
-    //input has the value nativeElement
-    this.setState({
-      aboutMe: event.nativeEvent.text
-    });
-  }
+
   render() {
-    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    var { updateProfile, currentUser } = this.props;
+
     return (
       <View style={styles.container}>
-
-        <Badge />
-
+        <Badge currentUser={this.props.currentUser} />
         <Text style={styles.title}>
           Username
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.username}
-          onChange = {this.handleUsernameChange.bind(this)}
+          value = {updateProfile.username}
+          onChange = {this.handleInputChange.bind(this, 'username')}
         />
-
         <Text style={styles.title}>
           Tell us about yourself
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {this.state.aboutMe}
-          onChange = {this.handleAboutMeChange.bind(this)}
+          value = {updateProfile['about_me']}
+          onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
-
-
         <View style={styles.splashImage}>
           <Text style={styles.buttonText}> COLOR PICKER </Text>
         </View>
-
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.goToLocation.bind(this)}
+          onPress = {this.handleSubmit.bind(this, () => {this.goToLocation()})}
           underlayColor = '#88D4f5'
         >
           <Text style = {styles.buttonText}> Explore </Text>
@@ -86,6 +75,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
+  },
+  badgeContainer: {
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 1,
+    paddingTop: 50,
+    paddingBottom: 40
+  },
+  badgeInfoContainer: {
+
+  },
+  badgeName: {
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    fontSize: 21,
+    marginTop: 10,
+    marginBottom: 5,
+    color: 'white'
+  },
+  badgeHandle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: 'white'
+  },
+  badgeImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    marginTop: 10,
+    alignSelf: 'center',
+    marginLeft: 10,
+    marginRight: 30
   },
   text: {
     fontSize: 20,

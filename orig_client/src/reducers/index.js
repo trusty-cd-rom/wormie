@@ -11,5 +11,4 @@ const rootReducer = combineReducers({
 	pendingWormholeSubmission,
 });
 
-
 export default rootReducer;

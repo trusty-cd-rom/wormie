@@ -10,7 +10,7 @@ import React, {
 import Navbar from './Navbar';
 
 class CreateRequest extends Component {
-  handleInuptChange(fieldName, event) {
+  handleInputChange(fieldName, event) {
     var { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
   }
@@ -41,13 +41,12 @@ class CreateRequest extends Component {
     let { inputText } = this.props;
     return (
       <View style={styles.container}>
-
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.back.bind(this)}
           underlayColor = '#88D4f5'
         >
-          <Text style = {styles.buttonText}> Back </Text>
+        <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
 
         <Text style={styles.title}>
@@ -57,7 +56,7 @@ class CreateRequest extends Component {
           ref='a'
           style = {styles.searchInput}
           value = {inputText.title}
-          onChange = {this.handleInuptChange.bind(this,'title')}
+          onChange = {this.handleInputChange.bind(this,'title')}
         />
 
         <Text style={styles.title}>
@@ -66,7 +65,7 @@ class CreateRequest extends Component {
         <TextInput
           style = {styles.searchInput}
           value = {inputText.location}
-          onChange = {this.handleInuptChange.bind(this,'location')}
+          onChange = {this.handleInputChange.bind(this,'location')}
         />
         <Text style={styles.title}>
           Deadline
@@ -74,7 +73,7 @@ class CreateRequest extends Component {
         <TextInput
           style = {styles.searchInput}
           value = {inputText.deadline}
-          onChange = {this.handleInuptChange.bind(this,'deadline')}
+          onChange = {this.handleInputChange.bind(this,'deadline')}
         />
 
         <Text style={styles.title}>
@@ -83,7 +82,7 @@ class CreateRequest extends Component {
         <TextInput
           style = {styles.searchInput}
           value = {inputText.notes}
-          onChange = {this.handleInuptChange.bind(this,'notes')}
+          onChange = {this.handleInputChange.bind(this,'notes')}
         />
 
         <ActivityIndicatorIOS
