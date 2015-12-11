@@ -41,13 +41,14 @@ class PersonBaseSerializer(serializers.ModelSerializer):
     """
 
     account_id = serializers.ReadOnlyField(source='account.id')
+    about_me = serializers.ReadOnlyField(source='account.about_me')
     picture_url = serializers.ReadOnlyField(source='account.picture_url')
     wormie_color = serializers.ReadOnlyField(source='account.wormie_color')
 
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name',
-            'email', 'account_id', 'picture_url', 'wormie_color')
+            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color')
 
 
 class SubmissionSerializer(SubmissionBaseSerializer):
@@ -81,7 +82,7 @@ class PersonExpandedSerializer(PersonBaseSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name',
-            'email', 'picture_url', 'wormie_color', 'wormholes', 'submissions')
+            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color', 'wormholes', 'submissions')
 
 
 class UserSerializer(serializers.ModelSerializer):
