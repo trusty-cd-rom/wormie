@@ -90,19 +90,33 @@ var api = {
 
 	createUser(userData) {
 		return fetch(urls.users, {
-	    method: 'post',
+	    method: 'POST',
+	    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+   		},
 	    body: JSON.stringify(userData)
 	  })
-	  .then((res) => res.json())
+	  .then((res) => {
+	  	res.json();
+	  	console.log(res);
+	  })
 	  ;
 	},
 
 	updateUserDetails(userData) {
 		return fetch(`${urls.users}/${userData.id}`, {
-	    method: 'put',
+	    method: 'PUT',
+	    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+   		},
 	    body: JSON.stringify(userData)
 	  })
-	  .then((res) => res.json())
+	  .then((res) => {
+	  	res.json();
+	  	console.log(res);
+	  })
 	  ;
 	},
 

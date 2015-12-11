@@ -11,6 +11,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  // return {
+  //   onClick: function (id) {
+  //     dispatch(toggleTodo(id));
+  //   } 
+  // }
   return bindActionCreators(FeedListActions, dispatch);
 }
 

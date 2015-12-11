@@ -1,6 +1,6 @@
 import api from '../utils/api';
 
-import { CREATE_REQUEST, TOGGLE_FETCH, UPDATE_INPUT_TEST} from '../constants/actions';
+import { CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, UPDATE_INPUT_TEXT} from '../constants/actions';
 
 //this will be called by the create request component when the user submits the form for a new wormhole
 export function createRequest(requestData, cb) {
@@ -23,6 +23,31 @@ export function createRequest(requestData, cb) {
    //  }, 200);
   }
 };
+
+export function createUserInfo(userInfo) {
+  return dispatch => {
+  	dispatch(startFetching());
+	  // return api.createWormhole()
+	  // 	.then((res) => {
+	  // 		dispatch(createRequestAction(res))
+	  // 		dispatch(stopFetching());
+	  // 	})
+	  // 	.catch((err) => console.log(err))
+	  console.log('about to send the new createRequest to server');
+	  return setTimeout(() => {
+	  	console.log('got successful post back from server');
+	  	dispatch(createUserInfoAction(userInfo))
+	  	dispatch(stopFetching());
+    }, 200);
+  }
+};
+
+var createUserInfoAction = (userInfo) => {
+	return {
+		type: ADD_USER_INFO,
+		userInfo
+	}
+}
 
 //returns the create request action object
 // will be called by createRequest after the data for the new wormhole has been sent and accepted by the server DB
@@ -48,17 +73,9 @@ function stopPosting() {
 };
 
 export function updateInputText(field, text) {
-	return {
-		type: UPDATE_INPUT_TEST,
-		field,
-		text
-	};
+  return {
+    type: UPDATE_INPUT_TEXT,
+    field,
+    text
+  };
 };
-
-
-
-
-
-
-
-
