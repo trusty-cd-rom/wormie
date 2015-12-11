@@ -6,6 +6,7 @@ import * as UpdateUserProfileActions from '../actions/updateUserProfile';
 function mapStateToProps(state) {
   console.log('feed state: ', state);
   return {
+    updateProfile: state.userProfile.updateProfile,
     currentUser: state.userProfile.currentUser,
   };
 }

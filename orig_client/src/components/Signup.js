@@ -8,6 +8,7 @@ import React, {
   TextInput,
 } from 'react-native';
 import Badge from '../components/Badge';
+// import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
 
 class Signup extends Component {
@@ -17,6 +18,13 @@ class Signup extends Component {
       component: Location
     });
   }
+
+  handleSubmit(cb) {
+    var { updateProfile, updateUserProfile } = this.props;
+    console.log('from signup component');
+    updateUserProfile(updateProfile, cb);
+  };
+
   // TODO: require updateinputtext from signup-containter.js
   handleInputChange(fieldName, event) {
     //input has the value nativeElement
@@ -25,7 +33,7 @@ class Signup extends Component {
   }
 
   render() {
-    var { currentUser } = this.props;
+    var { updateProfile, currentUser } = this.props;
 
     return (
       <View style={styles.container}>
@@ -35,7 +43,7 @@ class Signup extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {currentUser.username}
+          value = {updateProfile.username}
           onChange = {this.handleInputChange.bind(this, 'username')}
         />
         <Text style={styles.title}>
@@ -43,7 +51,7 @@ class Signup extends Component {
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {currentUser['about_me']}
+          value = {updateProfile['about_me']}
           onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
         <View style={styles.splashImage}>
@@ -51,7 +59,7 @@ class Signup extends Component {
         </View>
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.goToLocation.bind(this)}
+          onPress = {this.handleSubmit.bind(this, () => {this.goToLocation()})}
           underlayColor = '#88D4f5'
         >
           <Text style = {styles.buttonText}> Explore </Text>

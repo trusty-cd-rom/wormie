@@ -121,6 +121,7 @@ class Profile extends Component{
 
   render() {
     var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
+    debugger;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
