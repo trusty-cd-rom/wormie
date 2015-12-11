@@ -62,6 +62,19 @@ var styles = StyleSheet.create({
 });
 
 class Profile extends Component{
+
+  goToCreateRequest() {
+    this.props.navigator.replace({
+      component: CreateRequest
+    })
+  }
+
+  createRequest() {
+    this.props.navigator.push({
+      component: CreateRequest
+    });
+  }
+
   viewRequest(index, array, type) {
     var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
     console.log('trying to view request: ', wormholes, wormholes[index]);
@@ -79,7 +92,7 @@ class Profile extends Component{
       list = submissions;
       updateCurrentWormhole(list[index]);
     }
-    
+
     // debugger;
     if(list[index].status === 'open') {
       this.props.navigator.push({
@@ -92,11 +105,6 @@ class Profile extends Component{
     }
   }
 
-  createRequest() {
-    this.props.navigator.push({
-      component: CreateRequest
-    });
-  }
 
   createList(array, styleButton, type) {
     return array.map((item, index) => {
@@ -122,7 +130,14 @@ class Profile extends Component{
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
-        <Badge currentUser={this.props.currentUser} />
+        <View style={{alignSelf: 'stretch', flexDirection: 'row'}}>
+          <Badge style={{flex: 3}} currentUser={this.props.currentUser} />
+          <TouchableHighlight
+            onPress = { this.goToCreateRequest.bind(this) }
+          >
+            <Text style={{flex: 1, marginTop: 30, alignSelf: "center", backgroundColor: "purple", color: "black"}}> + </Text>
+          </TouchableHighlight>
+        </View>
         <View style = {styles.list}>
           <Text style = {{color: 'white'}}>My Requests</Text>
           {this.createList(wormholes, styles.request, 'wormholes')}
