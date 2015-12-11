@@ -5,23 +5,50 @@ import React, {
   View,
   TouchableHighlight,
   TextInput,
-  ScrollView
+  ScrollView,
+  ActivityIndicatorIOS,
 } from 'react-native';
-var YouTube = require('react-native-youtube');
+// var YouTube = require('react-native-youtube');
 import Navbar from './Navbar';
+var Video = require('react-native-video');
 
 class SubmitWormhole extends Component {
   back() {
     this.props.navigator.pop();
   }
   submit() {
-    this.props.navigator.replace({
-      component: Navbar
+    let { pendingWormholeSubmission, currentUser, uploadWormholeSubmission } = this.props;
+    uploadWormholeSubmission(pendingWormholeSubmission, currentUser, () => {
+      this.props.navigator.replace({
+        component: Navbar
+      });
     });
+  }
+  _renderSubmitButton() {
+    let { pendingWormholeSubmission } = this.props;
+    if(!pendingWormholeSubmission.isUploading) {
+      return (
+        <TouchableHighlight
+          style = {styles.back}
+          onPress = {this.submit.bind(this)}
+          underlayColor = 'purple'
+        >
+          <Text style = {styles.buttonText}> Submit </Text>
+        </TouchableHighlight>
+      )
+    } else {
+      return (
+        <ActivityIndicatorIOS
+          animating = {true}
+          color = 'white'
+          size = 'large'
+        ></ActivityIndicatorIOS>
+      )
+    }
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-    let { currentWormhole, currentUser } = this.props;
+    let { pendingWormholeSubmission, currentUser } = this.props;
     return (
       <ScrollView 
         automaticallyAdjustContentInsets={false}
@@ -35,25 +62,24 @@ class SubmitWormhole extends Component {
         >
           <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
-        <YouTube 
-          videoId={currentWormhole.submissions[0] ? currentWormhole.submissions[0].video_url : ''}
-          play={false}
-          hidden={!Boolean(currentWormhole.submissions[0])}
-          playsInline={true}
-          showinfo={true}
-          // modestbranding={true}
-          onError={(e)=>{console.log('youtube error: ', e.error)}}
-          style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-        />
+        <Video source={{uri: pendingWormholeSubmission.video}}
+               rate={1.0}
+               volume={1.0}
+               muted={false}
+               paused={false}
+               resizeMode="cover"
+               repeat={true}
+               onError={console.log('error in video playback load')}
+               style={styles.backgroundVideo} />
 
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentWormhole.title}
+            {pendingWormholeSubmission.wormhole.title}
           </Text>
         </View>
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentWormhole.owner_name}
+            {pendingWormholeSubmission.wormhole.owner_name}
           </Text>
         </View>
         <View style={styles.loginButton}>
@@ -68,7 +94,7 @@ class SubmitWormhole extends Component {
         </View>
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentWormhole.notes}
+            {pendingWormholeSubmission.wormhole.notes}
           </Text>
         </View>
         <TextInput
@@ -76,13 +102,7 @@ class SubmitWormhole extends Component {
           value = {''}
           // onChange = {this.handleInuptChange.bind(this,'location')}
         />
-        <TouchableHighlight
-          style = {styles.back}
-          onPress = {this.submit.bind(this)}
-          underlayColor = 'purple'
-        >
-          <Text style = {styles.buttonText}> Submit </Text>
-        </TouchableHighlight>
+        {this._renderSubmitButton()}
       </ScrollView>
     );
   }
@@ -99,7 +119,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#48BBEC'
+    backgroundColor: 'black'
   },
   back: {
     flexDirection: 'row',
@@ -120,15 +140,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   searchInput: {
-    height: 200,
+    height: 100,
     padding: 4,
-    marginRight: 5,
+    margin: 7,
     fontSize: 23,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
     color: 'white'
   },
+  backgroundVideo: {
+    alignSelf: 'stretch',
+    height: 220,
+    backgroundColor: '#48BBEC',
+    marginBottom: 0
+  }
 });
 
 export default SubmitWormhole;

@@ -13,6 +13,8 @@ class OpenWormhole extends Component {
     this.props.navigator.pop();
   }
   startSubmission() {
+    let { currentWormhole, initPendingSubmission } = this.props;
+    initPendingSubmission(currentWormhole);
     this.props.navigator.push({
       component: CameraView
     });

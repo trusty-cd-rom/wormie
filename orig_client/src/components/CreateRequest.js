@@ -18,18 +18,23 @@ class CreateRequest extends Component {
     this.props.navigator.pop();
   }
   submitRequest() {
+    // debugger;
+    console.log('about to submit request from create request screen');
     var { createRequest, currentUser, inputText } = this.props;
     var newRequestData = {
       title: inputText.title,
-      location: inputText.location,
-      deadline: inputText.deadline,
+      latitude: 37.786140,
+      longitude: -122.405754,
+      deadline: '2015-12-09T23:37:58.271497Z',
       notes: inputText.notes,
-      owner_name: currentUser.user.first_name,
-      status: 'open'
+      status: 'open',
+      requestor: currentUser.id,
     };
-    createRequest(newRequestData)
-    this.props.navigator.replace({
-      component: Navbar
+    console.log(newRequestData);
+    createRequest(newRequestData, () => {
+      this.props.navigator.replace({
+        component: Navbar
+      });
     });
   }
   render() {
@@ -49,6 +54,7 @@ class CreateRequest extends Component {
           Title
         </Text>
         <TextInput
+          ref='a'
           style = {styles.searchInput}
           value = {inputText.title}
           onChange = {this.handleInuptChange.bind(this,'title')}
@@ -62,7 +68,6 @@ class CreateRequest extends Component {
           value = {inputText.location}
           onChange = {this.handleInuptChange.bind(this,'location')}
         />
-
         <Text style={styles.title}>
           Deadline
         </Text>
@@ -80,7 +85,7 @@ class CreateRequest extends Component {
           value = {inputText.notes}
           onChange = {this.handleInuptChange.bind(this,'notes')}
         />
-        
+
         <ActivityIndicatorIOS
           animating = {inputText.isFetching==='true'}
           color = 'white'

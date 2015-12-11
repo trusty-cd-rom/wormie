@@ -17,7 +17,7 @@ class CameraView extends Component {
     switchCamera(newCameraType);
   }
   _takeVideo() {
-    let { cameraState, toggleRecording } = this.props;
+    let { cameraState, toggleRecording, uploadVideo, updateSubmissionVideo } = this.props;
     if(!cameraState.isRecording) {
       console.log('starting the capture');
       
@@ -29,28 +29,21 @@ class CameraView extends Component {
         // })
         // .catch((err) => console.log(err))
         // ;
+        // uploadVideo(data);
+        updateSubmissionVideo(data);
         this.props.navigator.push({
           component: SubmitWormhole 
-        })
+        });
       });
       toggleRecording();
     } else {
       console.log('stopping the capture');
       this.refs.cam.stopCapture();
       toggleRecording();
-      this.props.navigator.push({
-          component: SubmitWormhole 
-      });
     }
   }
   constructor(props) {
     super(props);
-    this.state = {
-      cameraType: Camera.constants.Type.back,
-      captureMode: Camera.constants.CaptureMode.video,
-      captureTarget: Camera.constants.CaptureTarget.disk,
-      isRecording: false
-    }
   }
   componentWillMount() {
     let { initCameraState } = this.props;
@@ -59,7 +52,8 @@ class CameraView extends Component {
       cameraType: Camera.constants.Type.back,
       captureMode: Camera.constants.CaptureMode.video,
       captureTarget: Camera.constants.CaptureTarget.disk,
-      isRecording: false
+      isRecording: false,
+      isUploading: false
     });
   }
   back() {
