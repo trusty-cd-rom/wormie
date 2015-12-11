@@ -1,5 +1,8 @@
 from worms.models import Wormhole, Submission, Account
-from worms.serializers import WormholeSerializer, SubmissionSerializer, AccountSerializer, UserSerializer
+from worms.serializers import WormholeSerializer, SubmissionSerializer
+from worms.serializers import AccountSerializer
+from worms.serializers import PersonBaseSerializer, PersonExpandedSerializer
+from worms.serializers import WormholeBaseSerializer, SubmissionBaseSerializer
 from worms.permissions import IsOwnerOrReadOnly
 from django.http import Http404
 from django.contrib.auth.models import User
@@ -30,7 +33,7 @@ class WormholeList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = WormholeSerializer(data=request.data)
+        serializer = WormholeBaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -95,7 +98,7 @@ class SubmissionList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = SubmissionSerializer(data=request.data)
+        serializer = SubmissionBaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -149,7 +152,7 @@ class UserList(generics.ListAPIView):
     """
 
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = PersonExpandedSerializer
 
 
 class UserDetail(APIView):
@@ -168,12 +171,12 @@ class UserDetail(APIView):
 
     def get(self, request, pk, format=None):
         user = self.get_object(pk)
-        serializer = UserSerializer(user)
+        serializer = PersonExpandedSerializer(user)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         user = self.get_object(pk)
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = PersonExpandedSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
