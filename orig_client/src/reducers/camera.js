@@ -4,7 +4,7 @@ var initialState = {};
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
 function camera(state = {}, action) {
-	console.log('camera reducer', state)
+	// console.log('camera reducer', state)
   switch (action.type) {
 	  case INIT_CAMERA:
 	    return action.cameraState;
