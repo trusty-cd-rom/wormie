@@ -2,6 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbauth2</string>
+  </array>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>facebook.com</key>
+      <dict>
+        <key>NSIncludesSubdomains</key> <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key> <false/>
+      </dict>
+      <key>fbcdn.net</key>
+      <dict>
+        <key>NSIncludesSubdomains</key> <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>  <false/>
+      </dict>
+      <key>akamaihd.net</key>
+      <dict>
+        <key>NSIncludesSubdomains</key> <true/>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key> <false/>
+      </dict>
+    </dict>
+  </dict>
   <key>CFBundleURLTypes</key>
   <array>
     <dict>
