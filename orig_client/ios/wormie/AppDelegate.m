@@ -72,4 +72,8 @@
           ];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
+}
+
 @end
