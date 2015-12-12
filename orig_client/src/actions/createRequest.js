@@ -1,6 +1,6 @@
 import api from '../utils/api';
-
 import { CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, UPDATE_INPUT_TEXT} from '../constants/actions';
+import { refreshFeedData } from './feedList';
 
 //this will be called by the create request component when the user submits the form for a new wormhole
 export function createRequest(requestData, cb) {
@@ -11,16 +11,10 @@ export function createRequest(requestData, cb) {
 	  return api.createWormhole(requestData)
 	  	.then((res) => {
 	  		console.log('this is what the server said to me yesterday: ', res);
-	  		dispatch(createRequestAction(res))
 	  		dispatch(stopPosting());
+	  		dispatch(refreshFeedData())
 	  		cb();
 	  	})
-	  // console.log('about to send the new createRequest to server');
-	  // return setTimeout(() => {
-	  // 	console.log('got successful post back from server');
-	  // 	dispatch(createRequestAction(requestData))
-	  // 	dispatch(stopFetching());
-   //  }, 200);
   }
 };
 
@@ -36,7 +30,9 @@ export function createUserInfo(userInfo) {
 	  console.log('about to send the new createRequest to server');
 	  return setTimeout(() => {
 	  	console.log('got successful post back from server');
+	  	//this should be replaced with a profile refresh
 	  	dispatch(createUserInfoAction(userInfo))
+	  	//feedrefresh
 	  	dispatch(stopFetching());
     }, 200);
   }

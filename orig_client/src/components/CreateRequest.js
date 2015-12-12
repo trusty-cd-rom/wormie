@@ -11,7 +11,7 @@ import Navbar from './Navbar';
 
 class CreateRequest extends Component {
   handleInputChange(fieldName, event) {
-    var { updateInputText } = this.props;
+    let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
   }
   back() {
@@ -20,8 +20,8 @@ class CreateRequest extends Component {
   submitRequest() {
     // debugger;
     console.log('about to submit request from create request screen');
-    var { createRequest, currentUser, inputText } = this.props;
-    var newRequestData = {
+    let { createRequest, currentUser, inputText } = this.props;
+    let newRequestData = {
       title: inputText.title,
       latitude: 37.786140,
       longitude: -122.405754,
@@ -30,7 +30,7 @@ class CreateRequest extends Component {
       status: 'open',
       requestor: currentUser.id,
     };
-    console.log(newRequestData);
+    // console.log(newRequestData);
     createRequest(newRequestData, () => {
       this.props.navigator.replace({
         component: Navbar

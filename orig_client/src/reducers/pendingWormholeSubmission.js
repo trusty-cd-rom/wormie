@@ -1,12 +1,15 @@
-import { INIT_PENDING_WORMHOLE_SUBMISSION, UPDATE_WORMHOLE_SUBMISSION_VIDEO, TOGGLE_VIDEO_UPLOADING } from '../constants/actions';
+import { INIT_PENDING_WORMHOLE_SUBMISSION, UPDATE_WORMHOLE_SUBMISSION_VIDEO, TOGGLE_VIDEO_UPLOADING, UPDATE_SUBMISSION_INPUT_TEXT } from '../constants/actions';
 
 var initialState = {
-	isUploading: false
+	isUploading: false,
+	submissionForm: {
+		notes: ''
+	}
 };
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
 function pendingWormholeSubmission(state = initialState, action) {
-	console.log('pendingWormholeSubmission', state)
+	// console.log('pendingWormholeSubmission', state)
   switch (action.type) {
   	case INIT_PENDING_WORMHOLE_SUBMISSION:
 	    return {
@@ -23,10 +26,29 @@ function pendingWormholeSubmission(state = initialState, action) {
 	  		...state,
 	  		isUploading: !state.isUploading
 	  	}
+	  case UPDATE_SUBMISSION_INPUT_TEXT:
+	  	return {
+	   		...state,
+	   		submissionForm: submissionForm(state.submissionForm, action)
+	   	}
 	  default:
 	    return state;
   }
   return state;
+};
+
+function submissionForm(state, action) {
+	switch (action.type) {
+	  case UPDATE_SUBMISSION_INPUT_TEXT:
+	  	let newVal = {};
+	  	newVal[action.field] = action.text;
+	  	return {
+	  		...state,
+	  		...newVal 
+	  	}
+	  default:
+	    return state;
+  }
 };
 
 export default pendingWormholeSubmission;

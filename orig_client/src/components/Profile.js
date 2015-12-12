@@ -71,7 +71,7 @@ class Profile extends Component{
 
   viewRequest(index, array, type) {
     var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
-    console.log('trying to view request: ', wormholes, wormholes[index]);
+    // console.log('trying to view request: ', wormholes, wormholes[index]);
     
     // UPDATECURRENTWORMHOLE
     // this function is setting current Wormhole to set the top-state
