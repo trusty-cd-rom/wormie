@@ -62,7 +62,6 @@ class MySubmissions extends Component{
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { submissions } = this.props;
-
     return submissions.map((submission, index) => {
       return (
         <View key = {index}>
@@ -73,7 +72,7 @@ class MySubmissions extends Component{
           >
             <View>
               <Text style = {styles.buttonText}>Request: {index} Status: {submission.status} </Text>
-              <Text > Title: {submission.title} </Text>
+              <Text > Title: {submission.wormhole.title} </Text>
               <Text > Notes: {submission.notes} </Text>
             </View>
           </TouchableHighlight>

@@ -57,7 +57,6 @@ class MyWormholes extends Component{
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    console.log(wormholes[outerIndex].submissions[index]);
     updateMyCurrentWormhole(wormholes[outerIndex].submissions[index]);
     this.props.navigator.push({
       component: ViewMyWormhole,
