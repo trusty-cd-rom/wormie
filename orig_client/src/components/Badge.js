@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
 
 class Badge extends React.Component{
   componentWillMount() {
-    console.log(this.props.currentUser);
+    // console.log(this.props.currentUser);
   }
   render() {
     var { currentUser } = this.props;
