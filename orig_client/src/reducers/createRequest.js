@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
+import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, SET_CURRENT_USER, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
 import data from '../testData/data';
 
 
@@ -6,7 +6,7 @@ console.log(data, data.userList[0]);
 
 var initialState = {
 	feed: data.wormholeList,
-	currentUser: data.userList[0],
+	currentUser: {},
 	createRequest: {
 		title: '',
 		location: '',
@@ -75,6 +75,13 @@ function userProfile(state = initialState, action) {
 	  		...state,
 	  		currentUser: updateProfile(state.currentUser, action)
 	  	}
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: {
+          ...action.userData
+        }
+      }
 	  default:
 	    return state;
   }

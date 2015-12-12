@@ -5,7 +5,7 @@ var api = {
 		// debugger;
 		wormholeData = '{ "title": "hiking", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"foxboy", "status": "open", "requestor": 2}';
 		console.log('about to post to the server from util api', wormholeData);
-	  return fetch('http://localhost:8000/api/wormholes/', {
+	  return fetch(urls.wormholes, {
 	    method: 'POST',
 	    headers: {
 	    	'Content-Type': 'application/json',

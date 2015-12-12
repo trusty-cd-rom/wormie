@@ -13,6 +13,11 @@ import Location from './Location';
 
 class Signup extends Component {
 
+  componentWillMount() {
+    var { getUserDataFromFB } = this.props;
+    getUserDataFromFB();
+  }
+
   goToLocation() {
     this.props.navigator.replace({
       component: Location
@@ -72,6 +77,7 @@ class Signup extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
