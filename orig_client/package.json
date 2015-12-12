@@ -9,7 +9,7 @@
     "react-native": "0.15.0",
     "react-native-camera": "0.3.8",
     "react-native-file-upload": "1.0.4",
-    "react-native-video": "^0.6.1",
+    "react-native-video": "0.6.1",
     "react-native-youtube": "0.5.0",
     "react-redux": "3.1.0",
     "redux": "3.0.4",

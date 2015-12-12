@@ -20,9 +20,9 @@ var youtube = {
 
     return this.refreshToken()
     .then((res) => {
-    	console.log('about to do the post of the video to youtube: ', res);
+    	// console.log('about to do the post of the video to youtube: ', res);
     	url = url+res.access_token;
-    	console.log('here is the url that i am going to use to make the post youtube with the access token', url);
+    	// console.log('here is the url that i am going to use to make the post youtube with the access token', url);
 			var obj = {
 				uploadUrl: url,
 				method: 'POST', // default 'POST',support 'POST' and 'PUT'
@@ -45,7 +45,7 @@ var youtube = {
 		    	if(err) {
 		    		reject();
 		    	} else {
-		    		resolve(res);
+		    		resolve(result);
 		    	}
 		    })
 		  });

@@ -46,6 +46,10 @@ class SubmitWormhole extends Component {
       )
     }
   }
+  handleInputChange(fieldName, event) {
+    let { updateInputText } = this.props;
+    updateInputText(fieldName, event.nativeEvent.text);
+  }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     let { pendingWormholeSubmission, currentUser } = this.props;
@@ -84,7 +88,7 @@ class SubmitWormhole extends Component {
         </View>
         <View style={styles.loginButton}>
           <Text style={styles.title}>
-            {currentUser.user.username}
+            {currentUser.username}
           </Text>
         </View>
         <View style={styles.loginButton}>
@@ -99,8 +103,8 @@ class SubmitWormhole extends Component {
         </View>
         <TextInput
           style = {styles.searchInput}
-          value = {''}
-          // onChange = {this.handleInuptChange.bind(this,'location')}
+          value = {pendingWormholeSubmission.notes}
+          onChange = {this.handleInputChange.bind(this,'notes')}
         />
         {this._renderSubmitButton()}
       </ScrollView>

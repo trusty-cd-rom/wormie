@@ -5,7 +5,7 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
-import Signup from '../components/Signup';
+import Signup from '../containers/Signup';
 
 class Login extends Component {
   goToSignup() {

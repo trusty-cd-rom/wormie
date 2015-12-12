@@ -5,6 +5,8 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
+
+// import YouTube from 'react-native-youtube';
 var YouTube = require('react-native-youtube');
 
 class ViewRequest extends Component {
@@ -13,6 +15,7 @@ class ViewRequest extends Component {
   }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    // console.log(this.props.currentWormhole);
     let { currentWormhole } = this.props;
     return (
       <View style={styles.container}>
@@ -61,7 +64,6 @@ class ViewRequest extends Component {
             {currentWormhole.notes}
           </Text>
         </View>
-
       </View>
     );
   }
