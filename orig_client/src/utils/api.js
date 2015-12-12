@@ -3,18 +3,18 @@ import urls from '../constants/urls';
 var api = {
 	createWormhole(wormholeData) {
 		// debugger;
-		wormholeData = '{ "title": "hiking", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"foxboy", "status": "open", "requestor": 2}';
-		console.log('about to post to the server from util api', wormholeData);
-	  return fetch('http://localhost:8000/api/wormholes/', {
+		// wormholeData = '{ "title": "hiking", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"foxboy", "status": "open", "requestor": 2}';
+		// console.log('about to post to the server from util api', wormholeData);
+	  return fetch(urls.wormholes, {
 	    method: 'POST',
 	    headers: {
 	    	'Content-Type': 'application/json',
-	    	// 'Accept': 'application/json'
-	    },	
-	    body: JSON.stringify({ "title": "fat ugly face party party at ikea", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"make it phat", "status": "zip line", "requestor": 2})
+	    },
+	    body: JSON.stringify(wormholeData)
+	    // body: JSON.stringify({ "title": "fat ugly face party party at ikea", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"make it phat", "status": "zip line", "requestor": 2})
 	  })
 	  .then((res, a) => {
-	  	console.log('got this back from server on wormhole create post', res, a);
+	  	// console.log('got this back from server on wormhole create post', res, a);
 	  	return res.json();
 	  })
 	  ;
@@ -37,18 +37,30 @@ var api = {
 		;
 	},
 
-	updateWormholeDetails(wormholeData) {
-		return fetch(`${urls.wormholes}/${wormholeData.id}`, {
+	updateWormholeDetails(wormholeId, wormholeData) {
+		console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
+		return fetch(`${urls.wormholes}/${wormholeId}/`, {
 	    method: 'put',
+	    headers: {
+	    	'Content-Type': 'application/json',
+	    	'Accept': 'application/json',
+	    },
 	    body: JSON.stringify(wormholeData)
 	  })
-	  .then((res) => res.json())
+	  .then((res) => {
+	  	console.log('just head back from the put, and they said: ', res);
+	  	res
+	  })
 	  ;
 	},
 
 	createSubmission(submissionData) {
+		console.log('about to submit against request');
 	  return fetch(urls.submissions, {
 	    method: 'post',
+	    headers: {
+	    	'Content-Type': 'application/json',
+	    },
 	    body: JSON.stringify(submissionData)
 	  })
 	  .then((res) => res.json())
@@ -99,7 +111,7 @@ var api = {
 	  })
 	  .then((res) => {
 	  	res.json();
-	  	console.log(res);
+	  	// console.log(res);
 	  })
 	  ;
 	},
@@ -115,7 +127,7 @@ var api = {
 	  })
 	  .then((res) => {
 	  	res.json();
-	  	console.log(res);
+	  	// console.log(res);
 	  })
 	  ;
 	},

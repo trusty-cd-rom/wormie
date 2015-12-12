@@ -36,17 +36,21 @@ var styles = StyleSheet.create({
 });
 
 class FeedList extends React.Component{
+  componentWillMount() {
+    let { refreshFeedData } = this.props;
+    refreshFeedData();
+  }
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
-    console.log('trying to view request: ', index, feed[index]);
+    // console.log('trying to view request: ', index, feed[index]);
     updateCurrentWormhole(feed[index]);
-    if(feed[index].status === 'open') {
+    if(feed[index].status === 'completed') {
       this.props.navigator.push({
-        component: OpenWormhole,
+        component: ViewRequest,
       });
     } else {
       this.props.navigator.push({
-        component: ViewRequest,
+        component: OpenWormhole,
       });
     }
   }
@@ -64,6 +68,7 @@ class FeedList extends React.Component{
             <View>
               <Text style = {styles.buttonText}> Request: {index} </Text>
               <Text > {item.title} </Text>
+              <Text >  - {item.status} </Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -71,9 +76,13 @@ class FeedList extends React.Component{
     });
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <View style={styles.container}>
+      <ScrollView 
+        automaticallyAdjustContentInsets={false}
+        // onScroll={() => { console.log('onScroll!'); }}
+        scrollEventThrottle={200}
+        style={styles.container}>
         {list}
-      </View>
+      </ScrollView>
     );
   }
 };

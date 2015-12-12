@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import userProfile from './createRequest';
 import currentWormhole from './currentWormhole';
 import camera from './camera';
+import feed from './feed';
 import pendingWormholeSubmission from './pendingWormholeSubmission';
 
 const rootReducer = combineReducers({
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
 	currentWormhole,
 	camera,
 	pendingWormholeSubmission,
+	feed,
 });
 
 export default rootReducer;

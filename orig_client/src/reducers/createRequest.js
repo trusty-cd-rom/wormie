@@ -2,7 +2,7 @@ import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, UPDATE_
 import data from '../testData/data';
 
 
-console.log(data, data.userList[0]);
+// console.log(data, data.userList[0]);
 
 var initialState = {
 	feed: data.wormholeList,
@@ -21,33 +21,9 @@ var initialState = {
 	isFetching: 'false'
 };
 
-// function createUserProfile(state = initialState2, action) {
-//   switch(action.type) {
-//     case ADD_USER_INFO:
-//       return {
-//         ...state,
-//         about_me: action["about_me"],
-//         user: updateName(state.user, action)
-//       }
-//     default:
-//       return state;
-//   }
-// }
-
-// function updateName(state = initialState3, action) {
-//   switch(action.type) {
-//     case ADD_USER_INFO:
-//       return {
-//         ...state,
-//         username: action.username
-//       }
-//     default:
-//       return state;
-//   }
-// }
 
 function userProfile(state = initialState, action) {
-	console.log('createRequest>reducerRoute', state)
+	// console.log('createRequest>reducerRoute', state)
   switch (action.type) {
 	  case CREATE_REQUEST:
 	    return {
@@ -82,7 +58,7 @@ function userProfile(state = initialState, action) {
 };
 
 function feedReducerRoute(state, action) {
-	console.log('createRequest>reducerRoute>feedReducerRoute', state)
+	// console.log('createRequest>reducerRoute>feedReducerRoute', state)
 	switch (action.type) {
 	  case CREATE_REQUEST:
 	  	return [
@@ -95,7 +71,7 @@ function feedReducerRoute(state, action) {
 };
 
 function userReducerRoute(state, action) {
-	console.log('createRequest>reducerRoute>userReducerRoute', state)
+	// console.log('createRequest>reducerRoute>userReducerRoute', state)
 	switch (action.type) {
 	  case CREATE_REQUEST:
 	  	return {
@@ -108,7 +84,7 @@ function userReducerRoute(state, action) {
 };
 
 function createRequestReducerRoute(state, action) {
-	console.log('createRequest>reducerRoute>createRequestReducerRoute', state)
+	// console.log('createRequest>reducerRoute>createRequestReducerRoute', state)
 	switch (action.type) {
 	  case UPDATE_INPUT_TEXT:
 	  	let newVal = {};
@@ -123,7 +99,7 @@ function createRequestReducerRoute(state, action) {
 };
 
 function userRequestReducerRoute(state = [], action) {
-	console.log('createRequest>reducerRoute>userReducerRoute>userRequestReducerRoute', state)
+	// console.log('createRequest>reducerRoute>userReducerRoute>userRequestReducerRoute', state)
 	switch (action.type) {
 	  case CREATE_REQUEST:
 	  	return [
@@ -172,3 +148,30 @@ function updateProfile(state, action) {
 }
 
 export default userProfile;
+
+
+
+// function createUserProfile(state = initialState2, action) {
+//   switch(action.type) {
+//     case ADD_USER_INFO:
+//       return {
+//         ...state,
+//         about_me: action["about_me"],
+//         user: updateName(state.user, action)
+//       }
+//     default:
+//       return state;
+//   }
+// }
+
+// function updateName(state = initialState3, action) {
+//   switch(action.type) {
+//     case ADD_USER_INFO:
+//       return {
+//         ...state,
+//         username: action.username
+//       }
+//     default:
+//       return state;
+//   }
+// }
