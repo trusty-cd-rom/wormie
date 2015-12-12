@@ -49,6 +49,8 @@
 		680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */; };
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CBC930061C1CABF0005EBA4F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */; };
+		CBC930071C1CABF0005EBA4F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +222,8 @@
 		680C61251C190DBA006F6E87 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1321B9331C1CF621002DEA85 /* libReactNativeIcons.a in Frameworks */,
+				CBC930061C1CABF0005EBA4F /* FBSDKCoreKit.framework in Frameworks */,
+				CBC930071C1CABF0005EBA4F /* FBSDKLoginKit.framework in Frameworks */,
 				680055711C1A7E1900F331E3 /* libRCTVideo.a in Frameworks */,
 				680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */,
 				680C61201C18F95D006F6E87 /* libRCTYouTube.a in Frameworks */,
@@ -452,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				1321B9341C1CF678002DEA85 /* FontAwesomeKit */,
+				CBC930151C1CABF8005EBA4F /* Frameworks */,
 				680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */,
 				13B07FAE1A68108700A75B9A /* wormie */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -469,6 +476,15 @@
 				00E356EE1AD99517003FC87E /* wormieTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CBC930151C1CABF8005EBA4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */,
+				CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -851,6 +867,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -870,6 +887,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
