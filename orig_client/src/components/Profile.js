@@ -11,6 +11,8 @@ import React, {
 import CreateRequest from '../containers/CreateRequest';
 import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole.js';
+import MySubmissions from './MySubmissions.js';
+import MyWormholes from './MyWormholes.js';
 import Badge from './Badge';
 
 var styles = StyleSheet.create({
@@ -28,7 +30,9 @@ var styles = StyleSheet.create({
     color: 'white'
   },
   container:{
-    marginTop: 0,
+    flex: 'flex',
+    marginTop: 20,
+    marginBottom: 49,
     flex: 3,
     backgroundColor: 'black',
     alignSelf: 'stretch',
@@ -54,6 +58,7 @@ var styles = StyleSheet.create({
   },
   submission: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     // alignSelf: 'stretch',
     // justifyContent: 'center',
     flex: 1,
@@ -69,58 +74,8 @@ class Profile extends Component{
     })
   }
 
-  viewRequest(index, array, type) {
-    var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
-    // console.log('trying to view request: ', wormholes, wormholes[index]);
-    
-    // UPDATECURRENTWORMHOLE
-    // this function is setting current Wormhole to set the top-state
-    // top state will contain information about what the current wormhole is
-    // current wormhole is the next page after user press current request
-
-    // TODO: after datastructure change
-    if (type === 'wormholes') {
-      list = wormholes;
-      updateCurrentWormhole({submissions: [list[index]]});
-    } else {
-      list = submissions;
-      updateCurrentWormhole({submissions: [list[index]]});
-    }
-
-    // debugger;
-    if(list[index].status === 'open') {
-      this.props.navigator.push({
-        component: OpenWormhole,
-      });
-    } else {
-      this.props.navigator.push({
-        component: ViewRequest,
-      });
-    }
-  }
-
-
-  createList(array, styleButton, type) {
-    return array.map((item, index) => {
-      return (
-        <View key = {index}>
-          <TouchableHighlight
-            style = {styleButton}
-            onPress = {this.viewRequest.bind(this, index, array, type)}
-            underlayColor = 'purple'
-          >
-            <View>
-              <Text style = {styles.buttonText}>Request: {index} Status: {item.status} </Text>
-              <Text > {item.title} </Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-      );
-    });
-  }
-
   render() {
-    var { currentUser, submissions, wormholes, updateCurrentWormhole } = this.props;
+    var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
@@ -132,14 +87,20 @@ class Profile extends Component{
             <Text style={{flex: 1, marginTop: 30, alignSelf: "center", backgroundColor: "purple", color: "black"}}> + </Text>
           </TouchableHighlight>
         </View>
-        <View style = {styles.list}>
-          <Text style = {{color: 'white'}}>My Requests</Text>
-          {this.createList(wormholes, styles.request, 'wormholes')}
-        </View>
-        <View style = {styles.list}>
-          <Text style = {{color: 'white'}}>My Submissions</Text>
-          {this.createList(submissions, styles.submission, 'submissions')}
-        </View>
+        <MyWormholes 
+          wormholes = {this.props.wormholes}
+          updateCurrentWormhole = {this.props.updateMyCurrentWormhole}
+          updateMyCurrentWormhole = {this.props.updateMyCurrentWormhole}
+          myCurrentWormhole = {this.props.myCurrentWormhole}
+          navigator = {this.props.navigator}
+        />
+        <MySubmissions
+          submissions = {this.props.submissions}
+          updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
+          updateCurrentSubmission = {this.props.updateMyCurrentSubmission}
+          myCurrentSubmission = {this.props.myCurrentSubmission}
+          navigator = {this.props.navigator}
+        />
       </View>
     );
   }
