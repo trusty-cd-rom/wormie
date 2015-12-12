@@ -14,23 +14,18 @@ class ViewMyWormhole extends Component {
     this.props.navigator.pop();
   }
   startSubmission() {
-    let { myCurrentWormhole, initPendingSubmission } = this.props;
-    initPendingSubmission(myCurrentWormhole);
+    let { myCurrentWormhole } = this.props;
     this.props.navigator.push({
       component: CameraView
     });
   }
-  componentWillMount() {
-    console.log(this.props.myCurrentWormhole);
-  }
 
   video() {
-    debugger;
     var { myCurrentWormhole } = this.props;
-    if (myCurrentWormhole.submitter['video_url']) {
+    if (myCurrentWormhole['video_url']) {
       return (
         <YouTube 
-          videoId={myCurrentWormhole.submitter['video_url']}
+          videoId={myCurrentWormhole['video_url']}
           play={false}
           hidden={false}
           playsInline={true}
@@ -46,7 +41,6 @@ class ViewMyWormhole extends Component {
   }
 
   render() {
-
     let { myCurrentWormhole } = this.props;
     console.log('myCurrentWormhole: ', myCurrentWormhole);
     return (

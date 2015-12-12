@@ -15,16 +15,16 @@ class ViewMySubmission extends Component {
   }
   startSubmission() {
     let { myCurrentSubmission } = this.props;
-    initPendingSubmission(myCurrentSubmission);
     this.props.navigator.push({
       component: CameraView
     });
   }
 
   video() {
+    let { myCurrentSubmission } = this.props;
     return (
       <YouTube 
-        videoId={currentWormhole.submissions[0].video_url}
+        videoId={myCurrentSubmission.video_url}
         play={false}
         hidden={false}
         playsInline={true}
@@ -35,6 +35,7 @@ class ViewMySubmission extends Component {
       />
     );
   }
+
   render() {
     let { myCurrentSubmission } = this.props;
     console.log('myCurrentSubmission: ', myCurrentSubmission);
@@ -48,7 +49,7 @@ class ViewMySubmission extends Component {
         >
           <Text style = {styles.buttonText}> Back </Text>
         </TouchableHighlight>
-
+        {this.video()}
         <Text style={styles.title}>
           Title: {myCurrentSubmission.wormhole.title}
         </Text>
