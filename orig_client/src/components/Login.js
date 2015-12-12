@@ -1,3 +1,5 @@
+var FacebookLogin = require('./Facebook');
+
 import React, {
   Component,
   StyleSheet,
@@ -20,6 +22,7 @@ class Login extends Component {
         <View style={styles.splashImage}>
           <Text style={styles.buttonText}> WORMIE</Text>
         </View>
+        <FacebookLogin />
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.goToSignup.bind(this)}
