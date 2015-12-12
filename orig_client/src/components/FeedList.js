@@ -148,7 +148,7 @@ var styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 49,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   buttonText: {
     fontSize: 24,
@@ -160,7 +160,7 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   cardTitle: {
     fontSize: 20,
@@ -186,13 +186,13 @@ var styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 40,
     flex: 1,
-    backgroundColor: '#262626'
+    backgroundColor: 'black'
   },
   cardTitleContainer: {
     paddingTop: 5,
     paddingBottom: 5,
     flex: 1,
-    backgroundColor: '#262626'
+    backgroundColor: 'black'
   },
   row: {
     flexDirection: 'row',
