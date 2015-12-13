@@ -30,8 +30,8 @@ class Navbar extends Component{
   render() {
     return (
       <TabBarIOS
-        // tintColor="C"
-        // barTintColor="black"
+        tintColor="#48BBEC"
+        barTintColor="black"
         selectedTab={this.state.selectedTab}
       >
         <TabBarIOS.Item
