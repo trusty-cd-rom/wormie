@@ -133,8 +133,6 @@ var api = {
 	},
 
 	convertToken(tokenData) {
-		console.log("I'm in convertToken");
-		console.log(urls.convertToken);
 		return fetch(urls.convertToken, {
 			method: 'POST',
 			headers: {
@@ -143,16 +141,18 @@ var api = {
 			body: tokenData
 		})
 		.then((res) => {
-			console.log(" it worked", res);
+			console.log("Success! Token converted", res);
+			// TODO: Save the django token somewhere
 			res.json();
 		})
 		.catch((err) => {
-			console.log("DDINT OWRK");
+			console.log("Error converting token");
 			console.error(err);
 		});
 
 	},
 
+	// TODO: Add a refresh token API call using the stored refresh token
 
 };
 
