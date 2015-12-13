@@ -144,6 +144,13 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#48BBEC'
   },
+  requestButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 2,
+    backgroundColor: '#48BBEC'
+  },
   loginButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
