@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
   },
   list: {
-    flex: 3
+    // flex: 3
   },
   image: {
     height: 350
@@ -36,8 +36,8 @@ var styles = StyleSheet.create({
   },
   submission: {
     flexDirection: 'row',
-    // alignSelf: 'stretch',
-    // justifyContent: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
     flex: 1,
     backgroundColor: 'orange'
   },
@@ -90,7 +90,6 @@ class MySubmissions extends Component{
         onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
         style={styles.list}>
-        <Text style = {{color: 'white'}}>My Submissions</Text>
         {this.createList()}
       </ScrollView>
 
