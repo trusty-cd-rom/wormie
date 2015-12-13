@@ -12,6 +12,7 @@ import React, {
 import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 var YouTube = require('react-native-youtube');
+var Video = require('react-native-video');
 
 class FeedList extends React.Component{
   componentWillMount() {
@@ -48,7 +49,12 @@ class FeedList extends React.Component{
         />
       );
     }else {
-      return (<View />);
+      return (
+        <Image 
+          style={{height: 220, width: 390, flex: 1}}
+          source = {require('../assets/dsnWormhole.jpg')}
+        />
+      );
     }
 
 
@@ -102,16 +108,20 @@ class FeedList extends React.Component{
       console.log(item);
       return (
         <View key = {index}>
-          <View style={[styles.cardTitleContainer, styles.row]}>
-            <Text style = {styles.cardTitle}> {item.title} </Text>
-            <View style={styles.spaceBuffer} />
-            <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
-          </View>
+          <TouchableHighlight
+            style = {styles.loginButton}
+            onPress = {this.viewRequest.bind(this, index)}
+          >
+            <View style={[styles.cardTitleContainer, styles.row]}>
+              <Text style = {styles.cardTitle}> {item.title} </Text>
+              <View style={styles.spaceBuffer} />
+              <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
+            </View>
+          </TouchableHighlight> 
           {this._renderVideo(item)}
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
-            underlayColor = 'purple'
           >
             <View style={styles.cardInfoContainer}>
               <View style = {styles.row}>
@@ -186,13 +196,13 @@ var styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 40,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#3B3738'
   },
   cardTitleContainer: {
     paddingTop: 5,
     paddingBottom: 5,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#3B3738'
   },
   row: {
     flexDirection: 'row',
@@ -209,6 +219,12 @@ var styles = StyleSheet.create({
   },
   spaceBuffer: {
     flex: 2
+  },
+  backgroundVideo: {
+    alignSelf: 'stretch',
+    height: 220,
+    backgroundColor: 'transparent',
+    marginBottom: 0
   }
 });
 
