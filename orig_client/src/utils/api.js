@@ -132,6 +132,28 @@ var api = {
 	  ;
 	},
 
+	convertToken(tokenData) {
+		console.log("I'm in convertToken");
+		console.log(urls.convertToken);
+		return fetch(urls.convertToken, {
+			method: 'POST',
+			headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: tokenData
+		})
+		.then((res) => {
+			console.log(" it worked", res);
+			res.json();
+		})
+		.catch((err) => {
+			console.log("DDINT OWRK");
+			console.error(err);
+		});
+
+	},
+
+
 };
 
 module.exports = api;

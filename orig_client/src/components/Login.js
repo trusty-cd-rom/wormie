@@ -1,4 +1,4 @@
-var FacebookLogin = require('./Facebook');
+import Facebook from '../containers/Facebook';
 
 import React, {
   Component,
@@ -20,9 +20,9 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.buttonText}> WORMIE</Text>
+          <Text style={styles.buttonText}>WORMIE</Text>
         </View>
-        <FacebookLogin />
+        <Facebook />
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.goToSignup.bind(this)}
