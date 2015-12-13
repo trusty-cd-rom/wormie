@@ -42,57 +42,56 @@ class CreateRequest extends Component {
     return (
       <View style={styles.container}>
         <TouchableHighlight
-          style = {styles.loginButton}
+          style = {styles.backButton}
           onPress = {this.back.bind(this)}
-          underlayColor = '#88D4f5'
         >
-        <Text style = {styles.buttonText}> Back </Text>
+          <Text style = {styles.backText}> {'<'} </Text>
         </TouchableHighlight>
+        <View style = {styles.contentContainer}>
+          <Text style={styles.title}>
+            Title
+          </Text>
+          <TextInput
+            ref='a'
+            style = {styles.searchInput}
+            value = {inputText.title}
+            onChange = {this.handleInputChange.bind(this,'title')}
+          />
 
-        <Text style={styles.title}>
-          Title
-        </Text>
-        <TextInput
-          ref='a'
-          style = {styles.searchInput}
-          value = {inputText.title}
-          onChange = {this.handleInputChange.bind(this,'title')}
-        />
+          <Text style={styles.title}>
+            Location
+          </Text>
+          <TextInput
+            style = {styles.searchInput}
+            value = {inputText.location}
+            onChange = {this.handleInputChange.bind(this,'location')}
+          />
+          <Text style={styles.title}>
+            Deadline
+          </Text>
+          <TextInput
+            style = {styles.searchInput}
+            value = {inputText.deadline}
+            onChange = {this.handleInputChange.bind(this,'deadline')}
+          />
 
-        <Text style={styles.title}>
-          Location
-        </Text>
-        <TextInput
-          style = {styles.searchInput}
-          value = {inputText.location}
-          onChange = {this.handleInputChange.bind(this,'location')}
-        />
-        <Text style={styles.title}>
-          Deadline
-        </Text>
-        <TextInput
-          style = {styles.searchInput}
-          value = {inputText.deadline}
-          onChange = {this.handleInputChange.bind(this,'deadline')}
-        />
+          <Text style={styles.title}>
+            Description
+          </Text>
+          <TextInput
+            style = {styles.searchInput}
+            value = {inputText.notes}
+            onChange = {this.handleInputChange.bind(this,'notes')}
+          />
 
-        <Text style={styles.title}>
-          Description
-        </Text>
-        <TextInput
-          style = {styles.searchInput}
-          value = {inputText.notes}
-          onChange = {this.handleInputChange.bind(this,'notes')}
-        />
-
-        <ActivityIndicatorIOS
-          animating = {inputText.isFetching==='true'}
-          color = 'white'
-          size = 'large'
-        ></ActivityIndicatorIOS>
-
+          <ActivityIndicatorIOS
+            animating = {inputText.isFetching==='true'}
+            color = 'white'
+            size = 'large'
+          ></ActivityIndicatorIOS>
+        </View>
         <TouchableHighlight
-          style = {styles.loginButton}
+          style = {styles.requestButton}
           onPress = {this.submitRequest.bind(this)}
           underlayColor = '#88D4f5'
         >
@@ -106,10 +105,13 @@ class CreateRequest extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: 'black',
     marginTop: 20
+  },
+  contentContainer: {
+    flex:15,
   },
   text: {
     fontSize: 20,
@@ -123,12 +125,32 @@ const styles = StyleSheet.create({
     flex: 4,
     backgroundColor: 'black'
   },
+  requestButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 2,
+    backgroundColor: '#48BBEC'
+  },
   loginButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
     backgroundColor: '#48BBEC'
+  },
+  backButton: {
+    // flexDirection: 'row',
+    // alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 1,
+    backgroundColor: 'black'
+  },
+  backText: {
+    fontSize: 30,
+    color: 'white',
+    alignSelf: 'flex-start',
+    marginLeft: 5
   },
   buttonText: {
     fontSize: 24,
@@ -142,6 +164,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   searchInput: {
+    alignSelf: 'stretch',
     height: 50,
     padding: 4,
     marginRight: 5,
