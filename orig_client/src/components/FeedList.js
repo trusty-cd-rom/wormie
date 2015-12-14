@@ -110,6 +110,7 @@ class FeedList extends React.Component{
       // console.log(item);
       return (
         <View key = {index}>
+<<<<<<< HEAD
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
@@ -124,6 +125,22 @@ class FeedList extends React.Component{
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
+=======
+          <TouchableHighlight
+            style = {styles.loginButton}
+            onPress = {this.viewRequest.bind(this, index)}
+          >
+            <View style={[styles.cardTitleContainer, styles.row]}>
+              <Text style = {styles.cardTitle}> {item.title} </Text>
+              <View style={styles.spaceBuffer} />
+              <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
+            </View>
+          </TouchableHighlight> 
+          {this._renderVideo(item)}
+          <TouchableHighlight
+            style = {styles.loginButton}
+            onPress = {this.viewRequest.bind(this, index)}
+>>>>>>> 7bfa350011b458f628909ea73cb2b7095eeaf77e
           >
             <View style={styles.cardInfoContainer}>
               <View style = {styles.row}>
