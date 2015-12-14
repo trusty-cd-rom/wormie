@@ -24,7 +24,6 @@ class FacebookLogin extends React.Component {
       if (error) {
         console.log('Error making request.');
       } else {
-        // Data from request is in result
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         console.log("The user's email is: ", result.email);
         // Need to save this as the current user's email
@@ -43,7 +42,7 @@ class FacebookLogin extends React.Component {
 
     this.props.convertFacebookToken(tokenData, () => {
       
-      console.log("I need to get the users email ");
+      console.log("I need to get the users email so that I can get their django ID ");
       this.fetchProfile();
       console.log("I need to save the token somewhere");
       console.log("I should probably switch to next page");

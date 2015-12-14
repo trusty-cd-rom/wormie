@@ -38,15 +38,18 @@ export function getUserDataFromFB() {
 export function updateUserProfile(updatedUserData, cb) {
   console.log('hey');
   return dispatch => {
-    dispatch(startUpdating());
-    return api.createUser()
-     .then((res) => {
-        console.log(res);
-        dispatch(updateUserProfileAction(updatedUserData));
-        dispatch(stopUpdating());
-        cb();
-     })
-     .catch((err) => console.log(err));
+    // dispatch(startUpdating());
+    dispatch(updateUserProfileAction(updatedUserData));
+    cb();
+
+    // return api.createUser()
+    //  .then((res) => {
+    //     console.log(res);
+    //     dispatch(updateUserProfileAction(updatedUserData));
+    //     dispatch(stopUpdating());
+    //     cb();
+    //  })
+    //  .catch((err) => console.log(err));
   }
 }
 

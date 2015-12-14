@@ -100,21 +100,27 @@ var api = {
 		;
 	},
 
-	createUser(userData) {
-		return fetch(urls.users, {
-	    method: 'POST',
-	    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-   		},
-	    body: JSON.stringify(userData)
-	  })
-	  .then((res) => {
-	  	res.json();
-	  	// console.log(res);
-	  })
-	  ;
+	getUserDetailsByEmail(email) {
+		return fetch(`${urls.usersByEmail}/${email}`)
+		.then((res) => res.json())
+		;
 	},
+
+	// createUser(userData) {
+	// 	return fetch(urls.users, {
+	//     method: 'POST',
+	//     headers: {
+ //        'Accept': 'application/json',
+ //        'Content-Type': 'application/json'
+ //   		},
+	//     body: JSON.stringify(userData)
+	//   })
+	//   .then((res) => {
+	//   	res.json();
+	//   	// console.log(res);
+	//   })
+	//   ;
+	// },
 
 	updateUserDetails(userData) {
 		return fetch(`${urls.users}/${userData.id}`, {
