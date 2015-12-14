@@ -6,7 +6,7 @@ var initialState = {};
 function myCurrentSubmission(state = {}, action) {
   switch (action.type) {
     case UPDATE_MY_CURRENT_SUBMISSION:
-      console.log('myCurrentSubmission', state)
+      // console.log('myCurrentSubmission', state)
       return action.submission;
     default:
       return state;
