@@ -1,6 +1,6 @@
 branch-defaults:
   default:
-    environment: null
+    environment: wormie-4-dev
     group_suffix: null
 global:
   application_name: wormie-4
