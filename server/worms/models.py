@@ -37,6 +37,7 @@ class Account(models.Model):
     picture_url = models.CharField(max_length=1000)
     about_me = models.CharField(max_length=255)
     wormie_color = models.CharField(max_length=100)
+    fb_id = models.CharField(max_length=200)
 
     class Meta:
         ordering = ('created_at',)
