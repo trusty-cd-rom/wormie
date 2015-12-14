@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#39247F',
   },
   badgeContainer: {
     backgroundColor: 'black',
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'black'
+    backgroundColor: '#39247F'
   },
   loginButton: {
     flexDirection: 'row',

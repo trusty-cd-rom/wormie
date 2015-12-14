@@ -36,19 +36,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#39247F'
+
   },
   logo: {
     fontSize: 60,
     textAlign: 'center',
     alignSelf: 'center',
-    color: '#39247F',
+    color: 'white',
     margin: 10,
   },
   subtitle: {
     fontSize: 20,
     textAlign: 'center',
     alignSelf: 'center',
-    color: '#39247F',
+    color: 'white',
     flex: 1
   },
   splashImage: {
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'white'
+    backgroundColor: '#39247F'
   },
   facebookButton: {
     paddingBottom: 50
