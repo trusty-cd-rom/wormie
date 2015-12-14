@@ -10,6 +10,18 @@ import React, {
 import Navbar from './Navbar';
 
 class CreateRequest extends Component {
+  componentWillMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let initialPosition = JSON.stringify(position);
+        console.log(initialPosition);
+        //replace with call to action function, update state via reducer
+        // this.setState({initialPosition});
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+  }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
@@ -107,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     marginTop: 20
   },
   contentContainer: {
@@ -123,7 +135,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   requestButton: {
     flexDirection: 'row',
@@ -144,24 +156,24 @@ const styles = StyleSheet.create({
     // alignSelf: 'stretch',
     justifyContent: 'flex-start',
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   backText: {
     fontSize: 30,
-    color: 'white',
+    color: 'black',
     alignSelf: 'flex-start',
     marginLeft: 5
   },
   buttonText: {
     fontSize: 24,
-    color: 'white',
+    color: 'black',
     alignSelf: 'center'
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
     textAlign: 'center',
-    color: '#fff'
+    color: 'black'
   },
   searchInput: {
     alignSelf: 'stretch',
@@ -170,9 +182,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
     fontSize: 23,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: 'black',
     borderRadius: 8,
-    color: 'white'
+    color: 'black'
   },
 });
 

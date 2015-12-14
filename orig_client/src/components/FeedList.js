@@ -162,7 +162,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 24,
-    color: 'white',
+    color: 'black',
     alignSelf: 'center'
   },
   loginButton: {
@@ -174,35 +174,38 @@ var styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 20,
-    color: 'white',
+    color: 'black',
   },
   cardLocation: {
-    color: 'white',
+    color: 'black',
   },
   cardRequestor: {
     marginLeft: 5,
     flex: 1,
-    color: 'white',
+    color: 'black',
   },
   cardSubmitter: {
     marginRight: 5,
     flex: 1,
-    color: 'white',
+    color: 'black',
   },
   cardDate: {
-    color: 'white',
+    color: 'black',
   },
   cardInfoContainer: {
     paddingTop: 5,
-    paddingBottom: 40,
+    paddingBottom: 15,
+    marginBottom: 15,
     flex: 1,
-    backgroundColor: '#3B3738'
+    backgroundColor: 'white',
+    borderColor: 'grey',
+    borderBottomWidth: 0.25
   },
   cardTitleContainer: {
-    paddingTop: 5,
+    paddingTop: 0,
     paddingBottom: 5,
     flex: 1,
-    backgroundColor: '#3B3738'
+    backgroundColor: 'white'
   },
   row: {
     flexDirection: 'row',
