@@ -21,6 +21,7 @@ class OpenWormhole extends Component {
   }
   render() {
     let { currentWormhole } = this.props;
+    console.log(currentWormhole);
     return (
       <View style={styles.container}>
 
@@ -42,7 +43,14 @@ class OpenWormhole extends Component {
             Requester
           </Text>
           <Text style={styles.text}>
-            {currentWormhole.owner_name}
+            {currentWormhole.requestor.username}
+          </Text>
+
+          <Text style={styles.title}>
+            Location
+          </Text>
+          <Text style={styles.text}>
+            {`${currentWormhole.latitude} , ${currentWormhole.longitude}`}
           </Text>
 
           <Text style={styles.title}>

@@ -38,7 +38,7 @@ var api = {
 	},
 
 	updateWormholeDetails(wormholeId, wormholeData) {
-		console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
+		// console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
 		return fetch(`${urls.wormholes}/${wormholeId}/`, {
 	    method: 'put',
 	    headers: {
@@ -48,7 +48,7 @@ var api = {
 	    body: JSON.stringify(wormholeData)
 	  })
 	  .then((res) => {
-	  	console.log('just head back from the put, and they said: ', res);
+	  	// console.log('just head back from the put, and they said: ', res);
 	  	res
 	  })
 	  ;

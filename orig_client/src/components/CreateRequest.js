@@ -3,28 +3,38 @@ import React, {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableHighlight,
   TextInput,
   ActivityIndicatorIOS,
+  DatePickerIOS,
 } from 'react-native';
 import Navbar from './Navbar';
 
 class CreateRequest extends Component {
   componentWillMount() {
+    let { updateInputText } = this.props;
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let initialPosition = JSON.stringify(position);
         console.log(initialPosition);
         //replace with call to action function, update state via reducer
-        // this.setState({initialPosition});
+        console.log(typeof position.coords.latitude);
+        updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
       },
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
+    updateInputText('deadline', new Date());
   }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
+  }
+  updateDate(date) {
+    let { updateInputText } = this.props;
+    console.log(date);
+    updateInputText('deadline', date);
   }
   back() {
     this.props.navigator.pop();
@@ -35,9 +45,9 @@ class CreateRequest extends Component {
     let { createRequest, currentUser, inputText } = this.props;
     let newRequestData = {
       title: inputText.title,
-      latitude: 37.786140,
-      longitude: -122.405754,
-      deadline: '2015-12-09T23:37:58.271497Z',
+      latitude: inputText.location ? inputText.location.split(',')[0].trim() : 37.786140,
+      longitude: inputText.location ? inputText.location.split(',')[1].trim() : -122.405754,
+      deadline: inputText.deadline,
       notes: inputText.notes,
       status: 'open',
       requestor: currentUser.id,
@@ -52,7 +62,7 @@ class CreateRequest extends Component {
   render() {
     let { inputText } = this.props;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TouchableHighlight
           style = {styles.backButton}
           onPress = {this.back.bind(this)}
@@ -81,10 +91,12 @@ class CreateRequest extends Component {
           <Text style={styles.title}>
             Deadline
           </Text>
-          <TextInput
-            style = {styles.searchInput}
-            value = {inputText.deadline}
-            onChange = {this.handleInputChange.bind(this,'deadline')}
+          <DatePickerIOS
+            date={new Date(inputText.deadline)}
+            mode="datetime"
+            minimumDate={new Date()}
+            minuteInterval= {15}
+            onDateChange = {this.updateDate.bind(this)}
           />
 
           <Text style={styles.title}>
@@ -109,7 +121,7 @@ class CreateRequest extends Component {
         >
           <Text style = {styles.buttonText}> Request! </Text>
         </TouchableHighlight>
-      </View>
+      </ScrollView>
     );
   }
 }

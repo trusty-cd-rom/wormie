@@ -33,8 +33,8 @@ class FeedList extends React.Component{
       });
     }
   }
-  _renderVideo(item) {
-    console.log('rendering video', item.submissions[0]);
+  _renderVideo(item, index) {
+    // console.log('rendering video', item.submissions[0]);
     if(item.submissions[0]) {
       return (
         <YouTube 
@@ -50,10 +50,12 @@ class FeedList extends React.Component{
       );
     }else {
       return (
-        <Image 
-          style={{height: 220, width: 390, flex: 1}}
-          source = {require('../assets/dsnWormhole.jpg')}
-        />
+        <TouchableHighlight onPress={this.viewRequest.bind(this, index)}>
+          <Image 
+            style={{height: 220, width: 390, flex: 1}}
+            source = {require('../assets/dsnWormhole.jpg')}
+          />
+        </TouchableHighlight>
       );
     }
 
@@ -105,7 +107,7 @@ class FeedList extends React.Component{
   render() {
     var { feed } = this.props;
     var list = feed.map((item, index) => {
-      console.log(item);
+      // console.log(item);
       return (
         <View key = {index}>
           <TouchableHighlight
@@ -118,7 +120,7 @@ class FeedList extends React.Component{
               <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
             </View>
           </TouchableHighlight> 
-          {this._renderVideo(item)}
+          {this._renderVideo(item, index)}
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}

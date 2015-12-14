@@ -29,7 +29,7 @@ export function getUserDataFromFB() {
     return api.getUserDetails(2)
       .then((res) => {
         console.log('got data from server');
-        console.log('res: ', res);
+        // console.log('res: ', res);
         dispatch(setCurrentUser(res));
       });
   }
@@ -41,7 +41,7 @@ export function updateUserProfile(updatedUserData, cb) {
     dispatch(startUpdating());
     return api.createUser()
      .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(updateUserProfileAction(updatedUserData));
         dispatch(stopUpdating());
         cb();

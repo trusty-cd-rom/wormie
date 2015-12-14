@@ -31,7 +31,7 @@ function userProfile(state = initialState, action) {
 	    	feed: feedReducerRoute(state.feed, action)
 	    };
 	  case TOGGLE_FETCH:
-	  	console.log('toggling fetch to: ',action.status, 'state is: ', state)
+	  	// console.log('toggling fetch to: ',action.status, 'state is: ', state)
 	    return {
 	    	...state,
 	    	isFetching: action.status
