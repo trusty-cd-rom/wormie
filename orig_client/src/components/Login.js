@@ -22,14 +22,7 @@ class Login extends Component {
         <View style={styles.splashImage}>
           <Text style={styles.buttonText}>WORMIE</Text>
         </View>
-        <Facebook />
-        <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.goToSignup.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Login </Text>
-        </TouchableHighlight>
+        <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
       </View>
     );
   }
@@ -43,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   text: {
-    fontSize: 20,
+    fontSize: 60,
     textAlign: 'center',
     margin: 10,
   },
@@ -52,18 +45,23 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
+  },
+  facebookButton: {
+    margin: 50,
+    flex: 2
   },
   loginButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#48BBEC'
+    backgroundColor: '#39247F',
+    color: 'white'
   },
   buttonText: {
-    fontSize: 24,
-    color: 'white',
+    fontSize: 50,
+    color: '#39247F',
     alignSelf: 'center'
   }
 });

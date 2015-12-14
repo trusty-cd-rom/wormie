@@ -5,7 +5,7 @@ const urls = {
 	wormholes: `${host}/wormholes/`,
 	submissions: `${host}/submissions/`,
 	users: `${host}/users/`,
-  usersByEmail: `${host}/users/email/`,
+  usersByFacebookID: `${host}/users/fb/`,
 	accounts: `${host}/accounts/`,
   convertToken: `${authHost}/convert\-token/`,
 }

@@ -100,8 +100,8 @@ var api = {
 		;
 	},
 
-	getUserDetailsByEmail(email) {
-		return fetch(`${urls.usersByEmail}/${email}`)
+	getUserDetailsByFacebookID(fb_id) {
+		return fetch(`${urls.usersByFacebookID}/${fb_id}`)
 		.then((res) => res.json())
 		;
 	},

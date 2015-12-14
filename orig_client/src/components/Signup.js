@@ -13,10 +13,10 @@ import Location from './Location';
 
 class Signup extends Component {
 
-  componentWillMount() {
-    var { getUserDataFromFB } = this.props;
-    getUserDataFromFB();
-  }
+  // componentWillMount() {
+  //   var { getUserDataFromFB } = this.props;
+  //   getUserDataFromFB();
+  // }
 
   goToLocation() {
     this.props.navigator.replace({

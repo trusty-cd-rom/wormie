@@ -1,6 +1,8 @@
 var React = require('react-native');
 var FBSDKLogin = require('react-native-fbsdklogin');
 var FBSDKCore = require('react-native-fbsdkcore');
+import Signup from '../containers/Signup';
+
 
 var {
   FBSDKAccessToken,
@@ -18,6 +20,13 @@ var {
 
 class FacebookLogin extends React.Component {
 
+  goToSignup() {
+    console.log(this.props);
+    this.props.navigator.replace({
+      component: Signup
+    });
+  }
+
   fetchProfile(){
 
     var fetchProfileRequest = new FBSDKGraphRequest((error, result) => {
@@ -25,13 +34,26 @@ class FacebookLogin extends React.Component {
         console.log('Error making request.');
       } else {
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log("The user's email is: ", result.email);
-        // Need to save this as the current user's email
-        // TODO!
+        console.log("The user's details: ", result);
+        
+        var { getUserDataFromServer } = this.props;
+        
+        getUserDataFromServer(result.id, () => {
+          console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+          console.log("I GOT THE USERS DATA FROM OUR SERVER");
+          console.log("Time to move to next page");
+          console.log(this.props);
+          this.props.navigator.replace({
+            component: Signup
+          });
+        });
+
       }
     }, '/me');
 
-    fetchProfileRequest.addStringParameter('email', 'fields');
+    // Note: Add parameters if you want more details from Facebook
+    //       Here is an example to get the user's email address
+    // fetchProfileRequest.addStringParameter('email', 'fields');
 
     fetchProfileRequest.start();
   }
@@ -40,12 +62,8 @@ class FacebookLogin extends React.Component {
 
     var tokenData = "grant_type=convert_token&client_id=LQBBAG7oJGNgdQyFyJg8TgZpNveL3d8PDkVgfgG2&client_secret=FjoMZbsjfuNJPEsuCgGFHTC0ABDh1KhM0odP7yJpDTAVvcrMzxFNSCU0seF6959ekTsCdB0FSbt2deHnHwM8U5GQfKW9WfrDyBlcHyViRxTF6vM0oavydUkByfUBK4HJ&backend=facebook&token=" + token;
 
-    this.props.convertFacebookToken(tokenData, () => {
-      
-      console.log("I need to get the users email so that I can get their django ID ");
+    this.props.convertFacebookToken(tokenData, () => {      
       this.fetchProfile();
-      console.log("I need to save the token somewhere");
-      console.log("I should probably switch to next page");
     });
   }
 
