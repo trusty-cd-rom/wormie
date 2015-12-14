@@ -40,8 +40,8 @@ var styles = StyleSheet.create({
   },
   request: {
     flexDirection: 'row',
-    // alignSelf: 'stretch',
-    // justifyContent: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
     flex: 1,
     backgroundColor: '#48BBEC'
   },
@@ -130,7 +130,6 @@ class MyWormholes extends Component{
         scrollEventThrottle={200}
         style={styles.list}
       >
-        <Text style = {{color: 'white'}}>My Wormholes</Text>
         {this.createList()}
       </ScrollView>
     );
