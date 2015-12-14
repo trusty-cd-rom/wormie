@@ -38,7 +38,7 @@ class FacebookLogin extends React.Component {
 
   convertToken(token){
 
-    var tokenData = "grant_type=convert_token&client_id=WEU2sT6tm9M7tsTUaV9CZGgYBL3TZBmYWUhRPVxA&client_secret=cckcY9UnOcHp04zTrVUODdvQJan0v7ZwGg891FlWW2TZheC6xNNm0Gb7WTig3VYEk2ziNWhX35CRo3vOU3sZOZzVmkjOSXXLzEmbxa6LbVApuS5p62DTK5wgMds5HS76&backend=facebook&token=" + token;
+    var tokenData = "grant_type=convert_token&client_id=LQBBAG7oJGNgdQyFyJg8TgZpNveL3d8PDkVgfgG2&client_secret=FjoMZbsjfuNJPEsuCgGFHTC0ABDh1KhM0odP7yJpDTAVvcrMzxFNSCU0seF6959ekTsCdB0FSbt2deHnHwM8U5GQfKW9WfrDyBlcHyViRxTF6vM0oavydUkByfUBK4HJ&backend=facebook&token=" + token;
 
     this.props.convertFacebookToken(tokenData, () => {
       

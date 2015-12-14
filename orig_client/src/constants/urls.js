@@ -1,5 +1,5 @@
-const host = 'http://wormie-3-dev.elasticbeanstalk.com/api';
-const authHost = 'http://wormie-3-dev.elasticbeanstalk.com/auth';
+const host = 'http://wormie-4-dev.elasticbeanstalk.com/api';
+const authHost = 'http://wormie-4-dev.elasticbeanstalk.com/auth';
 
 const urls = {
 	wormholes: `${host}/wormholes/`,
