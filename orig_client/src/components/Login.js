@@ -20,9 +20,12 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.buttonText}>WORMIE</Text>
+          <Text style={styles.logo}>WORMIE</Text>
         </View>
+        <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
         <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
+      <View style={styles.bottomLayer}>
+      </View>
       </View>
     );
   }
@@ -33,12 +36,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  text: {
+  logo: {
     fontSize: 60,
     textAlign: 'center',
+    alignSelf: 'center',
+    color: '#39247F',
     margin: 10,
+  },
+  subtitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: '#39247F',
+    flex: 1
   },
   splashImage: {
     flexDirection: 'row',
@@ -48,21 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   facebookButton: {
-    margin: 50,
-    flex: 2
+    paddingBottom: 50
   },
-  loginButton: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#39247F',
-    color: 'white'
-  },
-  buttonText: {
-    fontSize: 50,
-    color: '#39247F',
-    alignSelf: 'center'
+  bottomLayer: {
+    margin: 30
   }
 });
 
