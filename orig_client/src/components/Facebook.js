@@ -27,43 +27,19 @@ class FacebookLogin extends React.Component {
     });
   }
 
-  fetchProfile(){
-
-    var fetchProfileRequest = new FBSDKGraphRequest((error, result) => {
-      if (error) {
-        console.log('Error making request.');
-      } else {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log("The user's details: ", result);
-        
-        var { getUserDataFromServer } = this.props;
-        
-        getUserDataFromServer(result.id, () => {
-          console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-          console.log("I GOT THE USERS DATA FROM OUR SERVER");
-          console.log("Time to move to next page");
-          console.log(this.props);
-          this.props.navigator.replace({
-            component: Signup
-          });
-        });
-
-      }
-    }, '/me');
-
-    // Note: Add parameters if you want more details from Facebook
-    //       Here is an example to get the user's email address
-    // fetchProfileRequest.addStringParameter('email', 'fields');
-
-    fetchProfileRequest.start();
-  }
-
   convertToken(token){
 
     var tokenData = "grant_type=convert_token&client_id=LQBBAG7oJGNgdQyFyJg8TgZpNveL3d8PDkVgfgG2&client_secret=FjoMZbsjfuNJPEsuCgGFHTC0ABDh1KhM0odP7yJpDTAVvcrMzxFNSCU0seF6959ekTsCdB0FSbt2deHnHwM8U5GQfKW9WfrDyBlcHyViRxTF6vM0oavydUkByfUBK4HJ&backend=facebook&token=" + token;
 
-    this.props.convertFacebookToken(tokenData, () => {      
-      this.fetchProfile();
+    // Use Facebook token to create new user in our database and return OAuth2 token
+    this.props.convertFacebookToken(tokenData, () => {
+      // Grab the user's Facebook id from Facebook and look up user in our database
+      console.log("Time to fetchFacebookProfile");
+      this.props.fetchFacebookProfile(() => {
+        // Switch to the next screen after the client knows the user's info
+        console.log("Now let's goToSignup page");
+        this.goToSignup();
+      });
     });
   }
 
@@ -79,7 +55,6 @@ class FacebookLogin extends React.Component {
                 alert('Login cancelled.');
               } else {
                 FBSDKAccessToken.getCurrentAccessToken((token) => {
-                  console.log(token.tokenString);
                   this.convertToken(token.tokenString);
                 });
               }

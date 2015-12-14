@@ -4,7 +4,6 @@ import Facebook from '../components/Facebook';
 import * as FacebookActions from '../actions/facebook';
 
 function mapStateToProps(state) {
-  console.log("Facebook state is: ", state);
   return {
     currentUser: state.userProfile.currentUser,
   };

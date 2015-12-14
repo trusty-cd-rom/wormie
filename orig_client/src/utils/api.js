@@ -1,5 +1,13 @@
 import urls from '../constants/urls';
 
+// Facebook requests
+var FBSDKCore = require('react-native-fbsdkcore');
+var {
+  FBSDKGraphRequest,
+} = FBSDKCore;
+
+
+
 var api = {
 	createWormhole(wormholeData) {
 		// debugger;
@@ -101,6 +109,7 @@ var api = {
 	},
 
 	getUserDetailsByFacebookID(fb_id) {
+		console.log("getUserDetailsByFacebookID");
 		return fetch(`${urls.usersByFacebookID}/${fb_id}`)
 		.then((res) => res.json())
 		;
@@ -157,6 +166,25 @@ var api = {
 		});
 
 	},
+
+	fetchFacebookProfileFromFacebook(cb) {
+
+		var fetchProfileRequest = new FBSDKGraphRequest((error, result) => {
+      if (error) {
+        console.log('Error making request.');
+        cb(error);
+      } else {
+      	console.log("Result: ", result);
+      	cb(result);
+      }
+    }, '/me');
+
+		// Invoke the fetchProfileRequest
+    return fetchProfileRequest.start();
+	
+	}
+
+
 
 	// TODO: Add a refresh token API call using the stored refresh token
 

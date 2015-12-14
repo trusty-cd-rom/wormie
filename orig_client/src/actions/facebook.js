@@ -13,12 +13,25 @@ export function convertFacebookToken(tokenData, cb) {
   }
 };
 
+export function fetchFacebookProfile(cb) {
+
+    console.log("Im in fetchFacebookProfile Action");
+    
+    return dispatch => {
+      
+      return api.fetchFacebookProfileFromFacebook((res) => {
+          console.log("Action page: Result is: ", res);
+          dispatch(getUserDataFromServer(res.id, cb));
+      });
+    }
+};
+
 export function getUserDataFromServer(fb_id, cb) {
+  console.log("getUserDataFromServer: ", fb_id);
   return dispatch => {
     return api.getUserDetailsByFacebookID(fb_id)
       .then((res) => {
-        console.log('I got the user data from Django server!');
-        console.log('res: ', res);
+        console.log("Hello");
         dispatch(setCurrentUser(res));
         cb();
       });
@@ -26,8 +39,6 @@ export function getUserDataFromServer(fb_id, cb) {
 };
 
 function setCurrentUser(res) {
-  console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-  console.log("I want to set the current user to:", res);
   return {
     type: SET_CURRENT_USER,
     userData: res
