@@ -5,24 +5,19 @@ import React, {
   Image,
   View,
   TouchableHighlight,
+  SliderIOS,
   TextInput,
 } from 'react-native';
+
 import Badge from '../components/Badge';
-// import updateUserProfile from '../actions/updateUserProfile.js';
-import Location from './Location';
 import Navbar from './Navbar';
+// import ColorSlider from './ColorSlider';
 
 class Signup extends Component {
 
   // componentWillMount() {
   //   var { getUserDataFromFB } = this.props;
   //   getUserDataFromFB();
-  // }
-
-  // goToLocation() {
-  //   this.props.navigator.replace({
-  //     component: Location
-  //   });
   // }
 
   goToHome() {
@@ -81,9 +76,23 @@ class Signup extends Component {
           value = {currentUser.about_me}
           onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
-        <View style={styles.splashImage}>
-          <Text style={styles.buttonText}> COLOR PICKER </Text>
-        </View>
+        <Text style={styles.title}> Design your Wormie's color:
+        </Text>
+        <SliderIOS
+          style={styles.slider}
+          value = {updateProfile.wormie_red}
+          minimumValue={0.0}
+          maximumValue={255.0}/>
+        <SliderIOS
+          style={styles.slider}
+          value = {updateProfile.wormie_green}
+          minimumValue={0.0}
+          maximumValue={255.0}/>
+        <SliderIOS
+            style={styles.slider}
+            value = {updateProfile.wormie_blue}
+            minimumValue={0.0}
+            maximumValue={255.0}/>
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
@@ -103,51 +112,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#39247F',
   },
-  badgeContainer: {
-    backgroundColor: 'black',
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'flex-start',
+  slider: {
     flex: 1,
-    paddingTop: 50,
-    paddingBottom: 40
-  },
-  badgeInfoContainer: {
-
-  },
-  badgeName: {
-    alignSelf: 'center',
-    justifyContent: 'flex-start',
-    fontSize: 21,
-    marginTop: 10,
-    marginBottom: 5,
-    color: 'white'
-  },
-  badgeHandle: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
-  badgeImage: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
-    marginTop: 10,
-    alignSelf: 'center',
-    marginLeft: 10,
-    marginRight: 30
+    width: 300,
+    height: 10,
+    margin: 6
   },
   text: {
     fontSize: 14,
     textAlign: 'center',
     margin: 10,
-  },
-  splashImage: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 4,
-    backgroundColor: '#39247F'
   },
   loginButton: {
     flexDirection: 'row',
@@ -162,16 +136,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   title: {
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
     fontSize: 16,
+    fontWeight: 'bold',
     textAlign: 'center',
     color: '#fff'
   },
   searchInput: {
-    height: 50,
+    height: 40,
+    width: 350,
     padding: 4,
-    marginRight: 5,
-    fontSize: 23,
+    textAlign: 'center',
+    marginLeft: 10,
+    marginBottom: 10,
+    fontSize: 16,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,

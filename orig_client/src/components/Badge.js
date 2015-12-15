@@ -20,7 +20,6 @@ var styles = StyleSheet.create({
     marginBottom: 23
   },
   infoContainer: {
-    // color: 'black',
     alignSelf: 'flex-start'
   },
   name: {
