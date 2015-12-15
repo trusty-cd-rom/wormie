@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
 
   },
   logo: {
-    fontSize: 60,
+    fontSize: 50,
+    fontWeight: 'bold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',

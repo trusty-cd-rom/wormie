@@ -10,6 +10,7 @@ import React, {
 import Badge from '../components/Badge';
 // import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
+import Navbar from './Navbar';
 
 class Signup extends Component {
 
@@ -18,9 +19,15 @@ class Signup extends Component {
   //   getUserDataFromFB();
   // }
 
-  goToLocation() {
+  // goToLocation() {
+  //   this.props.navigator.replace({
+  //     component: Location
+  //   });
+  // }
+
+  goToHome() {
     this.props.navigator.replace({
-      component: Location
+      component: Navbar
     });
   }
 
@@ -79,7 +86,7 @@ class Signup extends Component {
         </View>
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.handleSubmit.bind(this, () => {this.goToLocation()})}
+          onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
           underlayColor = '#88D4f5'>
           <Text style = {styles.buttonText}> Explore </Text>
         </TouchableHighlight>
