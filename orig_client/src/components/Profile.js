@@ -84,20 +84,11 @@ class Profile extends Component{
           style={{flexWrap: 'wrap'}}>
           <MyWormholes 
             tabLabel="Wormholes"
-            wormholes = {this.props.wormholes}
-            updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
-            myCurrentWormhole = {this.props.myCurrentWormhole}
-            navigator = {this.props.navigator}
-            isAnimating = {this.props.isAnimating}
-            toggleAnimating = {this.props.toggleAnimating}
+            {...this.props}
           />
           <MySubmissions 
             tabLabel="Connections"
-            submissions = {this.props.submissions}
-            updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
-            myCurrentSubmission = {this.props.myCurrentSubmission}
-            navigator = {this.props.navigator}
-            isAnimating = {this.props.isAnimating}
+            {...this.props}
           />
         </ScrollableTabView>
       </View>

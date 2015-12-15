@@ -47,7 +47,7 @@ function toggleAnimating(state = {isAnimating: false}, action) {
   }
 }
 
-function profile(state = {}, action) {
+function profile(state = {isAnimating: false}, action) {
   switch (action.type) {
     // single matched wormhole from wormhole list
     case UPDATE_MY_CURRENT_WORMHOLE:
@@ -70,7 +70,7 @@ function profile(state = {}, action) {
     case TOGGLE_ANIMATING:
       return {
         ...state,
-        isAnimating: toggleAnimating(state.isAnimating, action)
+        isAnimating: action.status
       }
     default:
       return state;

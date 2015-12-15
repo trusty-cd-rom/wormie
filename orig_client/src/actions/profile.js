@@ -36,9 +36,11 @@ export function updateMyCurrentWormholeList(wormholeSubmissions) {
 
 export function getUserInfo(id) {
   return dispatch => {
-    api.getUserDetails(id)
+    dispatch(startFetching());
+    return api.getUserDetails(id)
       .then(function (res) {
         dispatch(setCurrentUser(res));
+        dispatch(stopFetching());
       });
   }
 }
@@ -50,12 +52,17 @@ function setCurrentUser(res) {
   };
 }
 
-export function toggleAnimating(isAnimating) {
-  isAnimating = isAnimating ? false : true;
-  return dispatch => {
-    return dispatch({
-      type: TOGGLE_ANIMATING,
-      isAnimating
-    });
-  }
-}
+function startFetching() {
+  return {
+    type: TOGGLE_ANIMATING,
+    status: true
+  };
+};
+
+function stopFetching() {
+  return {
+    type: TOGGLE_ANIMATING,
+    status: false
+  };
+};
+

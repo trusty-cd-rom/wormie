@@ -9,6 +9,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewMySubmission from '../containers/ViewMySubmission';
+import Spinner from './Spinner';
 
 var styles = StyleSheet.create({
   list: {
@@ -86,19 +87,30 @@ class MySubmissions extends Component{
     });
   }
 
+
   render() {
     var { submissions, updateMyCurrentSubmission } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.list}
-      >
-        {this.createList()}
-      </ScrollView>
-
+      <View>
+        <View
+          style={styles.requestList}
+        >
+          <Spinner 
+            isAnimating={this.props.isAnimating}
+            getUserInfo={this.props.getUserInfo}
+            currentUser={this.props.currentUser} 
+          />
+        </View>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={styles.list}
+        >
+          {this.createList()}
+        </ScrollView>
+      </View>
     );
   }
 };

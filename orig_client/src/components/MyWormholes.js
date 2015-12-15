@@ -10,6 +10,7 @@ import React, {
   ActivityIndicatorIOS,
 } from 'react-native';
 import ViewMyWormholeList from '../containers/ViewMyWormholeList';
+import Spinner from './Spinner';
 
 var styles = StyleSheet.create({
   handle: {
@@ -21,7 +22,7 @@ var styles = StyleSheet.create({
 
   },
   list: {
-    flex: 1
+    flex: 1,
   },
   image: {
     height: 20,
@@ -49,17 +50,6 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     marginBottom: 5,
     paddingLeft: 0
-  },
-  centering: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  gray: {
-    backgroundColor: '#cccccc',
-  },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
   },
 });
 
@@ -96,16 +86,6 @@ class MyWormholes extends Component{
     }
   }
 
-  setToggleTimeout() {
-    let { isAnimating } = this.props;
-    setTimeout(
-      () => {
-        this.setState({animating: !isAnimating});
-        this.setToggleTimeout();
-      },
-      1200
-    );
-  }
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     let { wormholes, isAnimating } = this.props;
@@ -113,6 +93,7 @@ class MyWormholes extends Component{
 
     return wormholes.map((wormhole, outerIndex) => {
       return (
+
         <View 
           style = {styles.requestList}
         >
@@ -132,33 +113,49 @@ class MyWormholes extends Component{
     });
   }
 
+  handleScroll(e) {
+    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
+    this.lastScrollY = scrollY;
+    this.lastContentInsetTop = e.nativeEvent.contentInset.top;
+    this.lastContentOffsetX = e.nativeEvent.contentOffset.x;
+    this.minPulldownDistance = 40;
+
+    console.log('onScroll!');
+
+    if (scrollY < -this.minPulldownDistance) {
+      if (!isAnimating) {
+        getUserInfo(currentUser.id);
+      }
+    }
+  }
 
   render() {
-    let { updateMyCurrentWormhole, toggleAnimating, isAnimating } = this.props;
-    console.log(toggleAnimating);
+    let { updateMyCurrentWormhole, getUserInfo, isAnimating, currentUser } = this.props;
+
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { 
-          console.log('onScroll!');
-          toggleAnimating(isAnimating);
-        }}
-        scrollEventThrottle={200}
-        style={styles.list}
-      >
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}>
-          <ActivityIndicatorIOS
-            animating={true}
-            style={[styles.centering, {height: 50}]}
-            size="large"
+      <View>
+        <View
+          style={styles.requestList}
+        >
+          <Spinner 
+            isAnimating={this.props.isAnimating}
+            getUserInfo={this.props.getUserInfo}
+            currentUser={this.props.currentUser} 
           />
         </View>
-        {this.createList()}
-      </ScrollView>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={(e) => {
+            this.handleScroll(e)
+          }}
+          scrollEventThrottle={200}
+          style={styles.list}
+        >
+          {this.createList()}
+        </ScrollView>
+      </View>
     );
   }
 };
