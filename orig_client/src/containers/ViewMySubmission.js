@@ -5,7 +5,7 @@ import * as ProfileActions from '../actions/profile';
 
 function mapStateToProps(state) {
   return {
-    myCurrentSubmission: state.myCurrentSubmission,
+    myCurrentSubmission: state.profile.submission,
   };
 }
 

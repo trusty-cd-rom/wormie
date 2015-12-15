@@ -11,35 +11,34 @@ import React, {
 import ViewMySubmission from '../containers/ViewMySubmission';
 
 var styles = StyleSheet.create({
-  handle: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
-  container:{
-    marginTop: 0,
-    flex: 3,
-    backgroundColor: 'black',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
   list: {
-    // flex: 3
+    // textAlign: 'left',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   image: {
     height: 350
   },
   buttonText: {
-    fontSize: 24,
-    color: 'white',
-    alignSelf: 'center'
+    fontSize: 15,
+    color: '#39247f',
+    alignSelf: 'flex-start',
+    flex: 1,
+    fontWeight: 'bold'
+  },
+  submissionList: {
+    flex: 1,
+    width: 375,
+    alignItems: 'stretch',
+    padding: 5,
+    // margin: 5,
   },
   submission: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    color: '#444444',
     flex: 1,
-    backgroundColor: 'orange'
+    paddingLeft: 0,
+    marginBottom: 5
   },
 });
 
@@ -63,17 +62,23 @@ class MySubmissions extends Component{
   createList() {
     var { submissions } = this.props;
     return submissions.map((submission, index) => {
+      console.log(submission);
       return (
-        <View key = {index}>
+        <View 
+          key={index}
+          style={styles.submissionList}
+        >
           <TouchableHighlight
-            style = {styles.submission}
             onPress = {this.viewRequest.bind(this, index)}
-            underlayColor = 'purple'
+            underlayColor = 'rgba(125,125,125,0.2)'
+            style={styles.submission}
           >
             <View>
-              <Text style = {styles.buttonText}>Request: {index} Status: {submission.status} </Text>
-              <Text > Title: {submission.wormhole.title} </Text>
-              <Text > Notes: {submission.notes} </Text>
+              <Text style={styles.buttonText}>Title: {submission.wormhole.title} </Text>
+              <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
+              <Text>{submission.wormhole.notes} </Text>
+              <Text style={{fontWeight:'bold'}}>My notes:</Text>
+              <Text>{submission.notes} </Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -89,7 +94,8 @@ class MySubmissions extends Component{
         automaticallyAdjustContentInsets={false}
         onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
-        style={styles.list}>
+        style={styles.list}
+      >
         {this.createList()}
       </ScrollView>
 

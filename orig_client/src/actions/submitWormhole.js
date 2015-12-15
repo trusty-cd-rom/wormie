@@ -15,7 +15,7 @@ export function uploadWormholeSubmission(pendingWormholeSubmission, currentUser,
     return youtube.postVideo(pendingWormholeSubmission.video)
     	.then((res) => {
     		// sent the new submission record to our server to add to the db
-            console.log('this is the response from upload video', 'this is the id i am gonna use for the video!', JSON.parse(res.data));
+            // console.log('this is the response from upload video', 'this is the id i am gonna use for the video!', JSON.parse(res.data));
     		return api.createSubmission({
     			wormhole: pendingWormholeSubmission.wormhole.id,
     			submitter: currentUser.id,
@@ -27,11 +27,11 @@ export function uploadWormholeSubmission(pendingWormholeSubmission, currentUser,
     		//done with the update!
     		//now we can refresh the user profile data and return to the feed or to profile
     		//for now we will just return to the feed
-            console.log('came back from post submit' ,res, res.wormhole)
+            // console.log('came back from post submit' ,res, res.wormhole)
             return api.updateWormholeDetails(res.wormhole, {status: 'completed'});
         })
         .then((res) => {
-            console.log('just updated the wormhole submitted against: ', res);
+            // console.log('just updated the wormhole submitted against: ', res);
             dispatch(toggleUploading());
             cb();
         })

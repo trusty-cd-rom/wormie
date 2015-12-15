@@ -13,10 +13,10 @@ import Location from './Location';
 
 class Signup extends Component {
 
-  componentWillMount() {
-    var { getUserDataFromFB } = this.props;
-    getUserDataFromFB();
-  }
+  // componentWillMount() {
+  //   var { getUserDataFromFB } = this.props;
+  //   getUserDataFromFB();
+  // }
 
   goToLocation() {
     this.props.navigator.replace({
@@ -43,9 +43,11 @@ class Signup extends Component {
     return (
       <View style={styles.container}>
         <Badge currentUser={this.props.currentUser} />
-        <Text style={styles.title}>
-          Username
-        </Text>
+        <View>
+          <Text style={styles.title}>
+            Username
+          </Text>
+        </View>
         <TextInput
           style = {styles.searchInput}
           value = {updateProfile.username}
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#39247F',
   },
   badgeContainer: {
     backgroundColor: 'black',
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'black'
+    backgroundColor: '#39247F'
   },
   loginButton: {
     flexDirection: 'row',

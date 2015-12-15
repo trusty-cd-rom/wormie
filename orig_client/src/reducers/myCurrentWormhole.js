@@ -6,7 +6,7 @@ var initialState = {};
 function myCurrentWormhole(state = {}, action) {
   switch (action.type) {
     case UPDATE_MY_CURRENT_WORMHOLE:
-      console.log('hit my current wormhole reducer', action.wormhole);
+      // console.log('hit my current wormhole reducer', action.wormhole);
       return action.wormhole;
     default:
       return state;

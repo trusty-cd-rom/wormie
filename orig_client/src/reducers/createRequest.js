@@ -14,6 +14,7 @@ var initialState = {
 		notes: '',
 	},
   updateProfile: {
+    'fb_id': '',
     'about_me': '',
     username: '',
     'wormie_color': '',
@@ -31,7 +32,7 @@ function userProfile(state = initialState, action) {
 	    	feed: feedReducerRoute(state.feed, action)
 	    };
 	  case TOGGLE_FETCH:
-	  	console.log('toggling fetch to: ',action.status, 'state is: ', state)
+	  	// console.log('toggling fetch to: ',action.status, 'state is: ', state)
 	    return {
 	    	...state,
 	    	isFetching: action.status
@@ -124,7 +125,7 @@ var initialProfile = {
   'wormie_color': '',
 }
 
-function updateSignUpInput(state = initialProfile, action) {
+function updateSignUpInput(state, action) {
   switch (action.type) {
     case UPDATE_SIGNUP_INPUT_TEXT:
       let updatedInfo = {};
@@ -144,6 +145,7 @@ function updateProfile(state, action) {
         'about_me': action['about_me'],
         'username': action['username'],
         'wormie_color': action['wormie_color'],
+        'fb_id': action['fb_id'],
         // ...state,
         // ...updateUserProfileActions
         // 'about_me': action["about_me"],

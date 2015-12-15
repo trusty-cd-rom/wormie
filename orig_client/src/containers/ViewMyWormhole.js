@@ -6,7 +6,7 @@ import * as ProfileActions from '../actions/profile';
 function mapStateToProps(state) {
   console.log('state:', state);
   return {
-    myCurrentWormhole: state.myCurrentWormhole,
+    myCurrentWormhole: state.profile.wormhole,
   };
 }
 
