@@ -1,6 +1,7 @@
 /************ PROFILE *************/
 import React, {
   Text,
+  TabBarIOS,
   View,
   StyleSheet,
   ScrollView,
@@ -17,29 +18,12 @@ import Badge from './Badge';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 var styles = StyleSheet.create({
-  name: {
-    alignSelf: 'center',
-    justifyContent: 'flex-start',
-    fontSize: 21,
-    marginTop: 10,
-    marginBottom: 5,
-    color: 'white'
-  },
-  handle: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
   container:{
-    flex: 'flex',
     marginBottom: 49,
-    flex: 3,
+    flex: 1,
     backgroundColor: 'white',
     alignSelf: 'stretch',
     justifyContent: 'center',
-  },
-  list: {
-    flex: 3
   },
   image: {
     height: 350
@@ -49,26 +33,15 @@ var styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center'
   },
-  request: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#48BBEC'
-  },
-  submission: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: 'orange'
-  },
+  badgeContainer: {
+    marginTop: 10, 
+    marginBottom: -20, 
+    alignSelf: 'stretch', 
+    flexDirection: 'row'
+  }
 });
 
 class Profile extends Component{
-
-
         // <MyWormholes 
         //   wormholes = {this.props.wormholes}
         //   updateCurrentWormhole = {this.props.updateMyCurrentWormhole}
@@ -90,9 +63,10 @@ class Profile extends Component{
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
-        <View style={{marginTop: 10, alignSelf: 'stretch', flexDirection: 'row'}}>
+        <View 
+          style={styles.badgeContainer}
+        >
           <Badge 
-            style={{flex: 3, flexDirection: 'row'}} 
             currentUser={this.props.currentUser} 
             navigator={this.props.navigator}
             profile="true"
@@ -100,20 +74,19 @@ class Profile extends Component{
           />
           
         </View>
-        <ScrollableTabView>
+        <ScrollableTabView
+          style={{flexWrap: 'wrap'}}>
           <MyWormholes 
             tabLabel="My Wormholes"
             wormholes = {this.props.wormholes}
-            updateCurrentWormhole = {this.props.updateMyCurrentWormhole}
-            updateMyCurrentWormhole = {this.props.updateMyCurrentWormhole}
+            updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
             myCurrentWormhole = {this.props.myCurrentWormhole}
             navigator = {this.props.navigator}
           />
           <MySubmissions 
-            tabLabel="My Submissions"
+            tabLabel="My Connections"
             submissions = {this.props.submissions}
             updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
-            updateCurrentSubmission = {this.props.updateMyCurrentSubmission}
             myCurrentSubmission = {this.props.myCurrentSubmission}
             navigator = {this.props.navigator}
           />

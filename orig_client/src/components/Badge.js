@@ -17,44 +17,41 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1,
     paddingTop: 20,
-    paddingBottom: 20
+    marginBottom: 23
   },
   infoContainer: {
+    // color: 'black',
+    alignSelf: 'flex-start'
   },
   name: {
-    alignSelf: 'center',
-    justifyContent: 'flex-start',
-    fontSize: 21,
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#3e3e3e',
     marginTop: 10,
     marginBottom: 5,
-    color: 'white'
   },
   handle: {
-    alignSelf: 'center',
     fontSize: 16,
-    color: 'white'
+    color: '#727272'
   },
   image: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 70,
+    width: 70,
+    borderRadius: 35,
     marginTop: 2,
     alignSelf: 'center',
-    marginLeft: 10,
-    marginRight: 30
+    marginLeft: 8,
+    marginRight: 10
   },
   button: {
-    flex:1,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'flex-end'
+    flex: 1,
+    flexDirection:'column',
+    alignItems:'flex-end',
+    paddingRight: 7,
   },
   ionic: { 
-    width: 50, 
-    height: 50, 
-    marginLeft: 15, 
-    marginTop: 15, 
-    color: '#5c5b9d', 
+    width: 30, 
+    height: 30,
   }
 });
 
@@ -67,6 +64,17 @@ class Badge extends React.Component{
     })
   }
 
+  name() {
+    var { currentUser } = this.props;
+    console.log(currentUser);
+    if (currentUser.username && currentUser.username !== '.') {
+      return <Text style = {styles.name}>{currentUser['username']}</Text>
+    } else {
+      return <Text style = {styles.name}>{currentUser['first_name']} {currentUser['last_name']}  </Text>    
+    }
+
+  }
+
   // <Text style={{marginTop: 30, backgroundColor: "purple", color: "black"}}> + </Text>
   button() {
     var { profile } = this.props;
@@ -74,14 +82,22 @@ class Badge extends React.Component{
       return (
         <View style={ styles.button }>
           <TouchableHighlight
-            onPress = { this.goToCreateRequest.bind(this) }
+            onPress = { this.goToCreateRequest.bind(this)}
+            style={{flex:1, marginTop: 20, marginRight: 6}}
           >
-            <Icon
-              name='ion|plus-circled'
-              size={50}
-              color='#5c5b9d'
-              style={styles.ionic}
-            />
+            <View
+              style={{
+                backgroundColor:'#39247f',
+                width: 30,
+                height: 30
+              }}>
+              <Icon
+                name='ion|plus-round'
+                size={30}
+                color='white'
+                style={styles.ionic}
+              />
+            </View>
           </TouchableHighlight>
         </View>
       );
@@ -101,8 +117,8 @@ class Badge extends React.Component{
           source = {{uri: currentUser['picture_url']}}
         />
         <View style={styles.infoContainer}>
-          <Text style = {styles.name}> {currentUser.username}  </Text>
-          <Text style = {styles.handle}> {currentUser['about_me']} </Text>
+          {this.name()}
+          <Text style = {styles.handle}>{currentUser['about_me']}</Text>
         </View>
         { this.button() }
       </View>

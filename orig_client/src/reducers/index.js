@@ -4,17 +4,14 @@ import currentWormhole from './currentWormhole';
 import camera from './camera';
 import feed from './feed';
 import pendingWormholeSubmission from './pendingWormholeSubmission';
-import myCurrentWormhole from './myCurrentWormhole';
-import myCurrentSubmission from './myCurrentSubmission';
-
+import profile from './profile';
 const rootReducer = combineReducers({
 	userProfile,
 	currentWormhole,
 	camera,
 	pendingWormholeSubmission,
 	feed,
-  myCurrentWormhole,
-  myCurrentSubmission,
+  profile,
 });
 
 export default rootReducer;

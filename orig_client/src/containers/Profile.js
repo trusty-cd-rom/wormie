@@ -8,8 +8,9 @@ function mapStateToProps(state) {
     currentUser: state.userProfile.currentUser,
     submissions: state.userProfile.currentUser.submissions,
     wormholes: state.userProfile.currentUser.wormholes,
-    myCurrentSubmission: state.myCurrentSubmission,
-    myCurrentWormhole: state.myCurrentWormhole,
+    myCurrentSubmission: state.profile.myCurrentSubmission,
+    myCurrentWormhole: state.profile.myCurrentWormhole,
+    myCurrentWormholeSubmissions: state.profile.myCurrentWormholeSubmissions,
   };
 }
 

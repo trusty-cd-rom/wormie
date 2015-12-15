@@ -8,7 +8,7 @@ import React, {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import ViewMyWormhole from '../containers/ViewMyWormhole';
+import ViewMyWormholeList from '../containers/ViewMyWormholeList';
 
 var styles = StyleSheet.create({
   handle: {
@@ -17,11 +17,7 @@ var styles = StyleSheet.create({
     color: 'white'
   },
   container:{
-    marginTop: 0,
-    flex: 3,
-    backgroundColor: 'black',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+
   },
   list: {
     flex: 3
@@ -34,91 +30,90 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonText: {
-    fontSize: 24,
-    color: 'white',
-    alignSelf: 'center'
+    fontSize: 15,
+    color: '#39247f',
+    alignSelf: 'flex-start',
+    flex: 1,
+    fontWeight: 'bold'
+  },
+  requestList: {
+    flex: 1,
+    width: 375,
+    color: '#575757',
+    // margin: 5,
+    padding: 5,
+    // textAlign: 'left',
+    // alignItems: 'stretch',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
   },
   request: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#48BBEC'
+    flexDirection: 'column',
+    // flex: 1,
+    // alignSelf: 'stretch',
+    // textAlign: 'left',
+    marginBottom: 5,
+    paddingLeft: 0
   },
 });
 
 class MyWormholes extends Component{
 
-  viewRequest(outerIndex, index) {
-    var { updateMyCurrentWormhole, wormholes } = this.props;
-    console.log('trying to view request: ', wormholes, wormholes[index]);
+  viewRequest(currentWormholeList) {
+    var { updateMyCurrentWormholeList, wormholes } = this.props;
+    console.log('trying to view request: ', wormholes);
     
     // UPDATECURRENTWORMHOLE
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    updateMyCurrentWormhole(wormholes[outerIndex].submissions[index]);
+    console.log('currentWormholeList: ', currentWormholeList);
+    updateMyCurrentWormholeList(currentWormholeList);
     this.props.navigator.push({
-      component: ViewMyWormhole,
+      component: ViewMyWormholeList,
     });
   }
 
+  showStatus(status) {
+    if (status === 'completed') {
+      return (
+        <Text>There is a Match!</Text>
+      )          
+    } else if (status === 'open') {
+      return (
+        <Text>There is no Match Yet.</Text>
+      )
+    }
+  }
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { wormholes } = this.props;
     var requestor, submitList;
 
     return wormholes.map((wormhole, outerIndex) => {
-      // if submission for this wormhole exists
-      if (wormhole.submissions.length > 0) {
-        submitList = wormhole.submissions.map((submission, index) => {
-          return (
-            <TouchableHighlight
-              onPress = {this.viewRequest.bind(this, outerIndex, index)}
-              underlayColor = 'purple'
-            >
-              <View>
-                <View 
-                  key={index} 
-                  style = {styles.submitterProfile}
-                >
-                  <Image 
-                    style = {styles.image}
-                    source = {{uri: submission.submitter['picture_url']}}
-                  />
-                  <Text> Requestor: {submission.submitter.username} </Text>
-                </View>
-                <Text>Notes: { submission.notes }</Text>
-              </View>
-            </TouchableHighlight>
-          );
-        });
-  
-        submitters = (
-          <View>
-            <Text> submitters</Text>
-            { submitList }
-          </View>
-        )
-      } else {
-        submitters = <View />;
-      }
       return (
-        <View key = {outerIndex}>
-          <View
-            style = {styles.request}
+        <View 
+          style = {styles.requestList}
+        >
+          <TouchableHighlight
+            onPress = {this.viewRequest.bind(this, wormhole)}
+            underlayColor = 'rgba(125,125,125,0.2)'
+            style={styles.request}
           >
             <View>
-              <Text style = {styles.buttonText}> Request: {outerIndex+1} Status: {wormhole.status} </Text>
-              <Text > Title: {wormhole.title} </Text>
-              <Text > Notes: {wormhole.notes} </Text>
-              { submitters }
+              <Text style={styles.buttonText}>Title: {wormhole.title} </Text>
+              <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
+              <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
             </View>
-          </View>
+          </TouchableHighlight>
         </View>
       );
     });
   }
+
 
   render() {
     var { updateMyCurrentWormhole } = this.props;

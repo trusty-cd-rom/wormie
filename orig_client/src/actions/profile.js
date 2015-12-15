@@ -1,4 +1,8 @@
-import { UPDATE_MY_CURRENT_WORMHOLE, UPDATE_MY_CURRENT_SUBMISSION } from '../constants/actions';
+import { 
+  UPDATE_MY_CURRENT_WORMHOLE,
+  UPDATE_MY_CURRENT_SUBMISSION,
+  UPDATE_MY_CURRENT_WORMHOLE_LIST
+} from '../constants/actions';
 
 export function updateMyCurrentWormhole(wormhole) {
   // console.log('update my current wormhole', wormhole)
@@ -15,4 +19,13 @@ export function updateMyCurrentSubmission(submission) {
     submission
   };
 };
+
+// submission from other users for my request
+export function updateMyCurrentWormholeList(wormholeSubmissions) {
+  console.log('update my current wormhole list', wormholeSubmissions);
+  return {
+    type: UPDATE_MY_CURRENT_WORMHOLE_LIST,
+    submissionsForWormholes: wormholeSubmissions
+  }
+}
 
