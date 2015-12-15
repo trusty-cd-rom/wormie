@@ -20,33 +20,36 @@ import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, TOGGLE_FETCH, SET_CURRENT_USER
 //   }
 // };
 
-export function getUserDataFromFB() {
-  return dispatch => {
-    console.log('FB dispatch is working');
-    dispatch(startUpdating());
-    // TODO: AFTER FB AUTHENTICATION WORK WITH FRONT-END
-    //       Change it to real data from fb
-    return api.getUserDetails(2)
-      .then((res) => {
-        console.log('got data from server');
-        console.log('res: ', res);
-        dispatch(setCurrentUser(res));
-      });
-  }
-}
+// export function getUserDataFromFB() {
+//   return dispatch => {
+//     console.log('FB dispatch is working');
+//     dispatch(startUpdating());
+//     // TODO: AFTER FB AUTHENTICATION WORK WITH FRONT-END
+//     //       Change it to real data from fb
+//     return api.getUserDetails(2)
+//       .then((res) => {
+//         console.log('got data from server');
+//         console.log('res: ', res);
+//         dispatch(setCurrentUser(res));
+//       });
+//   }
+// }
 
 export function updateUserProfile(updatedUserData, cb) {
   console.log('hey');
   return dispatch => {
-    dispatch(startUpdating());
-    return api.createUser()
-     .then((res) => {
-        console.log(res);
-        dispatch(updateUserProfileAction(updatedUserData));
-        dispatch(stopUpdating());
-        cb();
-     })
-     .catch((err) => console.log(err));
+    // dispatch(startUpdating());
+    dispatch(updateUserProfileAction(updatedUserData));
+    cb();
+
+    // return api.createUser()
+    //  .then((res) => {
+    //     console.log(res);
+    //     dispatch(updateUserProfileAction(updatedUserData));
+    //     dispatch(stopUpdating());
+    //     cb();
+    //  })
+    //  .catch((err) => console.log(err));
   }
 }
 
