@@ -120,7 +120,7 @@ class FeedList extends React.Component{
               <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
             </View>
           </TouchableHighlight> 
-          {this._renderVideo(item, index)}
+          {this._renderVideo(item)}
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
