@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
+import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, SET_CURRENT_USER, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
 import data from '../testData/data';
 
 
@@ -6,7 +6,7 @@ import data from '../testData/data';
 
 var initialState = {
 	feed: data.wormholeList,
-	currentUser: data.userList[0],
+	currentUser: {},
 	createRequest: {
 		title: '',
 		location: '',
@@ -14,6 +14,7 @@ var initialState = {
 		notes: '',
 	},
   updateProfile: {
+    'fb_id': '',
     'about_me': '',
     username: '',
     'wormie_color': '',
@@ -31,7 +32,7 @@ function userProfile(state = initialState, action) {
 	    	feed: feedReducerRoute(state.feed, action)
 	    };
 	  case TOGGLE_FETCH:
-	  	console.log('toggling fetch to: ',action.status, 'state is: ', state)
+	  	// console.log('toggling fetch to: ',action.status, 'state is: ', state)
 	    return {
 	    	...state,
 	    	isFetching: action.status
@@ -51,6 +52,13 @@ function userProfile(state = initialState, action) {
 	  		...state,
 	  		currentUser: updateProfile(state.currentUser, action)
 	  	}
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: {
+          ...action.userData
+        }
+      }
 	  default:
 	    return state;
   }
@@ -117,7 +125,7 @@ var initialProfile = {
   'wormie_color': '',
 }
 
-function updateSignUpInput(state = initialProfile, action) {
+function updateSignUpInput(state, action) {
   switch (action.type) {
     case UPDATE_SIGNUP_INPUT_TEXT:
       let updatedInfo = {};
@@ -137,6 +145,7 @@ function updateProfile(state, action) {
         'about_me': action['about_me'],
         'username': action['username'],
         'wormie_color': action['wormie_color'],
+        'fb_id': action['fb_id'],
         // ...state,
         // ...updateUserProfileActions
         // 'about_me': action["about_me"],

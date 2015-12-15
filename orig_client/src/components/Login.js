@@ -1,3 +1,5 @@
+import Facebook from '../containers/Facebook';
+
 import React, {
   Component,
   StyleSheet,
@@ -18,15 +20,12 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.buttonText}> WORMIE</Text>
+          <Text style={styles.logo}>WORMIE</Text>
         </View>
-        <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.goToSignup.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Login </Text>
-        </TouchableHighlight>
+        <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
+        <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
+      <View style={styles.bottomLayer}>
+      </View>
       </View>
     );
   }
@@ -37,31 +36,35 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#39247F'
+
   },
-  text: {
+  logo: {
+    fontSize: 60,
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: 'white',
+    margin: 10,
+  },
+  subtitle: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    alignSelf: 'center',
+    color: 'white',
+    flex: 1
   },
   splashImage: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 4,
-    backgroundColor: 'black'
+    backgroundColor: '#39247F'
   },
-  loginButton: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#48BBEC'
+  facebookButton: {
+    paddingBottom: 50
   },
-  buttonText: {
-    fontSize: 24,
-    color: 'white',
-    alignSelf: 'center'
+  bottomLayer: {
+    margin: 30
   }
 });
 

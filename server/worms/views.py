@@ -188,6 +188,55 @@ class UserDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #############################
+# USER DETAIL WITH FB ID
+#############################
+
+class UserDetailFB(APIView):
+
+    # Uses class-based view
+
+    """
+    Retrieve, update, or delete a USER with their Facebook id.
+    """
+
+    def get_account(self, fb_id):
+        try:
+            return Account.objects.get(fb_id=fb_id)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, fb_id, format=None):
+        account = self.get_account(fb_id)
+        pk = account.user.id
+        user = self.get_user(pk)
+        serializer = PersonExpandedSerializer(user)
+        return Response(serializer.data)
+
+    def put(self, request, fb_id, format=None):
+        account = self.get_account(fb_id)
+        pk = account.user.id
+        user = self.get_user(pk)
+        serializer = PersonExpandedSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, fb_id, format=None):
+        account = self.get_account(fb_id)
+        pk = account.user.id
+        user = self.get_user(pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#############################
 # ACCOUNTS
 #############################
 

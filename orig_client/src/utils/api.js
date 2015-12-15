@@ -1,5 +1,13 @@
 import urls from '../constants/urls';
 
+// Facebook requests
+var FBSDKCore = require('react-native-fbsdkcore');
+var {
+  FBSDKGraphRequest,
+} = FBSDKCore;
+
+
+
 var api = {
 	createWormhole(wormholeData) {
 		// debugger;
@@ -38,7 +46,7 @@ var api = {
 	},
 
 	updateWormholeDetails(wormholeId, wormholeData) {
-		console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
+		// console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
 		return fetch(`${urls.wormholes}/${wormholeId}/`, {
 	    method: 'put',
 	    headers: {
@@ -48,7 +56,7 @@ var api = {
 	    body: JSON.stringify(wormholeData)
 	  })
 	  .then((res) => {
-	  	console.log('just head back from the put, and they said: ', res);
+	  	// console.log('just head back from the put, and they said: ', res);
 	  	res
 	  })
 	  ;
@@ -100,6 +108,13 @@ var api = {
 		;
 	},
 
+	getUserDetailsByFacebookID(fb_id) {
+		console.log("getUserDetailsByFacebookID");
+		return fetch(`${urls.usersByFacebookID}/${fb_id}`)
+		.then((res) => res.json())
+		;
+	},
+
 	createUser(userData) {
 		return fetch(urls.users, {
 	    method: 'POST',
@@ -131,6 +146,47 @@ var api = {
 	  })
 	  ;
 	},
+
+	convertToken(tokenData) {
+		return fetch(urls.convertToken, {
+			method: 'POST',
+			headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: tokenData
+		})
+		.then((res) => {
+			console.log("Success! Token converted", res);
+			// TODO: Save the django token somewhere
+			res.json();
+		})
+		.catch((err) => {
+			console.log("Error converting token");
+			console.error(err);
+		});
+
+	},
+
+	fetchFacebookProfileFromFacebook(cb) {
+
+		var fetchProfileRequest = new FBSDKGraphRequest((error, result) => {
+      if (error) {
+        console.log('Error making request.');
+        cb(error);
+      } else {
+      	console.log("Result: ", result);
+      	cb(result);
+      }
+    }, '/me');
+
+		// Invoke the fetchProfileRequest
+    return fetchProfileRequest.start();
+	
+	}
+
+
+
+	// TODO: Add a refresh token API call using the stored refresh token
 
 };
 

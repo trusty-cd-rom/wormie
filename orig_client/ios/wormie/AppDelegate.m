@@ -9,6 +9,9 @@
 
 #import "AppDelegate.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "RCTRootView.h"
 
 @implementation AppDelegate
@@ -31,9 +34,9 @@
    * on the same Wi-Fi network.
    */
   // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.185:8081/index.ios.bundle?platform=ios&dev=true"];
-  jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.90:8081/index.ios.bundle?platform=ios&dev=true"];
-  // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-
+  // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.90:8081/index.ios.bundle?platform=ios&dev=true"];
+   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+//   jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -42,6 +45,11 @@
    */
 
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
+  
+  // Facebook
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"wormie"
@@ -54,6 +62,18 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation
+          ];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
 }
 
 @end

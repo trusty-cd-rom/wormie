@@ -3,11 +3,15 @@ import React, {
   View,
   Image,
   StyleSheet,
+  TouchableHighlight,
 } from 'react-native';
+
+import { Icon } from 'react-native-icons';
+import CreateRequest from '../containers/CreateRequest';
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'flex-start',
@@ -38,13 +42,56 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 10,
     marginRight: 30
+  },
+  button: {
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'flex-end'
+  },
+  ionic: { 
+    width: 50, 
+    height: 50, 
+    marginLeft: 15, 
+    marginTop: 15, 
+    color: '#5c5b9d', 
   }
 });
 
 class Badge extends React.Component{
-  componentWillMount() {
-    // console.log(this.props.currentUser);
+
+  goToCreateRequest() {
+    var { navigator } = this.props;
+    this.props.navigator.push({
+      component: CreateRequest
+    })
   }
+
+  // <Text style={{marginTop: 30, backgroundColor: "purple", color: "black"}}> + </Text>
+  button() {
+    var { profile } = this.props;
+    if (profile === 'true') {
+      return (
+        <View style={ styles.button }>
+          <TouchableHighlight
+            onPress = { this.goToCreateRequest.bind(this) }
+          >
+            <Icon
+              name='ion|plus-circled'
+              size={50}
+              color='#5c5b9d'
+              style={styles.ionic}
+            />
+          </TouchableHighlight>
+        </View>
+      );
+    } else {
+      return <View />
+    }
+  }
+
+  // ion-plus-circled
+  // var { Icon, } = require('react-native-icons');
   render() {
     var { currentUser } = this.props;
     return (
@@ -57,6 +104,7 @@ class Badge extends React.Component{
           <Text style = {styles.name}> {currentUser.username}  </Text>
           <Text style = {styles.handle}> {currentUser['about_me']} </Text>
         </View>
+        { this.button() }
       </View>
       
     );
