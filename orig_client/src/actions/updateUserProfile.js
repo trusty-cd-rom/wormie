@@ -1,25 +1,6 @@
 import api from '../utils/api';
 import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
 
-//this will be called by the create request component when the user submits the form for a new wormhole
-// export function createRequest(requestData) {
-//   return dispatch => {
-//     dispatch(startFetching());
-//     // return api.createWormhole()
-//     //  .then((res) => {
-//     //    dispatch(createRequestAction(res))
-//     //    dispatch(stopFetching());
-//     //  })
-//     //  .catch((err) => console.log(err))
-//     console.log('about to send the new createRequest to server');
-//     return setTimeout(() => {
-//       console.log('got successful post back from server');
-//       dispatch(createRequestAction(requestData))
-//       dispatch(stopFetching());
-//     }, 200);
-//   }
-// };
-
 
 export function getUserDataFromFB() {
   return dispatch => {
@@ -36,16 +17,32 @@ export function getUserDataFromFB() {
   }
 }
 
-export function updateUserProfile(updatedUserData, cb) {
-  console.log('hey');
+export function updateUserProfile(accountUpdate, cb) {
+
+  console.log('hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
   return dispatch => {
+
     dispatch(startUpdating());
-    return api.createUser()
+
+    return api.updateAccountDetails(accountUpdate)
      .then((res) => {
-        // console.log(res);
-        dispatch(updateUserProfileAction(updatedUserData));
-        dispatch(stopUpdating());
-        cb();
+        dispatch(updateUserProfileAction(accountUpdate));
+
+        var userData = {
+          id: accountUpdate.user_id,
+          username: accountUpdate.username
+        };
+
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        console.log("userdata is: ", userData);
+
+        return api.updateUserDetails(userData)
+          .then((res) => {
+            console.log("Should have UPDATED USERNAME");
+            dispatch(stopUpdating());
+            cb();
+          });
      })
      .catch((err) => console.log(err));
   }
@@ -59,6 +56,9 @@ var updateUserProfileAction = (newUserData) => {
     'about_me': newUserData['about_me'],
     'wormie_color': newUserData['wormie_color'],
     'username': newUserData['username'],
+    'wormie_red': newUserData['wormie_red'],
+    'wormie_green': newUserData['wormie_green'],
+    'wormie_blue': newUserData['wormie_blue'],
   };
 };
 

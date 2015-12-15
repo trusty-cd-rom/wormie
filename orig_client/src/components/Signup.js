@@ -10,6 +10,7 @@ import React, {
 import Badge from '../components/Badge';
 // import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
+import Navbar from './Navbar';
 
 class Signup extends Component {
 
@@ -18,16 +19,35 @@ class Signup extends Component {
   //   getUserDataFromFB();
   // }
 
-  goToLocation() {
+  // goToLocation() {
+  //   this.props.navigator.replace({
+  //     component: Location
+  //   });
+  // }
+
+  goToHome() {
     this.props.navigator.replace({
-      component: Location
+      component: Navbar
     });
   }
 
   handleSubmit(cb) {
-    var { updateProfile, updateUserProfile } = this.props;
-    console.log('from signup component');
-    updateUserProfile(updateProfile, cb);
+
+    var { updateProfile, updateUserProfile, currentUser } = this.props;
+
+    username = updateProfile.username || currentUser.username;
+    about_me = updateProfile.about_me || currentUser.about_me;
+
+    var accountUpdate = {
+      user_id: currentUser.id,
+      account_id: currentUser.account_id,
+      username: username,
+      wormie_color: updateProfile.wormie_color,
+      about_me: about_me
+    };
+
+    updateUserProfile(accountUpdate, cb);
+
   };
 
   // TODO: require updateinputtext from signup-containter.js
@@ -42,23 +62,23 @@ class Signup extends Component {
 
     return (
       <View style={styles.container}>
-        <Badge currentUser={this.props.currentUser} />
-        <View>
-          <Text style={styles.title}>
-            Username
-          </Text>
-        </View>
-        <TextInput
-          style = {styles.searchInput}
-          value = {updateProfile.username}
-          onChange = {this.handleInputChange.bind(this, 'username')}
-        />
+        <Badge 
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} />
         <Text style={styles.title}>
-          Tell us about yourself
+          Hi, {currentUser.first_name}! Choose your Wormie username:
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {updateProfile['about_me']}
+          value = {currentUser.username}
+          onChange = {this.handleInputChange.bind(this, 'username')}
+        />
+        <Text style={styles.title}>
+          Add your bio:
+        </Text>
+        <TextInput
+          style = {styles.searchInput}
+          value = {currentUser.about_me}
           onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
         <View style={styles.splashImage}>
@@ -66,9 +86,8 @@ class Signup extends Component {
         </View>
         <TouchableHighlight
           style = {styles.loginButton}
-          onPress = {this.handleSubmit.bind(this, () => {this.goToLocation()})}
-          underlayColor = '#88D4f5'
-        >
+          onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
+          underlayColor = '#88D4f5'>
           <Text style = {styles.buttonText}> Explore </Text>
         </TouchableHighlight>
       </View>
@@ -119,7 +138,7 @@ const styles = StyleSheet.create({
     marginRight: 30
   },
   text: {
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'center',
     margin: 10,
   },
@@ -138,13 +157,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#48BBEC'
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 20,
     color: 'white',
     alignSelf: 'center'
   },
   title: {
     marginBottom: 20,
-    fontSize: 25,
+    fontSize: 16,
     textAlign: 'center',
     color: '#fff'
   },
