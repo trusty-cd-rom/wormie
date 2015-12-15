@@ -40,6 +40,7 @@ function myCurrentWormholeList(state = {}, action) {
   }
 };
 
+<<<<<<< 21baee951669032469933b5e77456f1e7b2b114e
 function toggleAnimating(state = {isAnimating: false}, action) {
   switch (action.type) {
     case TOGGLE_ANIMATING:
@@ -50,6 +51,20 @@ function toggleAnimating(state = {isAnimating: false}, action) {
 }
 
 function profile(state = {isAnimating: false}, action) {
+||||||| merged common ancestors
+function profile(state = {}, action) {
+=======
+function toggleAnimating(state = {isAnimating: false}, action) {
+  switch (action.type) {
+    case TOGGLE_ANIMATING:
+      return action.isAnimating;
+    default:
+      return state;
+  }
+}
+
+function profile(state = {}, action) {
+>>>>>>> Working on spinner
   switch (action.type) {
     // single matched wormhole from wormhole list
     case UPDATE_MY_CURRENT_WORMHOLE:
@@ -69,6 +84,7 @@ function profile(state = {isAnimating: false}, action) {
         ...state,
         submissionsForWormholes: myCurrentWormholeList(state.submissionsForWormholes, action)
       };
+<<<<<<< 21baee951669032469933b5e77456f1e7b2b114e
 
     // for spinner
     case TOGGLE_ANIMATING:
@@ -92,6 +108,14 @@ function profile(state = {isAnimating: false}, action) {
         peekClickedUser: action.status
       }
 
+||||||| merged common ancestors
+=======
+    case TOGGLE_ANIMATING:
+      return {
+        ...state,
+        isAnimating: toggleAnimating(state.isAnimating, action)
+      }
+>>>>>>> Working on spinner
     default:
       return state;
   }

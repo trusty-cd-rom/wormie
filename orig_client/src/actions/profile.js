@@ -3,20 +3,12 @@ var api = require('../utils/api');
 import { 
   UPDATE_MY_CURRENT_WORMHOLE,
   UPDATE_MY_CURRENT_SUBMISSION,
-<<<<<<< 8a8955c2d430768a3b8d7f4f93ea4f76afa35cff
   UPDATE_MY_CURRENT_WORMHOLE_LIST,
   GET_USER_INFO,
   SET_CURRENT_USER,
   TOGGLE_ANIMATING,
   SET_CLICKED_USER,
   TOGGLE_PEEK_CLICKED_USER
-||||||| merged common ancestors
-  UPDATE_MY_CURRENT_WORMHOLE_LIST
-=======
-  UPDATE_MY_CURRENT_WORMHOLE_LIST,
-  GET_USER_INFO,
-  SET_CURRENT_USER,
->>>>>>> Add action object to keep updating data in profile
 } from '../constants/actions';
 
 export function updateMyCurrentWormhole(wormhole) {
@@ -44,7 +36,6 @@ export function updateMyCurrentWormholeList(wormholeSubmissions) {
   }
 }
 
-<<<<<<< 8a8955c2d430768a3b8d7f4f93ea4f76afa35cff
 export function getUserInfo(id) {
   return dispatch => {
     return api.getUserDetails(id)
@@ -112,8 +103,6 @@ function stopFetching() {
   };
 };
 
-||||||| merged common ancestors
-=======
 export function getUserInfo(id) {
   return dispatch => {
     api.getUserDetails(id)
@@ -129,4 +118,13 @@ function setCurrentUser(res) {
     userData: res
   };
 }
->>>>>>> Add action object to keep updating data in profile
+
+export function toggleAnimating(isAnimating) {
+  isAnimating = isAnimating ? false : true;
+  return dispatch => {
+    return dispatch({
+      type: TOGGLE_ANIMATING,
+      isAnimating
+    });
+  }
+}

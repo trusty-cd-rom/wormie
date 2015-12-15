@@ -50,6 +50,17 @@ var styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 0
   },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gray: {
+    backgroundColor: '#cccccc',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 });
 
 class MyWormholes extends Component{
@@ -131,7 +142,6 @@ class MyWormholes extends Component{
 
   render() {
     let { updateMyCurrentWormhole, getUserInfo, isAnimating, currentUser } = this.props;
-
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View>
@@ -155,6 +165,27 @@ class MyWormholes extends Component{
           {this.createList()}
         </ScrollView>
       </View>
+      <ScrollView
+        automaticallyAdjustContentInsets={false}
+        onScroll={() => { 
+          console.log('onScroll!');
+          toggleAnimating(isAnimating);
+        }}
+        scrollEventThrottle={200}
+        style={styles.list}
+      >
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around'
+        }}>
+          <ActivityIndicatorIOS
+            animating={true}
+            style={[styles.centering, {height: 50}]}
+            size="large"
+          />
+        </View>
+        {this.createList()}
+      </ScrollView>
     );
   }
 };

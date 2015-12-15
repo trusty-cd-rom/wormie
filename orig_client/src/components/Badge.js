@@ -58,6 +58,12 @@ var styles = StyleSheet.create({
 
 class Badge extends React.Component{
 
+  componentWillMount() {
+    let { getUserInfo, currentUser } = this.props;
+    console.log('currentUser: ', currentUser);
+    getUserInfo(currentUser.id);
+  }
+
   goToCreateRequest() {
     var { navigator } = this.props;
     this.props.navigator.push({

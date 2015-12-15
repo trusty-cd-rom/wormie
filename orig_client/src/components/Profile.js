@@ -108,6 +108,7 @@ class Profile extends Component{
     }
   }
 
+  // TODO: spinner isAnimating, toggleAnimating
   render() {
     var { 
       submissions, 
@@ -139,10 +140,17 @@ class Profile extends Component{
           <MyWormholes 
             tabLabel="Wormholes"
             {...this.props}
+            wormholes = {this.props.wormholes}
+            updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
+            myCurrentWormhole = {this.props.myCurrentWormhole}
+            navigator = {this.props.navigator}
           />
           <MySubmissions 
             tabLabel="Connections"
             {...this.props}
+            submissions = {this.props.submissions}
+            updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
+            myCurrentSubmission = {this.props.myCurrentSubmission}
           />
         </ScrollableTabView>
       </View>
