@@ -7,6 +7,7 @@ import React, {
 } from 'react-native';
 import Navbar from './Navbar';
 import CameraView from '../containers/Camera';
+import ViewMyWormholeList from '../containers/ViewMyWormholeList';
 var YouTube = require('react-native-youtube');
 
 class ViewMyWormhole extends Component {

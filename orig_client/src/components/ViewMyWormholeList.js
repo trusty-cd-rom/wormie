@@ -1,4 +1,3 @@
-/************ PROFILE *************/
 import React, {
   Text,
   View,
@@ -8,7 +7,7 @@ import React, {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import ViewMyWormholeList from '../containers/ViewMyWormholeList';
+import ViewMyWormhole from '../containers/ViewMyWormhole';
 
 var styles = StyleSheet.create({
   handle: {
@@ -42,7 +41,7 @@ var styles = StyleSheet.create({
     color: '#575757',
     // margin: 5,
     padding: 5,
-    // textAlign: 'left',
+    textAlign: 'left',
     // alignItems: 'stretch',
     // flexDirection: 'row',
     // flexWrap: 'wrap',
@@ -60,9 +59,9 @@ var styles = StyleSheet.create({
   },
 });
 
-class MyWormholes extends Component{
+class ViewMyWormholeList extends Component{
 
-  viewRequest(currentWormholeList) {
+  viewRequest(index) {
     var { updateMyCurrentWormholeList, wormholes } = this.props;
     console.log('trying to view request: ', wormholes);
     
@@ -70,10 +69,10 @@ class MyWormholes extends Component{
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    console.log(currentWormholeList);
-    updateMyCurrentWormholeList(currentWormholeList);
+    console.log(currentWormholeList.submissions[index]);
+    updateMyCurrentWormholeList(currentWormholeList.submissions[index]);
     this.props.navigator.push({
-      component: ViewMyWormholeList,
+      component: ViewMyWormhole,
     });
   }
 
@@ -88,35 +87,69 @@ class MyWormholes extends Component{
       )
     }
   }
+
+
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
-    var { wormholes } = this.props;
-    var requestor, submitList;
+    var { myCurrentWormholeList } = this.props;
+    var submitList, submitters;
 
-    return wormholes.map((wormhole, outerIndex) => {
-      return (
-        <View 
-          style = {styles.requestList}
-        >
+    console.log(myCurrentWormholeList.submissions);
+    if (myCurrentWormholeList.submissions.length > 0) {
+      console.log('yeah')
+      debugger;
+      submitList = myCurrentWormholeList.submissions.map((submission, index) => {
+        return (
           <TouchableHighlight
-            onPress = {this.viewRequest.bind(this, wormhole)}
+            onPress = {this.viewRequest.bind(this, index)}
             underlayColor = 'rgba(125,125,125,0.2)'
-            style={styles.request}
           >
             <View>
-              <Text style={styles.buttonText}> Title: {wormhole.title} </Text>
-              <Text> {this.showStatus(wormhole.status)} </Text>
-              <Text style={{flex: 1}}> Notes: {wormhole.notes} </Text>
+              <View 
+                key={index} 
+                style = {styles.submitterProfile}
+              >
+                <Image 
+                  style = {styles.image}
+                  source = {{uri: submission.submitter['picture_url']}}
+                />
+                <Text> Requestor: {submission.submitter.username} </Text>
+              </View>
+              <Text>Notes: { submission.notes }</Text>
             </View>
           </TouchableHighlight>
+        );
+      });
+
+      submitters = (
+        <View>
+          <Text> submitters</Text>
+          { submitList }
         </View>
-      );
-    });
+      )
+    } else {
+      submitters = <View />;
+    }
+          // <View
+          //   style={styles.request}
+          // >
+            // onPress = {this.viewRequest.bind(this, index)}
+
+              // <Text style={styles.buttonText}> Title: {wormhole.title} </Text>
+              // <Text> {this.showStatus(wormhole.status)} </Text>
+              // <Text style={{flex: 1}}> Notes: {wormhole.notes} </Text>
+
+    return (
+      <View 
+        style = {styles.requestList}
+      >
+        { submitters }
+      </View>
+    );
   }
 
 
   render() {
-    var { updateMyCurrentWormhole } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView
@@ -131,4 +164,4 @@ class MyWormholes extends Component{
   }
 };
 
-export default MyWormholes;
+export default ViewMyWormholeList;

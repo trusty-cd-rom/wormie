@@ -17,44 +17,42 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1,
     paddingTop: 20,
-    paddingBottom: 20
+    marginBottom: 23
   },
   infoContainer: {
+    // color: 'black',
+    alignSelf: 'flex-start'
   },
   name: {
-    alignSelf: 'center',
-    justifyContent: 'flex-start',
     fontSize: 21,
+    fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: 'white'
   },
   handle: {
-    alignSelf: 'center',
     fontSize: 16,
-    color: 'white'
   },
   image: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 70,
+    width: 70,
+    borderRadius: 35,
     marginTop: 2,
     alignSelf: 'center',
-    marginLeft: 10,
-    marginRight: 30
+    marginLeft: 20,
+    marginRight: 10
   },
   button: {
     flex:1,
     flexDirection:'row',
     alignItems:'center',
+    paddingRight: 7,
     justifyContent:'flex-end'
   },
   ionic: { 
     width: 50, 
     height: 50, 
     marginLeft: 15, 
-    marginTop: 15, 
-    color: '#5c5b9d', 
+    marginTop: 15,
   }
 });
 
@@ -79,7 +77,7 @@ class Badge extends React.Component{
             <Icon
               name='ion|plus-circled'
               size={50}
-              color='#5c5b9d'
+              color='#39247f'
               style={styles.ionic}
             />
           </TouchableHighlight>

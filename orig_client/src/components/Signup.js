@@ -43,9 +43,11 @@ class Signup extends Component {
     return (
       <View style={styles.container}>
         <Badge currentUser={this.props.currentUser} />
-        <Text style={styles.title}>
-          Username
-        </Text>
+        <View>
+          <Text style={styles.title}>
+            Username
+          </Text>
+        </View>
         <TextInput
           style = {styles.searchInput}
           value = {updateProfile.username}
