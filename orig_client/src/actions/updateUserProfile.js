@@ -86,8 +86,7 @@ export function updateSignUpSlider(field, value) {
 };
 
 
-
-function setCurrentUser(res) {
+export function setCurrentUser(res) {
   return {
     type: SET_CURRENT_USER,
     userData: res
