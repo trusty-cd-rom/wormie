@@ -110,6 +110,7 @@ var api = {
 
 	getUserDetailsByFacebookID(fb_id) {
 		console.log("getUserDetailsByFacebookID");
+		console.log(`${urls.usersByFacebookID}/${fb_id}`);
 		return fetch(`${urls.usersByFacebookID}/${fb_id}`)
 		.then((res) => res.json())
 		;
@@ -131,9 +132,14 @@ var api = {
 	  ;
 	},
 
+	/*
+	/	 Update user's details (e.g. 'username', 'email') 
+	*/
 	updateUserDetails(userData) {
-		return fetch(`${urls.users}/${userData.id}`, {
-	    method: 'PUT',
+		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		console.log("userData: ", userData);
+		return fetch(`${urls.users}${userData.id}/`, {
+	    method: 'put',
 	    headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -141,12 +147,38 @@ var api = {
 	    body: JSON.stringify(userData)
 	  })
 	  .then((res) => {
+	  	console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+	  	console.log(res);
 	  	res.json();
 	  	// console.log(res);
 	  })
 	  ;
 	},
 
+	/*
+	/	 Update user's "account" details (e.g. 'wormie_color', 'about_me') 
+	*/
+	updateAccountDetails(accountData) {
+		var data = {
+			"about_me": accountData["about_me"],
+			// "wormie_color": accountData["wormie_color"]
+		}
+		return fetch(`${urls.accounts}${accountData.account_id}/`, {
+			method: 'put',
+			headers: {
+	    	'Content-Type': 'application/json',
+	    },
+			body: JSON.stringify(data)
+		})
+		.then((res) => {
+			console.log(res);
+			res.json();
+		})
+	},
+
+	/*
+	/	 Convert facebook token to Oauth2, create new User in database
+	*/
 	convertToken(tokenData) {
 		return fetch(urls.convertToken, {
 			method: 'POST',
@@ -167,8 +199,10 @@ var api = {
 
 	},
 
+	/*
+	/	 Get user's Facebook profile (specifically, we want the user's FB id)
+	*/
 	fetchFacebookProfileFromFacebook(cb) {
-
 		var fetchProfileRequest = new FBSDKGraphRequest((error, result) => {
       if (error) {
         console.log('Error making request.');
@@ -184,9 +218,7 @@ var api = {
 	
 	}
 
-
-
-	// TODO: Add a refresh token API call using the stored refresh token
+	// TODO: Add a refresh token API call using the stored refresh OAuth2 token
 
 };
 

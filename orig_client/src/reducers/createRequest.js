@@ -16,7 +16,10 @@ var initialState = {
   updateProfile: {
     'fb_id': '',
     'about_me': '',
-    username: '',
+    'username': '',
+    'wormie_red': '',
+    'wormie_green': '',
+    'wormie_blue' : '',
     'wormie_color': '',
   },
 	isFetching: 'false'
@@ -119,11 +122,11 @@ function userRequestReducerRoute(state = [], action) {
   }
 };
 
-var initialProfile = {
-  'about_me': '',
-  username: '',
-  'wormie_color': '',
-}
+// var initialProfile = {
+//   'about_me': '',
+//   username: '',
+//   'wormie_color': '',
+// }
 
 function updateSignUpInput(state, action) {
   switch (action.type) {
@@ -146,6 +149,9 @@ function updateProfile(state, action) {
         'username': action['username'],
         'wormie_color': action['wormie_color'],
         'fb_id': action['fb_id'],
+        'wormie_red': action['wormie_red'],
+        'wormie_green': action['wormie_green'],
+        'wormie_blue': action['wormie_blue'],
         // ...state,
         // ...updateUserProfileActions
         // 'about_me': action["about_me"],
