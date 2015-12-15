@@ -25,9 +25,24 @@ class Signup extends Component {
   }
 
   handleSubmit(cb) {
-    var { updateProfile, updateUserProfile } = this.props;
-    console.log('from signup component');
-    updateUserProfile(updateProfile, cb);
+
+    console.log("handling submit!");
+    
+    var { updateProfile, updateUserProfile, currentUser } = this.props;
+
+    var accountUpdate = {
+      user_id: currentUser.id,
+      account_id: currentUser.account_id,
+      username: updateProfile.username,
+      wormie_color: updateProfile.wormie_color,
+      about_me: updateProfile.about_me
+    };
+    // Not dealing with username yet
+
+
+    console.log(accountUpdate);
+
+    updateUserProfile(accountUpdate, cb);
   };
 
   // TODO: require updateinputtext from signup-containter.js
@@ -50,7 +65,7 @@ class Signup extends Component {
         </View>
         <TextInput
           style = {styles.searchInput}
-          value = {updateProfile.username}
+          value = {currentUser.username}
           onChange = {this.handleInputChange.bind(this, 'username')}
         />
         <Text style={styles.title}>
@@ -67,8 +82,7 @@ class Signup extends Component {
         <TouchableHighlight
           style = {styles.loginButton}
           onPress = {this.handleSubmit.bind(this, () => {this.goToLocation()})}
-          underlayColor = '#88D4f5'
-        >
+          underlayColor = '#88D4f5'>
           <Text style = {styles.buttonText}> Explore </Text>
         </TouchableHighlight>
       </View>
