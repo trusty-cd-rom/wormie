@@ -115,21 +115,21 @@ var api = {
 		;
 	},
 
-	// createUser(userData) {
-	// 	return fetch(urls.users, {
-	//     method: 'POST',
-	//     headers: {
- //        'Accept': 'application/json',
- //        'Content-Type': 'application/json'
- //   		},
-	//     body: JSON.stringify(userData)
-	//   })
-	//   .then((res) => {
-	//   	res.json();
-	//   	// console.log(res);
-	//   })
-	//   ;
-	// },
+	createUser(userData) {
+		return fetch(urls.users, {
+	    method: 'POST',
+	    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+   		},
+	    body: JSON.stringify(userData)
+	  })
+	  .then((res) => {
+	  	res.json();
+	  	// console.log(res);
+	  })
+	  ;
+	},
 
 	updateUserDetails(userData) {
 		return fetch(`${urls.users}/${userData.id}`, {
