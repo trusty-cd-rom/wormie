@@ -58,22 +58,20 @@ class Signup extends Component {
     return (
       <View style={styles.container}>
         <Badge currentUser={this.props.currentUser} />
-        <View>
-          <Text style={styles.title}>
-            Username
-          </Text>
-        </View>
+        <Text style={styles.title}>
+          Choose a Wormie username:
+        </Text>
         <TextInput
           style = {styles.searchInput}
           value = {currentUser.username}
           onChange = {this.handleInputChange.bind(this, 'username')}
         />
         <Text style={styles.title}>
-          Tell us about yourself
+          Say something to the world:
         </Text>
         <TextInput
           style = {styles.searchInput}
-          value = {updateProfile['about_me']}
+          value = {currentUser.about_me}
           onChange = {this.handleInputChange.bind(this, 'about_me')}
         />
         <View style={styles.splashImage}>
