@@ -57,6 +57,11 @@ class Profile extends Component{
         //   navigator = {this.props.navigator}
         // />
         // <ScrollableTabView renderTabBar={() => <CustomTabBar someProp={'here'} />}>
+  componentWillMount() {
+    let { getUserInfo, currentUser } = this.props;
+    console.log('currentUser: ', currentUser);
+    getUserInfo(currentUser.id);
+  }
 
   render() {
     var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;

@@ -20,7 +20,6 @@ export function getUserDataFromFB() {
 export function updateUserProfile(accountUpdate, cb) {
 
   console.log('hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-
   return dispatch => {
 
     dispatch(startUpdating());
@@ -84,7 +83,7 @@ export function updateSignUpInputText(field, text) {
   };
 };
 
-function setCurrentUser(res) {
+export function setCurrentUser(res) {
   return {
     type: SET_CURRENT_USER,
     userData: res
