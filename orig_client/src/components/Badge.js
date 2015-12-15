@@ -65,14 +65,21 @@ class Badge extends React.Component{
   }
 
   name() {
-    var { currentUser } = this.props;
-    console.log(currentUser);
-    if (currentUser.username && currentUser.username !== '.') {
-      return <Text style = {styles.name}>{currentUser['username']}</Text>
+    var { currentUser, updateProfile, profile} = this.props;
+    if ( updateProfile.username.length > 0 ){
+      return <Text style={styles.name}>{updateProfile['username']}</Text>
     } else {
-      return <Text style = {styles.name}>{currentUser['first_name']} {currentUser['last_name']}  </Text>    
+      return <Text style={styles.name}>{currentUser['username']}</Text>
     }
+  }
 
+  about_me() {
+    var { currentUser, updateProfile, profile} = this.props;
+    if ( updateProfile.about_me.length > 0 ){
+      return <Text style={styles.handle}>{updateProfile['about_me']}</Text>
+    } else {
+      return <Text style={styles.handle}>{currentUser['about_me']}</Text>
+    }
   }
 
   // <Text style={{marginTop: 30, backgroundColor: "purple", color: "black"}}> + </Text>
@@ -109,7 +116,7 @@ class Badge extends React.Component{
   // ion-plus-circled
   // var { Icon, } = require('react-native-icons');
   render() {
-    var { currentUser } = this.props;
+    var { currentUser, updateProfile } = this.props;
     return (
       <View style = {styles.container}>
         <Image 
@@ -118,7 +125,7 @@ class Badge extends React.Component{
         />
         <View style={styles.infoContainer}>
           {this.name()}
-          <Text style = {styles.handle}>{currentUser['about_me']}</Text>
+          {this.about_me()}
         </View>
         { this.button() }
       </View>

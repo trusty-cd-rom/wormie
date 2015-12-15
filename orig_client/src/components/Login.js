@@ -10,11 +10,6 @@ import React, {
 import Signup from '../containers/Signup';
 
 class Login extends Component {
-  goToSignup() {
-    this.props.navigator.replace({
-      component: Signup
-    });
-  }
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
@@ -40,7 +35,8 @@ const styles = StyleSheet.create({
 
   },
   logo: {
-    fontSize: 60,
+    fontSize: 50,
+    fontWeight: 'bold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',
