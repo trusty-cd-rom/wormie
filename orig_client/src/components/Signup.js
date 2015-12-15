@@ -74,7 +74,7 @@ class Signup extends Component {
           onChange = {this.handleInputChange.bind(this, 'username')}
         />
         <Text style={styles.title}>
-          You can also add a bio:
+          Add your bio:
         </Text>
         <TextInput
           style = {styles.searchInput}
