@@ -57,6 +57,12 @@ var styles = StyleSheet.create({
 
 class Badge extends React.Component{
 
+  componentWillMount() {
+    let { getUserInfo, currentUser } = this.props;
+    console.log('currentUser: ', currentUser);
+    getUserInfo(currentUser.id);
+  }
+
   goToCreateRequest() {
     var { navigator } = this.props;
     this.props.navigator.push({
@@ -113,8 +119,6 @@ class Badge extends React.Component{
     }
   }
 
-  // ion-plus-circled
-  // var { Icon, } = require('react-native-icons');
   render() {
     var { currentUser, updateProfile } = this.props;
     return (

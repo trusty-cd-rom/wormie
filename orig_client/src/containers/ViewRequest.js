@@ -1,7 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import ViewRequest from '../components/ViewRequest';
-import * as ViewRequestActions from '../actions/viewRequest';
 
 function mapStateToProps(state) {
   return {
@@ -10,8 +9,8 @@ function mapStateToProps(state) {
 }
 
 // bindActionCreaters
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ViewRequestActions, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(ViewRequestActions, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewRequest);
+export default connect(mapStateToProps)(ViewRequest);

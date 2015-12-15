@@ -7,6 +7,7 @@ import React, {
   Component,
   Image,
   TouchableHighlight,
+  ActivityIndicatorIOS,
 } from 'react-native';
 import ViewMyWormholeList from '../containers/ViewMyWormholeList';
 
@@ -20,7 +21,7 @@ var styles = StyleSheet.create({
 
   },
   list: {
-    flex: 3
+    flex: 1
   },
   image: {
     height: 20,
@@ -42,25 +43,31 @@ var styles = StyleSheet.create({
     color: '#575757',
     // margin: 5,
     padding: 5,
-    // textAlign: 'left',
-    // alignItems: 'stretch',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
   },
   request: {
     flex: 1,
     flexDirection: 'column',
-    // flex: 1,
-    // alignSelf: 'stretch',
-    // textAlign: 'left',
     marginBottom: 5,
     paddingLeft: 0
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gray: {
+    backgroundColor: '#cccccc',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 
 class MyWormholes extends Component{
+
+  componentWillMount() {
+    // this.setToggleTimeout();
+  }
 
   viewRequest(currentWormholeList) {
     var { updateMyCurrentWormholeList, wormholes } = this.props;
@@ -88,10 +95,21 @@ class MyWormholes extends Component{
       )
     }
   }
+
+  setToggleTimeout() {
+    let { isAnimating } = this.props;
+    setTimeout(
+      () => {
+        this.setState({animating: !isAnimating});
+        this.setToggleTimeout();
+      },
+      1200
+    );
+  }
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
-    var { wormholes } = this.props;
-    var requestor, submitList;
+    let { wormholes, isAnimating } = this.props;
+    let requestor, submitList;
 
     return wormholes.map((wormhole, outerIndex) => {
       return (
@@ -116,15 +134,29 @@ class MyWormholes extends Component{
 
 
   render() {
-    var { updateMyCurrentWormhole } = this.props;
+    let { updateMyCurrentWormhole, toggleAnimating, isAnimating } = this.props;
+    console.log(toggleAnimating);
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView
         automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
+        onScroll={() => { 
+          console.log('onScroll!');
+          toggleAnimating(isAnimating);
+        }}
         scrollEventThrottle={200}
         style={styles.list}
       >
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around'
+        }}>
+          <ActivityIndicatorIOS
+            animating={true}
+            style={[styles.centering, {height: 50}]}
+            size="large"
+          />
+        </View>
         {this.createList()}
       </ScrollView>
     );

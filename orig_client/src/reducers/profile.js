@@ -1,7 +1,8 @@
 import { 
   UPDATE_MY_CURRENT_WORMHOLE,
   UPDATE_MY_CURRENT_SUBMISSION,
-  UPDATE_MY_CURRENT_WORMHOLE_LIST
+  UPDATE_MY_CURRENT_WORMHOLE_LIST,
+  TOGGLE_ANIMATING
 } from '../constants/actions';
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
@@ -37,6 +38,15 @@ function myCurrentWormholeList(state = {}, action) {
   }
 };
 
+function toggleAnimating(state = {isAnimating: false}, action) {
+  switch (action.type) {
+    case TOGGLE_ANIMATING:
+      return action.isAnimating;
+    default:
+      return state;
+  }
+}
+
 function profile(state = {}, action) {
   switch (action.type) {
     // single matched wormhole from wormhole list
@@ -57,6 +67,11 @@ function profile(state = {}, action) {
         ...state,
         submissionsForWormholes: myCurrentWormholeList(state.submissionsForWormholes, action)
       };
+    case TOGGLE_ANIMATING:
+      return {
+        ...state,
+        isAnimating: toggleAnimating(state.isAnimating, action)
+      }
     default:
       return state;
   }

@@ -64,7 +64,13 @@ class Profile extends Component{
   }
 
   render() {
+<<<<<<< 1c5fe47b7128b1266e0138be428a44ae54965a19
     var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;
+||||||| merged common ancestors
+    let { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission } = this.props;
+=======
+    let { currentUser, submissions, wormholes, updateMyCurrentWormhole, toggleAnimating, updateMyCurrentSubmission } = this.props;
+>>>>>>> Working on spinner
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
@@ -88,6 +94,8 @@ class Profile extends Component{
             updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
             myCurrentWormhole = {this.props.myCurrentWormhole}
             navigator = {this.props.navigator}
+            isAnimating = {this.props.isAnimating}
+            toggleAnimating = {this.props.toggleAnimating}
           />
           <MySubmissions 
             tabLabel="Connections"
@@ -95,6 +103,7 @@ class Profile extends Component{
             updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
             myCurrentSubmission = {this.props.myCurrentSubmission}
             navigator = {this.props.navigator}
+            isAnimating = {this.props.isAnimating}
           />
         </ScrollableTabView>
       </View>

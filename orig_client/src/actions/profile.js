@@ -6,6 +6,7 @@ import {
   UPDATE_MY_CURRENT_WORMHOLE_LIST,
   GET_USER_INFO,
   SET_CURRENT_USER,
+  TOGGLE_ANIMATING,
 } from '../constants/actions';
 
 export function updateMyCurrentWormhole(wormhole) {
@@ -47,4 +48,14 @@ function setCurrentUser(res) {
     type: SET_CURRENT_USER,
     userData: res
   };
+}
+
+export function toggleAnimating(isAnimating) {
+  isAnimating = isAnimating ? false : true;
+  return dispatch => {
+    return dispatch({
+      type: TOGGLE_ANIMATING,
+      isAnimating
+    });
+  }
 }

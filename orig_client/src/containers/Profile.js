@@ -12,6 +12,7 @@ function mapStateToProps(state) {
     myCurrentSubmission: state.profile.myCurrentSubmission,
     myCurrentWormhole: state.profile.myCurrentWormhole,
     myCurrentWormholeSubmissions: state.profile.myCurrentWormholeSubmissions,
+    isAnimating: state.profile.isAnimating,
   };
 }
 
