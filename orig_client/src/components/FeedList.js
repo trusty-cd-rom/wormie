@@ -12,6 +12,7 @@ import React, {
 import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 var YouTube = require('react-native-youtube');
+var Video = require('react-native-video');
 
 class FeedList extends React.Component{
   componentWillMount() {
@@ -32,8 +33,8 @@ class FeedList extends React.Component{
       });
     }
   }
-  _renderVideo(item) {
-    console.log('rendering video', item.submissions[0]);
+  _renderVideo(item, index) {
+    // console.log('rendering video', item.submissions[0]);
     if(item.submissions[0]) {
       return (
         <YouTube 
@@ -48,7 +49,14 @@ class FeedList extends React.Component{
         />
       );
     }else {
-      return (<View />);
+      return (
+        <TouchableHighlight onPress={this.viewRequest.bind(this, index)}>
+          <Image 
+            style={{height: 220, width: 390, flex: 1}}
+            source = {require('../assets/dsnWormhole.jpg')}
+          />
+        </TouchableHighlight>
+      );
     }
 
 
@@ -99,19 +107,23 @@ class FeedList extends React.Component{
   render() {
     var { feed } = this.props;
     var list = feed.map((item, index) => {
-      console.log(item);
+      // console.log(item);
       return (
         <View key = {index}>
-          <View style={[styles.cardTitleContainer, styles.row]}>
-            <Text style = {styles.cardTitle}> {item.title} </Text>
-            <View style={styles.spaceBuffer} />
-            <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
-          </View>
+          <TouchableHighlight
+            style = {styles.loginButton}
+            onPress = {this.viewRequest.bind(this, index)}
+          >
+            <View style={[styles.cardTitleContainer, styles.row]}>
+              <Text style = {styles.cardTitle}> {item.title} </Text>
+              <View style={styles.spaceBuffer} />
+              <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
+            </View>
+          </TouchableHighlight> 
           {this._renderVideo(item)}
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
-            underlayColor = 'purple'
           >
             <View style={styles.cardInfoContainer}>
               <View style = {styles.row}>
@@ -152,7 +164,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 24,
-    color: 'white',
+    color: 'black',
     alignSelf: 'center'
   },
   loginButton: {
@@ -164,35 +176,38 @@ var styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 20,
-    color: 'white',
+    color: 'black',
   },
   cardLocation: {
-    color: 'white',
+    color: 'black',
   },
   cardRequestor: {
     marginLeft: 5,
     flex: 1,
-    color: 'white',
+    color: 'black',
   },
   cardSubmitter: {
     marginRight: 5,
     flex: 1,
-    color: 'white',
+    color: 'black',
   },
   cardDate: {
-    color: 'white',
+    color: 'black',
   },
   cardInfoContainer: {
     paddingTop: 5,
-    paddingBottom: 40,
+    paddingBottom: 15,
+    marginBottom: 15,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'white',
+    borderColor: 'grey',
+    borderBottomWidth: 0.25
   },
   cardTitleContainer: {
-    paddingTop: 5,
+    paddingTop: 0,
     paddingBottom: 5,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   row: {
     flexDirection: 'row',
@@ -209,6 +224,12 @@ var styles = StyleSheet.create({
   },
   spaceBuffer: {
     flex: 2
+  },
+  backgroundVideo: {
+    alignSelf: 'stretch',
+    height: 220,
+    backgroundColor: 'transparent',
+    marginBottom: 0
   }
 });
 

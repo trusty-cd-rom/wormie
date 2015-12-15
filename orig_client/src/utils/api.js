@@ -46,7 +46,7 @@ var api = {
 	},
 
 	updateWormholeDetails(wormholeId, wormholeData) {
-		console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
+		// console.log('about to send put to update submit from api file, id: ', wormholeId, wormholeData );
 		return fetch(`${urls.wormholes}/${wormholeId}/`, {
 	    method: 'put',
 	    headers: {
@@ -56,7 +56,7 @@ var api = {
 	    body: JSON.stringify(wormholeData)
 	  })
 	  .then((res) => {
-	  	console.log('just head back from the put, and they said: ', res);
+	  	// console.log('just head back from the put, and they said: ', res);
 	  	res
 	  })
 	  ;
@@ -115,21 +115,21 @@ var api = {
 		;
 	},
 
-	// createUser(userData) {
-	// 	return fetch(urls.users, {
-	//     method: 'POST',
-	//     headers: {
- //        'Accept': 'application/json',
- //        'Content-Type': 'application/json'
- //   		},
-	//     body: JSON.stringify(userData)
-	//   })
-	//   .then((res) => {
-	//   	res.json();
-	//   	// console.log(res);
-	//   })
-	//   ;
-	// },
+	createUser(userData) {
+		return fetch(urls.users, {
+	    method: 'POST',
+	    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+   		},
+	    body: JSON.stringify(userData)
+	  })
+	  .then((res) => {
+	  	res.json();
+	  	// console.log(res);
+	  })
+	  ;
+	},
 
 	updateUserDetails(userData) {
 		return fetch(`${urls.users}/${userData.id}`, {
