@@ -26,23 +26,21 @@ class Signup extends Component {
 
   handleSubmit(cb) {
 
-    console.log("handling submit!");
-    
     var { updateProfile, updateUserProfile, currentUser } = this.props;
+
+    username = updateProfile.username || currentUser.username;
+    about_me = updateProfile.about_me || currentUser.about_me;
 
     var accountUpdate = {
       user_id: currentUser.id,
       account_id: currentUser.account_id,
-      username: updateProfile.username,
+      username: username,
       wormie_color: updateProfile.wormie_color,
-      about_me: updateProfile.about_me
+      about_me: about_me
     };
-    // Not dealing with username yet
-
-
-    console.log(accountUpdate);
 
     updateUserProfile(accountUpdate, cb);
+
   };
 
   // TODO: require updateinputtext from signup-containter.js
@@ -57,9 +55,11 @@ class Signup extends Component {
 
     return (
       <View style={styles.container}>
-        <Badge currentUser={this.props.currentUser} />
+        <Badge 
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} />
         <Text style={styles.title}>
-          Choose a Wormie username:
+          Hi, {currentUser.first_name}! Choose your Wormie username:
         </Text>
         <TextInput
           style = {styles.searchInput}
@@ -67,7 +67,7 @@ class Signup extends Component {
           onChange = {this.handleInputChange.bind(this, 'username')}
         />
         <Text style={styles.title}>
-          Say something to the world:
+          You can also add a bio:
         </Text>
         <TextInput
           style = {styles.searchInput}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     marginRight: 30
   },
   text: {
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'center',
     margin: 10,
   },
@@ -150,13 +150,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#48BBEC'
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 20,
     color: 'white',
     alignSelf: 'center'
   },
   title: {
     marginBottom: 20,
-    fontSize: 25,
+    fontSize: 16,
     textAlign: 'center',
     color: '#fff'
   },

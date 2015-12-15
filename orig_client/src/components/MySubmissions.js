@@ -74,7 +74,7 @@ class MySubmissions extends Component{
             style={styles.submission}
           >
             <View>
-              <Text style={styles.buttonText}>Title: {submission.wormhole.title} </Text>
+              <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
               <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
               <Text>{submission.wormhole.notes} </Text>
               <Text style={{fontWeight:'bold'}}>My notes:</Text>

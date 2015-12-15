@@ -59,7 +59,7 @@ class Profile extends Component{
         // <ScrollableTabView renderTabBar={() => <CustomTabBar someProp={'here'} />}>
 
   render() {
-    var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission } = this.props;
+    var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
@@ -67,7 +67,8 @@ class Profile extends Component{
           style={styles.badgeContainer}
         >
           <Badge 
-            currentUser={this.props.currentUser} 
+            currentUser={this.props.currentUser}
+            updateProfile={this.props.updateProfile} 
             navigator={this.props.navigator}
             profile="true"
             goToCreateRequest={this.goToCreateRequest}
@@ -77,14 +78,14 @@ class Profile extends Component{
         <ScrollableTabView
           style={{flexWrap: 'wrap'}}>
           <MyWormholes 
-            tabLabel="My Wormholes"
+            tabLabel="Wormholes"
             wormholes = {this.props.wormholes}
             updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
             myCurrentWormhole = {this.props.myCurrentWormhole}
             navigator = {this.props.navigator}
           />
           <MySubmissions 
-            tabLabel="My Connections"
+            tabLabel="Connections"
             submissions = {this.props.submissions}
             updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
             myCurrentSubmission = {this.props.myCurrentSubmission}
