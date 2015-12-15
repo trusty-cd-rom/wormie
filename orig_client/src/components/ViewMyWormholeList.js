@@ -8,25 +8,38 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewMyWormhole from '../containers/ViewMyWormhole';
+import { Icon } from 'react-native-icons';
 
 var styles = StyleSheet.create({
-  handle: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
   container:{
-
+    marginTop: 20,
+    flex:1
   },
-  list: {
-    flex: 3
+  back: {
+    flexDirection: 'row', 
+    justifyContent: 'flex-start', 
+    flex: 1, 
+    alignSelf: 'center'
   },
-  image: {
-    height: 20,
-    width: 20
-  },
-  submitterProfile: {
+  topbar: {
+    color: '#39247f', 
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
     flexDirection: 'row',
+    flex: 1
+  },
+  topBarText: {
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    flex: 10,
+    alignSelf: 'center'
+  },
+  ionic: { 
+    width: 30, 
+    height: 30, 
+    marginLeft: 5, 
+    marginTop: 5,
   },
   buttonText: {
     fontSize: 15,
@@ -35,55 +48,58 @@ var styles = StyleSheet.create({
     flex: 1,
     fontWeight: 'bold'
   },
+  image: {
+    height: 20,
+    width: 20
+  },
+  submitterProfile: {
+    flexDirection: 'row',
+  },
   requestList: {
-    flex: 1,
     width: 375,
     color: '#575757',
-    // margin: 5,
     padding: 5,
-    textAlign: 'left',
-    // alignItems: 'stretch',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-  },
-  request: {
-    flex: 1,
-    flexDirection: 'column',
-    // flex: 1,
-    // alignSelf: 'stretch',
-    textAlign: 'left',
-    marginBottom: 5,
-    paddingLeft: 0
   },
 });
 
 class ViewMyWormholeList extends Component{
+  back() {
+    this.props.navigator.pop();
+  }
 
   viewRequest(index) {
-    var { updateMyCurrentWormholeList, wormholes } = this.props;
-    console.log('trying to view request: ', wormholes);
+    var { updateMyCurrentWormholeList, myCurrentWormholeList } = this.props;
+    console.log('trying to view request: ', myCurrentWormholeList);
     
     // UPDATECURRENTWORMHOLE
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    console.log(currentWormholeList.submissions[index]);
-    updateMyCurrentWormholeList(currentWormholeList.submissions[index]);
     this.props.navigator.push({
       component: ViewMyWormhole,
+      passProps: {wormhole: myCurrentWormholeList.submissions[index]}
     });
   }
 
-  showStatus(status) {
-    if (status === 'completed') {
+  showStatus() {
+    var { myCurrentWormholeList } = this.props;
+
+    if (myCurrentWormholeList.submissions.length) {
+      // return (
+      //   <Text>There is a Match!</Text>
+      // )
+      return <View />          
+    } else {
       return (
-        <Text>There is a Match!</Text>
-      )          
-    } else if (status === 'open') {
-      return (
-        <Text>There is no Match Yet.</Text>
+        <View
+          style={{
+            flex:1, 
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Text>There is No Match Yet.</Text>
+        </View>
       )
     }
   }
@@ -93,27 +109,28 @@ class ViewMyWormholeList extends Component{
   createList() {
     var { myCurrentWormholeList } = this.props;
     var submitList, submitters;
-
-    console.log(myCurrentWormholeList.submissions);
+    console.log(myCurrentWormholeList.submissions.length);
     if (myCurrentWormholeList.submissions.length > 0) {
-      console.log('yeah')
-      debugger;
+      console.log('working well');
       submitList = myCurrentWormholeList.submissions.map((submission, index) => {
+        console.log(submission);
         return (
           <TouchableHighlight
             onPress = {this.viewRequest.bind(this, index)}
             underlayColor = 'rgba(125,125,125,0.2)'
+            key={index}
           >
-            <View>
+            <View
+              style={{marginTop: 14}}
+            >
               <View 
-                key={index} 
                 style = {styles.submitterProfile}
               >
                 <Image 
                   style = {styles.image}
                   source = {{uri: submission.submitter['picture_url']}}
                 />
-                <Text> Requestor: {submission.submitter.username} </Text>
+                <Text> Submitter: {submission.submitter.username} </Text>
               </View>
               <Text>Notes: { submission.notes }</Text>
             </View>
@@ -123,21 +140,12 @@ class ViewMyWormholeList extends Component{
 
       submitters = (
         <View>
-          <Text> submitters</Text>
           { submitList }
         </View>
       )
     } else {
       submitters = <View />;
     }
-          // <View
-          //   style={styles.request}
-          // >
-            // onPress = {this.viewRequest.bind(this, index)}
-
-              // <Text style={styles.buttonText}> Title: {wormhole.title} </Text>
-              // <Text> {this.showStatus(wormhole.status)} </Text>
-              // <Text style={{flex: 1}}> Notes: {wormhole.notes} </Text>
 
     return (
       <View 
@@ -148,18 +156,58 @@ class ViewMyWormholeList extends Component{
     );
   }
 
+  topbar() {
+    return (
+      <View
+        style={styles.topbar}
+      >
+        <TouchableHighlight
+          onPress={this.back.bind(this)}
+          underlayColor='white'
+          color='white'
+          style={styles.back}
+        > 
+          <Icon
+            name='ion|chevron-left'
+            size={30}
+            color='#39247f'
+            style={styles.ionic}
+          />
+        </TouchableHighlight>
+        <View 
+          style={styles.topBarText}
+        >
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#39247f',
+              fontSize: 15,
+            }}
+          >Wormholes      </Text>
+        </View>
+      </View>
+    );
+  }
 
   render() {
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.list}
+      <View
+        style={styles.container}
       >
-        {this.createList()}
-      </ScrollView>
+        {this.topbar()}
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={{flex: 10}}
+        >
+          <View>
+            {this.showStatus()}
+          </View>
+          {this.createList()}
+        </ScrollView>
+      </View>
     );
   }
 };

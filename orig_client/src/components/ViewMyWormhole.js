@@ -7,7 +7,6 @@ import React, {
 } from 'react-native';
 import Navbar from './Navbar';
 import CameraView from '../containers/Camera';
-import ViewMyWormholeList from '../containers/ViewMyWormholeList';
 var YouTube = require('react-native-youtube');
 
 class ViewMyWormhole extends Component {
@@ -15,18 +14,18 @@ class ViewMyWormhole extends Component {
     this.props.navigator.pop();
   }
   startSubmission() {
-    let { myCurrentWormhole } = this.props;
+    let { wormhole } = this.props;
     this.props.navigator.push({
       component: CameraView
     });
   }
 
   video() {
-    var { myCurrentWormhole } = this.props;
-    if (myCurrentWormhole['video_url']) {
+    var { wormhole } = this.props;
+    if (wormhole['video_url']) {
       return (
         <YouTube 
-          videoId={myCurrentWormhole['video_url']}
+          videoId={wormhole['video_url']}
           play={false}
           hidden={false}
           playsInline={true}
@@ -42,8 +41,8 @@ class ViewMyWormhole extends Component {
   }
 
   render() {
-    let { myCurrentWormhole } = this.props;
-    console.log('myCurrentWormhole: ', myCurrentWormhole);
+    let { wormhole } = this.props;
+    console.log('wormhole: ', wormhole);
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -55,25 +54,25 @@ class ViewMyWormhole extends Component {
         </TouchableHighlight>
         { this.video() }
         <Text style={styles.title}>
-          Title: {myCurrentWormhole.wormhole.title}
+          Title: {wormhole.wormhole.title}
         </Text>
 
         <Text style={styles.title}>
-          Requestor: {myCurrentWormhole.submitter.username}
+          Requestor: {wormhole.submitter.username}
         </Text>
 
         <Text style={styles.title}>
           Deadline
         </Text>
         <Text style={styles.text}>
-          {myCurrentWormhole.wormhole.deadline}
+          {wormhole.wormhole.deadline}
         </Text>
 
         <Text style={styles.title}>
           Notes
         </Text>
         <Text style={styles.text}>
-          {myCurrentWormhole.notes}
+          {wormhole.notes}
         </Text>
         
         <TouchableHighlight

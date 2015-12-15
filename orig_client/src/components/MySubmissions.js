@@ -12,7 +12,7 @@ import ViewMySubmission from '../containers/ViewMySubmission';
 
 var styles = StyleSheet.create({
   list: {
-    textAlign: 'left',
+    // textAlign: 'left',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -44,7 +44,7 @@ var styles = StyleSheet.create({
 
 class MySubmissions extends Component{
   viewRequest(index) {
-    var { submissions, updateMyCurrentSubmissions } = this.props;
+    var { submissions, updateMyCurrentSubmission } = this.props;
     console.log('trying to view request: ', submissions, submissions[index]);
     
     // UPDATECURRENTWORMHOLE
@@ -52,7 +52,7 @@ class MySubmissions extends Component{
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
 
-    updateMyCurrentSubmissions(submissions[index]);
+    updateMyCurrentSubmission(submissions[index]);
     this.props.navigator.push({
       component: ViewMySubmission,
     });
@@ -62,9 +62,10 @@ class MySubmissions extends Component{
   createList() {
     var { submissions } = this.props;
     return submissions.map((submission, index) => {
+      console.log(submission);
       return (
         <View 
-          key = {index}
+          key={index}
           style={styles.submissionList}
         >
           <TouchableHighlight
@@ -73,9 +74,11 @@ class MySubmissions extends Component{
             style={styles.submission}
           >
             <View>
-              <Text style = {styles.buttonText}>Request: {index}</Text>
-              <Text>Title: {submission.wormhole.title} </Text>
-              <Text>Notes: {submission.notes} </Text>
+              <Text style={styles.buttonText}>Title: {submission.wormhole.title} </Text>
+              <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
+              <Text>{submission.wormhole.notes} </Text>
+              <Text style={{fontWeight:'bold'}}>My notes:</Text>
+              <Text>{submission.notes} </Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -84,7 +87,7 @@ class MySubmissions extends Component{
   }
 
   render() {
-    var { submissions, updateMyCurrentSubmissions } = this.props;
+    var { submissions, updateMyCurrentSubmission } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView

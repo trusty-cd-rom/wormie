@@ -33,21 +33,6 @@ var styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center'
   },
-  // request: {
-  //   flexDirection: 'row',
-  //   alignSelf: 'stretch',
-  //   justifyContent: 'center',
-  //   flex: 1,
-  //   backgroundColor: '#48BBEC'
-  // },
-  // submission: {
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   alignSelf: 'stretch',
-  //   justifyContent: 'center',
-  //   flex: 1,
-  //   backgroundColor: 'orange'
-  // },
   badgeContainer: {
     marginTop: 10, 
     marginBottom: -20, 
@@ -57,8 +42,6 @@ var styles = StyleSheet.create({
 });
 
 class Profile extends Component{
-
-
         // <MyWormholes 
         //   wormholes = {this.props.wormholes}
         //   updateCurrentWormhole = {this.props.updateMyCurrentWormhole}
@@ -101,7 +84,7 @@ class Profile extends Component{
             navigator = {this.props.navigator}
           />
           <MySubmissions 
-            tabLabel="My Submissions"
+            tabLabel="My Connections"
             submissions = {this.props.submissions}
             updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
             myCurrentSubmission = {this.props.myCurrentSubmission}

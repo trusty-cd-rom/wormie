@@ -54,7 +54,7 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     // flex: 1,
     // alignSelf: 'stretch',
-    textAlign: 'left',
+    // textAlign: 'left',
     marginBottom: 5,
     paddingLeft: 0
   },
@@ -70,7 +70,7 @@ class MyWormholes extends Component{
     // this function is setting current Wormhole to set the top-state
     // top state will contain information about what the current wormhole is
     // current wormhole is the next page after user press current request
-    console.log(currentWormholeList);
+    console.log('currentWormholeList: ', currentWormholeList);
     updateMyCurrentWormholeList(currentWormholeList);
     this.props.navigator.push({
       component: ViewMyWormholeList,
@@ -104,9 +104,9 @@ class MyWormholes extends Component{
             style={styles.request}
           >
             <View>
-              <Text style={styles.buttonText}> Title: {wormhole.title} </Text>
-              <Text> {this.showStatus(wormhole.status)} </Text>
-              <Text style={{flex: 1}}> Notes: {wormhole.notes} </Text>
+              <Text style={styles.buttonText}>Title: {wormhole.title} </Text>
+              <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
+              <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
             </View>
           </TouchableHighlight>
         </View>
