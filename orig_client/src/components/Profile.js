@@ -64,13 +64,7 @@ class Profile extends Component{
   }
 
   render() {
-<<<<<<< 1c5fe47b7128b1266e0138be428a44ae54965a19
     var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;
-||||||| merged common ancestors
-    let { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission } = this.props;
-=======
-    let { currentUser, submissions, wormholes, updateMyCurrentWormhole, toggleAnimating, updateMyCurrentSubmission } = this.props;
->>>>>>> Working on spinner
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
