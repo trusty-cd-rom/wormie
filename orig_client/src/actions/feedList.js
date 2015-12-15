@@ -14,7 +14,6 @@ export function refreshFeedData() {
   return dispatch => {
     return api.getWormholeList()
     .then((res) => {
-      // console.log('APIIIII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', res)
       dispatch(refreshFeedDataAction(res))
     })
   }

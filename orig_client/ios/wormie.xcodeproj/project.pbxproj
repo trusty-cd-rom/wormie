@@ -48,11 +48,11 @@
 		680C61201C18F95D006F6E87 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C611E1C18F94F006F6E87 /* libRCTYouTube.a */; };
 		680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */; };
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
+		68A13A201C1F9F460038770E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A13A1E1C1F9F460038770E /* FBSDKCoreKit.framework */; };
+		68A13A211C1F9F470038770E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A13A1F1C1F9F460038770E /* FBSDKLoginKit.framework */; };
+		68A13A221C1F9F8D0038770E /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A13A1D1C1F9F330038770E /* libRCTFBSDKLogin.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CBC930061C1CABF0005EBA4F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */; };
-		CBC930071C1CABF0005EBA4F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
-		CBC930291C1CB24F005EBA4F /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC930281C1CB219005EBA4F /* libRCTFBSDKLogin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +147,13 @@
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RCTCamera;
 		};
+		68A13A1C1C1F9F330038770E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68A13A181C1F9F330038770E /* RCTFBSDKLogin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTFBSDKLogin;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -167,13 +174,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTFBSDKCore;
-		};
-		CBC930271C1CB219005EBA4F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBC930231C1CB219005EBA4F /* RCTFBSDKLogin.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RCTFBSDKLogin;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -236,12 +236,12 @@
 		680C61101C18F94F006F6E87 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		680C61251C190DBA006F6E87 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		68A13A181C1F9F330038770E /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "../node_modules/react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<group>"; };
+		68A13A1E1C1F9F460038770E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		68A13A1F1C1F9F460038770E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
-		CBC930231C1CB219005EBA4F /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "/Users/charlie/HackR/wormie/orig_client/node_modules/react-native-fbsdkcore/../react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,11 +256,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A13A221C1F9F8D0038770E /* libRCTFBSDKLogin.a in Frameworks */,
+				68A13A211C1F9F470038770E /* FBSDKLoginKit.framework in Frameworks */,
 				1321B9331C1CF621002DEA85 /* libReactNativeIcons.a in Frameworks */,
 				CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */,
-				CBC930291C1CB24F005EBA4F /* libRCTFBSDKLogin.a in Frameworks */,
-				CBC930061C1CABF0005EBA4F /* FBSDKCoreKit.framework in Frameworks */,
-				CBC930071C1CABF0005EBA4F /* FBSDKLoginKit.framework in Frameworks */,
 				680055711C1A7E1900F331E3 /* libRCTVideo.a in Frameworks */,
 				680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */,
 				680C61201C18F95D006F6E87 /* libRCTYouTube.a in Frameworks */,
@@ -272,6 +271,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				68A13A201C1F9F460038770E /* FBSDKCoreKit.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 			);
@@ -436,6 +436,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		68A13A191C1F9F330038770E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68A13A1D1C1F9F330038770E /* libRCTFBSDKLogin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,8 +455,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				68A13A181C1F9F330038770E /* RCTFBSDKLogin.xcodeproj */,
 				1321B92C1C1CF576002DEA85 /* ReactNativeIcons.xcodeproj */,
-				CBC930231C1CB219005EBA4F /* RCTFBSDKLogin.xcodeproj */,
 				CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */,
 				6800556B1C1A7E0600F331E3 /* RCTVideo.xcodeproj */,
 				6800555D1C1A254000F331E3 /* FileUpload.m */,
@@ -503,8 +511,8 @@
 		CBC930151C1CABF8005EBA4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBC930041C1CABF0005EBA4F /* FBSDKCoreKit.framework */,
-				CBC930051C1CABF0005EBA4F /* FBSDKLoginKit.framework */,
+				68A13A1E1C1F9F460038770E /* FBSDKCoreKit.framework */,
+				68A13A1F1C1F9F460038770E /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -513,14 +521,6 @@
 			isa = PBXGroup;
 			children = (
 				CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CBC930241C1CB219005EBA4F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CBC930281C1CB219005EBA4F /* libRCTFBSDKLogin.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -608,8 +608,8 @@
 					ProjectRef = CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */;
 				},
 				{
-					ProductGroup = CBC930241C1CB219005EBA4F /* Products */;
-					ProjectRef = CBC930231C1CB219005EBA4F /* RCTFBSDKLogin.xcodeproj */;
+					ProductGroup = 68A13A191C1F9F330038770E /* Products */;
+					ProjectRef = 68A13A181C1F9F330038770E /* RCTFBSDKLogin.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -753,6 +753,13 @@
 			remoteRef = 680C61291C190DBA006F6E87 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		68A13A1D1C1F9F330038770E /* libRCTFBSDKLogin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDKLogin.a;
+			remoteRef = 68A13A1C1C1F9F330038770E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -772,13 +779,6 @@
 			fileType = archive.ar;
 			path = libRCTFBSDKCore.a;
 			remoteRef = CBC9301A1C1CB0AE005EBA4F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CBC930281C1CB219005EBA4F /* libRCTFBSDKLogin.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTFBSDKLogin.a;
-			remoteRef = CBC930271C1CB219005EBA4F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

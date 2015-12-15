@@ -21,7 +21,7 @@ class FeedList extends React.Component{
   }
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
-    // console.log('trying to view request: ', index, feed[index]);
+    console.log('trying to view request: ', index, feed[index]);
     updateCurrentWormhole(feed[index]);
     if(feed[index].status === 'completed') {
       this.props.navigator.push({
@@ -120,7 +120,7 @@ class FeedList extends React.Component{
               <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
             </View>
           </TouchableHighlight> 
-          {this._renderVideo(item)}
+          {this._renderVideo(item, index)}
           <TouchableHighlight
             style = {styles.loginButton}
             onPress = {this.viewRequest.bind(this, index)}
