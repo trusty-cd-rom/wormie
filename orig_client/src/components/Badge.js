@@ -71,30 +71,6 @@ class Badge extends React.Component{
     })
   }
 
-  name() {
-    var { currentUser, updateProfile, profile, clickedUser, } = this.props;
-    if ( updateProfile.username.length > 0 ){
-      return <Text style={styles.name}>{updateProfile['username']}</Text>
-    // clicked user exist
-    } else if ( clickedUser ) {
-      return <Text style={styles.name}>{clickedUser['username']}</Text>
-    } else if ( currentUser ) {
-      return <Text style={styles.name}>{currentUser['username']}</Text>
-    }
-  }
-
-  about_me() {
-    var { currentUser, updateProfile, profile, clickedUser} = this.props;
-    if ( updateProfile.about_me.length > 0 ){
-      return <Text style={styles.handle}>{updateProfile['about_me']}</Text>
-    // clicked user exist
-    } else if ( clickedUser ) {
-      return <Text style={styles.handle}>{clickedUser['about_me']}</Text>
-    } else if ( currentUser ) {
-      return <Text style={styles.handle}>{currentUser['about_me']}</Text>
-    }
-  }
-
   image() {
     var { currentUser, clickedUser } = this.props;
     if ( !clickedUser ) {
@@ -117,7 +93,14 @@ class Badge extends React.Component{
 
   info() {
     var { currentUser, updateProfile, profile, clickedUser, } = this.props;
-    if ( updateProfile.username.length > 0 ){
+    if ( clickedUser ) {
+      return (
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{clickedUser['username']}</Text>
+          <Text style={styles.handle}>{clickedUser['about_me']}</Text>
+        </View>
+      );
+    } else if ( updateProfile.username.length > 0 ){
       return (
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{updateProfile['username']}</Text>
@@ -125,13 +108,6 @@ class Badge extends React.Component{
         </View>
       );
     // clicked user exist
-    } else if ( clickedUser ) {
-      return (
-        <View style={styles.infoContainer}>
-          <Text style={styles.name}>{clickedUser['username']}</Text>
-          <Text style={styles.handle}>{clickedUser['about_me']}</Text>
-        </View>
-      );
     } else if ( currentUser ) {
       return (
         <View style={styles.infoContainer}>
@@ -141,7 +117,6 @@ class Badge extends React.Component{
       );
     }
   }
-
 
   button() {
     var { profile, currentUser, clickedUser } = this.props;

@@ -73,8 +73,6 @@ class Profile extends Component{
   }
 
   // TODO: updateProfile
-
-  // TODO: updateProfile
   topbar() {
     let { profile, stopClickedUser, currentUser, clickedUser, fromFeed } = this.props;
     // toggle peek_clicked_user(friends/others)
@@ -104,6 +102,34 @@ class Profile extends Component{
     }
   }
 
+  badge() {
+    if (this.props.fromFeed) {
+      return (
+        <Badge 
+          clickedUser={this.props.clickedUser}
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} 
+          navigator={this.props.navigator}
+          profile="true"
+          fromFeed={this.props.fromFeed}
+          goToCreateRequest={this.goToCreateRequest}
+        />
+      );
+    } else {
+      return (
+        <Badge 
+          clickedUser={this.props.clickedUser}
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} 
+          navigator={this.props.navigator}
+          profile="true"
+          goToCreateRequest={this.goToCreateRequest}
+        />
+      );
+    }
+  }
+
+
   // TODO: spinner isAnimating, toggleAnimating
   render() {
     var { 
@@ -122,14 +148,7 @@ class Profile extends Component{
         <View 
           style={styles.badgeContainer}
         >
-          <Badge 
-            clickedUser={this.props.clickedUser}
-            currentUser={this.props.currentUser}
-            updateProfile={this.props.updateProfile} 
-            navigator={this.props.navigator}
-            profile="true"
-            goToCreateRequest={this.goToCreateRequest}
-          />
+          { this.badge() }
         </View>
         <ScrollableTabView
           style={{flexWrap: 'wrap'}}>
