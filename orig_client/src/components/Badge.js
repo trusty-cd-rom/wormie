@@ -57,6 +57,13 @@ var styles = StyleSheet.create({
 
 class Badge extends React.Component{
 
+  componentWillMount() {
+    var {clickedUser,currentUser,updateProfile,} = this.props;
+    console.log('clickedUser', clickedUser);
+    console.log('currentUser', currentUser);
+    console.log('updateProfile', updateProfile);
+  }
+
   goToCreateRequest() {
     var { navigator } = this.props;
     this.props.navigator.push({
@@ -168,7 +175,6 @@ class Badge extends React.Component{
   }
 
   render() {
-    var { currentUser, updateProfile } = this.props;
     return (
       <View style = {styles.container}>
         { this.image() }
