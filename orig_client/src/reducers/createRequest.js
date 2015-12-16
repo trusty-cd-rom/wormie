@@ -17,9 +17,9 @@ var initialState = {
     'fb_id': '',
     'about_me': '',
     'username': '',
-    'wormie_red': 25,
+    'wormie_red': 20,
     'wormie_green': 100,
-    'wormie_blue' : 100,
+    'wormie_blue' : 120,
     'wormie_color': '',
   },
 	isFetching: 'false'

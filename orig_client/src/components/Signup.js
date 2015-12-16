@@ -11,7 +11,7 @@ import React, {
 
 import Badge from '../components/Badge';
 import Navbar from './Navbar';
-import colorUtil from '../utils/rgb2hex';
+import colorUtil from '../utils/color';
 
 class Signup extends Component {
 
@@ -19,6 +19,13 @@ class Signup extends Component {
   //   var { getUserDataFromFB } = this.props;
   //   getUserDataFromFB();
   // }
+
+  componentWillMount() {
+    var { updateProfile, currentUser } = this.props;
+    updateProfile.wormie_red = colorUtil.hexToRGB(currentUser.wormie_color)[0];
+    updateProfile.wormie_green = colorUtil.hexToRGB(currentUser.wormie_color)[1];
+    updateProfile.wormie_blue = colorUtil.hexToRGB(currentUser.wormie_color)[2];
+  }
 
   goToHome() {
     this.props.navigator.replace({
@@ -33,7 +40,7 @@ class Signup extends Component {
     username = updateProfile.username || currentUser.username;
     about_me = updateProfile.about_me || currentUser.about_me;
 
-    wormie_color = colorUtil.rgbToHex(updateProfile.wormie_green, updateProfile.wormie_green, updateProfile.wormie_green) || currentUser.wormie_color;
+    wormie_color = colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue) || currentUser.wormie_color;
 
     var accountUpdate = {
       user_id: currentUser.id,
