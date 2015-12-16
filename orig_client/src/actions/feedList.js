@@ -27,7 +27,7 @@ export function refreshFeedDataAction(data) {
 };
 
 export function setClickedProfile(data) {
-  console.log('feedlist data', data);
+  console.log('feedlist data plz', data);
   return {
     type: SET_CLICKED_USER,
     userData: data
