@@ -20,18 +20,17 @@ var styles = StyleSheet.create({
     marginBottom: 23
   },
   infoContainer: {
+    // color: 'black',
     alignSelf: 'flex-start'
   },
   name: {
     fontSize: 17,
-    fontFamily: 'Lato-Bold',
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
     color: '#3e3e3e',
     marginTop: 10,
     marginBottom: 5,
   },
   handle: {
-    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: '#727272'
   },
@@ -57,12 +56,6 @@ var styles = StyleSheet.create({
 });
 
 class Badge extends React.Component{
-
-  componentWillMount() {
-    let { getUserInfo, currentUser } = this.props;
-    console.log('currentUser: ', currentUser);
-    getUserInfo(currentUser.id);
-  }
 
   goToCreateRequest() {
     var { navigator } = this.props;

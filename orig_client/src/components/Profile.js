@@ -92,7 +92,7 @@ class Profile extends Component{
       console.log('topbar!!!')
       return (
         <View
-          style={{paddingTop: 20, flex:0.07}}
+          style={{paddingTop: 20, flex: 0.07}}
         >
           <Topbar 
             topbarTitle={clickedUser.username}
@@ -136,17 +136,10 @@ class Profile extends Component{
           <MyWormholes 
             tabLabel="Wormholes"
             {...this.props}
-            wormholes = {this.props.wormholes}
-            updateMyCurrentWormholeList = {this.props.updateMyCurrentWormholeList}
-            myCurrentWormhole = {this.props.myCurrentWormhole}
-            navigator = {this.props.navigator}
           />
           <MySubmissions 
             tabLabel="Connections"
             {...this.props}
-            submissions = {this.props.submissions}
-            updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
-            myCurrentSubmission = {this.props.myCurrentSubmission}
           />
         </ScrollableTabView>
       </View>
