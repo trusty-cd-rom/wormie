@@ -1,4 +1,4 @@
-import { CREATE_REQUEST, ADD_USER_INFO, TOGGLE_FETCH, UPDATE_INPUT_TEXT, SET_CURRENT_USER, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
+import { CREATE_REQUEST, ADD_USER_INFO, UPDATE_SIGNUP_SLIDER, TOGGLE_FETCH, UPDATE_INPUT_TEXT, SET_CURRENT_USER, UPDATE_SIGNUP_INPUT_TEXT} from '../constants/actions';
 import data from '../testData/data';
 
 
@@ -49,6 +49,11 @@ function userProfile(state = initialState, action) {
       return {
         ...state,
         updateProfile: updateSignUpInput(state.updateProfile, action)
+      }
+    case UPDATE_SIGNUP_SLIDER:
+      return {
+        ...state,
+        updateProfile: updateSignUpSlider(state.updateProfile, action)
       }
 	  case ADD_USER_INFO:
 	  	return {
@@ -122,11 +127,19 @@ function userRequestReducerRoute(state = [], action) {
   }
 };
 
-// var initialProfile = {
-//   'about_me': '',
-//   username: '',
-//   'wormie_color': '',
-// }
+
+function updateSignUpSlider(state, action) {
+  switch (action.type) {
+    case UPDATE_SIGNUP_SLIDER:
+      let updatedInfo = {};
+      updatedInfo[action.field] = action.value;
+      return {
+        ...state,
+        ...updatedInfo
+      }
+  }
+}
+
 
 function updateSignUpInput(state, action) {
   switch (action.type) {

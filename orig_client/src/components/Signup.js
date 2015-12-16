@@ -11,6 +11,7 @@ import React, {
 
 import Badge from '../components/Badge';
 import Navbar from './Navbar';
+import colorUtil from '../utils/rgb2hex';
 // import ColorSlider from './ColorSlider';
 
 class Signup extends Component {
@@ -37,13 +38,16 @@ class Signup extends Component {
       user_id: currentUser.id,
       account_id: currentUser.account_id,
       username: username,
+      wormie_red: updateProfile.wormie_red,
+      wormie_green: updateProfile.wormie_green,
+      wormie_blue: updateProfile.wormie_blue,
       wormie_color: updateProfile.wormie_color,
       about_me: about_me
     };
 
     updateUserProfile(accountUpdate, cb);
 
-  };
+  }
 
   // TODO: require updateinputtext from signup-containter.js
   handleInputChange(fieldName, event) {
@@ -52,7 +56,13 @@ class Signup extends Component {
     updateSignUpInputText(fieldName, event.nativeEvent.text);
   }
 
+  handleSliderChange(data) {
+    var { updateSignUpSlider, updateProfile } = this.props;
+    updateSignUpSlider(data.field, data.value);
+  }
+
   render() {
+
     var { updateProfile, currentUser } = this.props;
 
     return (
@@ -80,21 +90,24 @@ class Signup extends Component {
         </Text>
         <SliderIOS
           style={styles.slider}
-          value = {updateProfile.wormie_red}
+          value = {updateProfile.wormie_red || currentUser.wormie_red}
           minimumValue={0.0}
-          maximumValue={255.0}/>
+          maximumValue={255.0}
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_red', value: value})}/>
         <SliderIOS
           style={styles.slider}
-          value = {updateProfile.wormie_green}
+          value = {updateProfile.wormie_green || currentUser.wormie_green}
           minimumValue={0.0}
-          maximumValue={255.0}/>
+          maximumValue={255.0}
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_green', value: value})}/>
         <SliderIOS
-            style={styles.slider}
-            value = {updateProfile.wormie_blue}
-            minimumValue={0.0}
-            maximumValue={255.0}/>
+          style={styles.slider}
+          value = {updateProfile.wormie_blue || currentUser.wormie_blue}
+          minimumValue={0.0}
+          maximumValue={255.0}
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_blue', value: value})}/>
         <TouchableHighlight
-          style = {styles.loginButton}
+          style={[styles.container, { backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue)}]}
           onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
           underlayColor = '#88D4f5'>
           <Text style = {styles.buttonText}> Explore </Text>
@@ -102,7 +115,40 @@ class Signup extends Component {
       </View>
     );
   }
+
+  // _buttonBackground() {
+
+  //   var {updateProfile, currentUser} = this.props;
+
+  //   var obj = {
+  //     flexDirection: 'row',
+  //     alignSelf: 'stretch',
+  //     justifyContent: 'center',
+  //     flex: 1
+  //   }
+
+  //   function componentToHex(c) {
+  //       var hex = c.toString(16);
+  //       return hex.length == 1 ? "0" + hex : hex;
+  //   }
+
+  //   function rgbToHex(r, g, b) {
+  //       return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  //   }
+
+  //   var red = updateProfile.wormie_red;
+  //   var green = updateProfile.wormie_green;
+  //   var blue = updateProfile.wormie_blue;
+
+  //   var bgColor = rgbToHex(red, green, blue);
+
+  //   obj.backgroundColor = bgColor;
+
+  //   return obj; 
+  // }
+
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -115,20 +161,18 @@ const styles = StyleSheet.create({
   slider: {
     flex: 1,
     width: 300,
-    height: 10,
-    margin: 6
+    height: 10
   },
   text: {
     fontSize: 14,
     textAlign: 'center',
     margin: 10,
   },
-  loginButton: {
+  bottomButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#48BBEC'
+    flex: 1
   },
   buttonText: {
     fontSize: 20,
@@ -149,7 +193,7 @@ const styles = StyleSheet.create({
     padding: 4,
     textAlign: 'center',
     marginLeft: 10,
-    marginBottom: 10,
+    marginBottom: 20,
     fontSize: 16,
     borderWidth: 1,
     borderColor: 'white',

@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
+import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, UPDATE_SIGNUP_SLIDER, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
 
 
 export function getUserDataFromFB() {
@@ -83,6 +83,16 @@ export function updateSignUpInputText(field, text) {
     text
   };
 };
+
+export function updateSignUpSlider(field, value) {
+  return {
+    type: UPDATE_SIGNUP_SLIDER,
+    field,
+    value
+  };
+};
+
+
 
 function setCurrentUser(res) {
   return {
