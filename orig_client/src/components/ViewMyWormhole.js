@@ -13,12 +13,6 @@ class ViewMyWormhole extends Component {
   back() {
     this.props.navigator.pop();
   }
-  startSubmission() {
-    let { wormhole } = this.props;
-    this.props.navigator.push({
-      component: CameraView
-    });
-  }
 
   video() {
     var { wormhole } = this.props;
@@ -74,14 +68,6 @@ class ViewMyWormhole extends Component {
         <Text style={styles.text}>
           {wormhole.notes}
         </Text>
-        
-        <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.startSubmission.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Request! </Text>
-        </TouchableHighlight>
       </View>
     );
   }

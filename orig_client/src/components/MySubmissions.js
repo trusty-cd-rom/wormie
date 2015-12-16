@@ -9,6 +9,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewMySubmission from '../containers/ViewMySubmission';
+import Spinner from './Spinner';
 
 var styles = StyleSheet.create({
   list: {
@@ -74,7 +75,7 @@ class MySubmissions extends Component{
             style={styles.submission}
           >
             <View>
-              <Text style={styles.buttonText}>Title: {submission.wormhole.title} </Text>
+              <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
               <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
               <Text>{submission.wormhole.notes} </Text>
               <Text style={{fontWeight:'bold'}}>My notes:</Text>
@@ -86,19 +87,48 @@ class MySubmissions extends Component{
     });
   }
 
+  handleScroll(e) {
+    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
+    this.lastScrollY = scrollY;
+    this.lastContentInsetTop = e.nativeEvent.contentInset.top;
+    this.lastContentOffsetX = e.nativeEvent.contentOffset.x;
+    this.minPulldownDistance = 40;
+
+    console.log('onScroll!');
+
+    if (scrollY < -this.minPulldownDistance) {
+      if (!isAnimating) {
+        getUserInfo(currentUser.id);
+      }
+    }
+  }
+
   render() {
     var { submissions, updateMyCurrentSubmission } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.list}
-      >
-        {this.createList()}
-      </ScrollView>
-
+      <View>
+        <View
+          style={styles.submissionList}
+        >
+          <Spinner 
+            isAnimating={this.props.isAnimating}
+            getUserInfo={this.props.getUserInfo}
+            currentUser={this.props.currentUser} 
+          />
+        </View>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={(e) => {
+            this.handleScroll(e)
+          }}
+          scrollEventThrottle={200}
+          style={styles.list}
+        >
+          {this.createList()}
+        </ScrollView>
+      </View>
     );
   }
 };

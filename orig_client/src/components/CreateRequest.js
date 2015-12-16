@@ -9,7 +9,7 @@ import React, {
   ActivityIndicatorIOS,
   DatePickerIOS,
 } from 'react-native';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 
 class CreateRequest extends Component {
   componentWillMount() {

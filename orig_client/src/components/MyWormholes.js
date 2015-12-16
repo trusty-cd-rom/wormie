@@ -1,4 +1,3 @@
-/************ PROFILE *************/
 import React, {
   Text,
   View,
@@ -7,8 +6,10 @@ import React, {
   Component,
   Image,
   TouchableHighlight,
+  ActivityIndicatorIOS,
 } from 'react-native';
 import ViewMyWormholeList from '../containers/ViewMyWormholeList';
+import Spinner from './Spinner';
 
 var styles = StyleSheet.create({
   handle: {
@@ -20,7 +21,7 @@ var styles = StyleSheet.create({
 
   },
   list: {
-    flex: 3
+    flex: 1,
   },
   image: {
     height: 20,
@@ -42,25 +43,20 @@ var styles = StyleSheet.create({
     color: '#575757',
     // margin: 5,
     padding: 5,
-    // textAlign: 'left',
-    // alignItems: 'stretch',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
   },
   request: {
     flex: 1,
     flexDirection: 'column',
-    // flex: 1,
-    // alignSelf: 'stretch',
-    // textAlign: 'left',
     marginBottom: 5,
     paddingLeft: 0
   },
 });
 
 class MyWormholes extends Component{
+
+  componentWillMount() {
+    // this.setToggleTimeout();
+  }
 
   viewRequest(currentWormholeList) {
     var { updateMyCurrentWormholeList, wormholes } = this.props;
@@ -88,13 +84,15 @@ class MyWormholes extends Component{
       )
     }
   }
+
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
-    var { wormholes } = this.props;
-    var requestor, submitList;
+    let { wormholes, isAnimating } = this.props;
+    let requestor, submitList;
 
     return wormholes.map((wormhole, outerIndex) => {
       return (
+
         <View 
           style = {styles.requestList}
         >
@@ -104,7 +102,7 @@ class MyWormholes extends Component{
             style={styles.request}
           >
             <View>
-              <Text style={styles.buttonText}>Title: {wormhole.title} </Text>
+              <Text style={styles.buttonText}>{wormhole.title} </Text>
               <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
               <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
             </View>
@@ -114,19 +112,49 @@ class MyWormholes extends Component{
     });
   }
 
+  handleScroll(e) {
+    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
+    this.lastScrollY = scrollY;
+    this.lastContentInsetTop = e.nativeEvent.contentInset.top;
+    this.lastContentOffsetX = e.nativeEvent.contentOffset.x;
+    this.minPulldownDistance = 40;
+
+    console.log('onScroll!');
+
+    if (scrollY < -this.minPulldownDistance) {
+      if (!isAnimating) {
+        getUserInfo(currentUser.id);
+      }
+    }
+  }
 
   render() {
-    var { updateMyCurrentWormhole } = this.props;
+    let { updateMyCurrentWormhole, getUserInfo, isAnimating, currentUser } = this.props;
+
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.list}
-      >
-        {this.createList()}
-      </ScrollView>
+      <View>
+        <View
+          style={styles.requestList}
+        >
+          <Spinner 
+            isAnimating={this.props.isAnimating}
+            getUserInfo={this.props.getUserInfo}
+            currentUser={this.props.currentUser} 
+          />
+        </View>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={(e) => {
+            this.handleScroll(e)
+          }}
+          scrollEventThrottle={200}
+          style={styles.list}
+        >
+          {this.createList()}
+        </ScrollView>
+      </View>
     );
   }
 };
