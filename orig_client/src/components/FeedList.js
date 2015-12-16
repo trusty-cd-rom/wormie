@@ -138,7 +138,7 @@ class FeedList extends React.Component{
               //   </TouchableHighlight> 
               // </View>
   render() {
-    var { feed } = this.props;
+    var { feed, getUserInfo } = this.props;
     var list = feed.map((item, index) => {
       // console.log(item);
       return (
@@ -156,13 +156,29 @@ class FeedList extends React.Component{
           {this._renderVideo(item, index)}
           <View style={styles.cardInfoContainer}>
             <View style = {styles.row}>
-              <View style = {styles.row}>
-                <Image 
-                  style = {[styles.profilePic, styles.marginLeft]}
-                  source = {{uri: item.requestor.picture_url}}
-                />
-                <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
-              </View>
+              <TouchableHighlight
+                onPress={()=>{
+                  console.log('requests', item);
+                  // get submisster account_id
+                  // id(in database) = account_id + 1
+                  console.log('requestor id', item.requestor['account_id'] + 1);
+                  var id = item.requestor['account_id'] + 1;
+                  getUserInfo(id, () => {
+                    this.props.navigator.push({
+                      component: Profile,
+                    });
+                  })
+                }}
+                underlayColor='white'
+              >
+                <View style = {styles.row}>
+                  <Image 
+                    style = {[styles.profilePic, styles.marginLeft]}
+                    source = {{uri: item.requestor.picture_url}}
+                  />
+                  <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
+                </View>
+              </TouchableHighlight>
               <View style={styles.spaceBuffer} />
               {this._showRequestorOnCard(item)}
             </View>
@@ -170,6 +186,15 @@ class FeedList extends React.Component{
         </View>
       );
     });
+
+    // <View style = {styles.row}>
+    //             <Image 
+    //               style = {[styles.profilePic, styles.marginLeft]}
+    //               source = {{uri: item.requestor.picture_url}}
+    //             />
+    //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
+    //           </View>
+          
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
