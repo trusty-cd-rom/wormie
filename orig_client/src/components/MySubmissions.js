@@ -87,6 +87,22 @@ class MySubmissions extends Component{
     });
   }
 
+  handleScroll(e) {
+    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
+    this.lastScrollY = scrollY;
+    this.lastContentInsetTop = e.nativeEvent.contentInset.top;
+    this.lastContentOffsetX = e.nativeEvent.contentOffset.x;
+    this.minPulldownDistance = 40;
+
+    console.log('onScroll!');
+
+    if (scrollY < -this.minPulldownDistance) {
+      if (!isAnimating) {
+        getUserInfo(currentUser.id);
+      }
+    }
+  }
 
   render() {
     var { submissions, updateMyCurrentSubmission } = this.props;
@@ -94,7 +110,7 @@ class MySubmissions extends Component{
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View>
         <View
-          style={styles.requestList}
+          style={styles.submissionList}
         >
           <Spinner 
             isAnimating={this.props.isAnimating}
@@ -104,7 +120,9 @@ class MySubmissions extends Component{
         </View>
         <ScrollView
           automaticallyAdjustContentInsets={false}
-          onScroll={() => { console.log('onScroll!'); }}
+          onScroll={(e) => {
+            this.handleScroll(e)
+          }}
           scrollEventThrottle={200}
           style={styles.list}
         >

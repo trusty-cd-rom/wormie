@@ -2,7 +2,8 @@ import {
   UPDATE_MY_CURRENT_WORMHOLE,
   UPDATE_MY_CURRENT_SUBMISSION,
   UPDATE_MY_CURRENT_WORMHOLE_LIST,
-  TOGGLE_ANIMATING
+  TOGGLE_ANIMATING,
+  COPY_CURRENT_USER,
 } from '../constants/actions';
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
@@ -67,11 +68,21 @@ function profile(state = {isAnimating: false}, action) {
         ...state,
         submissionsForWormholes: myCurrentWormholeList(state.submissionsForWormholes, action)
       };
+
+    // for spinner
     case TOGGLE_ANIMATING:
       return {
         ...state,
         isAnimating: action.status
       }
+
+    // copy current user info to this
+    case COPY_CURRENT_USER:
+      return {
+        ...state,
+        copyCurrentUser: action.userData
+      }
+      
     default:
       return state;
   }

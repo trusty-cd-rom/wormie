@@ -8,6 +8,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import ViewMyWormhole from '../containers/ViewMyWormhole';
+import Topbar from './Topbar';
 import { Icon } from 'react-native-icons';
 
 var styles = StyleSheet.create({
@@ -156,38 +157,38 @@ class ViewMyWormholeList extends Component{
     );
   }
 
-  topbar() {
-    return (
-      <View
-        style={styles.topbar}
-      >
-        <TouchableHighlight
-          onPress={this.back.bind(this)}
-          underlayColor='white'
-          color='white'
-          style={styles.back}
-        > 
-          <Icon
-            name='ion|chevron-left'
-            size={30}
-            color='#39247f'
-            style={styles.ionic}
-          />
-        </TouchableHighlight>
-        <View 
-          style={styles.topBarText}
-        >
-          <Text
-            style={{
-              fontWeight: 'bold',
-              color: '#39247f',
-              fontSize: 15,
-            }}
-          >Wormholes      </Text>
-        </View>
-      </View>
-    );
-  }
+  // topbar() {
+  //   return (
+  //     <View
+  //       style={styles.topbar}
+  //     >
+  //       <TouchableHighlight
+  //         onPress={this.back.bind(this)}
+  //         underlayColor='white'
+  //         color='white'
+  //         style={styles.back}
+  //       > 
+  //         <Icon
+  //           name='ion|chevron-left'
+  //           size={30}
+  //           color='#39247f'
+  //           style={styles.ionic}
+  //         />
+  //       </TouchableHighlight>
+  //       <View 
+  //         style={styles.topBarText}
+  //       >
+  //         <Text
+  //           style={{
+  //             fontWeight: 'bold',
+  //             color: '#39247f',
+  //             fontSize: 15,
+  //           }}
+  //         >Wormholes      </Text>
+  //       </View>
+  //     </View>
+  //   );
+  // }
 
   render() {
     return (
@@ -195,7 +196,10 @@ class ViewMyWormholeList extends Component{
       <View
         style={styles.container}
       >
-        {this.topbar()}
+        <Topbar 
+          topbarTitle={"Wormholes"} 
+          navigator={this.props.navigator}
+        />
         <ScrollView
           automaticallyAdjustContentInsets={false}
           onScroll={() => { console.log('onScroll!'); }}

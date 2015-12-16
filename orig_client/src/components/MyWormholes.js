@@ -103,7 +103,7 @@ class MyWormholes extends Component{
             style={styles.request}
           >
             <View>
-              <Text style={styles.buttonText}>Title: {wormhole.title} </Text>
+              <Text style={styles.buttonText}>{wormhole.title} </Text>
               <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
               <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
             </View>

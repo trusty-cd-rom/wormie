@@ -15,6 +15,7 @@ import OpenWormhole from '../containers/OpenWormhole.js';
 import MySubmissions from './MySubmissions.js';
 import MyWormholes from './MyWormholes.js';
 import Badge from './Badge';
+import Topbar from './Topbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 var styles = StyleSheet.create({
@@ -63,11 +64,33 @@ class Profile extends Component{
     getUserInfo(currentUser.id);
   }
 
+  topbar() {
+    let { updateProfile, currentUser } = this.props;
+    console.log(updateProfile);
+    console.log(currentUser);
+    if (updateProfile) {
+      console.log(currentUser);
+      return (
+        <View
+          style={{paddingTop: 20, flex:0.07}}
+        >
+          <Topbar 
+            topbarTitle={currentUser.username}
+            navigator={this.props.navigator}
+          />
+        </View>
+      );
+    } else {
+      return <View />
+    }
+  }
+
   render() {
     var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
+        { this.topbar() }
         <View 
           style={styles.badgeContainer}
         >
