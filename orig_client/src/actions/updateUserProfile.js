@@ -18,7 +18,6 @@ export function getUserDataFromFB() {
 }
 
 export function updateUserProfile(accountUpdate, cb) {
-
   return dispatch => {
 
     dispatch(startUpdating());

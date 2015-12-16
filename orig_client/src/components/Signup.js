@@ -10,9 +10,10 @@ import React, {
 } from 'react-native';
 
 import Badge from '../components/Badge';
-import Navbar from './Navbar';
+// import updateUserProfile from '../actions/updateUserProfile.js';
+import Location from './Location';
+import Navbar from '../containers/Navbar';
 import colorUtil from '../utils/color';
-
 class Signup extends Component {
 
   // componentWillMount() {

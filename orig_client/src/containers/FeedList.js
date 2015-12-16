@@ -6,7 +6,9 @@ import * as FeedListActions from '../actions/feedList';
 function mapStateToProps(state) {
 	// console.log('feed state!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ', state);
   return {
-    feed: state.feed
+    feed: state.feed,
+    currentUser: state.userProfile.currentUser,
+    peekClickedUser: state.profile.peekClickedUser,
   };
 }
 

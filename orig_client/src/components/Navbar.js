@@ -15,19 +15,9 @@ class Navbar extends Component{
       selectedTab: 'feeds'
     }
   }
-  // goToProfile() {
-  //   this.props.navigator.replace({
-  //     // title: 'Profile Page',
-  //     component: Profile,
-  //   });
-  // }
-  // goToFeedList() {
-  //   this.props.navigator.replace({
-  //     // title: 'FeedList',
-  //     component: FeedList,
-  //   });
-  // }
+
   render() {
+    let { setClickedProfile, currentUser } = this.props;
     return (
       <TabBarIOS
         // tintColor="C"
@@ -52,6 +42,7 @@ class Navbar extends Component{
           selected={this.state.selectedTab === 'profile'}
           icon={{uri:'contacts'}}
           onPress={() => {
+            setClickedProfile(currentUser);
             this.setState({
               selectedTab: 'profile',
             });

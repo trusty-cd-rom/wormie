@@ -6,7 +6,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 // import Signup from '../components/Signup';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 
 class Location extends Component {
   goToHome() {
