@@ -84,12 +84,6 @@ function profile(state = {isAnimating: false}, action) {
         peekClickedUser: action.status
       }
 
-    case TOGGLE_ANIMATING:
-      return {
-        ...state,
-        isAnimating: toggleAnimating(state.isAnimating, action)
-      }
-
     default:
       return state;
   }

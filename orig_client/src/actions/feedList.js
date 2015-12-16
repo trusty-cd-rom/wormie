@@ -51,4 +51,3 @@ function checkClickedUser() {
     status: true
   }
 }
-

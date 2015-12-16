@@ -10,10 +10,26 @@ import React, {
 } from 'react-native';
 
 import Badge from '../components/Badge';
+<<<<<<< 2ee40a1e95614749c13040bede454282ac16e8b4
 // import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
 import Navbar from '../containers/Navbar';
+||||||| merged common ancestors
+import Navbar from './Navbar';
+=======
+<<<<<<< 8e2da248d11285bc1d75986576b57ecd53349c6d
+import Navbar from './Navbar';
+>>>>>>> REFACTOR profile, add clickeduser logic
 import colorUtil from '../utils/color';
+<<<<<<< 2ee40a1e95614749c13040bede454282ac16e8b4
+||||||| merged common ancestors
+
+=======
+
+// import updateUserProfile from '../actions/updateUserProfile.js';
+import Location from './Location';
+import Navbar from '../containers/Navbar';
+>>>>>>> REFACTOR profile, add clickeduser logic
 class Signup extends Component {
 
   // componentWillMount() {
