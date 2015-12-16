@@ -15,7 +15,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.logo}>WORMIE</Text>
+          <Text style={styles.logo}>WORMiE</Text>
         </View>
         <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
         <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>

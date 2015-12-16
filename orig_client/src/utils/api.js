@@ -136,8 +136,6 @@ var api = {
 	/	 Update user's details (e.g. 'username', 'email') 
 	*/
 	updateUserDetails(userData) {
-		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		console.log("userData: ", userData);
 		return fetch(`${urls.users}${userData.id}/`, {
 	    method: 'put',
 	    headers: {
@@ -147,10 +145,7 @@ var api = {
 	    body: JSON.stringify(userData)
 	  })
 	  .then((res) => {
-	  	console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-	  	console.log(res);
 	  	res.json();
-	  	// console.log(res);
 	  })
 	  ;
 	},
@@ -161,7 +156,7 @@ var api = {
 	updateAccountDetails(accountData) {
 		var data = {
 			"about_me": accountData["about_me"],
-			// "wormie_color": accountData["wormie_color"]
+			"wormie_color": accountData["wormie_color"]
 		}
 		return fetch(`${urls.accounts}${accountData.account_id}/`, {
 			method: 'put',

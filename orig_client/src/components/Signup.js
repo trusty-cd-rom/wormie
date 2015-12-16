@@ -12,7 +12,6 @@ import React, {
 import Badge from '../components/Badge';
 import Navbar from './Navbar';
 import colorUtil from '../utils/rgb2hex';
-// import ColorSlider from './ColorSlider';
 
 class Signup extends Component {
 
@@ -34,6 +33,8 @@ class Signup extends Component {
     username = updateProfile.username || currentUser.username;
     about_me = updateProfile.about_me || currentUser.about_me;
 
+    wormie_color = colorUtil.rgbToHex(updateProfile.wormie_green, updateProfile.wormie_green, updateProfile.wormie_green) || currentUser.wormie_color;
+
     var accountUpdate = {
       user_id: currentUser.id,
       account_id: currentUser.account_id,
@@ -41,7 +42,7 @@ class Signup extends Component {
       wormie_red: updateProfile.wormie_red,
       wormie_green: updateProfile.wormie_green,
       wormie_blue: updateProfile.wormie_blue,
-      wormie_color: updateProfile.wormie_color,
+      wormie_color: wormie_color,
       about_me: about_me
     };
 
@@ -93,59 +94,37 @@ class Signup extends Component {
           value = {updateProfile.wormie_red || currentUser.wormie_red}
           minimumValue={0.0}
           maximumValue={255.0}
-          onValueChange={(value) => this.handleSliderChange({field: 'wormie_red', value: value})}/>
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_red', value: Math.floor(value)})}/>
         <SliderIOS
           style={styles.slider}
           value = {updateProfile.wormie_green || currentUser.wormie_green}
           minimumValue={0.0}
           maximumValue={255.0}
-          onValueChange={(value) => this.handleSliderChange({field: 'wormie_green', value: value})}/>
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_green', value: Math.floor(value)})}/>
         <SliderIOS
           style={styles.slider}
           value = {updateProfile.wormie_blue || currentUser.wormie_blue}
           minimumValue={0.0}
           maximumValue={255.0}
-          onValueChange={(value) => this.handleSliderChange({field: 'wormie_blue', value: value})}/>
+          onValueChange={(value) => this.handleSliderChange({field: 'wormie_blue', value: Math.floor(value)})}/>
         <TouchableHighlight
-          style={[styles.container, { backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue)}]}
+          style={[styles.container, { 
+            backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue),
+            flexDirection: 'row',
+            justifyContent: 'center',
+            width: 180,
+            borderRadius: 10,
+            borderColor: 'white',
+            marginBottom: 20,
+            flex: 1,
+            }]}
           onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
           underlayColor = '#88D4f5'>
-          <Text style = {styles.buttonText}> Explore </Text>
+          <Text style = {styles.buttonText}> EXPLORE </Text>
         </TouchableHighlight>
       </View>
     );
   }
-
-  // _buttonBackground() {
-
-  //   var {updateProfile, currentUser} = this.props;
-
-  //   var obj = {
-  //     flexDirection: 'row',
-  //     alignSelf: 'stretch',
-  //     justifyContent: 'center',
-  //     flex: 1
-  //   }
-
-  //   function componentToHex(c) {
-  //       var hex = c.toString(16);
-  //       return hex.length == 1 ? "0" + hex : hex;
-  //   }
-
-  //   function rgbToHex(r, g, b) {
-  //       return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-  //   }
-
-  //   var red = updateProfile.wormie_red;
-  //   var green = updateProfile.wormie_green;
-  //   var blue = updateProfile.wormie_blue;
-
-  //   var bgColor = rgbToHex(red, green, blue);
-
-  //   obj.backgroundColor = bgColor;
-
-  //   return obj; 
-  // }
 
 }
 
@@ -175,7 +154,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 25,
     color: 'white',
     alignSelf: 'center'
   },

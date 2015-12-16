@@ -19,8 +19,6 @@ export function getUserDataFromFB() {
 
 export function updateUserProfile(accountUpdate, cb) {
 
-  console.log('hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-
   return dispatch => {
 
     dispatch(startUpdating());
@@ -34,12 +32,8 @@ export function updateUserProfile(accountUpdate, cb) {
           username: accountUpdate.username
         };
 
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        console.log("userdata is: ", userData);
-
         return api.updateUserDetails(userData)
           .then((res) => {
-            console.log("Should have UPDATED USERNAME");
             dispatch(stopUpdating());
             cb();
           });
