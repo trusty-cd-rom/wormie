@@ -38,6 +38,9 @@ var styles = StyleSheet.create({
 
 class Topbar extends Component{
   back() {
+    var { stopClickedUser } = this.props;
+    console.log('stopClickedUser from topbar');
+    if (stopClickedUser) { stopClickedUser(); }
     this.props.navigator.pop();
   }
 

@@ -28,6 +28,7 @@ class Navbar extends Component{
   //   });
   // }
   render() {
+    let { setClickedProfile, currentUser } = this.props;
     return (
       <TabBarIOS
         // tintColor="C"
@@ -52,6 +53,7 @@ class Navbar extends Component{
           selected={this.state.selectedTab === 'profile'}
           icon={{uri:'contacts'}}
           onPress={() => {
+            setClickedProfile(currentUser);
             this.setState({
               selectedTab: 'profile',
             });

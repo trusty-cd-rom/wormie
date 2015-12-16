@@ -59,34 +59,65 @@ class Profile extends Component{
         // />
         // <ScrollableTabView renderTabBar={() => <CustomTabBar someProp={'here'} />}>
   componentWillMount() {
-    let { getUserInfo, currentUser } = this.props;
-    console.log('currentUser: ', currentUser);
-    getUserInfo(currentUser.id);
+    let { peekClickedUser, setClickedProfile, currentUser } = this.props;
+    // if there is no clicked user(friends/others)
+    if (!peekClickedUser) {
+      console.log('current username!!!!!!!!!!!!!!!', currentUser);
+      // set currentUser to clickedUser
+      setClickedProfile(currentUser);
+    // this will be set from feedlist
+    } 
+    // else {
+    //   setClickedProfile(clickedUser);
+    // }
   }
 
+  componentWillUpdate() {
+    let { peekClickedUser, setClickedProfile, currentUser } = this.props;
+    // if there is no clicked user(friends/others)
+    if (!peekClickedUser) {
+      console.log('current username!!!!!!!!!!!!!!! for will update', currentUser);
+      // set currentUser to clickedUser
+      setClickedProfile(currentUser);
+    // this will be set from feedlist
+    }
+  }
+
+  // TODO: updateProfile
   topbar() {
-    let { updateProfile, currentUser } = this.props;
-    console.log(updateProfile);
-    console.log(currentUser);
-    if (updateProfile) {
-      console.log(currentUser);
+    let { profile,stopClickedUser, currentUser, clickedUser } = this.props;
+    // toggle peek_clicked_user(friends/others)
+    console.log('current username: ',currentUser.username);
+    console.log('clicked user: ', clickedUser.username);
+    console.log('profile: ', profile)
+    if ((clickedUser && (clickedUser.username == currentUser.username )) || profile === 'true') {
+      return <View />
+    } else {
+      console.log('topbar!!!')
       return (
         <View
           style={{paddingTop: 20, flex:0.07}}
         >
           <Topbar 
-            topbarTitle={currentUser.username}
+            topbarTitle={clickedUser.username}
             navigator={this.props.navigator}
+            stopClickedUser={this.props.stopClickedUser}
           />
         </View>
       );
-    } else {
-      return <View />
     }
   }
 
   render() {
-    var { currentUser, submissions, wormholes, updateMyCurrentWormhole, updateMyCurrentSubmission, updateProfile } = this.props;
+    var { 
+      submissions, 
+      wormholes, 
+      updateMyCurrentWormhole, 
+      updateMyCurrentSubmission, 
+      updateProfile,
+      clickedUser,
+      submissions
+    } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
@@ -95,13 +126,13 @@ class Profile extends Component{
           style={styles.badgeContainer}
         >
           <Badge 
+            clickedUser={this.props.clickedUser}
             currentUser={this.props.currentUser}
             updateProfile={this.props.updateProfile} 
             navigator={this.props.navigator}
             profile="true"
             goToCreateRequest={this.goToCreateRequest}
           />
-          
         </View>
         <ScrollableTabView
           style={{flexWrap: 'wrap'}}>

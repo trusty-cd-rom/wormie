@@ -10,8 +10,7 @@ import React, {
 import Badge from '../components/Badge';
 // import updateUserProfile from '../actions/updateUserProfile.js';
 import Location from './Location';
-import Navbar from './Navbar';
-
+import Navbar from '../containers/Navbar';
 class Signup extends Component {
 
   // componentWillMount() {

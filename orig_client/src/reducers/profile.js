@@ -3,7 +3,8 @@ import {
   UPDATE_MY_CURRENT_SUBMISSION,
   UPDATE_MY_CURRENT_WORMHOLE_LIST,
   TOGGLE_ANIMATING,
-  COPY_CURRENT_USER,
+  SET_CLICKED_USER,
+  TOGGLE_PEEK_CLICKED_USER,
 } from '../constants/actions';
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
@@ -77,12 +78,20 @@ function profile(state = {isAnimating: false}, action) {
       }
 
     // copy current user info to this
-    case COPY_CURRENT_USER:
+    case SET_CLICKED_USER:
+      console.log('hit set clicekd user reducer');
       return {
         ...state,
-        copyCurrentUser: action.userData
+        clickedUser: action.userData
       }
-      
+
+    case TOGGLE_PEEK_CLICKED_USER:
+      console.log('hit toggle peek reducer');
+      return {
+        ...state,
+        peekClickedUser: action.status
+      }
+
     default:
       return state;
   }

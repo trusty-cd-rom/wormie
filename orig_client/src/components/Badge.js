@@ -65,27 +65,81 @@ class Badge extends React.Component{
   }
 
   name() {
-    var { currentUser, updateProfile, profile} = this.props;
+    var { currentUser, updateProfile, profile, clickedUser, } = this.props;
     if ( updateProfile.username.length > 0 ){
       return <Text style={styles.name}>{updateProfile['username']}</Text>
-    } else {
+    // clicked user exist
+    } else if ( clickedUser ) {
+      return <Text style={styles.name}>{clickedUser['username']}</Text>
+    } else if ( currentUser ) {
       return <Text style={styles.name}>{currentUser['username']}</Text>
     }
   }
 
   about_me() {
-    var { currentUser, updateProfile, profile} = this.props;
+    var { currentUser, updateProfile, profile, clickedUser} = this.props;
     if ( updateProfile.about_me.length > 0 ){
       return <Text style={styles.handle}>{updateProfile['about_me']}</Text>
-    } else {
+    // clicked user exist
+    } else if ( clickedUser ) {
+      return <Text style={styles.handle}>{clickedUser['about_me']}</Text>
+    } else if ( currentUser ) {
       return <Text style={styles.handle}>{currentUser['about_me']}</Text>
     }
   }
 
-  // <Text style={{marginTop: 30, backgroundColor: "purple", color: "black"}}> + </Text>
+  image() {
+    var { currentUser, clickedUser } = this.props;
+    if ( !clickedUser ) {
+      return (
+        <Image 
+          style = {styles.image}
+          source = {{uri: currentUser['picture_url']}}
+        />
+      );    
+    // clicked user exist
+    } else {
+      return (
+        <Image 
+          style = {styles.image}
+          source = {{uri: clickedUser['picture_url']}}
+        />
+      );
+    }
+  }
+
+  info() {
+    var { currentUser, updateProfile, profile, clickedUser, } = this.props;
+    if ( updateProfile.username.length > 0 ){
+      return (
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{updateProfile['username']}</Text>
+          <Text style={styles.handle}>{updateProfile['about_me']}</Text>
+        </View>
+      );
+    // clicked user exist
+    } else if ( clickedUser ) {
+      return (
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{clickedUser['username']}</Text>
+          <Text style={styles.handle}>{clickedUser['about_me']}</Text>
+        </View>
+      );
+    } else if ( currentUser ) {
+      return (
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{currentUser['username']}</Text>
+          <Text style={styles.handle}>{currentUser['about_me']}</Text>
+        </View>
+      );
+    }
+  }
+
+
   button() {
-    var { profile } = this.props;
-    if (profile === 'true') {
+    var { profile, currentUser, clickedUser } = this.props;
+    console.log('current username: ',currentUser.username);
+    if ((clickedUser && (clickedUser.username == currentUser.username )) && profile === 'true') {
       return (
         <View style={ styles.button }>
           <TouchableHighlight
@@ -96,7 +150,7 @@ class Badge extends React.Component{
               style={{
                 backgroundColor:'#39247f',
                 width: 30,
-                height: 30
+                height: 30,
               }}>
               <Icon
                 name='ion|plus-round'
@@ -117,14 +171,8 @@ class Badge extends React.Component{
     var { currentUser, updateProfile } = this.props;
     return (
       <View style = {styles.container}>
-        <Image 
-          style = {styles.image}
-          source = {{uri: currentUser['picture_url']}}
-        />
-        <View style={styles.infoContainer}>
-          {this.name()}
-          {this.about_me()}
-        </View>
+        { this.image() }
+        { this.info() }
         { this.button() }
       </View>
       

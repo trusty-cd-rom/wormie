@@ -18,8 +18,14 @@ var Video = require('react-native-video');
 
 class FeedList extends React.Component{
   componentWillMount() {
-    let { refreshFeedData, copyCurrentUser } = this.props;
+    let { peekClickedUser, setClickedProfile, currentUser, refreshFeedData, clickedUser } = this.props;
     refreshFeedData();
+    // if there is no clicked user(friends/others)
+    if (!peekClickedUser) {
+      console.log('hit feed list no peekClickedUser', currentUser);
+      // set currentUser to clickedUser
+      setClickedProfile(currentUser);
+    }
   }
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
@@ -74,10 +80,9 @@ class FeedList extends React.Component{
               // id(in database) = account_id + 1
               console.log('submitter', item.submissions[0].submitter['account_id']);
               var id = item.submissions[0].submitter['account_id'] + 1;
-              getUserInfo(id, (otherUserInfo) => {
+              getUserInfo(id, () => {
                 this.props.navigator.push({
                   component: Profile,
-                  passProps: {currentUser: otherUserInfo}
                 });
               })
             }}

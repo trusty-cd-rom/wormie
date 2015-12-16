@@ -9,7 +9,7 @@ import React, {
   ActivityIndicatorIOS,
 } from 'react-native';
 // var YouTube = require('react-native-youtube');
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 var Video = require('react-native-video');
 
 class SubmitWormhole extends Component {

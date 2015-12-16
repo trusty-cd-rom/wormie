@@ -1,4 +1,3 @@
-/************ PROFILE *************/
 import React, {
   Text,
   View,

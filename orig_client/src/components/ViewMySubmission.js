@@ -5,7 +5,7 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 import CameraView from '../containers/Camera';
 var YouTube = require('react-native-youtube');
 
