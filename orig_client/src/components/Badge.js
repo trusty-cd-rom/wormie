@@ -20,17 +20,18 @@ var styles = StyleSheet.create({
     marginBottom: 23
   },
   infoContainer: {
-    // color: 'black',
     alignSelf: 'flex-start'
   },
   name: {
     fontSize: 17,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
+    // fontWeight: 'bold',
     color: '#3e3e3e',
     marginTop: 10,
     marginBottom: 5,
   },
   handle: {
+    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: '#727272'
   },
