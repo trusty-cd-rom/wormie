@@ -72,25 +72,11 @@ class Profile extends Component{
     // }
   }
 
-<<<<<<< 2ee40a1e95614749c13040bede454282ac16e8b4
   // TODO: updateProfile
-||||||| merged common ancestors
-=======
-  componentWillUpdate() {
-    let { peekClickedUser, setClickedProfile, currentUser } = this.props;
-    // if there is no clicked user(friends/others)
-    if (!peekClickedUser) {
-      console.log('current username!!!!!!!!!!!!!!! for will update', currentUser);
-      // set currentUser to clickedUser
-      setClickedProfile(currentUser);
-    // this will be set from feedlist
-    }
-  }
 
   // TODO: updateProfile
->>>>>>> REFACTOR profile, add clickeduser logic
   topbar() {
-    let { profile,stopClickedUser, currentUser, clickedUser } = this.props;
+    let { profile, stopClickedUser, currentUser, clickedUser } = this.props;
     // toggle peek_clicked_user(friends/others)
     console.log('current username: ',currentUser.username);
     console.log('clicked user: ', clickedUser.username);

@@ -124,7 +124,7 @@ class MyWormholes extends Component{
   }
 
   handleScroll(e) {
-    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var { isAnimating, getUserInfo, clickedUser } = this.props;
     var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
     this.lastScrollY = scrollY;
     this.lastContentInsetTop = e.nativeEvent.contentInset.top;
@@ -135,7 +135,7 @@ class MyWormholes extends Component{
 
     if (scrollY < -this.minPulldownDistance) {
       if (!isAnimating) {
-        getUserInfo(currentUser.id);
+        getUserInfo(clickedUser.id);
       }
     }
   }
@@ -151,7 +151,7 @@ class MyWormholes extends Component{
           <Spinner 
             isAnimating={this.props.isAnimating}
             getUserInfo={this.props.getUserInfo}
-            currentUser={this.props.currentUser} 
+            clickedUser={this.props.clickedUser} 
           />
         </View>
         <ScrollView
