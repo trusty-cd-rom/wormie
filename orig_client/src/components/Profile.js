@@ -76,13 +76,18 @@ class Profile extends Component{
 
   // TODO: updateProfile
   topbar() {
-    let { profile, stopClickedUser, currentUser, clickedUser } = this.props;
+    let { profile, stopClickedUser, currentUser, clickedUser, fromFeed } = this.props;
     // toggle peek_clicked_user(friends/others)
     console.log('current username: ',currentUser.username);
     console.log('clicked user: ', clickedUser.username);
     console.log('profile: ', profile)
-    if ((clickedUser && (clickedUser.username == currentUser.username )) || profile === 'true') {
+    
+    // if clicked user === current user
+    // if the request is not from feedlist
+    if ( (clickedUser && !fromFeed && (clickedUser.username == currentUser.username )) || (profile === 'true')) {
       return <View />
+
+    // if the request if from feedList
     } else {
       console.log('topbar!!!')
       return (
