@@ -83,6 +83,7 @@ class FeedList extends React.Component{
               getUserInfo(id, () => {
                 this.props.navigator.push({
                   component: Profile,
+                  passProps: { fromFeed: true }
                 });
               })
             }}
