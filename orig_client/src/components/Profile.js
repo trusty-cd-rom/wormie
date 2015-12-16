@@ -72,31 +72,25 @@ class Profile extends Component{
     // }
   }
 
-  componentWillUpdate() {
-    let { peekClickedUser, setClickedProfile, currentUser } = this.props;
-    // if there is no clicked user(friends/others)
-    if (!peekClickedUser) {
-      console.log('current username!!!!!!!!!!!!!!! for will update', currentUser);
-      // set currentUser to clickedUser
-      setClickedProfile(currentUser);
-    // this will be set from feedlist
-    }
-  }
-
   // TODO: updateProfile
   topbar() {
-    let { profile,stopClickedUser, currentUser, clickedUser } = this.props;
+    let { profile, stopClickedUser, currentUser, clickedUser, fromFeed } = this.props;
     // toggle peek_clicked_user(friends/others)
     console.log('current username: ',currentUser.username);
     console.log('clicked user: ', clickedUser.username);
     console.log('profile: ', profile)
-    if ((clickedUser && (clickedUser.username == currentUser.username )) || profile === 'true') {
+    
+    // if clicked user === current user
+    // if the request is not from feedlist
+    if ( (clickedUser && !fromFeed && (clickedUser.username == currentUser.username )) || (profile === 'true')) {
       return <View />
+
+    // if the request if from feedList
     } else {
       console.log('topbar!!!')
       return (
         <View
-          style={{paddingTop: 20, flex:0.07}}
+          style={{paddingTop: 20, flex: 0.07}}
         >
           <Topbar 
             topbarTitle={clickedUser.username}
@@ -108,6 +102,35 @@ class Profile extends Component{
     }
   }
 
+  badge() {
+    if (this.props.fromFeed) {
+      return (
+        <Badge 
+          clickedUser={this.props.clickedUser}
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} 
+          navigator={this.props.navigator}
+          profile="true"
+          fromFeed={this.props.fromFeed}
+          goToCreateRequest={this.goToCreateRequest}
+        />
+      );
+    } else {
+      return (
+        <Badge 
+          clickedUser={this.props.clickedUser}
+          currentUser={this.props.currentUser}
+          updateProfile={this.props.updateProfile} 
+          navigator={this.props.navigator}
+          profile="true"
+          goToCreateRequest={this.goToCreateRequest}
+        />
+      );
+    }
+  }
+
+
+  // TODO: spinner isAnimating, toggleAnimating
   render() {
     var { 
       submissions, 
@@ -125,14 +148,7 @@ class Profile extends Component{
         <View 
           style={styles.badgeContainer}
         >
-          <Badge 
-            clickedUser={this.props.clickedUser}
-            currentUser={this.props.currentUser}
-            updateProfile={this.props.updateProfile} 
-            navigator={this.props.navigator}
-            profile="true"
-            goToCreateRequest={this.goToCreateRequest}
-          />
+          { this.badge() }
         </View>
         <ScrollableTabView
           style={{flexWrap: 'wrap'}}>

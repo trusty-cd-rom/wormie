@@ -20,18 +20,17 @@ var styles = StyleSheet.create({
     marginBottom: 23
   },
   infoContainer: {
+    // color: 'black',
     alignSelf: 'flex-start'
   },
   name: {
     fontSize: 17,
-    fontFamily: 'Lato-Bold',
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
     color: '#3e3e3e',
     marginTop: 10,
     marginBottom: 5,
   },
   handle: {
-    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: '#727272'
   },
@@ -58,35 +57,18 @@ var styles = StyleSheet.create({
 
 class Badge extends React.Component{
 
+  componentWillMount() {
+    var {clickedUser,currentUser,updateProfile,} = this.props;
+    console.log('clickedUser', clickedUser);
+    console.log('currentUser', currentUser);
+    console.log('updateProfile', updateProfile);
+  }
+
   goToCreateRequest() {
     var { navigator } = this.props;
     this.props.navigator.push({
       component: CreateRequest
     })
-  }
-
-  name() {
-    var { currentUser, updateProfile, profile, clickedUser, } = this.props;
-    if ( updateProfile.username.length > 0 ){
-      return <Text style={styles.name}>{updateProfile['username']}</Text>
-    // clicked user exist
-    } else if ( clickedUser ) {
-      return <Text style={styles.name}>{clickedUser['username']}</Text>
-    } else if ( currentUser ) {
-      return <Text style={styles.name}>{currentUser['username']}</Text>
-    }
-  }
-
-  about_me() {
-    var { currentUser, updateProfile, profile, clickedUser} = this.props;
-    if ( updateProfile.about_me.length > 0 ){
-      return <Text style={styles.handle}>{updateProfile['about_me']}</Text>
-    // clicked user exist
-    } else if ( clickedUser ) {
-      return <Text style={styles.handle}>{clickedUser['about_me']}</Text>
-    } else if ( currentUser ) {
-      return <Text style={styles.handle}>{currentUser['about_me']}</Text>
-    }
   }
 
   image() {
@@ -111,7 +93,14 @@ class Badge extends React.Component{
 
   info() {
     var { currentUser, updateProfile, profile, clickedUser, } = this.props;
-    if ( updateProfile.username.length > 0 ){
+    if ( clickedUser ) {
+      return (
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{clickedUser['username']}</Text>
+          <Text style={styles.handle}>{clickedUser['about_me']}</Text>
+        </View>
+      );
+    } else if ( updateProfile.username.length > 0 ){
       return (
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{updateProfile['username']}</Text>
@@ -119,13 +108,6 @@ class Badge extends React.Component{
         </View>
       );
     // clicked user exist
-    } else if ( clickedUser ) {
-      return (
-        <View style={styles.infoContainer}>
-          <Text style={styles.name}>{clickedUser['username']}</Text>
-          <Text style={styles.handle}>{clickedUser['about_me']}</Text>
-        </View>
-      );
     } else if ( currentUser ) {
       return (
         <View style={styles.infoContainer}>
@@ -136,11 +118,10 @@ class Badge extends React.Component{
     }
   }
 
-
   button() {
-    var { profile, currentUser, clickedUser } = this.props;
+    var { profile, currentUser, clickedUser, fromFeed } = this.props;
     console.log('current username: ',currentUser.username);
-    if ((clickedUser && (clickedUser.username == currentUser.username )) && profile === 'true') {
+    if ((fromFeed === undefined) && (clickedUser && (clickedUser.username == currentUser.username )) && profile === 'true') {
       return (
         <View style={ styles.button }>
           <TouchableHighlight
@@ -169,7 +150,6 @@ class Badge extends React.Component{
   }
 
   render() {
-    var { currentUser, updateProfile } = this.props;
     return (
       <View style = {styles.container}>
         { this.image() }

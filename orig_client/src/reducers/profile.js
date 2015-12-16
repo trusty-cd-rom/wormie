@@ -40,14 +40,6 @@ function myCurrentWormholeList(state = {}, action) {
   }
 };
 
-function toggleAnimating(state = {isAnimating: false}, action) {
-  switch (action.type) {
-    case TOGGLE_ANIMATING:
-      return action.isAnimating;
-    default:
-      return state;
-  }
-}
 
 function profile(state = {isAnimating: false}, action) {
   switch (action.type) {

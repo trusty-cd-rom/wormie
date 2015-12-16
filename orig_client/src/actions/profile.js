@@ -103,3 +103,28 @@ function stopFetching() {
   };
 };
 
+export function getUserInfo(id) {
+  return dispatch => {
+    api.getUserDetails(id)
+      .then(function (res) {
+        dispatch(setCurrentUser(res));
+      });
+  }
+}
+
+function setCurrentUser(res) {
+  return {
+    type: SET_CURRENT_USER,
+    userData: res
+  };
+}
+
+export function toggleAnimating(isAnimating) {
+  isAnimating = isAnimating ? false : true;
+  return dispatch => {
+    return dispatch({
+      type: TOGGLE_ANIMATING,
+      isAnimating
+    });
+  }
+}

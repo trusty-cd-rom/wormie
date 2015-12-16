@@ -123,7 +123,6 @@ class Signup extends Component {
             width: 150,
             borderRadius: 10,
             borderColor: 'white',
-            fontFamily: 'Lato-Bold',
             marginBottom: 20,
             flex: 1,
             }]}
@@ -137,6 +136,7 @@ class Signup extends Component {
 
 }
 
+            //fontFamily: 'Lato-Bold',
 
 const styles = StyleSheet.create({
   container: {

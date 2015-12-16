@@ -50,13 +50,21 @@ var styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 0
   },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gray: {
+    backgroundColor: '#cccccc',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 });
 
 class MyWormholes extends Component{
 
-  componentWillMount() {
-    // this.setToggleTimeout();
-  }
 
   viewRequest(currentWormholeList) {
     var { updateMyCurrentWormholeList, wormholes } = this.props;
@@ -113,7 +121,7 @@ class MyWormholes extends Component{
   }
 
   handleScroll(e) {
-    var { isAnimating, getUserInfo, currentUser } = this.props;
+    var { isAnimating, getUserInfo, clickedUser } = this.props;
     var scrollY = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y
     this.lastScrollY = scrollY;
     this.lastContentInsetTop = e.nativeEvent.contentInset.top;
@@ -124,14 +132,13 @@ class MyWormholes extends Component{
 
     if (scrollY < -this.minPulldownDistance) {
       if (!isAnimating) {
-        getUserInfo(currentUser.id);
+        getUserInfo(clickedUser.id);
       }
     }
   }
 
   render() {
-    let { updateMyCurrentWormhole, getUserInfo, isAnimating, currentUser } = this.props;
-
+    let { isAnimating, toggleAnimating } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View>
@@ -141,13 +148,14 @@ class MyWormholes extends Component{
           <Spinner 
             isAnimating={this.props.isAnimating}
             getUserInfo={this.props.getUserInfo}
-            currentUser={this.props.currentUser} 
+            clickedUser={this.props.clickedUser} 
           />
         </View>
         <ScrollView
           automaticallyAdjustContentInsets={false}
           onScroll={(e) => {
-            this.handleScroll(e)
+            this.handleScroll(e);
+            toggleAnimating(isAnimating);
           }}
           scrollEventThrottle={200}
           style={styles.list}
