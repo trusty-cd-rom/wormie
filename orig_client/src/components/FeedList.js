@@ -83,6 +83,7 @@ class FeedList extends React.Component{
               getUserInfo(id, () => {
                 this.props.navigator.push({
                   component: Profile,
+                  passProps: { fromFeed: true }
                 });
               })
             }}
@@ -130,13 +131,7 @@ class FeedList extends React.Component{
       }
       return Math.floor(seconds) + "s";
   }
-              //   <View>
-              //   <TouchableHighlight
-              //     style = {styles.loginButton}
-              //     onPress = {this.viewRequest.bind(this, index)}
-              //   >
-              //   </TouchableHighlight> 
-              // </View>
+
   render() {
     var { feed, getUserInfo } = this.props;
     var list = feed.map((item, index) => {
@@ -166,6 +161,7 @@ class FeedList extends React.Component{
                   getUserInfo(id, () => {
                     this.props.navigator.push({
                       component: Profile,
+                      passProps: { fromFeed: true }
                     });
                   })
                 }}

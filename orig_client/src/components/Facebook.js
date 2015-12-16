@@ -21,6 +21,7 @@ var {
 class FacebookLogin extends React.Component {
 
   goToSignup() {
+    console.log('about to go to signup');
     this.props.navigator.replace({
       component: Signup
     });
@@ -31,6 +32,7 @@ class FacebookLogin extends React.Component {
     var tokenData = "grant_type=convert_token&client_id=LQBBAG7oJGNgdQyFyJg8TgZpNveL3d8PDkVgfgG2&client_secret=FjoMZbsjfuNJPEsuCgGFHTC0ABDh1KhM0odP7yJpDTAVvcrMzxFNSCU0seF6959ekTsCdB0FSbt2deHnHwM8U5GQfKW9WfrDyBlcHyViRxTF6vM0oavydUkByfUBK4HJ&backend=facebook&token=" + token;
 
     this.props.convertFacebookToken(tokenData, () => {
+        console.log('convertFacebookToken');
         this.goToSignup();
     });
   }

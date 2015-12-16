@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 50,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
+    fontFamily: 'Lato-Semibold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',

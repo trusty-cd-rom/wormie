@@ -105,7 +105,7 @@ class MySubmissions extends Component{
   }
 
   render() {
-    var { submissions, updateMyCurrentSubmission } = this.props;
+    var { toggleAnimating, isAnimating } = this.props;
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View>
@@ -122,6 +122,7 @@ class MySubmissions extends Component{
           automaticallyAdjustContentInsets={false}
           onScroll={(e) => {
             this.handleScroll(e)
+            toggleAnimating(isAnimating);
           }}
           scrollEventThrottle={200}
           style={styles.list}

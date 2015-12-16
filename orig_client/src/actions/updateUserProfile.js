@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
+import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, UPDATE_SIGNUP_SLIDER, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
 
 
 export function getUserDataFromFB() {
@@ -18,8 +18,6 @@ export function getUserDataFromFB() {
 }
 
 export function updateUserProfile(accountUpdate, cb) {
-
-  console.log('hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   return dispatch => {
 
     dispatch(startUpdating());
@@ -33,12 +31,8 @@ export function updateUserProfile(accountUpdate, cb) {
           username: accountUpdate.username
         };
 
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        console.log("userdata is: ", userData);
-
         return api.updateUserDetails(userData)
           .then((res) => {
-            console.log("Should have UPDATED USERNAME");
             dispatch(stopUpdating());
             cb();
           });
@@ -82,6 +76,15 @@ export function updateSignUpInputText(field, text) {
     text
   };
 };
+
+export function updateSignUpSlider(field, value) {
+  return {
+    type: UPDATE_SIGNUP_SLIDER,
+    field,
+    value
+  };
+};
+
 
 export function setCurrentUser(res) {
   return {
