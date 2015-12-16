@@ -119,7 +119,7 @@ class Signup extends Component {
             backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue),
             flexDirection: 'row',
             justifyContent: 'center',
-            width: 180,
+            width: 150,
             borderRadius: 10,
             borderColor: 'white',
             marginBottom: 20,
