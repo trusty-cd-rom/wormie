@@ -122,6 +122,7 @@ class Signup extends Component {
             width: 150,
             borderRadius: 10,
             borderColor: 'white',
+            fontFamily: 'Lato-Bold',
             marginBottom: 20,
             flex: 1,
             }]}
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
     height: 10
   },
   text: {
+    fontFamily: 'Lato-Regular',
     fontSize: 14,
     textAlign: 'center',
     margin: 10,
@@ -161,11 +163,13 @@ const styles = StyleSheet.create({
     flex: 1
   },
   buttonText: {
+    fontFamily: 'Lato-Regular',
     fontSize: 25,
     color: 'white',
     alignSelf: 'center'
   },
   title: {
+    fontFamily: 'Lato-Regular',
     marginTop: 10,
     marginBottom: 10,
     fontSize: 16,
@@ -174,6 +178,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   searchInput: {
+    fontFamily: 'Lato-Regular',
     height: 40,
     width: 350,
     padding: 4,

@@ -15,7 +15,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.splashImage}>
-          <Text style={styles.logo}>WORMiE</Text>
+          <Text style={styles.logo}>WORMIE</Text>
         </View>
         <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
         <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 50,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
+    fontFamily: 'Lato-Semibold',
     textAlign: 'center',
     alignSelf: 'center',
     color: 'white',

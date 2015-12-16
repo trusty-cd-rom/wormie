@@ -53,6 +53,15 @@
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
+		CBFAD8DF1C21300500D81FC5 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8CD1C21300500D81FC5 /* Lato-Black.ttf */; };
+		CBFAD8E11C21300600D81FC5 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8CF1C21300500D81FC5 /* Lato-Bold.ttf */; };
+		CBFAD8E31C21300600D81FC5 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8D11C21300500D81FC5 /* Lato-Hairline.ttf */; };
+		CBFAD8E51C21300600D81FC5 /* Lato-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8D31C21300500D81FC5 /* Lato-Heavy.ttf */; };
+		CBFAD8E81C21300600D81FC5 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8D61C21300500D81FC5 /* Lato-Light.ttf */; };
+		CBFAD8EA1C21300600D81FC5 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8D81C21300500D81FC5 /* Lato-Medium.ttf */; };
+		CBFAD8EC1C21300600D81FC5 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8DA1C21300500D81FC5 /* Lato-Regular.ttf */; };
+		CBFAD8ED1C21300600D81FC5 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8DB1C21300500D81FC5 /* Lato-Semibold.ttf */; };
+		CBFAD8EF1C21300600D81FC5 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBFAD8DD1C21300500D81FC5 /* Lato-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +251,15 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
+		CBFAD8CD1C21300500D81FC5 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../../../../Downloads/lato/Lato-Black.ttf"; sourceTree = "<group>"; };
+		CBFAD8CF1C21300500D81FC5 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../Downloads/lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		CBFAD8D11C21300500D81FC5 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "../../../../Downloads/lato/Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		CBFAD8D31C21300500D81FC5 /* Lato-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Heavy.ttf"; path = "../../../../Downloads/lato/Lato-Heavy.ttf"; sourceTree = "<group>"; };
+		CBFAD8D61C21300500D81FC5 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../../../../Downloads/lato/Lato-Light.ttf"; sourceTree = "<group>"; };
+		CBFAD8D81C21300500D81FC5 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Medium.ttf"; path = "../../../../Downloads/lato/Lato-Medium.ttf"; sourceTree = "<group>"; };
+		CBFAD8DA1C21300500D81FC5 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		CBFAD8DB1C21300500D81FC5 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "../../../../Downloads/lato/Lato-Semibold.ttf"; sourceTree = "<group>"; };
+		CBFAD8DD1C21300500D81FC5 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../../../../Downloads/lato/Lato-Thin.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +505,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CBFAD8BC1C212FC100D81FC5 /* Fonts */,
 				1321B9341C1CF678002DEA85 /* FontAwesomeKit */,
 				CBC930151C1CABF8005EBA4F /* Frameworks */,
 				680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */,
@@ -523,6 +542,22 @@
 				CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CBFAD8BC1C212FC100D81FC5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CBFAD8CD1C21300500D81FC5 /* Lato-Black.ttf */,
+				CBFAD8CF1C21300500D81FC5 /* Lato-Bold.ttf */,
+				CBFAD8D11C21300500D81FC5 /* Lato-Hairline.ttf */,
+				CBFAD8D31C21300500D81FC5 /* Lato-Heavy.ttf */,
+				CBFAD8D61C21300500D81FC5 /* Lato-Light.ttf */,
+				CBFAD8D81C21300500D81FC5 /* Lato-Medium.ttf */,
+				CBFAD8DA1C21300500D81FC5 /* Lato-Regular.ttf */,
+				CBFAD8DB1C21300500D81FC5 /* Lato-Semibold.ttf */,
+				CBFAD8DD1C21300500D81FC5 /* Lato-Thin.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -797,27 +832,36 @@
 			files = (
 				13FCEF071C1CFF7C00E41510 /* FAKFontAwesome.h in Resources */,
 				13FCEF081C1CFF7C00E41510 /* FAKFontAwesome.m in Resources */,
+				CBFAD8EC1C21300600D81FC5 /* Lato-Regular.ttf in Resources */,
 				13FCEF091C1CFF7C00E41510 /* FAKFoundationIcons.h in Resources */,
+				CBFAD8ED1C21300600D81FC5 /* Lato-Semibold.ttf in Resources */,
+				CBFAD8EF1C21300600D81FC5 /* Lato-Thin.ttf in Resources */,
 				13FCEF0A1C1CFF7C00E41510 /* FAKFoundationIcons.m in Resources */,
+				CBFAD8E31C21300600D81FC5 /* Lato-Hairline.ttf in Resources */,
 				13FCEF0B1C1CFF7C00E41510 /* FAKMaterial.h in Resources */,
 				13FCEF0C1C1CFF7C00E41510 /* FAKMaterial.m in Resources */,
 				13FCEF0D1C1CFF7C00E41510 /* FAKOcticons.h in Resources */,
 				13FCEF0E1C1CFF7C00E41510 /* FAKOcticons.m in Resources */,
+				CBFAD8EA1C21300600D81FC5 /* Lato-Medium.ttf in Resources */,
 				13FCEF0F1C1CFF7C00E41510 /* FAKZocial.h in Resources */,
 				13FCEF101C1CFF7C00E41510 /* FAKZocial.m in Resources */,
 				13FCEF111C1CFF7C00E41510 /* octicons.ttf in Resources */,
 				13FCEF121C1CFF7C00E41510 /* zocial-regular-webfont.ttf in Resources */,
 				13FCEF041C1CFF3300E41510 /* FAKIcon.h in Resources */,
+				CBFAD8E81C21300600D81FC5 /* Lato-Light.ttf in Resources */,
 				13FCEF051C1CFF3300E41510 /* FAKIcon.m in Resources */,
 				13FCEF061C1CFF3300E41510 /* FontAwesomeKit.h in Resources */,
 				13FCEF021C1CFF0C00E41510 /* FAKIonIcons.h in Resources */,
+				CBFAD8E11C21300600D81FC5 /* Lato-Bold.ttf in Resources */,
 				13FCEF031C1CFF0C00E41510 /* FAKIonIcons.m in Resources */,
 				1321B94B1C1CF943002DEA85 /* FontAwesome.otf in Resources */,
+				CBFAD8E51C21300600D81FC5 /* Lato-Heavy.ttf in Resources */,
 				1321B94C1C1CF943002DEA85 /* foundation-icons.ttf in Resources */,
 				1321B94D1C1CF943002DEA85 /* Material-Design-Iconic-Font.ttf in Resources */,
 				1321B94A1C1CF8DC002DEA85 /* ionicons.ttf in Resources */,
 				680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CBFAD8DF1C21300500D81FC5 /* Lato-Black.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
