@@ -119,9 +119,9 @@ class Badge extends React.Component{
   }
 
   button() {
-    var { profile, currentUser, clickedUser } = this.props;
+    var { profile, currentUser, clickedUser, fromFeed } = this.props;
     console.log('current username: ',currentUser.username);
-    if ((clickedUser && (clickedUser.username == currentUser.username )) && profile === 'true') {
+    if ((fromFeed === false) && (clickedUser && (clickedUser.username == currentUser.username )) && profile === 'true') {
       return (
         <View style={ styles.button }>
           <TouchableHighlight
