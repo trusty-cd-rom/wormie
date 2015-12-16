@@ -20,6 +20,7 @@ function mapStateToProps(state) {
     myCurrentWormhole: state.profile.myCurrentWormhole,
     myCurrentWormholeSubmissions: state.profile.myCurrentWormholeSubmissions,
     isAnimating: state.profile.isAnimating,
+    otherUser: state.profile.otherUser
   };
 }
 

@@ -72,17 +72,6 @@ class Profile extends Component{
     // }
   }
 
-  componentWillUpdate() {
-    let { peekClickedUser, setClickedProfile, currentUser } = this.props;
-    // if there is no clicked user(friends/others)
-    if (!peekClickedUser) {
-      console.log('current username!!!!!!!!!!!!!!! for will update', currentUser);
-      // set currentUser to clickedUser
-      setClickedProfile(currentUser);
-    // this will be set from feedlist
-    }
-  }
-
   // TODO: updateProfile
   topbar() {
     let { profile,stopClickedUser, currentUser, clickedUser } = this.props;
