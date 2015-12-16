@@ -65,9 +65,6 @@ var styles = StyleSheet.create({
 
 class MyWormholes extends Component{
 
-  componentWillMount() {
-    // this.setToggleTimeout();
-  }
 
   viewRequest(currentWormholeList) {
     var { updateMyCurrentWormholeList, wormholes } = this.props;
@@ -145,47 +142,49 @@ class MyWormholes extends Component{
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View>
-        <View
-          style={styles.requestList}
-        >
-          <Spinner 
-            isAnimating={this.props.isAnimating}
-            getUserInfo={this.props.getUserInfo}
-            clickedUser={this.props.clickedUser} 
-          />
+        <View>
+          <View
+            style={styles.requestList}
+          >
+            <Spinner 
+              isAnimating={this.props.isAnimating}
+              getUserInfo={this.props.getUserInfo}
+              clickedUser={this.props.clickedUser} 
+            />
+          </View>
+          <ScrollView
+            automaticallyAdjustContentInsets={false}
+            onScroll={(e) => {
+              this.handleScroll(e)
+            }}
+            scrollEventThrottle={200}
+            style={styles.list}
+          >
+            {this.createList()}
+          </ScrollView>
         </View>
         <ScrollView
           automaticallyAdjustContentInsets={false}
-          onScroll={(e) => {
-            this.handleScroll(e)
+          onScroll={() => { 
+            console.log('onScroll!');
+            toggleAnimating(isAnimating);
           }}
           scrollEventThrottle={200}
           style={styles.list}
         >
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+          }}>
+            <ActivityIndicatorIOS
+              animating={true}
+              style={[styles.centering, {height: 50}]}
+              size="large"
+            />
+          </View>
           {this.createList()}
         </ScrollView>
       </View>
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { 
-          console.log('onScroll!');
-          toggleAnimating(isAnimating);
-        }}
-        scrollEventThrottle={200}
-        style={styles.list}
-      >
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}>
-          <ActivityIndicatorIOS
-            animating={true}
-            style={[styles.centering, {height: 50}]}
-            size="large"
-          />
-        </View>
-        {this.createList()}
-      </ScrollView>
     );
   }
 };
