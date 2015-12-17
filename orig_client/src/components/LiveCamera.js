@@ -20,15 +20,9 @@ var {
   RTCSetting,
 } = WebRTC;
 
-var configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
-
-var pcPeers = {};
-var localStream;
-
 function getLocalStream() {
   console.log('getLocalStream');
   navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
-    localStream = stream;
     container.setState({selfViewSrc: stream.toURL()});
     container.setState({status: 'ready', info: 'Please enter or create room ID'});
   }, logError);
