@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
-import Yelp from '../components/Yelp';
-import * as YelpActions from '../actions/yelp';
+import Discover from '../components/Discover';
+import * as DiscoverActions from '../actions/discover';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 // 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(YelpActions, dispatch);
+  return bindActionCreators(DiscoverActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Yelp);
+export default connect(mapStateToProps, mapDispatchToProps)(Discover);

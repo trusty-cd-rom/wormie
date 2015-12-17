@@ -2,12 +2,13 @@ import { SET_CURRENT_CATEGORY } from '../constants/actions';
 
 var initialState = {};
 
-function yelp(state = initialState, action) {
+function discover(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_CATEGORY:
+      console.log('hit reducer');
       return {
         ...state,
-        category: action.catogory
+        category: action.category
       }
     default:
       return state;
@@ -15,4 +16,4 @@ function yelp(state = initialState, action) {
   return state;
 };
 
-export default yelp;
+export default discover;

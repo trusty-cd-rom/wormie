@@ -4,7 +4,7 @@ import React, {
   StyleSheet,
 } from 'react-native';
 import Profile from '../containers/Profile';
-import Yelp from '../containers/Yelp';
+import Discover from '../containers/Discover';
 import FeedList from '../containers/FeedList';
 // import api from '../Utils/api';
 
@@ -47,7 +47,7 @@ class Navbar extends Component{
             });
             // this.goToFeedList.bind(this)
           }}>
-          <Yelp navigator={this.props.navigator} />
+          <Discover navigator={this.props.navigator} />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           systemIcon="contacts"

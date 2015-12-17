@@ -1,0 +1,18 @@
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux/native';
+import DiscoverSearch from '../components/DiscoverSearch';
+import * as DiscoverSearchActions from '../actions/discoverSearch';
+
+function mapStateToProps(state) {
+  return {
+    // updateProfile: state.userProfile.updateProfile,
+    category: state.discover.category,
+  };
+}
+
+// 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(DiscoverSearchActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoverSearch);

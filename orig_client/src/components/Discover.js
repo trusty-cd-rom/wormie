@@ -7,6 +7,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
+import DiscoverSearch from '../containers/DiscoverSearch';
 import { Icon } from 'react-native-icons';
 
 var styles = StyleSheet.create({
@@ -76,7 +77,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class Yelp extends React.Component{
+class Discover extends React.Component{
 
   // <Topbar
   //   topbarTitle={this.props.topbarTitle}
@@ -85,13 +86,20 @@ class Yelp extends React.Component{
   setCategory(category) {
     let { setCurrentCategoty } = this.props;
     setCurrentCategoty(category);
+    this.props.navigator.push({
+      component: DiscoverSearch,
+      passProps: { topbarTitle: 'Search'}
+    });
+
   }
 
   render() {
+
     return (
       <View style = {styles.container}>
         <TouchableHighlight
           underlayColor = 'rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('all')}
           style={[styles.singleButton, {backgroundColor: '#EEC583'}]}
         >
           <View>
@@ -106,6 +114,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor = 'rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('restaurants')}
           style={[styles.singleButton, {backgroundColor: '#88F8E1'}]}
         >
           <View>
@@ -120,6 +129,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('shopping')}
           style={[styles.singleButton, {backgroundColor: '#53E9F8'}]}
         >
           <View>
@@ -134,6 +144,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('beautysvc')}
           style={[styles.singleButton, {backgroundColor: '#8F87E1'}]}
         >
           <View>
@@ -148,6 +159,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('nightlife')}
           style={[styles.singleButton, {backgroundColor: '#F888A4'}]}
         >
           <View>
@@ -162,6 +174,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('hotelstravel')}
           style={[styles.singleButton, {backgroundColor: '#D8EEA0'}]}
         >
           <View>
@@ -176,6 +189,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('arts')}
           style={[styles.singleButton, {backgroundColor: '#EE9B83'}]}
         >
           <View>
@@ -190,6 +204,7 @@ class Yelp extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
+          onPress={() => this.setCategory('food')}
           style={[styles.singleButton, {backgroundColor: '#88E4F8'}]}
         >
           <View>
@@ -207,8 +222,8 @@ class Yelp extends React.Component{
   }
 }
 
-// Yelp.propTypes = {
+// Discover.propTypes = {
 //   userInfo: React.PropTypes.object.isRequired
 // }
 
-export default Yelp;
+export default Discover;
