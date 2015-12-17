@@ -7,6 +7,8 @@ function mapStateToProps(state) {
   return {
     // updateProfile: state.userProfile.updateProfile,
     category: state.discover.category,
+    term: state.discover.term,
+    location: state.discover.location,
   };
 }
 

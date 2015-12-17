@@ -1,12 +1,18 @@
-import { } from '../constants/actions';
+import { SET_CURRENT_TERM, SET_CURRENT_LOCATION } from '../constants/actions';
 
+export function setCurrentTerm(term) {
+  return {
+    type: SET_CURRENT_TERM,
+    term
+  }
+}
 
-// export function initPendingSubmission(wormhole) {
-//   return {
-//     type: INIT_PENDING_WORMHOLE_SUBMISSION,
-//     wormhole
-//   };
-// };
+export function setCurrentLocation(location) {
+  return {
+    type: SET_CURRENT_LOCATION,
+    location
+  }
+}
 
 // export function updateCurrentWormhole(wormhole) {
 //   return {
