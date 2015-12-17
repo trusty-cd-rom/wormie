@@ -6,9 +6,9 @@ import React, {
   StyleSheet,
 } from 'react-native';
 
-import MapExample from '../components/MapExample';
+import MapExplore from '../containers/MapExplore';
+// import MapExample from '../components/MapExample';
 import FeedList from '../containers/FeedList';
-
 
 // var focus = <MapExample/>;
 
@@ -17,7 +17,7 @@ class Explore extends Component {
   constructor(){
     super();
     this.state = {
-      focus: <MapExample/>
+      focus: <MapExplore/>
     }
   }
 
@@ -41,7 +41,7 @@ class Explore extends Component {
     
     if ( touchEvent === "Map") {
       this.setState({
-        focus: <MapExample/>
+        focus: <MapExplore/>
       });
     } else {
       this.setState({
