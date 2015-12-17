@@ -206,6 +206,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonText: {
+    fontFamily: 'Lato-Regular',
     fontSize: 24,
     color: 'black',
     alignSelf: 'center'
@@ -218,18 +219,21 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   cardTitle: {
-    fontSize: 20,
+    fontFamily: 'Lato-Semibold',
+    fontSize: 18,
     color: 'black',
   },
   cardLocation: {
     color: 'black',
   },
   cardRequestor: {
+    fontFamily: 'Lato-Regular',
     marginLeft: 5,
     flex: 1,
     color: 'black',
   },
   cardSubmitter: {
+    fontFamily: 'Lato-Regular',
     marginRight: 5,
     flex: 1,
     color: 'black',
