@@ -4,7 +4,10 @@ import LiveCamera from '../components/LiveCamera';
 import * as LiveCameraActions from '../actions/liveCamera';
 
 function mapStateToProps(state) {
-  return state;
+	console.log('livecamera state', state.liveCamera);
+  return {
+  	liveCamera: state.liveCamera
+  };
 }
 
 function mapDispatchToProps(dispatch) {

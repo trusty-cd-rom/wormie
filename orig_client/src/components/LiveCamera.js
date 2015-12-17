@@ -47,6 +47,17 @@ var LiveCamera = React.createClass({
   getInitialState: function() {
     return {info: 'Initializing', status: 'init', roomID: '', selfViewSrc: null, remoteList: {}};
   },
+  componentWillMount: function() {
+    let { initCameraState } = this.props;
+
+    initCameraState({
+      info: 'Initializing',
+      status: 'init',
+      roomID: '',
+      selfViewSrc: null,
+      remoteList: {}
+    });
+  },
   componentDidMount: function() {
     container = this;
     RTCSetting.setAudioOutput('speaker');
@@ -55,11 +66,14 @@ var LiveCamera = React.createClass({
     getLocalStream();
   },
   _press(event) {
-    this.refs.roomID.blur();
-    this.setState({status: 'connect', info: 'Connecting'});
-    join(this.state.roomID);
+    let { liveCamera, updateCameraState } = this.props;
+    // this.refs.roomID.blur();
+    updateCameraState('status', 'connect');
+    updateCameraState('info', 'Connecting');
+    join(liveCamera.roomID);
   },
   render: function() {
+    let { liveCamera, updateCameraState } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -71,8 +85,8 @@ var LiveCamera = React.createClass({
               ref='roomID'
               autoCorrect={false}
               style={{width: 200, height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(text) => this.setState({roomID: text})}
-              value={this.state.roomID}
+              onChangeText={(text) => updateCameraState('roomID', text)}
+              value={liveCamera.roomID}
             />
             <TouchableHighlight
               onPress={this._press}>
