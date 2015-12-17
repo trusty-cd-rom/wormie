@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
 var {
   AppRegistry,
@@ -133,7 +134,7 @@ var MapExample = React.createClass({
           zoomEnabled={true}
           showsUserLocation={true}
           ref={mapRef}
-          accessToken={'sk.eyJ1Ijoid2hhdHJvY2tzIiwiYSI6ImNpaTk4dWRpMjAwMGd1Y20ycTd2N2xsaHMifQ.sjxGEGObpJwf1_y5yv2r7Q'}
+          accessToken={mapboxConfig.accessToken}
           styleURL={this.mapStyles.streets}
           userTrackingMode={this.userTrackingMode.none}
           centerCoordinate={this.state.center}
