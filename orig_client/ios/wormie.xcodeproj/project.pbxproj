@@ -51,6 +51,27 @@
 		680C61201C18F95D006F6E87 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C611E1C18F94F006F6E87 /* libRCTYouTube.a */; };
 		680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */; };
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
+		68A1EFFD1C2289BE00AC7527 /* RTCPeerConnection+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFC91C2289BE00AC7527 /* RTCPeerConnection+Block.m */; };
+		68A1EFFE1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFCB1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m */; };
+		68A1EFFF1C2289BE00AC7527 /* RTCVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFCD1C2289BE00AC7527 /* RTCVideoViewManager.m */; };
+		68A1F0001C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFCF1C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.m */; };
+		68A1F0011C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFD11C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.m */; };
+		68A1F0021C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFD31C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.m */; };
+		68A1F0031C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFD51C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.m */; };
+		68A1F0041C2289BE00AC7527 /* WebRTCModule+RTCSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFD71C2289BE00AC7527 /* WebRTCModule+RTCSetting.m */; };
+		68A1F0051C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFD91C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.m */; };
+		68A1F0061C2289BE00AC7527 /* WebRTCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFDB1C2289BE00AC7527 /* WebRTCModule.m */; };
+		68A1F0071C2289BE00AC7527 /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1EFFC1C2289BE00AC7527 /* libWebRTC.a */; };
+		68A1F0091C2289E400AC7527 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0081C2289E400AC7527 /* AVFoundation.framework */; };
+		68A1F00B1C2289EE00AC7527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F00A1C2289EE00AC7527 /* AudioToolbox.framework */; };
+		68A1F00D1C2289F800AC7527 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F00C1C2289F800AC7527 /* CoreGraphics.framework */; };
+		68A1F00F1C228A0000AC7527 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F00E1C228A0000AC7527 /* GLKit.framework */; };
+		68A1F0111C228A0A00AC7527 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0101C228A0A00AC7527 /* CoreAudio.framework */; };
+		68A1F0131C228A1000AC7527 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0121C228A1000AC7527 /* CoreVideo.framework */; };
+		68A1F0151C228A1800AC7527 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0141C228A1800AC7527 /* VideoToolbox.framework */; };
+		68A1F0181C228A2400AC7527 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0161C228A2400AC7527 /* libc++.tbd */; };
+		68A1F0191C228A2400AC7527 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F0171C228A2400AC7527 /* libc.tbd */; };
+		68A1F01B1C228A2B00AC7527 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A1F01A1C228A2B00AC7527 /* libsqlite3.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CB4484031C213EA800655075 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4483FA1C213EA800655075 /* Lato-Black.ttf */; };
 		CB4484041C213EA800655075 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4483FB1C213EA800655075 /* Lato-Bold.ttf */; };
@@ -248,6 +269,67 @@
 		680C61101C18F94F006F6E87 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		680C61251C190DBA006F6E87 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		68A1EFC81C2289BE00AC7527 /* RTCPeerConnection+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCPeerConnection+Block.h"; sourceTree = "<group>"; };
+		68A1EFC91C2289BE00AC7527 /* RTCPeerConnection+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCPeerConnection+Block.m"; sourceTree = "<group>"; };
+		68A1EFCA1C2289BE00AC7527 /* RTCPeerConnectionDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionDelegator.h; sourceTree = "<group>"; };
+		68A1EFCB1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTCPeerConnectionDelegator.m; sourceTree = "<group>"; };
+		68A1EFCC1C2289BE00AC7527 /* RTCVideoViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoViewManager.h; sourceTree = "<group>"; };
+		68A1EFCD1C2289BE00AC7527 /* RTCVideoViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTCVideoViewManager.m; sourceTree = "<group>"; };
+		68A1EFCE1C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCICEConnectionState.h"; sourceTree = "<group>"; };
+		68A1EFCF1C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCICEConnectionState.m"; sourceTree = "<group>"; };
+		68A1EFD01C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCICEGatheringState.h"; sourceTree = "<group>"; };
+		68A1EFD11C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCICEGatheringState.m"; sourceTree = "<group>"; };
+		68A1EFD21C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCMediaStream.h"; sourceTree = "<group>"; };
+		68A1EFD31C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCMediaStream.m"; sourceTree = "<group>"; };
+		68A1EFD41C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCPeerConnection.h"; sourceTree = "<group>"; };
+		68A1EFD51C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCPeerConnection.m"; sourceTree = "<group>"; };
+		68A1EFD61C2289BE00AC7527 /* WebRTCModule+RTCSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCSetting.h"; sourceTree = "<group>"; };
+		68A1EFD71C2289BE00AC7527 /* WebRTCModule+RTCSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCSetting.m"; sourceTree = "<group>"; };
+		68A1EFD81C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebRTCModule+RTCSignalingState.h"; sourceTree = "<group>"; };
+		68A1EFD91C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebRTCModule+RTCSignalingState.m"; sourceTree = "<group>"; };
+		68A1EFDA1C2289BE00AC7527 /* WebRTCModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCModule.h; sourceTree = "<group>"; };
+		68A1EFDB1C2289BE00AC7527 /* WebRTCModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCModule.m; sourceTree = "<group>"; };
+		68A1EFDE1C2289BE00AC7527 /* RTCAudioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCAudioSource.h; sourceTree = "<group>"; };
+		68A1EFDF1C2289BE00AC7527 /* RTCAudioTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCAudioTrack.h; sourceTree = "<group>"; };
+		68A1EFE01C2289BE00AC7527 /* RTCAVFoundationVideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCAVFoundationVideoSource.h; sourceTree = "<group>"; };
+		68A1EFE11C2289BE00AC7527 /* RTCDataChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCDataChannel.h; sourceTree = "<group>"; };
+		68A1EFE21C2289BE00AC7527 /* RTCEAGLVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCEAGLVideoView.h; sourceTree = "<group>"; };
+		68A1EFE31C2289BE00AC7527 /* RTCFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCFileLogger.h; sourceTree = "<group>"; };
+		68A1EFE41C2289BE00AC7527 /* RTCI420Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCI420Frame.h; sourceTree = "<group>"; };
+		68A1EFE51C2289BE00AC7527 /* RTCICECandidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCICECandidate.h; sourceTree = "<group>"; };
+		68A1EFE61C2289BE00AC7527 /* RTCICEServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCICEServer.h; sourceTree = "<group>"; };
+		68A1EFE71C2289BE00AC7527 /* RTCLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCLogging.h; sourceTree = "<group>"; };
+		68A1EFE81C2289BE00AC7527 /* RTCMediaConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaConstraints.h; sourceTree = "<group>"; };
+		68A1EFE91C2289BE00AC7527 /* RTCMediaSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaSource.h; sourceTree = "<group>"; };
+		68A1EFEA1C2289BE00AC7527 /* RTCMediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaStream.h; sourceTree = "<group>"; };
+		68A1EFEB1C2289BE00AC7527 /* RTCMediaStreamTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaStreamTrack.h; sourceTree = "<group>"; };
+		68A1EFEC1C2289BE00AC7527 /* RTCNSGLVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCNSGLVideoView.h; sourceTree = "<group>"; };
+		68A1EFED1C2289BE00AC7527 /* RTCOpenGLVideoRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCOpenGLVideoRenderer.h; sourceTree = "<group>"; };
+		68A1EFEE1C2289BE00AC7527 /* RTCPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPair.h; sourceTree = "<group>"; };
+		68A1EFEF1C2289BE00AC7527 /* RTCPeerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnection.h; sourceTree = "<group>"; };
+		68A1EFF01C2289BE00AC7527 /* RTCPeerConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionDelegate.h; sourceTree = "<group>"; };
+		68A1EFF11C2289BE00AC7527 /* RTCPeerConnectionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionFactory.h; sourceTree = "<group>"; };
+		68A1EFF21C2289BE00AC7527 /* RTCPeerConnectionInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionInterface.h; sourceTree = "<group>"; };
+		68A1EFF31C2289BE00AC7527 /* RTCSessionDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCSessionDescription.h; sourceTree = "<group>"; };
+		68A1EFF41C2289BE00AC7527 /* RTCSessionDescriptionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCSessionDescriptionDelegate.h; sourceTree = "<group>"; };
+		68A1EFF51C2289BE00AC7527 /* RTCStatsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCStatsDelegate.h; sourceTree = "<group>"; };
+		68A1EFF61C2289BE00AC7527 /* RTCStatsReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCStatsReport.h; sourceTree = "<group>"; };
+		68A1EFF71C2289BE00AC7527 /* RTCTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCTypes.h; sourceTree = "<group>"; };
+		68A1EFF81C2289BE00AC7527 /* RTCVideoCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoCapturer.h; sourceTree = "<group>"; };
+		68A1EFF91C2289BE00AC7527 /* RTCVideoRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoRenderer.h; sourceTree = "<group>"; };
+		68A1EFFA1C2289BE00AC7527 /* RTCVideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoSource.h; sourceTree = "<group>"; };
+		68A1EFFB1C2289BE00AC7527 /* RTCVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoTrack.h; sourceTree = "<group>"; };
+		68A1EFFC1C2289BE00AC7527 /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWebRTC.a; sourceTree = "<group>"; };
+		68A1F0081C2289E400AC7527 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		68A1F00A1C2289EE00AC7527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		68A1F00C1C2289F800AC7527 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		68A1F00E1C228A0000AC7527 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		68A1F0101C228A0A00AC7527 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		68A1F0121C228A1000AC7527 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		68A1F0141C228A1800AC7527 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		68A1F0161C228A2400AC7527 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		68A1F0171C228A2400AC7527 /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		68A1F01A1C228A2B00AC7527 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CB4483FA1C213EA800655075 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../src/assets/Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -274,6 +356,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A1F01B1C228A2B00AC7527 /* libsqlite3.tbd in Frameworks */,
+				68A1F0181C228A2400AC7527 /* libc++.tbd in Frameworks */,
+				68A1F0191C228A2400AC7527 /* libc.tbd in Frameworks */,
+				68A1F0151C228A1800AC7527 /* VideoToolbox.framework in Frameworks */,
+				68A1F0131C228A1000AC7527 /* CoreVideo.framework in Frameworks */,
+				68A1F0111C228A0A00AC7527 /* CoreAudio.framework in Frameworks */,
+				68A1F00F1C228A0000AC7527 /* GLKit.framework in Frameworks */,
+				68A1F00D1C2289F800AC7527 /* CoreGraphics.framework in Frameworks */,
+				68A1F00B1C2289EE00AC7527 /* AudioToolbox.framework in Frameworks */,
+				68A1F0091C2289E400AC7527 /* AVFoundation.framework in Frameworks */,
 				13EA60891C1FCDE7006EE751 /* libRCTFBSDKLogin.a in Frameworks */,
 				1321B9331C1CF621002DEA85 /* libReactNativeIcons.a in Frameworks */,
 				CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */,
@@ -286,6 +378,7 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				68A1F0071C2289BE00AC7527 /* libWebRTC.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
@@ -411,6 +504,7 @@
 		13B07FAE1A68108700A75B9A /* wormie */ = {
 			isa = PBXGroup;
 			children = (
+				68A1EFC61C2289BE00AC7527 /* RCTWebRTC */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -460,6 +554,89 @@
 				680C612A1C190DBA006F6E87 /* libRCTCamera.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		68A1EFC61C2289BE00AC7527 /* RCTWebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				68A1EFC71C2289BE00AC7527 /* Classes */,
+				68A1EFDC1C2289BE00AC7527 /* libjingle_peerconnection */,
+			);
+			name = RCTWebRTC;
+			path = "../node_modules/react-native-webrtc/RCTWebRTC";
+			sourceTree = "<group>";
+		};
+		68A1EFC71C2289BE00AC7527 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				68A1EFC81C2289BE00AC7527 /* RTCPeerConnection+Block.h */,
+				68A1EFC91C2289BE00AC7527 /* RTCPeerConnection+Block.m */,
+				68A1EFCA1C2289BE00AC7527 /* RTCPeerConnectionDelegator.h */,
+				68A1EFCB1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m */,
+				68A1EFCC1C2289BE00AC7527 /* RTCVideoViewManager.h */,
+				68A1EFCD1C2289BE00AC7527 /* RTCVideoViewManager.m */,
+				68A1EFCE1C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.h */,
+				68A1EFCF1C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.m */,
+				68A1EFD01C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.h */,
+				68A1EFD11C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.m */,
+				68A1EFD21C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.h */,
+				68A1EFD31C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.m */,
+				68A1EFD41C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.h */,
+				68A1EFD51C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.m */,
+				68A1EFD61C2289BE00AC7527 /* WebRTCModule+RTCSetting.h */,
+				68A1EFD71C2289BE00AC7527 /* WebRTCModule+RTCSetting.m */,
+				68A1EFD81C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.h */,
+				68A1EFD91C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.m */,
+				68A1EFDA1C2289BE00AC7527 /* WebRTCModule.h */,
+				68A1EFDB1C2289BE00AC7527 /* WebRTCModule.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		68A1EFDC1C2289BE00AC7527 /* libjingle_peerconnection */ = {
+			isa = PBXGroup;
+			children = (
+				68A1EFDD1C2289BE00AC7527 /* Headers */,
+				68A1EFFC1C2289BE00AC7527 /* libWebRTC.a */,
+			);
+			path = libjingle_peerconnection;
+			sourceTree = "<group>";
+		};
+		68A1EFDD1C2289BE00AC7527 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				68A1EFDE1C2289BE00AC7527 /* RTCAudioSource.h */,
+				68A1EFDF1C2289BE00AC7527 /* RTCAudioTrack.h */,
+				68A1EFE01C2289BE00AC7527 /* RTCAVFoundationVideoSource.h */,
+				68A1EFE11C2289BE00AC7527 /* RTCDataChannel.h */,
+				68A1EFE21C2289BE00AC7527 /* RTCEAGLVideoView.h */,
+				68A1EFE31C2289BE00AC7527 /* RTCFileLogger.h */,
+				68A1EFE41C2289BE00AC7527 /* RTCI420Frame.h */,
+				68A1EFE51C2289BE00AC7527 /* RTCICECandidate.h */,
+				68A1EFE61C2289BE00AC7527 /* RTCICEServer.h */,
+				68A1EFE71C2289BE00AC7527 /* RTCLogging.h */,
+				68A1EFE81C2289BE00AC7527 /* RTCMediaConstraints.h */,
+				68A1EFE91C2289BE00AC7527 /* RTCMediaSource.h */,
+				68A1EFEA1C2289BE00AC7527 /* RTCMediaStream.h */,
+				68A1EFEB1C2289BE00AC7527 /* RTCMediaStreamTrack.h */,
+				68A1EFEC1C2289BE00AC7527 /* RTCNSGLVideoView.h */,
+				68A1EFED1C2289BE00AC7527 /* RTCOpenGLVideoRenderer.h */,
+				68A1EFEE1C2289BE00AC7527 /* RTCPair.h */,
+				68A1EFEF1C2289BE00AC7527 /* RTCPeerConnection.h */,
+				68A1EFF01C2289BE00AC7527 /* RTCPeerConnectionDelegate.h */,
+				68A1EFF11C2289BE00AC7527 /* RTCPeerConnectionFactory.h */,
+				68A1EFF21C2289BE00AC7527 /* RTCPeerConnectionInterface.h */,
+				68A1EFF31C2289BE00AC7527 /* RTCSessionDescription.h */,
+				68A1EFF41C2289BE00AC7527 /* RTCSessionDescriptionDelegate.h */,
+				68A1EFF51C2289BE00AC7527 /* RTCStatsDelegate.h */,
+				68A1EFF61C2289BE00AC7527 /* RTCStatsReport.h */,
+				68A1EFF71C2289BE00AC7527 /* RTCTypes.h */,
+				68A1EFF81C2289BE00AC7527 /* RTCVideoCapturer.h */,
+				68A1EFF91C2289BE00AC7527 /* RTCVideoRenderer.h */,
+				68A1EFFA1C2289BE00AC7527 /* RTCVideoSource.h */,
+				68A1EFFB1C2289BE00AC7527 /* RTCVideoTrack.h */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -530,6 +707,16 @@
 		CBC930151C1CABF8005EBA4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68A1F01A1C228A2B00AC7527 /* libsqlite3.tbd */,
+				68A1F0161C228A2400AC7527 /* libc++.tbd */,
+				68A1F0171C228A2400AC7527 /* libc.tbd */,
+				68A1F0141C228A1800AC7527 /* VideoToolbox.framework */,
+				68A1F0121C228A1000AC7527 /* CoreVideo.framework */,
+				68A1F0101C228A0A00AC7527 /* CoreAudio.framework */,
+				68A1F00E1C228A0000AC7527 /* GLKit.framework */,
+				68A1F00C1C2289F800AC7527 /* CoreGraphics.framework */,
+				68A1F00A1C2289EE00AC7527 /* AudioToolbox.framework */,
+				68A1F0081C2289E400AC7527 /* AVFoundation.framework */,
 				13EA607F1C1FCD9F006EE751 /* FBSDKCoreKit.framework */,
 				13EA60801C1FCD9F006EE751 /* FBSDKLoginKit.framework */,
 			);
@@ -614,7 +801,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = FG32U667X6;
+						DevelopmentTeam = 6J7ZEB8RF6;
 					};
 				};
 			};
@@ -899,8 +1086,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6800555E1C1A254000F331E3 /* FileUpload.m in Sources */,
+				68A1F0041C2289BE00AC7527 /* WebRTCModule+RTCSetting.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				68A1F0021C2289BE00AC7527 /* WebRTCModule+RTCMediaStream.m in Sources */,
+				68A1F0011C2289BE00AC7527 /* WebRTCModule+RTCICEGatheringState.m in Sources */,
+				68A1F0001C2289BE00AC7527 /* WebRTCModule+RTCICEConnectionState.m in Sources */,
+				68A1F0051C2289BE00AC7527 /* WebRTCModule+RTCSignalingState.m in Sources */,
+				68A1EFFF1C2289BE00AC7527 /* RTCVideoViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				68A1EFFE1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m in Sources */,
+				68A1F0061C2289BE00AC7527 /* WebRTCModule.m in Sources */,
+				68A1F0031C2289BE00AC7527 /* WebRTCModule+RTCPeerConnection.m in Sources */,
+				68A1EFFD1C2289BE00AC7527 /* RTCPeerConnection+Block.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +1168,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -981,6 +1179,7 @@
 				);
 				INFOPLIST_FILE = wormie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = wormie;
 				PROVISIONING_PROFILE = "";
@@ -993,6 +1192,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1003,6 +1204,7 @@
 				);
 				INFOPLIST_FILE = wormie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = wormie;
 				PROVISIONING_PROFILE = "";
