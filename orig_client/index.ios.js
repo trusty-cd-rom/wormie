@@ -6,6 +6,7 @@ import React, {
 import { Provider } from 'react-redux/native';
 import Login from './src/components/Login';
 import configureStore from './src/store/configureStore';
+import MapExample from './src/components/MapExample';
 
 const store = configureStore();
 
