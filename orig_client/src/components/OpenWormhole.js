@@ -6,7 +6,8 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
-import CameraView from '../containers/Camera';
+// import CameraView from '../containers/Camera';
+var LiveCamera = require('./LiveCamera.js');
 
 class OpenWormhole extends Component {
   back() {
@@ -16,7 +17,7 @@ class OpenWormhole extends Component {
     let { currentWormhole, initPendingSubmission } = this.props;
     initPendingSubmission(currentWormhole);
     this.props.navigator.push({
-      component: CameraView
+      component: LiveCamera
     });
   }
   render() {
