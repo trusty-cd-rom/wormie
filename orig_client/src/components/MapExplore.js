@@ -13,14 +13,59 @@ var {
 var MapExplore = React.createClass({
 
   mixins: [Mapbox.Mixin],
+
+  componentWillMount() {
+    let { refreshFeedData } = this.props;
+    refreshFeedData(() => {
+      this.getWormholeAnnotations();
+    });
+  },
+
+  getWormholeAnnotations() {
+
+    var { feed } = this.props;
+
+    var annotations = [];
+
+    for ( var wormhole in feed ) {
+
+     annotations.push({
+        coordinates: [ parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)],
+        'type': 'point',
+        // title: feed[wormhole].title,
+        title: feed[wormhole].latitude + ": " + feed[wormhole].longitude,
+        subtitle: feed[wormhole].notes,
+        rightCalloutAccessory: {
+          url: 'https://cldup.com/9Lp0EaBw5s.png',
+          height: 25,
+          width: 25
+        },
+        annotationImage: {
+          url: 'https://cldup.com/7NLZklp8zS.png',
+          height: 25,
+          width: 25
+        },
+        id: 'marker' + wormhole
+      });
+
+    }
+
+    this.addAnnotations(mapRef, annotations);
+    console.log("Done adding wormhole annotations");
+
+  },
   
   getInitialState() {
+
+    var { feed, refreshFeedData } = this.props;
+
     return {
       center: {
-        latitude: 40.72052634,
-        longitude: -73.97686958312988
+        latitude: 37.7861400,
+        longitude: -122.4057540
       },
       zoom: 11,
+      annotations: [],
     };
   },
 
@@ -30,9 +75,12 @@ var MapExplore = React.createClass({
 
   onRegionWillChange(location) {
     console.log(location);
+    // let { refreshFeedData } = this.props;
+    // refreshFeedData();
+    // this.getWormholeAnnotations();
   },
 
-  onUpdateUserLoocation(location) {
+  onUpdateUserLocation(location) {
     console.log(location);
   },
 
@@ -61,7 +109,7 @@ var MapExplore = React.createClass({
           showsUserLocation={true}
           ref={mapRef}
           accessToken={mapboxConfig.accessToken}
-          styleURL={this.mapStyles.emerald}
+          styleURL={mapboxConfig.styleURL}
           userTrackingMode={this.userTrackingMode.none}
           centerCoordinate={this.state.center}
           zoomLevel={this.state.zoom}
