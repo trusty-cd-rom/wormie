@@ -37,28 +37,24 @@ const styles = StyleSheet.create({
     marginRight: 8,
     fontSize: 15,
   },
-  floatView: {
-    position: 'absolute',
-    width: 100,
-    height: 100,
-    top: 200,
-    left: 40,
-    backgroundColor: 'green',
-  },
 })
 
 class SearchLocation extends React.Component{
   
-  setTerm(term) {
-    debugger;
+  setTerm(e) {
     let { setCurrentTerm } = this.props;
-    setCurrentTerm(term);
+    setCurrentTerm(e.nativeEvent.text);
   }
 
   setLocation(location) {
     let { setCurrentLocation } = this.props;
     setCurrentLocation(location);
   }
+
+  sendInfo() {
+    let { category, term, location, searchInfo } = this.props;
+    searchInfo(category, term, location);
+  }  
 
   render() {
     // predefinedPlaces={[homePlace, workPlace]}
@@ -139,8 +135,6 @@ class SearchLocation extends React.Component{
 
         // />
     
-              // onChange={this.setTerm}
-            // this.setLocation(details['formatted_address']);
     return (
       <View>
         <View
@@ -151,18 +145,24 @@ class SearchLocation extends React.Component{
           >
             <TextInput 
               style={styles.textInput} 
+              onChange={() => {
+                this.setTerm.bind(this);
+                this.sendInfo();
+              }}
+              placeholder={'tacos, cheap dinner, Max\'s'}
+              autoFocus={true}
             />
           </View>
         </View>
         <GooglePlacesAutocomplete
-          placeholder='Search'
+          placeholder='address, neighborhood, city, state or zip'
           minLength={2} // minimum length of text to search
           autoFocus={false}
           enablePoweredByContainer={false}
           fetchDetails={true}
           onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            console.log(data);
-            console.log(details);
+            this.setLocation(details['formatted_address']);
+            this.sendInfo();
           }}
           getDefaultValue={() => {
             return ''; // text input default value

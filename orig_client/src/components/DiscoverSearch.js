@@ -12,6 +12,7 @@ import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
 import SearchLocation from './SearchLocation';
 
+
 var styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -89,16 +90,6 @@ var styles = StyleSheet.create({
 
 class DiscoverSearch extends React.Component{
 
-  // setCategory(category) {
-  //   let { setCurrentCategoty } = this.props;
-  //   debugger;
-  //   setCurrentCategoty(category);
-  //   this.props.navigator.push({
-  //     component: DiscoverSearch
-  //   });
-
-  // }
-
           // <TouchableHighlight
           //   underlayColor = 'rgba(125,125,125,0.2)'
           //   style={[styles.singleButton, {backgroundColor: '#EEC583'}]}
@@ -115,18 +106,7 @@ class DiscoverSearch extends React.Component{
           // </TouchableHighlight>
         // <View style = {styles.floatView}>
         // </View>
-  componentWillMount() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // TODO: change it to this.props.responseList
-    var rows = [{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}];
-    return {
-      dataSource: ds.cloneWithRows(rows),
-    };
-  }
-  getInitialState() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var rows = [{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}];
-  }
+ 
   // _pressRow(rowID: number) {
   //   this._pressData[rowID] = !this._pressData[rowID];
   //   this.setState({dataSource: this.state.dataSource.cloneWithRows(
@@ -179,15 +159,14 @@ class DiscoverSearch extends React.Component{
   // dataSource={this.props.responseList}
   //dataSource={ds.cloneWithRows(rows)}
   // change rows to this.responseList
+        // <ScrollView>
 
-  // TODO: searchlocation is a module actually
-  // that is why it does not pass the props
-  // I need to fix it
+        // </ScrollView>
   render() {
     console.log(this.props.category);
     let { responseList, setCurrentTerm, setCurrentLocation } = this.props;
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var rows = [{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}];
+    var rows = [{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}];
     return (
       <View
         style={{marginTop: 20}}
@@ -196,26 +175,37 @@ class DiscoverSearch extends React.Component{
           topbarTitle={this.props.topbarTitle}
           navigator={this.props.navigator}
         />
-        <ListView
-          dataSource={ds.cloneWithRows(rows)}
-          renderRow={this._renderRow}
-          style={{
-            backgroundColor:'red',
-            position: 'absolute',
-            top: 130,
-            order: 99,
-            width: 280,
-            height: 200,
-          }}
-        />
+          <ListView
+            dataSource={ds.cloneWithRows(rows)}
+            renderRow={this._renderRow}
+            style={{
+              backgroundColor:'red',
+              position: 'absolute',
+              top: 120,
+              order: 99,
+              width: 380,
+              height: 520,
+            }}
+          />
         <SearchLocation
           setCurrentTerm={this.props.setCurrentTerm} 
           setCurrentLocation={this.props.setCurrentLocation}
+          sendInfo={this.props.sendInfo}
+          category={this.props.category}
+          term={this.props.term}
+          location={this.props.location}
           style={{
             position: 'absolute',
             top: 20,
           }}
         />
+        <View
+          style={{position:'absolute', top: 100}}
+        >
+          <Text>{ this.props.category }</Text>
+          <Text>{ this.props.term }</Text>
+          <Text>{ this.props.location }</Text>
+        </View>
       </View>
     );
   }
