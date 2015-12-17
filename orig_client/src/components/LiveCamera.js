@@ -8,6 +8,7 @@ var {
   TouchableHighlight,
   View,
   TextInput,
+  Component,
 } = React;
 
 window.navigator.userAgent = "react-native";
@@ -24,12 +25,7 @@ var {
   RTCSetting,
 } = WebRTC;
 
-socket.on('exchange', function(data){
-  exchange(data);
-});
-socket.on('leave', function(socketId){
-  leave(socketId);
-});
+
 
 function mapHash(hash, func) {
   var array = [];
@@ -51,11 +47,11 @@ function peerConnected() {
 }
 
 
-var LiveCamera = React.createClass({
-  getInitialState: function() {
+class LiveCamera extends Component{
+  getInitialState() {
     return {info: 'Initializing', status: 'init', roomID: '', selfViewSrc: null, remoteList: {}};
-  },
-  componentWillMount: function() {
+  }
+  componentWillMount() {
     let { initCameraState } = this.props;
 
     initCameraState({
@@ -66,20 +62,28 @@ var LiveCamera = React.createClass({
       remoteList: {},
       pcPeers: {}
     });
-  },
-  componentDidMount: function() {
+
+    socket.on('exchange', (data) => {
+      this.exchange(data);
+    });
+    socket.on('leave', (socketId) => {
+      this.leave(socketId);
+    });
+  }
+  componentDidMount() {
     RTCSetting.setAudioOutput('speaker');
     RTCSetting.setKeepScreenOn(true);
     RTCSetting.setProximityScreenOff(true);
     this.getLocalStream();
-  },
+  }
   _press(event) {
     let { liveCamera, updateCameraState } = this.props;
     // this.refs.roomID.blur();
     updateCameraState('status', 'connect');
     updateCameraState('info', 'Connecting');
-    this.joinRoom(liveCamera.roomID);
-  },
+    console.log(liveCamera, this.joinRoom);
+    this.joinRoom.call(this,liveCamera.roomID);
+  }
   getLocalStream() {
     let { updateCameraState } = this.props;
     console.log('getLocalStream');
@@ -89,16 +93,17 @@ var LiveCamera = React.createClass({
       updateCameraState('status', 'ready');
       updateCameraState('info', 'Please enter or create room ID');
     }, (err) => console.log(err));
-  },
+  }
   joinRoom(roomID) {
-    socket.emit('join', roomID, function(socketIds){
+    socket.emit('join', roomID, (socketIds) => {
       console.log('join', socketIds);
       for (var i in socketIds) {
         var socketId = socketIds[i];
+        console.log(this);
         this.createPC(socketId, true);
       }
     });
-  },
+  }
   createPC(socketId, isOffer) {
     let { liveCamera, updateCameraState } = this.props;
     var pc = new RTCPeerConnection(configuration);
@@ -139,7 +144,7 @@ var LiveCamera = React.createClass({
 
     pc.onaddstream = function (event) {
       console.log('onaddstream', event.stream);
-      container.setState({info: 'One peer join!'});
+      updateCameraState('info', 'One peer join!');
       peerConnected();
 
       var remoteList = liveCamera.remoteList;
@@ -148,8 +153,51 @@ var LiveCamera = React.createClass({
     };
     pc.addStream(liveCamera.localStream);
     return pc;
-  },
-  render: function() {
+  }
+  exchange(data) {
+    let { liveCamera, updateCameraState } = this.props;
+    var fromId = data.from;
+    var pc;
+    if (fromId in liveCamera.pcPeers) {
+      pc = liveCamera.pcPeers[fromId];
+    } else {
+      pc = this.createPC(fromId, false);
+    }
+
+    if (data.sdp) {
+      console.log('exchange sdp', data);
+      pc.setRemoteDescription(new RTCSessionDescription(data.sdp), function () {
+        if (pc.remoteDescription.type == "offer")
+          pc.createAnswer(function(desc) {
+            console.log('createAnswer', desc);
+            pc.setLocalDescription(desc, function () {
+              console.log('setLocalDescription', pc.localDescription);
+              socket.emit('exchange', {'to': fromId, 'sdp': pc.localDescription });
+            }, logError);
+          }, logError);
+      }, logError);
+    } else {
+      console.log('exchange candidate', data);
+      pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+    }
+  }
+  leave(socketId) {
+    let { liveCamera, updateCameraState } = this.props;
+    console.log('leave', socketId);
+    var pc = liveCamera.pcPeers[socketId];
+    var viewIndex = pc.viewIndex;
+    pc.close();
+    var tempPcPeers = liveCamera.pcPeers;
+    delete tempPcPeers[socketId];
+    updateCameraState('pcPeers', tempPcPeers );
+
+
+    var remoteList = liveCamera.remoteList;
+    delete remoteList[socketId]
+    updateCameraState('remoteList', remoteList );
+    updateCameraState('info', 'One peer leave!');
+  }
+  render() {
     let { liveCamera, updateCameraState } = this.props;
     return (
       <View style={styles.container}>
@@ -166,7 +214,7 @@ var LiveCamera = React.createClass({
               value={liveCamera.roomID}
             />
             <TouchableHighlight
-              onPress={this._press}>
+              onPress={this._press.bind(this)}>
               <Text>Enter room</Text>
             </TouchableHighlight>
           </View>) : null
@@ -180,7 +228,7 @@ var LiveCamera = React.createClass({
       </View>
     );
   }
-});
+};
 
 var styles = StyleSheet.create({
   selfView: {
