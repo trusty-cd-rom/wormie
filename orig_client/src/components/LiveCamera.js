@@ -20,18 +20,6 @@ var {
   RTCSetting,
 } = WebRTC;
 
-function getLocalStream() {
-  console.log('getLocalStream');
-  navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
-    container.setState({selfViewSrc: stream.toURL()});
-    container.setState({status: 'ready', info: 'Please enter or create room ID'});
-  }, logError);
-}
-
-function logError(error) {
-  console.log("logError", error);
-}
-
 function mapHash(hash, func) {
   var array = [];
   for (var key in hash) {
@@ -40,8 +28,6 @@ function mapHash(hash, func) {
   }
   return array;
 }
-
-var container;
 
 var LiveCamera = React.createClass({
   getInitialState: function() {
@@ -59,11 +45,10 @@ var LiveCamera = React.createClass({
     });
   },
   componentDidMount: function() {
-    container = this;
     RTCSetting.setAudioOutput('speaker');
     RTCSetting.setKeepScreenOn(true);
     RTCSetting.setProximityScreenOff(true);
-    getLocalStream();
+    this.getLocalStream();
   },
   _press(event) {
     let { liveCamera, updateCameraState } = this.props;
@@ -72,14 +57,23 @@ var LiveCamera = React.createClass({
     updateCameraState('info', 'Connecting');
     join(liveCamera.roomID);
   },
+  getLocalStream() {
+    let { updateCameraState } = this.props;
+    console.log('getLocalStream');
+    navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+      updateCameraState('selfViewSrc', stream.toURL());
+      updateCameraState('status', 'ready');
+      updateCameraState('info', 'Please enter or create room ID');
+    }, (err) => console.log(err));
+  },
   render: function() {
     let { liveCamera, updateCameraState } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          {this.state.info}
+          {liveCamera.info}
         </Text>
-        { this.state.status == 'ready' ?
+        { liveCamera.status == 'ready' ?
           (<View>
             <TextInput
               ref='roomID'
@@ -94,9 +88,9 @@ var LiveCamera = React.createClass({
             </TouchableHighlight>
           </View>) : null
         }
-        <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>
+        <RTCView streamURL={liveCamera.selfViewSrc} style={styles.selfView}/>
         {
-          mapHash(this.state.remoteList, function(remote, index) {
+          mapHash(liveCamera.remoteList, function(remote, index) {
             return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
           })
         }
