@@ -10,6 +10,10 @@ var {
   TextInput,
 } = React;
 
+window.navigator.userAgent = "react-native";
+var io = require('socket.io-client/socket.io');
+var socket = io.connect('http://react-native-webrtc.herokuapp.com');
+var configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 var WebRTC = require('react-native-webrtc');
 var {
   RTCPeerConnection,
@@ -20,6 +24,13 @@ var {
   RTCSetting,
 } = WebRTC;
 
+socket.on('exchange', function(data){
+  exchange(data);
+});
+socket.on('leave', function(socketId){
+  leave(socketId);
+});
+
 function mapHash(hash, func) {
   var array = [];
   for (var key in hash) {
@@ -28,6 +39,17 @@ function mapHash(hash, func) {
   }
   return array;
 }
+
+function logError(error) {
+  console.log("logError", error);
+}
+
+function peerConnected() {
+  RTCSetting.setAudioOutput('speaker');
+  RTCSetting.setKeepScreenOn(true);
+  RTCSetting.setProximityScreenOff(true);
+}
+
 
 var LiveCamera = React.createClass({
   getInitialState: function() {
@@ -41,7 +63,8 @@ var LiveCamera = React.createClass({
       status: 'init',
       roomID: '',
       selfViewSrc: null,
-      remoteList: {}
+      remoteList: {},
+      pcPeers: {}
     });
   },
   componentDidMount: function() {
@@ -55,16 +78,76 @@ var LiveCamera = React.createClass({
     // this.refs.roomID.blur();
     updateCameraState('status', 'connect');
     updateCameraState('info', 'Connecting');
-    join(liveCamera.roomID);
+    this.joinRoom(liveCamera.roomID);
   },
   getLocalStream() {
     let { updateCameraState } = this.props;
     console.log('getLocalStream');
     navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+      updateCameraState('localStream', stream);
       updateCameraState('selfViewSrc', stream.toURL());
       updateCameraState('status', 'ready');
       updateCameraState('info', 'Please enter or create room ID');
     }, (err) => console.log(err));
+  },
+  joinRoom(roomID) {
+    socket.emit('join', roomID, function(socketIds){
+      console.log('join', socketIds);
+      for (var i in socketIds) {
+        var socketId = socketIds[i];
+        this.createPC(socketId, true);
+      }
+    });
+  },
+  createPC(socketId, isOffer) {
+    let { liveCamera, updateCameraState } = this.props;
+    var pc = new RTCPeerConnection(configuration);
+    let tempPcPeers = liveCamera.pcPeers;
+    tempPcPeers[socketId] = pc;
+    updateCameraState('pcPeers', tempPcPeers);
+
+    pc.onicecandidate = function (event) {
+      console.log('onicecandidate', event.candidate);
+      if (event.candidate) {
+        socket.emit('exchange', {'to': socketId, 'candidate': event.candidate });
+      }
+    };
+
+    function createOffer() {
+      pc.createOffer(function(desc) {
+        console.log('createOffer', desc);
+        pc.setLocalDescription(desc, function () {
+          console.log('setLocalDescription', pc.localDescription);
+          socket.emit('exchange', {'to': socketId, 'sdp': pc.localDescription });
+        }, logError);
+      }, logError);
+    }
+
+    pc.onnegotiationneeded = function () {
+      console.log('onnegotiationneeded');
+      if (isOffer) {
+        createOffer();
+      }
+    }
+
+    pc.oniceconnectionstatechange = function(event) {
+      console.log('oniceconnectionstatechange', event.target.iceConnectionState);
+    };
+    pc.onsignalingstatechange = function(event) {
+      console.log('onsignalingstatechange', event.target.signalingState);
+    };
+
+    pc.onaddstream = function (event) {
+      console.log('onaddstream', event.stream);
+      container.setState({info: 'One peer join!'});
+      peerConnected();
+
+      var remoteList = liveCamera.remoteList;
+      remoteList[socketId] = event.stream.toURL();
+      updateCameraState('remoteList', remoteList);
+    };
+    pc.addStream(liveCamera.localStream);
+    return pc;
   },
   render: function() {
     let { liveCamera, updateCameraState } = this.props;
