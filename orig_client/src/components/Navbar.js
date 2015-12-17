@@ -6,6 +6,7 @@ import React, {
 import Profile from '../containers/Profile';
 import Discover from '../containers/Discover';
 import FeedList from '../containers/FeedList';
+import Explore from '../containers/Explore';
 // import api from '../Utils/api';
 
 
@@ -35,7 +36,7 @@ class Navbar extends Component{
             });
             // this.goToFeedList.bind(this)
           }}>
-          <FeedList navigator={this.props.navigator} />
+          <Explore navigator={this.props.navigator} />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           systemIcon="search"
