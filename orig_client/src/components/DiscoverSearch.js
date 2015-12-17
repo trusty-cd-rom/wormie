@@ -163,8 +163,8 @@ class DiscoverSearch extends React.Component{
 
         // </ScrollView>
   render() {
-    console.log(this.props.category);
     let { responseList, setCurrentTerm, setCurrentLocation } = this.props;
+    console.log('term: ', this.props.term);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var rows = [{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}, {title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'},{title: 'NY', name: 'sun'}, {title: 'NY1', name: 'sun1'}, {title: 'NY2', name: 'sun2'}];
     return (
@@ -190,7 +190,7 @@ class DiscoverSearch extends React.Component{
         <SearchLocation
           setCurrentTerm={this.props.setCurrentTerm} 
           setCurrentLocation={this.props.setCurrentLocation}
-          sendInfo={this.props.sendInfo}
+          searchInfo={this.props.searchInfo}
           category={this.props.category}
           term={this.props.term}
           location={this.props.location}

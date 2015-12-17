@@ -41,9 +41,12 @@ const styles = StyleSheet.create({
 
 class SearchLocation extends React.Component{
   
-  setTerm(e) {
+  setTerm(text) {
+    console.log('setterm');
     let { setCurrentTerm } = this.props;
-    setCurrentTerm(e.nativeEvent.text);
+    console.log(text);
+    setCurrentTerm(text);
+    this.sendInfo();
   }
 
   setLocation(location) {
@@ -80,60 +83,6 @@ class SearchLocation extends React.Component{
       // <View
       //   style={{flex:1, flexDirection: 'row'}}
       // >
-      // </View>
-        // <GooglePlacesAutocomplete
-        //   style={styles.textInput}
-        //   enablePoweredByContainer={false}
-        //   placeholder='Search'
-        //   minLength={2} // minimum length of text to search
-        //   autoFocus={false}
-        //   fetchDetails={true}
-        //   onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-        //     console.log(data);
-        //     console.log(details);
-        //   }}
-        //   getDefaultValue={() => {
-        //     return ''; // text input default value
-        //   }}
-        //   query={{
-        //     // available options: https://developers.google.com/places/web-service/autocomplete
-        //     key: 'AIzaSyCNsbBETvV4YWKJED_pBZ_9UKJVwYXcHSs',
-        //     language: 'en', // language of the results
-        //     types: '(cities)', // default: 'geocode'
-        //   }}
-        //   styles={{
-        //     description: {
-        //       fontWeight: 'bold',
-        //     },
-        //     predefinedPlacesDescription: {
-        //       color: '#1faadb',
-        //     },
-        //     textInput: {
-        //       borderRadius: 0,
-        //     },
-        //     floatView: styles.floatView,
-        //     // textInputContainer: {
-        //     //   borderTopWidth: 0.1,
-        //     //   borderBottomWidth: 0.1,
-        //     // },
-        //   }}
-
-        //   currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-        //   currentLocationLabel="Current location"
-        //   nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-        //   GoogleReverseGeocodingQuery={{
-        //     // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-        //   }}
-        //   GooglePlacesSearchQuery={{
-        //     // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-        //     rankby: 'distance',
-        //     types: 'food',
-        //   }}
-
-
-        //   filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-
-        // />
     
     return (
       <View>
@@ -145,8 +94,8 @@ class SearchLocation extends React.Component{
           >
             <TextInput 
               style={styles.textInput} 
-              onChange={() => {
-                this.setTerm.bind(this);
+              onChangeText={(text) => {
+                this.setTerm(text);
                 this.sendInfo();
               }}
               placeholder={'tacos, cheap dinner, Max\'s'}
