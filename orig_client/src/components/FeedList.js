@@ -49,7 +49,7 @@ class FeedList extends React.Component{
           videoId={item.submissions[0].video_url}
           play={false}
           hidden={false}
-          playsInline={true}
+          playsInline={false}
           showinfo={false}
           modestbranding={true}
           onError={(e)=>{console.log('youtube error: ', e.error)}}
