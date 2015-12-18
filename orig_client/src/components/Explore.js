@@ -27,7 +27,7 @@ class Explore extends Component {
         <SegmentedControlIOS 
           values={['Map', 'List']}
           style={styles.segmentedControl}
-          tintColor="#39247F"
+          tintColor="white"
           selectedIndex={0} 
           onChange={this._onChange.bind(this)}/>
         {this.state.focus}
@@ -41,11 +41,11 @@ class Explore extends Component {
     
     if ( touchEvent === "Map") {
       this.setState({
-        focus: <MapExplore/>
+        focus: <MapExplore navigator={this.props.navigator}/>
       });
     } else {
       this.setState({
-        focus: <FeedList/>
+        focus: <FeedList navigator={this.props.navigator}/>
       });
     }
   }
@@ -54,12 +54,12 @@ class Explore extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    marginTop: 20,
-    marginBottom: 49,
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#39247F'
   },
   segmentedControl:{
+    marginTop: 10,
+    marginBottom: 10,
     fontFamily: 'Lato-Regular',
     fontSize: 24,
     width: 100,

@@ -206,8 +206,6 @@ class FeedList extends React.Component{
 
 var styles = StyleSheet.create({
   container:{
-    marginTop: 20,
-    marginBottom: 49,
     flex: 1,
     backgroundColor: 'white'
   },
