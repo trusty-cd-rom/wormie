@@ -87,45 +87,6 @@ var MapExample = React.createClass({
     StatusBarIOS.setHidden(true);
     return (
       <View style={styles.container}>
-        <Text style={styles.text} onPress={() => this.setDirectionAnimated(mapRef, 0)}>
-          Set direction to 0
-        </Text>
-        <Text style={styles.text} onPress={() => this.setZoomLevelAnimated(mapRef, 6)}>
-          Zoom out to zoom level 6
-        </Text>
-        <Text style={styles.text} onPress={() => this.setCenterCoordinateAnimated(mapRef, 48.8589, 2.3447)}>
-          Go to Paris at current zoom level {parseInt(this.state.currentZoom)}
-        </Text>
-        <Text style={styles.text} onPress={() => this.setCenterCoordinateZoomLevelAnimated(mapRef, 35.68829, 139.77492, 14)}>
-          Go to Tokyo at fixed zoom level 14
-        </Text>
-        <Text style={styles.text} onPress={() => this.addAnnotations(mapRef, [{
-          coordinates: [40.73312,-73.989],
-          type: 'point',
-          title: 'This is a new marker',
-          id: 'foo'
-        }, {
-          'coordinates': [[40.749857912194386, -73.96820068359375], [40.741924698522055,-73.9735221862793], [40.735681504432264,-73.97523880004883], [40.7315190495212,-73.97438049316406], [40.729177554196376,-73.97180557250975], [40.72345355209305,-73.97438049316406], [40.719290332250544,-73.97455215454102], [40.71369559554873,-73.97729873657227], [40.71200407096382,-73.97850036621094], [40.71031250340588,-73.98691177368163], [40.71031250340588,-73.99154663085938]],
-          'type': 'polygon',
-          'fillAlpha': 1,
-          'fillColor': '#000',
-          'strokeAlpha': 1,
-          'id': 'new-black-polygon'
-        }])}>
-          Add new marker
-        </Text>
-        <Text style={styles.text} onPress={() => this.selectAnnotationAnimated(mapRef, 0)}>
-          Open first popup
-        </Text>
-        <Text style={styles.text} onPress={() => this.removeAnnotation(mapRef, 0)}>
-          Remove first annotation
-        </Text>
-        <Text style={styles.text} onPress={() => this.setVisibleCoordinateBoundsAnimated(mapRef, 40.712, -74.227, 40.774, -74.125, 100, 0, 0, 0)}>
-          Set visible bounds to 40.7, -74.2, 40.7, -74.1
-        </Text>
-        <Text style={styles.text} onPress={() => this.setUserTrackingMode(mapRef, this.userTrackingMode.follow)}>
-          Set userTrackingMode to follow
-        </Text>
         <Mapbox
           style={styles.map}
           direction={0}

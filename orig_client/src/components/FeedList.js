@@ -13,6 +13,9 @@ import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
+import MapFeed from './MapFeed';
+import MapExplore from './MapExplore';
+
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
 
@@ -58,12 +61,7 @@ class FeedList extends React.Component{
       );
     }else {
       return (
-        <TouchableHighlight onPress={this.viewRequest.bind(this, index)}>
-          <Image 
-            style={{height: 220, width: 390, flex: 1}}
-            source = {require('../assets/dsnWormhole.jpg')}
-          />
-        </TouchableHighlight>
+        <MapFeed />
       );
     }
   }
