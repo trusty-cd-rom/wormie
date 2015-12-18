@@ -17,6 +17,7 @@ import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
+
 var {
   StyleSheet,
   Component,
@@ -82,8 +83,6 @@ var MapExplore = React.createClass({
   
   getInitialState() {
 
-    // var { feed, refreshFeedData, currentWormhole, updateCurrentWormhole } = this.props;
-
     return {
       center: {
         latitude: 37.7861400,
@@ -99,12 +98,7 @@ var MapExplore = React.createClass({
   },
 
   onRegionWillChange(location) {
-    // var { currentWormhole } = this.props;
-    // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    // console.log(currentWormhole);
-    // let { refreshFeedData } = this.props;
-    // refreshFeedData();
-    // this.getWormholeAnnotations();
+    console.log(location);
   },
 
   onUpdateUserLocation(location) {
@@ -112,6 +106,7 @@ var MapExplore = React.createClass({
   },
 
   onOpenAnnotation(annotation){
+    console.log(this.props);
     var {feed, updateCurrentWormhole} = this.props;
     updateCurrentWormhole(feed[annotation.id]);
   },
@@ -119,10 +114,24 @@ var MapExplore = React.createClass({
   // 
   onRightAnnotationTapped(e) {
     console.log(e);
+    this.viewRequest();
   },
 
   onLongPress(location){
     console.log('long pressed', location);
+  },
+
+  viewRequest() {
+    var { currentWormhole } = this.props;
+    if(currentWormhole.status === 'completed') {
+      this.props.navigator.push({
+        component: ViewRequest,
+      });
+    } else {
+      this.props.navigator.push({
+        component: OpenWormhole,
+      });
+    }
   },
 
   _renderYoutube(){
