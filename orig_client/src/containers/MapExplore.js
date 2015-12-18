@@ -8,6 +8,7 @@ function mapStateToProps(state) {
     feed: state.feed,
     currentUser: state.userProfile.currentUser,
     peekClickedUser: state.profile.peekClickedUser,
+    currentWormhole: state.currentWormhole,
   };
 }
 
