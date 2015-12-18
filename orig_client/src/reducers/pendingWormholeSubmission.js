@@ -1,10 +1,17 @@
-import { INIT_PENDING_WORMHOLE_SUBMISSION, UPDATE_WORMHOLE_SUBMISSION_VIDEO, TOGGLE_VIDEO_UPLOADING, UPDATE_SUBMISSION_INPUT_TEXT } from '../constants/actions';
+import {
+	INIT_PENDING_WORMHOLE_SUBMISSION,
+	UPDATE_WORMHOLE_SUBMISSION_VIDEO,
+	TOGGLE_VIDEO_UPLOADING,
+	UPDATE_SUBMISSION_INPUT_TEXT,
+	UPDATE_WORMHOLE_SUBMISSION_COORDINATES
+} from '../constants/actions';
 
 var initialState = {
 	isUploading: false,
 	submissionForm: {
 		notes: ''
-	}
+	},
+	locationData: []
 };
 
 //this will take in a newly selected wormhole, and store that is the one that is currently selected in the app
@@ -21,6 +28,11 @@ function pendingWormholeSubmission(state = initialState, action) {
 	    	...state,
 	    	video: action.video
 	    }
+	  case UPDATE_WORMHOLE_SUBMISSION_COORDINATES:
+	  	return {
+	  		...state,
+	  		locationData: locationData(state.locationData, action)
+	  	}
 	  case TOGGLE_VIDEO_UPLOADING:
 	  	return {
 	  		...state,
@@ -35,6 +47,13 @@ function pendingWormholeSubmission(state = initialState, action) {
 	    return state;
   }
   return state;
+};
+
+function locationData(state, action) {
+	return [
+		...state,
+		action.coordinates
+	]
 };
 
 function submissionForm(state, action) {

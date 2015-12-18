@@ -9,6 +9,7 @@
     "oauth": "0.9.14",
     "querystring": "0.2.0",
     "react-native": "0.15.0",
+    "react-native-background-geolocation": "^0.3.2",
     "react-native-camera": "0.3.8",
     "react-native-fbsdkcore": "0.0.7",
     "react-native-fbsdklogin": "0.0.7",

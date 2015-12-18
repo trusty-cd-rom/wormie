@@ -62,20 +62,9 @@ function peerConnected() {
 
 
 class LiveCamera extends Component{
-  // getInitialState() {
-  //   return {info: 'Initializing', status: 'init', roomID: '', selfViewSrc: null, remoteList: {}};
-  // }
+
   initStream() {
     let { initCameraState, currentWormhole, updateCameraState } = this.props;
-
-    // initCameraState({
-    //   info: 'Initializing',
-    //   status: 'init',
-    //   roomID: `wormhole${currentWormhole.id}`,
-    //   selfViewSrc: null,
-    //   remoteList: {},
-    //   pcPeers: {}
-    // });
 
     updateCameraState('roomID', `wormhole${currentWormhole.id}`);
 
@@ -277,13 +266,6 @@ class LiveCamera extends Component{
     );
   }
 };
-
-        // <RTCView streamURL={liveCamera.selfViewSrc} style={styles.selfView}/>
-        // {
-        //   mapHash(liveCamera.remoteList, function(remote, index) {
-        //     return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
-        //   })
-        // }
 
 var styles = StyleSheet.create({
   headerContainer: {

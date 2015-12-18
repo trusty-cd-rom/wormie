@@ -51,6 +51,8 @@
 		680C61201C18F95D006F6E87 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C611E1C18F94F006F6E87 /* libRCTYouTube.a */; };
 		680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */; };
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
+		6851D56D1C24787100C03D33 /* libRNBackgroundGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6851D56A1C24783700C03D33 /* libRNBackgroundGeolocation.a */; };
+		6851D56F1C24789400C03D33 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6851D56E1C24789400C03D33 /* TSLocationManager.framework */; };
 		68A1EFFD1C2289BE00AC7527 /* RTCPeerConnection+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFC91C2289BE00AC7527 /* RTCPeerConnection+Block.m */; };
 		68A1EFFE1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFCB1C2289BE00AC7527 /* RTCPeerConnectionDelegator.m */; };
 		68A1EFFF1C2289BE00AC7527 /* RTCVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A1EFCD1C2289BE00AC7527 /* RTCVideoViewManager.m */; };
@@ -196,6 +198,20 @@
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RCTCamera;
 		};
+		6851D5691C24783700C03D33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83FF5F851AFD0D2B0016A13E;
+			remoteInfo = RNBackgroundGeolocation;
+		};
+		6851D56B1C24783700C03D33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83FF5F901AFD0D2B0016A13E;
+			remoteInfo = RNBackgroundGeolocationTests;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -295,6 +311,8 @@
 		680C61101C18F94F006F6E87 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		680C61251C190DBA006F6E87 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundGeolocation.xcodeproj; path = "../node_modules/react-native-background-geolocation/RNBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
+		6851D56E1C24789400C03D33 /* TSLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = "<group>"; };
 		68A1EFC81C2289BE00AC7527 /* RTCPeerConnection+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCPeerConnection+Block.h"; sourceTree = "<group>"; };
 		68A1EFC91C2289BE00AC7527 /* RTCPeerConnection+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCPeerConnection+Block.m"; sourceTree = "<group>"; };
 		68A1EFCA1C2289BE00AC7527 /* RTCPeerConnectionDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionDelegator.h; sourceTree = "<group>"; };
@@ -405,6 +423,8 @@
 				CB245E221C2247AD00A92EF6 /* CoreTelephony.framework in Frameworks */,
 				CB245E1C1C22474200A92EF6 /* libRCTMapboxGL.a in Frameworks */,
 				68A1F01B1C228A2B00AC7527 /* libsqlite3.tbd in Frameworks */,
+				6851D56F1C24789400C03D33 /* TSLocationManager.framework in Frameworks */,
+				6851D56D1C24787100C03D33 /* libRNBackgroundGeolocation.a in Frameworks */,
 				68A1F0181C228A2400AC7527 /* libc++.tbd in Frameworks */,
 				68A1F0191C228A2400AC7527 /* libc.tbd in Frameworks */,
 				68A1F0151C228A1800AC7527 /* VideoToolbox.framework in Frameworks */,
@@ -552,6 +572,7 @@
 		13B07FAE1A68108700A75B9A /* wormie */ = {
 			isa = PBXGroup;
 			children = (
+				6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */,
 				68A1EFC61C2289BE00AC7527 /* RCTWebRTC */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -600,6 +621,15 @@
 			isa = PBXGroup;
 			children = (
 				680C612A1C190DBA006F6E87 /* libRCTCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6851D5551C24783700C03D33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6851D56A1C24783700C03D33 /* libRNBackgroundGeolocation.a */,
+				6851D56C1C24783700C03D33 /* RNBackgroundGeolocationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -776,6 +806,7 @@
 				CB245E251C2247BC00A92EF6 /* ImageIO.framework */,
 				CB245E231C2247B400A92EF6 /* GLKit.framework */,
 				CB245E211C2247AD00A92EF6 /* CoreTelephony.framework */,
+				6851D56E1C24789400C03D33 /* TSLocationManager.framework */,
 				68A1F01A1C228A2B00AC7527 /* libsqlite3.tbd */,
 				68A1F0161C228A2400AC7527 /* libc++.tbd */,
 				68A1F0171C228A2400AC7527 /* libc.tbd */,
@@ -871,6 +902,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6J7ZEB8RF6;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -953,6 +989,10 @@
 				{
 					ProductGroup = 1321B92D1C1CF576002DEA85 /* Products */;
 					ProjectRef = 1321B92C1C1CF576002DEA85 /* ReactNativeIcons.xcodeproj */;
+				},
+				{
+					ProductGroup = 6851D5551C24783700C03D33 /* Products */;
+					ProjectRef = 6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1053,6 +1093,20 @@
 			fileType = archive.ar;
 			path = libRCTCamera.a;
 			remoteRef = 680C61291C190DBA006F6E87 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6851D56A1C24783700C03D33 /* libRNBackgroundGeolocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBackgroundGeolocation.a;
+			remoteRef = 6851D5691C24783700C03D33 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6851D56C1C24783700C03D33 /* RNBackgroundGeolocationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNBackgroundGeolocationTests.xctest;
+			remoteRef = 6851D56B1C24783700C03D33 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
@@ -1258,7 +1312,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/$(USER)/Documents/FacebookSDK",
+					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1283,7 +1340,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "/Users/$(USER)/Documents/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/$(USER)/Documents/FacebookSDK",
+					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

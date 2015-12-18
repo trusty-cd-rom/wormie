@@ -101,6 +101,15 @@ class SubmitWormhole extends Component {
             {pendingWormholeSubmission.wormhole.notes}
           </Text>
         </View>
+        {pendingWormholeSubmission.locationData.map((val) => {
+          return (
+            <View style={styles.loginButton}>
+              <Text style={styles.buttonText}>
+                `${val.coords.latitude.toFixed(7)}, ${val.coords.longitude.toFixed(7)}`
+              </Text>
+            </View>
+          );
+        })}
         <TextInput
           style = {styles.searchInput}
           value = {pendingWormholeSubmission.notes}
@@ -139,7 +148,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 12,
     color: 'white',
     alignSelf: 'center'
   },
