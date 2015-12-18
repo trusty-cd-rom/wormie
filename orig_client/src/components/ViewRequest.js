@@ -77,6 +77,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     marginTop: 20
   },
+  buttonText: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 25,
+    color: 'white',
+    alignSelf: 'center'
+  },
   loginButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',

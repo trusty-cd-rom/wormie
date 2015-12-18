@@ -182,24 +182,18 @@ class FeedList extends React.Component{
         </View>
       );
     });
-
-    // <View style = {styles.row}>
-    //             <Image 
-    //               style = {[styles.profilePic, styles.marginLeft]}
-    //               source = {{uri: item.requestor.picture_url}}
-    //             />
-    //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
-    //           </View>
           
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <ScrollView 
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.container}>
-        {list}
-      </ScrollView>
+      <View>
+        <ScrollView 
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={styles.container}>
+          {list}
+        </ScrollView>
+      </View>
     );
   }
 };

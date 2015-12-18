@@ -4,6 +4,7 @@ import React, {
   StyleSheet,
 } from 'react-native';
 import Profile from '../containers/Profile';
+import Discover from '../containers/Discover';
 import FeedList from '../containers/FeedList';
 // import api from '../Utils/api';
 
@@ -36,7 +37,18 @@ class Navbar extends Component{
           }}>
           <FeedList navigator={this.props.navigator} />
         </TabBarIOS.Item>
-
+        <TabBarIOS.Item
+          systemIcon="search"
+          selected={this.state.selectedTab === 'discover'}
+          icon={{uri:'featured'}}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'discover',
+            });
+            // this.goToFeedList.bind(this)
+          }}>
+          <Discover navigator={this.props.navigator} />
+        </TabBarIOS.Item>
         <TabBarIOS.Item
           systemIcon="contacts"
           selected={this.state.selectedTab === 'profile'}
