@@ -122,13 +122,13 @@ var MapExplore = React.createClass({
   },
 
   viewRequest() {
-    var { currentWormhole } = this.props;
+    var { currentWormhole, navigator } = this.props;
     if(currentWormhole.status === 'completed') {
-      this.props.navigator.push({
+      navigator.push({
         component: ViewRequest,
       });
     } else {
-      this.props.navigator.push({
+      navigator.push({
         component: OpenWormhole,
       });
     }
@@ -199,7 +199,7 @@ var MapExplore = React.createClass({
         <Mapbox
           style={styles.map}
           direction={0}
-          rotateEnabled={true}
+          rotateEnabled={false}
           scrollEnabled={true}
           zoomEnabled={true}
           showsUserLocation={true}
@@ -273,6 +273,7 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: '#727272',
     marginLeft: 10,
+    marginTop: 5
   },
   profilePic: {
     height: 30,

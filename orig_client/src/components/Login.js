@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#39247F'
-
   },
   logo: {
     fontSize: 50,
