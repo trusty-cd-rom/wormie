@@ -3,7 +3,9 @@ import React, {
   SegmentedControlIOS,
   Text,
   View,
+  Image,
   StyleSheet,
+  TouchableHighlight,
 } from 'react-native';
 
 import MapExplore from '../containers/MapExplore';
@@ -22,14 +24,28 @@ class Explore extends Component {
   }
 
   render() {
+    var { currentUser } = this.props;
     return (
       <View style={styles.container}>
-        <SegmentedControlIOS 
-          values={['Map', 'List']}
-          style={styles.segmentedControl}
-          tintColor="white"
-          selectedIndex={0} 
-          onChange={this._onChange.bind(this)}/>
+        <View style={styles.row}>
+          <TouchableHighlight
+            onPress={() => {
+              console.log("clicked settings page");
+            }}
+            underlayColor='#39247F'>
+            <Image 
+              style = {styles.profilePic}
+              source = {{uri: (currentUser) ? currentUser.picture_url : ""}}
+            />
+          </TouchableHighlight>
+          <Text style={styles.title}></Text>
+          <SegmentedControlIOS 
+            values={['Map', 'List']}
+            style={styles.segmentedControl}
+            tintColor="white"
+            selectedIndex={0} 
+            onChange={this._onChange.bind(this)}/>
+        </View>
         {this.state.focus}
       </View>
     );
@@ -55,16 +71,34 @@ class Explore extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#39247F'
+  },
+  row: {
+    flexDirection: 'row',
+    backgroundColor: '#39247F',
+    height: 50
+  },
+  profilePic: {
+    marginTop: 10,
+    marginLeft: 10,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+  },
+  title:{
+    fontFamily: 'Lato-Bold',
+    marginTop: 12,
+    fontSize: 22,
+    color: 'white',
+    textAlign: 'center',
+    flex:1,
   },
   segmentedControl:{
     marginTop: 10,
     marginBottom: 10,
+    marginRight: 10,
     fontFamily: 'Lato-Regular',
     fontSize: 24,
     width: 100,
-    alignSelf: 'center',
-    justifyContent: 'center',
   }
 });
 
