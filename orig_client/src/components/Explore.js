@@ -11,16 +11,23 @@ import React, {
 import MapExplore from '../containers/MapExplore';
 // import MapExample from '../components/MapExample';
 import FeedList from '../containers/FeedList';
+import Settings from '../containers/Settings';
 
 // var focus = <MapExample/>;
 
 class Explore extends Component {
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      focus: <MapExplore/>
+      focus: <MapExplore navigator={this.props.navigator}/>
     }
+  }
+
+  goToSettings(){
+    this.props.navigator.push({
+      component: Settings,
+    });
   }
 
   render() {
@@ -30,7 +37,7 @@ class Explore extends Component {
         <View style={styles.row}>
           <TouchableHighlight
             onPress={() => {
-              console.log("clicked settings page");
+              this.goToSettings();
             }}
             underlayColor='#39247F'>
             <Image 
