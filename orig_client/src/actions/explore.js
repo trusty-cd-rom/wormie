@@ -22,6 +22,5 @@ export function updateCurrentWormhole(wormhole) {
   return {
     type: UPDATE_CURRENT_WORMHOLE,
     wormhole: wormhole
-
   };
 };
