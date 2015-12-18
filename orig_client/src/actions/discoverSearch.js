@@ -27,13 +27,8 @@ export function searchInfo (category, term, location) {
   return dispatch => {
     return queryInfo(category, term, location)
       .then(function (responseList) {
-        dispatch(setResultList(responseList));
+        console.log('responseList', responseList);
+        dispatch(setResultList(responseList.businesses));
       });
   }
 }
-// export function updateCurrentWormhole(wormhole) {
-//   return {
-//     type: UPDATE_CURRENT_WORMHOLE,
-//     wormhole
-//   };
-// };

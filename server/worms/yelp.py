@@ -1,17 +1,17 @@
 import rauth
 import time
 
-def main():
-    locations = [("restaurants", "tacos", "San Francisco, CA"),("restaurants", "noodle", "San Francisco, CA"),("restaurants", "bbq", "San Francisco, CA")]
-    api_calls = []
-    for category, term, location in locations:
-        params = get_search_parameters(category, term, location)
-        api_calls.append(get_results(params))
-        #Be a good internet citizen and rate-limit yourself
-        time.sleep(1.0)
+## ASK CHARLIE: is 'pip install rauth' ok?
+
+def yelpMain(category_filter, term, location):
+    # category = "restaurants"
+    # term = "tacos"
+    # location = "San Francisco, CA"
+    print('inside yelpmain in yelp.py')
+    params = get_search_parameters(category_filter, term, location)
         
     ##Do other processing 
-    print(api_calls)
+    return get_results(params)
 
 def get_results(params):
 
@@ -27,7 +27,7 @@ def get_results(params):
         ,access_token = token
         ,access_token_secret = token_secret)
         
-    request = session.get("http://api.yelp.com/v2/search",params=params)
+    request = session.get("http://api.yelp.com/v2/search", params=params)
     
     #Transforms the JSON API response into a Python dictionary
     data = request.json()
@@ -35,16 +35,16 @@ def get_results(params):
     
     return data
         
-def get_search_parameters(category, term, location):
+def get_search_parameters(category_filter, term, location):
     #See the Yelp API for more details
     params = {}
-    params["category_filter"] = category
+    params["category_filter"] = category_filter
     params["term"] = term
     params["location"] = location
     
     # params["ll"] = "{},{}".format(str(lat),str(long))
     params["radius_filter"] = "2000"
-    params["limit"] = "10"
+    params["limit"] = "20"
 
     return params
 
