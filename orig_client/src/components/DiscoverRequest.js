@@ -116,6 +116,24 @@ var styles = StyleSheet.create({
     marginRight: 15
   },
 });
+// var styles = StyleSheet.create({
+//   webViewContainer: {
+//     flex: 1,
+//     backgroundColor: '#F6F6EF',
+//     flexDirection: 'column',
+//   },
+// });
+
+// class Web extends React.Component{
+//   render() {
+//     return (
+//       <View style={styles.webViewContainer}>
+//         <WebView url={this.props.url}/>
+//       </View>
+//     );
+//   }
+// };
+
 
 class DiscoverRequest extends React.Component{
 

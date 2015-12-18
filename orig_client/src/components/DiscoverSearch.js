@@ -11,6 +11,7 @@ import React, {
 import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
 import SearchLocation from './SearchLocation';
+import DiscoverRequest from '../containers/DiscoverRequest';
 
 
 var styles = StyleSheet.create({
@@ -122,8 +123,12 @@ class DiscoverSearch extends React.Component{
 
   setTarget(data) {
     let { setCurrentTarget } = this.props;
-    console.log(data);
     setCurrentTarget(data);
+    let name = data.name;
+    this.props.navigator.push({
+      component: DiscoverRequest,
+      passProps: {topbarTitle: name}
+    });
   } 
 
   // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
@@ -153,6 +158,7 @@ class DiscoverSearch extends React.Component{
         <TouchableHighlight
           style={styles.container}
           onPress={this.setTarget.bind(this, rowData)}
+          underlayColor = 'rgba(222,93,74,0.1)'
         >
           <View style={{flex: 1, flexDirection: 'row'}}>
             <Image 
