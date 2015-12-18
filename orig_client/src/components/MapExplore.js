@@ -5,6 +5,9 @@ var Mapbox = require('react-native-mapbox-gl');
 var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
 
+// Random number util
+var randomInRange = require('../utils/random');
+
 // Youtube
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
@@ -28,7 +31,7 @@ var MapExplore = React.createClass({
   mixins: [Mapbox.Mixin],
 
   componentWillMount() {
-    var { refreshFeedData, currentWormhole } = this.props;
+    var { refreshFeedData, currentWormhole, feed, updateCurrentWormhole } = this.props;
     refreshFeedData(() => {
       this.getWormholeAnnotations();
     });
@@ -43,11 +46,20 @@ var MapExplore = React.createClass({
     for ( var wormhole in feed ) {
 
      annotations.push({
+
+        coordinates: [ [parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)], [parseFloat(feed[wormhole].latitude) + randomInRange(0.01), parseFloat(feed[wormhole].longitude) + randomInRange(0.01)]],
+        'type': 'polyline',
+        'strokeColor': feed[wormhole].requestor.wormie_color,
+        'strokeWidth': 4,
+        'strokeAlpha': 0.9,
+        id: wormhole + "_trail"
+      });
+
+     annotations.push({
+
         coordinates: [ parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)],
-        'type': 'point',
-        // title: feed[wormhole].title,
-        title: feed[wormhole].latitude + ": " + feed[wormhole].longitude,
-        subtitle: feed[wormhole].notes,
+        'type': 'point',     
+        title: feed[wormhole].status,
         rightCalloutAccessory: {
           url: 'https://cldup.com/9Lp0EaBw5s.png',
           height: 25,
@@ -70,7 +82,7 @@ var MapExplore = React.createClass({
   
   getInitialState() {
 
-    var { feed, refreshFeedData } = this.props;
+    // var { feed, refreshFeedData, currentWormhole, updateCurrentWormhole } = this.props;
 
     return {
       center: {
@@ -129,7 +141,7 @@ var MapExplore = React.createClass({
           showinfo={false}
           modestbranding={true}
           onError={(e)=>{console.log('youtube error: ', e.error)}}
-          style={{height: 121, width: 121, marginRight: 5}}
+          style={{height: 121, width: 121, marginRight: 10}}
         />
 
       );
@@ -142,6 +154,32 @@ var MapExplore = React.createClass({
 
       );
     }
+  },
+
+  _renderSubmitterDetails(){
+    
+    var { currentWormhole } = this.props;
+
+    var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
+
+    if ( currentWorm && currentWorm.submissions.length ) {
+      return (
+        <View style={styles.littleRow}>
+          <Image 
+                style = {styles.profilePic}
+                source = {{uri: (currentWormhole.submissions) ? currentWormhole.submissions[0].submitter.picture_url : ""}}
+              />
+          <Text style={styles.cardRequestor}>{ (currentWormhole.submissions) ? currentWormhole.submissions[0].submitter.username : ""}</Text>
+        </View>
+      );
+    } else {
+      
+      return (
+        <View style={styles.littleRow}>
+        </View>
+      );
+    }
+
   },
 
   render: function() {
@@ -173,13 +211,14 @@ var MapExplore = React.createClass({
           {this._renderYoutube()}
           <View>
             <Text style={styles.cardTitle}>{currentWormhole.title}</Text>
-            <View style={styles.row}>
+            <View style={styles.littleRow}>
               <Image 
                     style = {styles.profilePic}
                     source = {{uri: (currentWormhole.requestor) ? currentWormhole.requestor.picture_url : ""}}
                   />
               <Text style={styles.cardRequestor}>{ (currentWormhole.requestor) ? currentWormhole.requestor.username : ""}</Text>
             </View>
+            {this._renderSubmitterDetails()}
           </View>
         </View>
       </View>
@@ -200,7 +239,6 @@ var styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#E4E4E4',
   },
-
   map: {
     flex: 1
   },
@@ -209,9 +247,14 @@ var styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 170
   },
+  littleRow: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    height: 50
+  },
   cardTitle: {
     marginTop: 5,
-    marginBottom: 5,
+    marginBottom: 10,
     fontFamily: 'Lato-Semibold',
     fontSize: 16,
     color: '#3e3e3e',
@@ -220,6 +263,7 @@ var styles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 12,
     color: '#727272',
+    marginLeft: 10,
   },
   profilePic: {
     height: 30,
