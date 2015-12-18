@@ -1,5 +1,5 @@
 import { SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_RESULT_LIST } from '../constants/actions';
-import { query } from '../utils/discoverApi'
+import { queryInfo } from '../utils/discoverApi'
 
 export function setCurrentTerm(term) {
   console.log('set current term from action', term);
@@ -25,7 +25,7 @@ function setResultList(responseList) {
 
 export function searchInfo (category, term, location) {
   return dispatch => {
-    return query(category, term, location)
+    return queryInfo(category, term, location)
       .then(function (responseList) {
         dispatch(setResultList(responseList));
       });

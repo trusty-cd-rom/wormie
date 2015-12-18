@@ -100,7 +100,7 @@ class Discover extends React.Component{
         <TouchableHighlight
           underlayColor = 'rgba(125,125,125,0.2)'
           onPress={() => this.setCategory('all')}
-          style={[styles.singleButton, {backgroundColor: '#EDDA00'}]}
+          style={[styles.singleButton, {backgroundColor: '#F888A4'}]}
         >
           <View>
             <Icon
@@ -115,7 +115,7 @@ class Discover extends React.Component{
         <TouchableHighlight
           underlayColor = 'rgba(125,125,125,0.2)'
           onPress={() => this.setCategory('restaurants')}
-          style={[styles.singleButton, {backgroundColor: '#88F8E1'}]}
+          style={[styles.singleButton, {backgroundColor: '#FFD851'}]}
         >
           <View>
             <Icon
@@ -160,7 +160,7 @@ class Discover extends React.Component{
         <TouchableHighlight
           underlayColor='rgba(125,125,125,0.2)'
           onPress={() => this.setCategory('nightlife')}
-          style={[styles.singleButton, {backgroundColor: '#F888A4'}]}
+          style={[styles.singleButton, {backgroundColor: '#697EFF'}]}
         >
           <View>
             <Icon
