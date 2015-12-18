@@ -25,7 +25,21 @@ var {
   RTCSetting,
 } = WebRTC;
 
+function refreshPackages() {
 
+  window.navigator.userAgent = "react-native";
+  io = require('socket.io-client/socket.io');
+  socket = io.connect('http://react-native-webrtc.herokuapp.com');
+  configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
+  WebRTC = require('react-native-webrtc');
+  RTCPeerConnection = WebRTC.RTCPeerConnection;
+  RTCMediaStream = WebRTC.RTCMediaStream;
+  RTCIceCandidate = WebRTC.RTCIceCandidate;
+  RTCSessionDescription = WebRTC.RTCSessionDescription;
+  RTCView = WebRTC.RTCView;
+  RTCSetting = WebRTC.RTCSetting;
+
+}
 
 function mapHash(hash, func) {
   var array = [];
@@ -48,20 +62,22 @@ function peerConnected() {
 
 
 class LiveCamera extends Component{
-  getInitialState() {
-    return {info: 'Initializing', status: 'init', roomID: '', selfViewSrc: null, remoteList: {}};
-  }
-  componentWillMount() {
-    let { initCameraState } = this.props;
+  // getInitialState() {
+  //   return {info: 'Initializing', status: 'init', roomID: '', selfViewSrc: null, remoteList: {}};
+  // }
+  initStream() {
+    let { initCameraState, currentWormhole, updateCameraState } = this.props;
 
-    initCameraState({
-      info: 'Initializing',
-      status: 'init',
-      roomID: '',
-      selfViewSrc: null,
-      remoteList: {},
-      pcPeers: {}
-    });
+    // initCameraState({
+    //   info: 'Initializing',
+    //   status: 'init',
+    //   roomID: `wormhole${currentWormhole.id}`,
+    //   selfViewSrc: null,
+    //   remoteList: {},
+    //   pcPeers: {}
+    // });
+
+    updateCameraState('roomID', `wormhole${currentWormhole.id}`);
 
     socket.on('exchange', (data) => {
       this.exchange(data);
@@ -69,6 +85,9 @@ class LiveCamera extends Component{
     socket.on('leave', (socketId) => {
       this.leave(socketId);
     });
+  }
+  componentWillMount() {
+    this.initStream();
   }
   componentDidMount() {
     RTCSetting.setAudioOutput('speaker');
@@ -85,18 +104,27 @@ class LiveCamera extends Component{
     this.joinRoom.call(this,liveCamera.roomID);
   }
   getLocalStream() {
-    let { updateCameraState } = this.props;
-    console.log('getLocalStream');
-    navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
-      updateCameraState('localStream', stream);
-      updateCameraState('selfViewSrc', stream.toURL());
+    let { liveCamera, updateCameraState } = this.props;
+    console.log('getLocalStream', liveCamera.selfViewSrc);
+    if(liveCamera.selfViewSrc === null) {
+      navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+        updateCameraState('localStream', stream);
+        updateCameraState('selfViewSrc', stream.toURL());
+        updateCameraState('status', 'ready');
+        // updateCameraState('info', 'Please enter or create room ID');
+      }, (err) => console.log(err));
+    } else {
       updateCameraState('status', 'ready');
-      updateCameraState('info', 'Please enter or create room ID');
-    }, (err) => console.log(err));
+    }
   }
   joinRoom(roomID) {
+    let { updateCameraState } = this.props;
+    console.log('about to joing room', roomID);
     socket.emit('join', roomID, (socketIds) => {
       console.log('join', socketIds);
+      if(socketIds.length === 0) {
+        updateCameraState('streamMaster', true);
+      }
       for (var i in socketIds) {
         var socketId = socketIds[i];
         console.log(this);
@@ -185,7 +213,8 @@ class LiveCamera extends Component{
     let { liveCamera, updateCameraState } = this.props;
     console.log('leave', socketId);
     var pc = liveCamera.pcPeers[socketId];
-    var viewIndex = pc.viewIndex;
+    console.log('leave data: ', liveCamera.pcPeers.length, Object.keys(liveCamera.pcPeers));
+    // var viewIndex = pc.viewIndex;
     pc.close();
     var tempPcPeers = liveCamera.pcPeers;
     delete tempPcPeers[socketId];
@@ -197,58 +226,113 @@ class LiveCamera extends Component{
     updateCameraState('remoteList', remoteList );
     updateCameraState('info', 'One peer leave!');
   }
+  back() {
+    socket.disconnect();
+    this.props.navigator.pop();
+  }
+  renderCameras() {
+    let { liveCamera } = this.props;
+    let streamURL = liveCamera.selfViewSrc;
+    console.log('rendering the camera section', liveCamera.streamMaster, liveCamera.remoteList, liveCamera.selfViewSrc);
+    if(!liveCamera.streamMaster) {
+      let masterKey = Object.keys(liveCamera.remoteList).reduce((accum, key) => {
+        console.log('this is the value', liveCamera.remoteList[key]);
+        return liveCamera.remoteList[key] === 1 ? key : accum;
+      }, undefined);
+      console.log('masterkey ', masterKey, liveCamera.remoteList[masterKey]);
+      //streamURL = masterKey === undefined ? streamURL : liveCamera.remoteList[masterKey];
+      return (
+        <RTCView streamURL={liveCamera.remoteList[masterKey]} style={styles.selfView}/>
+      );
+    } else {
+      console.log(streamURL);
+      return (
+        <RTCView streamURL={liveCamera.selfViewSrc} style={styles.selfView}/>
+      );
+    }
+  }
   render() {
     let { liveCamera, updateCameraState } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {liveCamera.info}
-        </Text>
-        { liveCamera.status == 'ready' ?
-          (<View>
-            <TextInput
-              ref='roomID'
-              autoCorrect={false}
-              style={{width: 200, height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(text) => updateCameraState('roomID', text)}
-              value={liveCamera.roomID}
-            />
-            <TouchableHighlight
-              onPress={this._press.bind(this)}>
-              <Text>Enter room</Text>
-            </TouchableHighlight>
-          </View>) : null
-        }
-        <RTCView streamURL={liveCamera.selfViewSrc} style={styles.selfView}/>
-        {
-          mapHash(liveCamera.remoteList, function(remote, index) {
-            return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
-          })
-        }
+        <View style = {styles.headerContainer}>
+          <TouchableHighlight
+            style = {styles.backButton}
+            onPress = {this.back.bind(this)}
+          >
+            <Text style = {styles.backText}> {'<'} </Text>
+          </TouchableHighlight>
+          <Text style={styles.headerStatus}>
+            {liveCamera.info}
+          </Text>
+          <View style={styles.spacer}/>
+        </View>
+        {this.renderCameras()}
+        <TouchableHighlight
+          style={styles.engageButton}
+          onPress={this._press.bind(this)}>
+          <Text>Engage!</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 };
 
+        // <RTCView streamURL={liveCamera.selfViewSrc} style={styles.selfView}/>
+        // {
+        //   mapHash(liveCamera.remoteList, function(remote, index) {
+        //     return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
+        //   })
+        // }
+
 var styles = StyleSheet.create({
+  headerContainer: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    flex: 1
+  },
   selfView: {
-    width: 100,
-    height: 100,
+    flex: 10,
+    alignSelf: 'stretch',
   },
   remoteView: {
     width: 100,
     height: 100,
   },
+  headerStatus: {
+    flex: 1,
+  },
+  spacer: {
+    flex: 1,
+    backgroundColor: 'red'
+  },
+  backButton: {
+    // flexDirection: 'row',
+    // alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 1,
+    backgroundColor: 'black'
+  },
+  backText: {
+    fontSize: 30,
+    color: 'white',
+    alignSelf: 'flex-start',
+    marginLeft: 5
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'column',
+    marginTop: 20
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  engageButton: {
+    // alignSelf: 'stretch',
+    // flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'green',
   },
 });
 

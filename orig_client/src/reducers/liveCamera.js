@@ -1,8 +1,16 @@
 import { INIT_LIVE_CAMERA, UPDATE_LIVE_CAMERA } from '../constants/actions';
 
-var initialState = {};
+var initialState = {
+      info: 'Initializing',
+      status: 'init',
+      roomID: '',
+      selfViewSrc: null,
+      remoteList: {},
+      pcPeers: {},
+      streamMaster: false
+    };
 
-function liveCamera(state = {}, action) {
+function liveCamera(state = initialState, action) {
   switch (action.type) {
 	  case INIT_LIVE_CAMERA:
 	    return action.cameraState;

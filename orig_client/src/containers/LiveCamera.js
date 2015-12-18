@@ -4,9 +4,10 @@ import LiveCamera from '../components/LiveCamera';
 import * as LiveCameraActions from '../actions/liveCamera';
 
 function mapStateToProps(state) {
-	console.log('livecamera state', state.liveCamera);
+	console.log('livecamera state', state.currentWormhole);
   return {
-  	liveCamera: state.liveCamera
+  	liveCamera: state.liveCamera,
+  	currentWormhole: state.currentWormhole
   };
 }
 
