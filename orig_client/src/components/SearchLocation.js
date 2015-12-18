@@ -10,28 +10,25 @@ const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937,
 const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
 const styles = StyleSheet.create({
-  textInput: {
-    borderRadius: 0
-  },
   container: {
     flex: 1,
   },
   textInputContainer: {
-    backgroundColor: '#C9C9CE',
+    backgroundColor: 'white',
     height: 44,
-    borderTopColor: '#7e7e7e',
-    borderBottomColor: '#b5b5b5',
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
+    borderTopColor: 'white',
+    borderBottomColor: 'white',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
   },
   textInput: {
-    backgroundColor: '#FFFFFF',
-    height: 28,
-    borderRadius: 5,
+    backgroundColor: 'rgba(125,125,125,0.1)',
+    height: 33,
+    borderRadius: 7,
     paddingTop: 4.5,
-    paddingBottom: 4.5,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingBottom: 1,
+    paddingLeft: 6,
+    paddingRight: 6,
     marginTop: 7.5,
     marginLeft: 8,
     marginRight: 8,
@@ -60,30 +57,6 @@ class SearchLocation extends React.Component{
   }  
 
   render() {
-    // predefinedPlaces={[homePlace, workPlace]}
-              // { ...userProps }
-              // ref="textInput"
-              // autoFocus={this.props.autoFocus}
-              // style={[defaultStyles.textInput, this.props.styles.textInput]}
-              // onChangeText={onChangeText ? text => {this._onChangeText(text); onChangeText(text)} : this._onChangeText}
-              // value={this.state.text}
-              // placeholder={this.props.placeholder}
-              // onFocus={onFocus ? () => {this._onFocus(); onFocus()} : this._onFocus}
-              // clearButtonMode="while-editing"
-
-        // <View
-        //   style={styles.container}
-        // >
-        //   <View
-        //     style={styles.textInputContainer}
-        //   >
-        //     <TextInput style={styles.textInput} />
-        //   </View>
-        // </View>
-      // <View
-      //   style={{flex:1, flexDirection: 'row'}}
-      // >
-    
     return (
       <View>
         <View
@@ -128,6 +101,27 @@ class SearchLocation extends React.Component{
             },
             predefinedPlacesDescription: {
               color: '#1faadb',
+            },
+            textInputContainer: {
+              backgroundColor: 'white',
+              height: 44,
+              borderTopColor: 'white',
+              borderBottomColor: 'white',
+              borderTopWidth: 0,
+              borderBottomWidth: 0,
+            },
+            textInput: {
+              backgroundColor: 'rgba(125,125,125,0.1)',
+              height: 33,
+              borderRadius: 7,
+              paddingTop: 1,
+              paddingBottom: 1,
+              paddingLeft: 6,
+              paddingRight: 6,
+              marginTop: 3,
+              marginLeft: 8,
+              marginRight: 8,
+              fontSize: 15,
             },
           }}
 

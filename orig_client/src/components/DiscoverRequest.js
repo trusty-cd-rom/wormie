@@ -10,7 +10,6 @@ import React, {
 
 import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
-import SearchLocation from './SearchLocation';
 
 
 var styles = StyleSheet.create({
@@ -118,7 +117,7 @@ var styles = StyleSheet.create({
   },
 });
 
-class DiscoverSearch extends React.Component{
+class DiscoverRequest extends React.Component{
 
   setTarget(data) {
     let { setCurrentTarget } = this.props;
@@ -129,82 +128,8 @@ class DiscoverSearch extends React.Component{
   // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
   // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
 
-  separator(){
-    let { responseList } = this.props;
-    if (responseList[0].location['display_address'].length === 0) {
-      return (
-        <View />
-      )
-    } else {
-      return (
-        <View style={styles.separator} />
-      );      
-    }
-  }
-
-  _renderRow(rowData){
-    let list = rowData.location['display_address'].map((address, index) => {
-      return (
-        <Text style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
-      );
-    })
-    return (
-      <View>
-        <TouchableHighlight
-          style={styles.container}
-          onPress={this.setTarget.bind(this, rowData)}
-        >
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Image 
-              source = {{uri: rowData['image_url']}} 
-              style={styles.image}
-            />
-            <View>
-              <View
-                style={{alignSelf: 'flex-end'}}
-              >
-                <Text style={styles.name}> {rowData.name || ''} </Text>
-                <Image 
-                  source = {{uri: rowData['rating_img_url']}} 
-                  style={styles.ratingImage}
-                />
-                { list }
-              </View>
-            </View>
-          </View>
-        </TouchableHighlight>
-        { this.separator() }
-      </View>
-    )
-  }
-
-  _renderList(ds) {
-    let { responseList } = this.props;
-    var rows = responseList;
-
-    if (rows) {
-      return (
-        <ListView
-          dataSource={ds.cloneWithRows(rows)}
-          renderRow={this._renderRow.bind(this)}
-          style={{
-            backgroundColor:'white',
-            position: 'absolute',
-            top: 120,
-            order: 99,
-            width: 380,
-            height: 520,
-          }}
-        />
-      );
-    } else {
-      return <View />
-    }
-  }
 
   render() {
-    let { responseList, setCurrentTerm, setCurrentLocation } = this.props;
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     
     return (
       <View
@@ -214,26 +139,13 @@ class DiscoverSearch extends React.Component{
           topbarTitle={this.props.topbarTitle}
           navigator={this.props.navigator}
         />
-        { this._renderList(ds) }
-        <SearchLocation
-          setCurrentTerm={this.props.setCurrentTerm} 
-          setCurrentLocation={this.props.setCurrentLocation}
-          searchInfo={this.props.searchInfo}
-          category={this.props.category}
-          term={this.props.term}
-          location={this.props.location}
-          style={{
-            position: 'absolute',
-            top: 20,
-          }}
-        />
       </View>
     );
   }
 }
 
-DiscoverSearch.propTypes = {
+DiscoverRequest.propTypes = {
   responseList: React.PropTypes.object.isRequired
 }
 
-export default DiscoverSearch;
+export default DiscoverRequest;

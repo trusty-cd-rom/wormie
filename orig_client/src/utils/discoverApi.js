@@ -8,16 +8,6 @@ var api = {
     return fetch(url).then(function (res) {
       return res.json();
     });
-    // return fetch(url, {
-    //   method: 'GET'
-    //   // headers: {
-    //   //   'Content-Type': 'application/json',
-    //   //   'Accept': 'application/json',
-    //   // }
-    //   // body: JSON.stringify(query)
-    // }).then(function (res) {
-    //   return res.json();
-    // })
   }
 }
 

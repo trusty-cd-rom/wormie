@@ -293,9 +293,11 @@ class AccountDetail(APIView):
 @api_view(['GET', 'POST'])
 
 def yelp_list(request):
+
     """
     List all snippets, or create a new snippet.
     """
+    
     print('inside yelpmain in view.py')
     term = request.GET.get('term','')
     location = request.GET.get('location','')

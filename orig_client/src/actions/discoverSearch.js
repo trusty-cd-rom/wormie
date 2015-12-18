@@ -1,4 +1,4 @@
-import { SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_RESULT_LIST } from '../constants/actions';
+import { SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_RESULT_LIST, SET_CURRENT_TARGET } from '../constants/actions';
 import { queryInfo } from '../utils/discoverApi'
 
 export function setCurrentTerm(term) {
@@ -20,6 +20,13 @@ function setResultList(responseList) {
   return {
     type: SET_RESULT_LIST,
     responseList
+  }
+}
+
+export function setCurrentTarget(target) {
+  return {
+    type: SET_CURRENT_TARGET,
+    target
   }
 }
 

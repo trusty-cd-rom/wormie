@@ -1,6 +1,51 @@
-import { SET_RESULT_LIST, SET_CURRENT_CATEGORY, SET_CURRENT_TERM, SET_CURRENT_LOCATION } from '../constants/actions';
+import { SET_RESULT_LIST, SET_CURRENT_CATEGORY, SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_CURRENT_TARGET } from '../constants/actions';
 
-var initialState = {};
+var initialState = {
+  category: '',
+  term: '',
+  location: '',
+  responseList:  [
+    {
+      "is_claimed": "", 
+      "rating": "", 
+      "mobile_url": "", 
+      "rating_img_url": "", 
+      "review_count": "", 
+      "name": "", 
+      "rating_img_url_small": "", 
+      "url": "", 
+      "categories": [], 
+      "phone": "", 
+      "snippet_text": "", 
+      "image_url": "", 
+      "snippet_image_url": "", 
+      "display_phone": "", 
+      "rating_img_url_large": "", 
+      "id": "", 
+      "is_closed": "", 
+      "location": {
+        "cross_streets": "", 
+        "city": "", 
+        "display_address": [], 
+        "geo_accuracy": "", 
+        "neighborhoods": [
+          "", 
+          ""
+        ], 
+        "postal_code": "", 
+        "country_code": "", 
+        "address": [
+          ""
+        ], 
+        "coordinate": {
+          "latitude": '', 
+          "longitude": ''
+        }, 
+        "state_code": ""
+      }
+    }
+  ]
+};
 
 function discover(state = initialState, action) {
   switch (action.type) {
@@ -27,6 +72,12 @@ function discover(state = initialState, action) {
       return {
         ...state,
         responseList: action.responseList
+      }
+    case SET_CURRENT_TARGET:
+      console.log('set target');
+      return {
+        ...state,
+        target: action.target
       }
     default:
       return state;

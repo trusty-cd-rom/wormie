@@ -9,6 +9,7 @@ function mapStateToProps(state) {
     category: state.discover.category,
     term: state.discover.term,
     location: state.discover.location,
+    responseList: state.discover.responseList,
   };
 }
 
