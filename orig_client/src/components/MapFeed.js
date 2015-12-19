@@ -13,14 +13,9 @@ var {
   Image,
 } = React;
 
-class MapFeed extends React.Component{
+var MapFeed = React.createClass({
 
-  constructor(props){
-    super(props);
-    this.state = {
-      mixins: [Mapbox.Mixin]
-    };
-  }
+  mixins: [Mapbox.Mixin],
   
   getInitialState() {
 
@@ -32,33 +27,33 @@ class MapFeed extends React.Component{
       zoom: 11,
       annotations: [],
     };
-  }
+  },
 
   onRegionChange(location) {
     this.setState({ currentZoom: location.zoom });
-  }
+  },
 
   onRegionWillChange(location) {
     console.log(location);
-  }
+  },
 
   onUpdateUserLocation(location) {
     console.log(location);
-  }
+  },
 
   onOpenAnnotation(annotation){
-  }
+  },
 
   // 
   onRightAnnotationTapped(e) {
     console.log(e);
-  }
+  },
 
   onLongPress(location){
     console.log('long pressed', location);
-  }
+  },
 
-  render() {
+  render: function() {
     StatusBarIOS.setHidden(true);
     console.log("Rendering map");
     console.log("state is:", this.state);
@@ -68,9 +63,9 @@ class MapFeed extends React.Component{
           style={styles.map}
           direction={0}
           rotateEnabled={false}
-          scrollEnabled={true}
-          zoomEnabled={true}
-          showsUserLocation={false}
+          scrollEnabled={false}
+          zoomEnabled={false}
+          showsUserLocation={true}
           ref={mapRef}
           accessToken={mapboxConfig.accessToken}
           styleURL={mapboxConfig.styleURL}
@@ -87,14 +82,16 @@ class MapFeed extends React.Component{
       </View>
     );
   }
-};
+});
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    height: 220
   },
   map: {
-    flex: 1
+    flex: 1,
+    height: 220
   },
 });
 

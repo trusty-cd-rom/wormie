@@ -14,7 +14,7 @@ import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
 import MapFeed from './MapFeed';
-import MapExplore from './MapExplore';
+import MapExample from './MapExample';
 
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
