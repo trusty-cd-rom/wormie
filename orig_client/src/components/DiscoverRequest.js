@@ -6,134 +6,44 @@ import React, {
   ScrollView,
   TouchableHighlight,
   ListView,
+  WebView,
 } from 'react-native';
 
+import CreateRequest from '../containers/CreateRequest';
 import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
 
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    marginTop: 20,
     flex: 1,
-    padding: 4,
-    marginTop: 10,
-    fontFamily: 'Lato-Regular',
-  },
-  infoContainer: {
-    // color: 'black',
-    alignSelf: 'flex-start'
-  },
-  name: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: '#3e3e3e',
-    marginTop: 10,
-    marginBottom: 5,
-  },
-  handle: {
-    fontSize: 16,
-    color: '#727272'
-  },
-  image: {
-    height: 70,
-    width: 70,
-    borderRadius: 40,
-    marginTop: 2,
-    alignSelf: 'center',
-    marginLeft: 8,
-    marginRight: 10
-  },
-  button: {
-    flex: 1,
-    flexDirection:'column',
-    alignItems:'flex-end',
-    paddingRight: 7,
-  },
-  ionic: { 
-    width: 30, 
-    height: 30,
-  },
-  singleButton: {
-    width: 172,
-    height: 138,
-    marginBottom: 10,
-    backgroundColor: '#55378F',
-  },
-  buttonText: {
-    fontFamily: 'Lato-Bold',
-    textAlign: 'center',
-    alignSelf: 'center',
-    color: 'white',
-    fontSize: 25,
+    flexDirection: 'column', 
+    alignItems: 'stretch'
   },
   icon: {
-    width: 60,
-    height: 60,
-    marginTop: 20,
-    paddingLeft: 20,
+    width: 35,
+    height: 35,
+    paddingLeft: 30,
     alignSelf: 'center'
   },
-  floatView: {
-    position: 'absolute',
-    width: 100,
-    height: 100,
-    top: 88,
-    left: 0,
-    backgroundColor: 'green',
-  },
-  image: {
-    height: 120,
-    width: 120,
-    borderRadius: 20,
-    marginTop: 2,
-    alignSelf: 'flex-start',
-    marginLeft: 5,
-    marginRight: 10
-  },
-  ratingImage: {
-    height: 20,
-    width: 100,
-    paddingLeft: 5,
-    margin: 5,
-  },
-  name: {
-    color: '#39247F',
-    fontFamily: 'Lato-Bold',
-    fontSize: 18,
-    marginTop: 8,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#E4E4E4',
+  topbarContainer: {
     flex: 1,
-    marginLeft: 15,
-    marginTop: 10,
-    marginRight: 15
+    backgroundColor: 'white'
   },
-});
-// var styles = StyleSheet.create({
-//   webViewContainer: {
-//     flex: 1,
-//     backgroundColor: '#F6F6EF',
-//     flexDirection: 'column',
-//   },
-// });
-
-// class Web extends React.Component{
-//   render() {
-//     return (
-//       <View style={styles.webViewContainer}>
-//         <WebView url={this.props.url}/>
-//       </View>
-//     );
-//   }
-// };
-
+  buttonContainer: {
+    flex: 1.5,
+    backgroundColor: '#9E6FFF', 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center'
+  },
+  request: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 25,
+    color: 'white',
+  }
+})
 
 class DiscoverRequest extends React.Component{
 
@@ -146,21 +56,67 @@ class DiscoverRequest extends React.Component{
   // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
   // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
 
-
+//         <WebView url={target['mobile_url']}/>
+// <View style={styles.webViewContainer}>
+//           <WebView url={target['mobile_url']}/>
+//         </Vie
   render() {
-    
+    let { target } = this.props;
+    console.log(target['mobile_url']);
     return (
       <View
-        style={{marginTop: 20}}
+        style={styles.container}
       >
-        <Topbar
-          topbarTitle={this.props.topbarTitle}
-          navigator={this.props.navigator}
-        />
+        <View
+          style={styles.topbarContainer}
+        >
+          <Topbar
+            topbarTitle={this.props.topbarTitle}
+            navigator={this.props.navigator}
+          />
+        </View>
+        <View
+          style={{flex: 15}}
+        >
+          <WebView 
+            url={target['mobile_url']}
+            // style={{width: 300, height: 200}}
+          />
+        </View>
+        <View
+          style={styles.buttonContainer}
+        >
+          <TouchableHighlight
+            underlayColor={'#39247F'}
+            onPress={() => {
+              this.props.navigator.push({
+                component: CreateRequest,
+                passProps: {requestedTarget: this.props.target}
+              });
+            }}
+          >
+            <View
+              style={{
+                flexDirection: 'row'
+              }}
+            >
+              <Text
+                style={styles.request}
+              >{'CREATE REQUEST'}</Text>
+              <Icon
+                name='ion|location'
+                size={35}
+                color='white'
+                style={styles.icon}
+              />
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
 }
+              // style={{backgroundColor: 'blue', height: 100}}
 
 DiscoverRequest.propTypes = {
   responseList: React.PropTypes.object.isRequired
