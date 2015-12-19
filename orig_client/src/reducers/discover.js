@@ -8,7 +8,7 @@ var initialState = {
     {
       "is_claimed": "", 
       "rating": "", 
-      "mobile_url": "", 
+      "mobile_url": "https://www.google.com",  
       "rating_img_url": "", 
       "review_count": "", 
       "name": "", 
@@ -26,7 +26,7 @@ var initialState = {
       "location": {
         "cross_streets": "", 
         "city": "", 
-        "display_address": [], 
+        "display_address": ["default"], 
         "geo_accuracy": "", 
         "neighborhoods": [
           "", 
@@ -38,8 +38,8 @@ var initialState = {
           ""
         ], 
         "coordinate": {
-          "latitude": '', 
-          "longitude": ''
+          "latitude": '37.7833', 
+          "longitude": '122.4167'
         }, 
         "state_code": ""
       }

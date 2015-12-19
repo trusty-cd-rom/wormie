@@ -60,34 +60,6 @@ var styles = StyleSheet.create({
     width: 30, 
     height: 30,
   },
-  singleButton: {
-    width: 172,
-    height: 138,
-    marginBottom: 10,
-    backgroundColor: '#55378F',
-  },
-  buttonText: {
-    fontFamily: 'Lato-Bold',
-    textAlign: 'center',
-    alignSelf: 'center',
-    color: 'white',
-    fontSize: 25,
-  },
-  icon: {
-    width: 60,
-    height: 60,
-    marginTop: 20,
-    paddingLeft: 20,
-    alignSelf: 'center'
-  },
-  floatView: {
-    position: 'absolute',
-    width: 100,
-    height: 100,
-    top: 88,
-    left: 0,
-    backgroundColor: 'green',
-  },
   image: {
     height: 120,
     width: 120,

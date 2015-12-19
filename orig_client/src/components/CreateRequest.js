@@ -12,6 +12,15 @@ import React, {
 import Navbar from '../containers/Navbar';
 
 class CreateRequest extends Component {
+  /**************************************
+   target is available as this.props.requestedTarget
+   it has same structure with yelp data
+   let coords = this.props.requestedTarget.location.coordinate;
+   name: this.props.requestedTarget.name
+   latitude: this.props.requestedTarget.location.coordinate.latitude
+   longitude: this.props.requestedTarget.location.coordinate.longitude
+   *************************************/
+
   componentWillMount() {
     let { updateInputText } = this.props;
     navigator.geolocation.getCurrentPosition(
@@ -59,6 +68,19 @@ class CreateRequest extends Component {
       });
     });
   }
+
+  _renderYelpLocation() {
+    if (this.props.requestedTarget) {
+      return (
+        <Text style={styles.title}>
+          {this.props.requestedTarget.location.coordinate.latitude} {this.props.requestedTarget.location.coordinate.longitude}
+        </Text>
+      );
+    } else {
+      return <View />
+    }
+  }
+
   render() {
     let { inputText } = this.props;
     return (
@@ -88,9 +110,11 @@ class CreateRequest extends Component {
             value = {inputText.location}
             onChange = {this.handleInputChange.bind(this,'location')}
           />
+          {this._renderYelpLocation.bind(this)()}
           <Text style={styles.title}>
             Deadline
           </Text>
+          
           <DatePickerIOS
             date={new Date(inputText.deadline)}
             mode="datetime"

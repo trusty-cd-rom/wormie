@@ -37,13 +37,16 @@ const styles = StyleSheet.create({
 })
 
 class SearchLocation extends React.Component{
+  constructor(props) {
+    super(props);
+    this.running = false;
+    this.currentTimeout;
+  }
   
   setTerm(text) {
-    console.log('setterm');
+    console.log(this.running);
     let { setCurrentTerm } = this.props;
-    console.log(text);
     setCurrentTerm(text);
-    this.sendInfo();
   }
 
   setLocation(location) {
@@ -51,7 +54,19 @@ class SearchLocation extends React.Component{
     setCurrentLocation(location);
   }
 
+  time() {
+    if (this.running) {
+      clearTimeout(this.currentTimeout);
+    }
+    this.running = true;
+    this.currentTimeout = setTimeout(() => {
+      this.sendInfo();
+      this.running = false;
+    }, 2000);
+  }
+
   sendInfo() {
+    console.log('sendInfo is working');
     let { category, term, location, searchInfo } = this.props;
     searchInfo(category, term, location);
   }  
@@ -69,7 +84,6 @@ class SearchLocation extends React.Component{
               style={styles.textInput} 
               onChangeText={(text) => {
                 this.setTerm(text);
-                this.sendInfo();
               }}
               placeholder={'tacos, cheap dinner, Max\'s'}
               autoFocus={true}
@@ -84,7 +98,7 @@ class SearchLocation extends React.Component{
           fetchDetails={true}
           onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
             this.setLocation(details['formatted_address']);
-            this.sendInfo();
+            this.time();
           }}
           getDefaultValue={() => {
             return ''; // text input default value
