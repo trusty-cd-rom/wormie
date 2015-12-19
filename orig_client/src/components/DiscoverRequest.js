@@ -6,6 +6,7 @@ import React, {
   ScrollView,
   TouchableHighlight,
   ListView,
+  WebView,
 } from 'react-native';
 
 import { Icon } from 'react-native-icons';
@@ -78,14 +79,6 @@ var styles = StyleSheet.create({
     paddingLeft: 20,
     alignSelf: 'center'
   },
-  floatView: {
-    position: 'absolute',
-    width: 100,
-    height: 100,
-    top: 88,
-    left: 0,
-    backgroundColor: 'green',
-  },
   image: {
     height: 120,
     width: 120,
@@ -115,25 +108,15 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 15
   },
+  webViewContainer: {
+    flex: 1,
+    // position: 'absolute',
+    // top: 30,
+    // backgroundColor: 'red',
+    alignItems: 'stretch',
+    flexDirection: 'row'
+  },
 });
-// var styles = StyleSheet.create({
-//   webViewContainer: {
-//     flex: 1,
-//     backgroundColor: '#F6F6EF',
-//     flexDirection: 'column',
-//   },
-// });
-
-// class Web extends React.Component{
-//   render() {
-//     return (
-//       <View style={styles.webViewContainer}>
-//         <WebView url={this.props.url}/>
-//       </View>
-//     );
-//   }
-// };
-
 
 class DiscoverRequest extends React.Component{
 
@@ -146,21 +129,48 @@ class DiscoverRequest extends React.Component{
   // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
   // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
 
-
+//         <WebView url={target['mobile_url']}/>
+// <View style={styles.webViewContainer}>
+//           <WebView url={target['mobile_url']}/>
+//         </Vie
   render() {
-    
+    let { target } = this.props;
+    console.log(target['mobile_url']);
     return (
       <View
-        style={{marginTop: 20}}
+        style={{marginTop: 20, backgroundColor: 'white'}}
       >
-        <Topbar
-          topbarTitle={this.props.topbarTitle}
-          navigator={this.props.navigator}
-        />
+        <View style={styles.webViewContainer}>
+          <View
+            style={{
+              height: 600,
+              position: 'absolute',
+              top: 40
+            }}
+          >
+            <WebView 
+              url={target['mobile_url']}
+            />
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              alignItems: 'stretch',
+              flexDirection: 'row'
+            }}
+          >
+            <Topbar
+              topbarTitle={this.props.topbarTitle}
+              navigator={this.props.navigator}
+            />
+          </View>
+        </View>
       </View>
     );
   }
 }
+              // style={{backgroundColor: 'blue', height: 100}}
 
 DiscoverRequest.propTypes = {
   responseList: React.PropTypes.object.isRequired

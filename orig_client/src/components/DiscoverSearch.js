@@ -23,7 +23,7 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1,
     padding: 4,
-    marginTop: 10,
+    marginTop: 4,
     fontFamily: 'Lato-Regular',
   },
   infoContainer: {
@@ -114,7 +114,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#E4E4E4',
     flex: 1,
     marginLeft: 15,
-    marginTop: 10,
+    marginTop: 4,
     marginRight: 15
   },
 });
@@ -150,7 +150,7 @@ class DiscoverSearch extends React.Component{
   _renderRow(rowData){
     let list = rowData.location['display_address'].map((address, index) => {
       return (
-        <Text style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
+        <Text key={index} style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
       );
     })
     return (
