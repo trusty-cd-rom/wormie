@@ -52,6 +52,18 @@
 		680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 680C61231C18FA4B006F6E87 /* YTPlayerView-iframe-player.html */; };
 		680C612B1C190DC3006F6E87 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C612A1C190DBA006F6E87 /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CB245E1C1C22474200A92EF6 /* libRCTMapboxGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E191C22470900A92EF6 /* libRCTMapboxGL.a */; };
+		CB245E1E1C22476900A92EF6 /* Mapbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB245E1D1C22476900A92EF6 /* Mapbox.bundle */; };
+		CB245E201C22478300A92EF6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB245E1F1C22478300A92EF6 /* Settings.bundle */; };
+		CB245E221C2247AD00A92EF6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E211C2247AD00A92EF6 /* CoreTelephony.framework */; };
+		CB245E241C2247B400A92EF6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E231C2247B400A92EF6 /* GLKit.framework */; };
+		CB245E261C2247BC00A92EF6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E251C2247BC00A92EF6 /* ImageIO.framework */; };
+		CB245E281C2247D000A92EF6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E271C2247D000A92EF6 /* MobileCoreServices.framework */; };
+		CB245E2A1C2247DC00A92EF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E291C2247DC00A92EF6 /* QuartzCore.framework */; };
+		CB245E2C1C2247E600A92EF6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E2B1C2247E600A92EF6 /* SystemConfiguration.framework */; };
+		CB245E2E1C2247F000A92EF6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E2D1C2247F000A92EF6 /* libc++.tbd */; };
+		CB245E301C2247F800A92EF6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E2F1C2247F800A92EF6 /* libsqlite3.tbd */; };
+		CB245E321C22480100A92EF6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB245E311C22480100A92EF6 /* libz.tbd */; };
 		CB4484031C213EA800655075 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4483FA1C213EA800655075 /* Lato-Black.ttf */; };
 		CB4484041C213EA800655075 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4483FB1C213EA800655075 /* Lato-Bold.ttf */; };
 		CB4484051C213EA800655075 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4483FC1C213EA800655075 /* Lato-Hairline.ttf */; };
@@ -177,6 +189,20 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		CB245E181C22470900A92EF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB245E131C22470700A92EF6 /* RCTMapboxGL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5DBB3401AF2EF2B00E611A9;
+			remoteInfo = RCTMapboxGL;
+		};
+		CB245E1A1C22470900A92EF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB245E131C22470700A92EF6 /* RCTMapboxGL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5DBB34B1AF2EF2B00E611A9;
+			remoteInfo = RCTMapboxGLTests;
+		};
 		CBC9301A1C1CB0AE005EBA4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */;
@@ -250,6 +276,18 @@
 		680C61251C190DBA006F6E87 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CB245E131C22470700A92EF6 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMapboxGL.xcodeproj; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; };
+		CB245E1D1C22476900A92EF6 /* Mapbox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Mapbox.bundle; sourceTree = "<group>"; };
+		CB245E1F1C22478300A92EF6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CB245E211C2247AD00A92EF6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CB245E231C2247B400A92EF6 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		CB245E251C2247BC00A92EF6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		CB245E271C2247D000A92EF6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CB245E291C2247DC00A92EF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB245E2B1C2247E600A92EF6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CB245E2D1C2247F000A92EF6 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CB245E2F1C2247F800A92EF6 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CB245E311C22480100A92EF6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CB4483FA1C213EA800655075 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../src/assets/Lato-Black.ttf"; sourceTree = "<group>"; };
 		CB4483FB1C213EA800655075 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../src/assets/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		CB4483FC1C213EA800655075 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "../src/assets/Lato-Hairline.ttf"; sourceTree = "<group>"; };
@@ -274,6 +312,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB245E321C22480100A92EF6 /* libz.tbd in Frameworks */,
+				CB245E301C2247F800A92EF6 /* libsqlite3.tbd in Frameworks */,
+				CB245E2E1C2247F000A92EF6 /* libc++.tbd in Frameworks */,
+				CB245E2C1C2247E600A92EF6 /* SystemConfiguration.framework in Frameworks */,
+				CB245E2A1C2247DC00A92EF6 /* QuartzCore.framework in Frameworks */,
+				CB245E281C2247D000A92EF6 /* MobileCoreServices.framework in Frameworks */,
+				CB245E261C2247BC00A92EF6 /* ImageIO.framework in Frameworks */,
+				CB245E241C2247B400A92EF6 /* GLKit.framework in Frameworks */,
+				CB245E221C2247AD00A92EF6 /* CoreTelephony.framework in Frameworks */,
+				CB245E1C1C22474200A92EF6 /* libRCTMapboxGL.a in Frameworks */,
 				13EA60891C1FCDE7006EE751 /* libRCTFBSDKLogin.a in Frameworks */,
 				1321B9331C1CF621002DEA85 /* libReactNativeIcons.a in Frameworks */,
 				CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */,
@@ -505,6 +553,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CB245E1F1C22478300A92EF6 /* Settings.bundle */,
+				CB245E1D1C22476900A92EF6 /* Mapbox.bundle */,
+				CB245E131C22470700A92EF6 /* RCTMapboxGL.xcodeproj */,
 				CBFAD8BC1C212FC100D81FC5 /* Fonts */,
 				1321B9341C1CF678002DEA85 /* FontAwesomeKit */,
 				CBC930151C1CABF8005EBA4F /* Frameworks */,
@@ -527,9 +578,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CB245E141C22470700A92EF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB245E191C22470900A92EF6 /* libRCTMapboxGL.a */,
+				CB245E1B1C22470900A92EF6 /* RCTMapboxGLTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CBC930151C1CABF8005EBA4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB245E311C22480100A92EF6 /* libz.tbd */,
+				CB245E2F1C2247F800A92EF6 /* libsqlite3.tbd */,
+				CB245E2D1C2247F000A92EF6 /* libc++.tbd */,
+				CB245E2B1C2247E600A92EF6 /* SystemConfiguration.framework */,
+				CB245E291C2247DC00A92EF6 /* QuartzCore.framework */,
+				CB245E271C2247D000A92EF6 /* MobileCoreServices.framework */,
+				CB245E251C2247BC00A92EF6 /* ImageIO.framework */,
+				CB245E231C2247B400A92EF6 /* GLKit.framework */,
+				CB245E211C2247AD00A92EF6 /* CoreTelephony.framework */,
 				13EA607F1C1FCD9F006EE751 /* FBSDKCoreKit.framework */,
 				13EA60801C1FCD9F006EE751 /* FBSDKLoginKit.framework */,
 			);
@@ -657,6 +726,10 @@
 				{
 					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
 					ProjectRef = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = CB245E141C22470700A92EF6 /* Products */;
+					ProjectRef = CB245E131C22470700A92EF6 /* RCTMapboxGL.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
@@ -809,6 +882,20 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CB245E191C22470900A92EF6 /* libRCTMapboxGL.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTMapboxGL.a;
+			remoteRef = CB245E181C22470900A92EF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB245E1B1C22470900A92EF6 /* RCTMapboxGLTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RCTMapboxGLTests.xctest;
+			remoteRef = CB245E1A1C22470900A92EF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -830,6 +917,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB245E201C22478300A92EF6 /* Settings.bundle in Resources */,
+				CB245E1E1C22476900A92EF6 /* Mapbox.bundle in Resources */,
 				CB4484061C213EA800655075 /* Lato-Heavy.ttf in Resources */,
 				13FCEF071C1CFF7C00E41510 /* FAKFontAwesome.h in Resources */,
 				13FCEF081C1CFF7C00E41510 /* FAKFontAwesome.m in Resources */,
@@ -1048,7 +1137,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1088,7 +1177,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

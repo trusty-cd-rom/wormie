@@ -13,6 +13,9 @@ import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
+import MapFeed from './MapFeed';
+import MapExample from './MapExample';
+
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
 
@@ -49,7 +52,7 @@ class FeedList extends React.Component{
           videoId={item.submissions[0].video_url}
           play={false}
           hidden={false}
-          playsInline={true}
+          playsInline={false}
           showinfo={false}
           modestbranding={true}
           onError={(e)=>{console.log('youtube error: ', e.error)}}
@@ -58,12 +61,7 @@ class FeedList extends React.Component{
       );
     }else {
       return (
-        <TouchableHighlight onPress={this.viewRequest.bind(this, index)}>
-          <Image 
-            style={{height: 220, width: 390, flex: 1}}
-            source = {require('../assets/dsnWormhole.jpg')}
-          />
-        </TouchableHighlight>
+        <MapFeed />
       );
     }
   }
@@ -206,12 +204,11 @@ class FeedList extends React.Component{
 
 var styles = StyleSheet.create({
   container:{
-    marginTop: 20,
-    marginBottom: 49,
     flex: 1,
     backgroundColor: 'white'
   },
   buttonText: {
+    fontFamily: 'Lato-Regular',
     fontSize: 24,
     color: 'black',
     alignSelf: 'center'
@@ -224,18 +221,21 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   cardTitle: {
-    fontSize: 20,
+    fontFamily: 'Lato-Semibold',
+    fontSize: 18,
     color: 'black',
   },
   cardLocation: {
     color: 'black',
   },
   cardRequestor: {
+    fontFamily: 'Lato-Regular',
     marginLeft: 5,
     flex: 1,
     color: 'black',
   },
   cardSubmitter: {
+    fontFamily: 'Lato-Regular',
     marginRight: 5,
     flex: 1,
     color: 'black',
