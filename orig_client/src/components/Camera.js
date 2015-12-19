@@ -9,6 +9,7 @@ var Camera = require('react-native-camera');
 import SubmitWormhole from '../containers/SubmitWormhole';
 
 var canGoNext;
+var locationWatch;
 
 class CameraView extends Component {
   _switchCamera() {
@@ -23,23 +24,31 @@ class CameraView extends Component {
     if(!cameraState.isRecording) {
       console.log('starting the capture');
       
-
-      let locationWatch = navigator.geolocation.watchPosition(
+      locationWatch = setInterval(() => {navigator.geolocation.getCurrentPosition(
         (position) => {
-          let initialPosition = JSON.stringify(position);
-          console.log(initialPosition);
           updateSubmissionCoordinates(position);
-          //replace with call to action function, update state via reducer
-          // console.log(typeof position.coords.latitude);
-          // updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
         },
         (error) => alert(error.message),
-        {enableHighAccuracy: true}
-      );
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      )}, 5000);
+
+      // let locationWatch = navigator.geolocation.watchPosition(
+      //   (position) => {
+      //     let initialPosition = JSON.stringify(position);
+      //     console.log(initialPosition);
+      //     updateSubmissionCoordinates(position);
+      //     //replace with call to action function, update state via reducer
+      //     // console.log(typeof position.coords.latitude);
+      //     // updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
+      //   },
+      //   (error) => alert(error.message),
+      //   {enableHighAccuracy: true}
+      // );
       this.refs.cam.capture((err, data) => {
         console.log('this is the data location from the camera: ', err, data);
         updateSubmissionVideo(data);
         navigator.geolocation.clearWatch(locationWatch);
+        clearInterval(locationWatch);
         if(canGoNext) {
           this.props.navigator.push({
             component: SubmitWormhole 
@@ -51,7 +60,6 @@ class CameraView extends Component {
       console.log('stopping the capture');
       this.refs.cam.stopCapture();
       toggleRecording();
-      canGoNext = true;
     }
   }
   constructor(props) {
@@ -59,7 +67,7 @@ class CameraView extends Component {
   }
   componentWillMount() {
     let { initCameraState, updateSubmissionCoordinates } = this.props;
-    canGoNext = false;
+    canGoNext = true;
     initCameraState({
       cameraType: Camera.constants.Type.back,
       captureMode: Camera.constants.CaptureMode.video,
@@ -70,6 +78,11 @@ class CameraView extends Component {
 
   }
   back() {
+    let { initSubmissionCoordinates } = this.props;
+    canGoNext = false;
+    navigator.geolocation.clearWatch(locationWatch);
+    this._takeVideo();
+    initSubmissionCoordinates();
     this.props.navigator.pop();
   }
   render() {

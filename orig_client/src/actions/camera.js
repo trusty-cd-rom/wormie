@@ -4,7 +4,8 @@ import {
   TOGGLE_CAMERA_RECORDING,
   TOGGLE_VIDEO_UPLOADING,
   UPDATE_WORMHOLE_SUBMISSION_VIDEO,
-  UPDATE_WORMHOLE_SUBMISSION_COORDINATES
+  UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
+  INIT_WORMHOLE_SUBMISSION_COORDINATES,
 } from '../constants/actions';
 var youtube = require('../utils/youtubeApi');
 
@@ -55,6 +56,12 @@ export function updateSubmissionCoordinates(coordinates) {
   return {
     type: UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
     coordinates
+  }
+};
+
+export function initSubmissionCoordinates() {
+  return {
+    type: INIT_WORMHOLE_SUBMISSION_COORDINATES
   }
 };
 

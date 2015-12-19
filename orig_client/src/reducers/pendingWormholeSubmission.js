@@ -3,7 +3,8 @@ import {
 	UPDATE_WORMHOLE_SUBMISSION_VIDEO,
 	TOGGLE_VIDEO_UPLOADING,
 	UPDATE_SUBMISSION_INPUT_TEXT,
-	UPDATE_WORMHOLE_SUBMISSION_COORDINATES
+	UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
+	INIT_WORMHOLE_SUBMISSION_COORDINATES,
 } from '../constants/actions';
 
 var initialState = {
@@ -32,6 +33,11 @@ function pendingWormholeSubmission(state = initialState, action) {
 	  	return {
 	  		...state,
 	  		locationData: locationData(state.locationData, action)
+	  	}
+	  case INIT_WORMHOLE_SUBMISSION_COORDINATES:
+	  	return {
+	  		...state,
+	  		locationData: []
 	  	}
 	  case TOGGLE_VIDEO_UPLOADING:
 	  	return {
