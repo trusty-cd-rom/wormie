@@ -12,6 +12,10 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
 from rest_framework import status, generics, permissions
 from rest_framework.authtoken.models import Token
+
+# 
+from worms.yelp import yelpMain
+from rest_framework.decorators import api_view
 # from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 #############################
@@ -284,3 +288,20 @@ class AccountDetail(APIView):
         account = self.get_object(pk)
         account.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+
+def yelp_list(request):
+
+    """
+    List all snippets, or create a new snippet.
+    """
+    
+    print('inside yelpmain in view.py')
+    term = request.GET.get('term','')
+    location = request.GET.get('location','')
+    category_filter = request.GET.get('category_filter','')
+    if request.method == 'GET':
+        yelp_data = yelpMain(category_filter, term, location)
+        return Response(yelp_data)
