@@ -5,7 +5,6 @@ import React, {
   View,
   TouchableHighlight,
   TextInput,
-  ScrollView,
   ActivityIndicatorIOS,
 } from 'react-native';
 // var YouTube = require('react-native-youtube');
@@ -13,12 +12,23 @@ import Navbar from '../containers/Navbar';
 var Video = require('react-native-video');
 
 class SubmitWormhole extends Component {
+  componentWillMount() {
+    let { pendingWormholeSubmission, updateInputText } = this.props;
+    let route = pendingWormholeSubmission.locationData.map((val) => {
+      return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
+    });
+    console.log(JSON.stringify(route));
+    updateInputText('notes', JSON.stringify(route));
+  }
   back() {
+    let {initSubmissionCoordinates} = this.props;
+    initSubmissionCoordinates();
     this.props.navigator.pop();
   }
   submit() {
-    let { pendingWormholeSubmission, currentUser, uploadWormholeSubmission } = this.props;
+    let { pendingWormholeSubmission, currentUser, uploadWormholeSubmission, initSubmissionCoordinates } = this.props;
     uploadWormholeSubmission(pendingWormholeSubmission, currentUser, () => {
+      initSubmissionCoordinates();
       this.props.navigator.replace({
         component: Navbar
       });
@@ -54,7 +64,7 @@ class SubmitWormhole extends Component {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     let { pendingWormholeSubmission, currentUser } = this.props;
     return (
-      <ScrollView 
+      <View 
         automaticallyAdjustContentInsets={false}
         onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
@@ -101,13 +111,13 @@ class SubmitWormhole extends Component {
             {pendingWormholeSubmission.wormhole.notes}
           </Text>
         </View>
-        <TextInput
-          style = {styles.searchInput}
-          value = {pendingWormholeSubmission.notes}
-          onChange = {this.handleInputChange.bind(this,'notes')}
-        />
+        <View style={styles.loginButton}>
+          <Text style={styles.buttonText}>
+            {pendingWormholeSubmission.submissionForm.notes}
+          </Text>
+        </View>
         {this._renderSubmitButton()}
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -139,7 +149,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 12,
     color: 'white',
     alignSelf: 'center'
   },

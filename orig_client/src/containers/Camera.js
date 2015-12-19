@@ -5,7 +5,8 @@ import * as CameraActions from '../actions/camera';
 
 function mapStateToProps(state) {
   return {
-  	cameraState: state.camera
+  	cameraState: state.camera,
+  	pendingWormholeSubmission: state.pendingWormholeSubmission,
   };
 }
 

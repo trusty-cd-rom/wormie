@@ -8,6 +8,9 @@ import React, {
 var Camera = require('react-native-camera');
 import SubmitWormhole from '../containers/SubmitWormhole';
 
+var canGoNext;
+var locationWatch;
+
 class CameraView extends Component {
   _switchCamera() {
     // console.log('someone is trying to switch the camera');
@@ -17,23 +20,40 @@ class CameraView extends Component {
     switchCamera(newCameraType);
   }
   _takeVideo() {
-    let { cameraState, toggleRecording, uploadVideo, updateSubmissionVideo } = this.props;
+    let { cameraState, toggleRecording, uploadVideo, updateSubmissionVideo, updateSubmissionCoordinates } = this.props;
     if(!cameraState.isRecording) {
       console.log('starting the capture');
       
+      locationWatch = setInterval(() => {navigator.geolocation.getCurrentPosition(
+        (position) => {
+          updateSubmissionCoordinates(position);
+        },
+        (error) => alert(error.message),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      )}, 5000);
+
+      // let locationWatch = navigator.geolocation.watchPosition(
+      //   (position) => {
+      //     let initialPosition = JSON.stringify(position);
+      //     console.log(initialPosition);
+      //     updateSubmissionCoordinates(position);
+      //     //replace with call to action function, update state via reducer
+      //     // console.log(typeof position.coords.latitude);
+      //     // updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
+      //   },
+      //   (error) => alert(error.message),
+      //   {enableHighAccuracy: true}
+      // );
       this.refs.cam.capture((err, data) => {
         console.log('this is the data location from the camera: ', err, data);
-        // youtube.postVideo(data);
-        // .then((data) => {
-        //   console.log(data);
-        // })
-        // .catch((err) => console.log(err))
-        // ;
-        // uploadVideo(data);
         updateSubmissionVideo(data);
-        this.props.navigator.push({
-          component: SubmitWormhole 
-        });
+        navigator.geolocation.clearWatch(locationWatch);
+        clearInterval(locationWatch);
+        if(canGoNext) {
+          this.props.navigator.push({
+            component: SubmitWormhole 
+          });
+        }
       });
       toggleRecording();
     } else {
@@ -46,8 +66,8 @@ class CameraView extends Component {
     super(props);
   }
   componentWillMount() {
-    let { initCameraState } = this.props;
-    
+    let { initCameraState, updateSubmissionCoordinates } = this.props;
+    canGoNext = true;
     initCameraState({
       cameraType: Camera.constants.Type.back,
       captureMode: Camera.constants.CaptureMode.video,
@@ -55,13 +75,18 @@ class CameraView extends Component {
       isRecording: false,
       isUploading: false
     });
+
   }
   back() {
+    let { initSubmissionCoordinates } = this.props;
+    canGoNext = false;
+    navigator.geolocation.clearWatch(locationWatch);
+    this._takeVideo();
+    initSubmissionCoordinates();
     this.props.navigator.pop();
   }
   render() {
-    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-    let { cameraState } = this.props;
+    let { cameraState, pendingWormholeSubmission } = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -79,6 +104,15 @@ class CameraView extends Component {
           captureTarget = {cameraState.captureTarget}
         >
         </Camera>
+        {pendingWormholeSubmission.locationData.map((val) => {
+          return (
+            <View style={styles.loginButton}>
+              <Text style={styles.buttonText}>
+                `${val.coords.latitude.toFixed(7)}, ${val.coords.longitude.toFixed(7)}`
+              </Text>
+            </View>
+          );
+        })}
         <View
           style = {styles.buttonContainer}
         >
@@ -153,6 +187,53 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#48BBEC'
   },
+  buttonText: {
+    fontSize: 12,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  loginButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'black'
+  },
 });
 
 export default CameraView;
+
+var geoLocationConfig = {
+  desiredAccuracy: 0,
+  stationaryRadius: 50,
+  distanceFilter: 50,
+  disableElasticity: false, // <-- [iOS] Default is 'false'.  Set true to disable speed-based distanceFilter elasticity
+  locationUpdateInterval: 5000,
+  minimumActivityRecognitionConfidence: 80,   // 0-100%.  Minimum activity-confidence for a state-change 
+  fastestLocationUpdateInterval: 5000,
+  activityRecognitionInterval: 10000,
+  stopDetectionDelay: 1,  // <--  minutes to delay after motion stops before engaging stop-detection system
+  stopTimeout: 2, // 2 minutes
+  activityType: 'AutomotiveNavigation',
+
+  // Application config
+  debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+  forceReloadOnLocationChange: false,  // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a new location is recorded (WARNING: possibly distruptive to user) 
+  forceReloadOnMotionChange: false,    // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when device changes stationary-state (stationary->moving or vice-versa) --WARNING: possibly distruptive to user) 
+  forceReloadOnGeofence: false,        // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a geofence crossing occurs --WARNING: possibly distruptive to user) 
+  stopOnTerminate: false,              // <-- [Android] Allow the background-service to run headless when user closes the app.
+  startOnBoot: true,                   // <-- [Android] Auto start background-service in headless mode when device is powered-up.
+
+  // HTTP / SQLite config
+  url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
+  batchSync: false,       // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
+  autoSync: true,         // <-- [Default: true] Set true to sync each location to server as it arrives.
+  maxDaysToPersist: 1,    // <-- Maximum days to persist a location in plugin's SQLite database when HTTP fails
+  headers: {
+    "X-FOO": "bar"
+  },
+  params: {
+    "auth_token": "maybe_your_server_authenticates_via_token_YES?"
+  }
+};
+

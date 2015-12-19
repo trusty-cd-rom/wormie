@@ -1,4 +1,12 @@
-import { INIT_CAMERA, SWITCH_CAMERA, TOGGLE_CAMERA_RECORDING, TOGGLE_VIDEO_UPLOADING, UPDATE_WORMHOLE_SUBMISSION_VIDEO } from '../constants/actions';
+import {
+  INIT_CAMERA,
+  SWITCH_CAMERA,
+  TOGGLE_CAMERA_RECORDING,
+  TOGGLE_VIDEO_UPLOADING,
+  UPDATE_WORMHOLE_SUBMISSION_VIDEO,
+  UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
+  INIT_WORMHOLE_SUBMISSION_COORDINATES,
+} from '../constants/actions';
 var youtube = require('../utils/youtubeApi');
 
 export function initCameraState(cameraState) {
@@ -41,6 +49,19 @@ export function updateSubmissionVideo(video) {
   return {
     type: UPDATE_WORMHOLE_SUBMISSION_VIDEO,
     video
+  }
+};
+
+export function updateSubmissionCoordinates(coordinates) {
+  return {
+    type: UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
+    coordinates
+  }
+};
+
+export function initSubmissionCoordinates() {
+  return {
+    type: INIT_WORMHOLE_SUBMISSION_COORDINATES
   }
 };
 

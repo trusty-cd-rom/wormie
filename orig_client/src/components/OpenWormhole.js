@@ -7,16 +7,18 @@ import React, {
 } from 'react-native';
 import Navbar from '../containers/Navbar';
 import CameraView from '../containers/Camera';
+var LiveCamera = require('../containers/LiveCamera.js');
 
 class OpenWormhole extends Component {
   back() {
     this.props.navigator.pop();
   }
-  startSubmission() {
+  startSubmission(type) {
     let { currentWormhole, initPendingSubmission } = this.props;
     initPendingSubmission(currentWormhole);
+    let nextView = type === 'live' ? LiveCamera : CameraView;
     this.props.navigator.push({
-      component: CameraView
+      component: nextView
     });
   }
   render() {
@@ -67,13 +69,22 @@ class OpenWormhole extends Component {
             {currentWormhole.notes}
           </Text>
         </View>
-        <TouchableHighlight
-          style = {styles.requestButton}
-          onPress = {this.startSubmission.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Request! </Text>
-        </TouchableHighlight>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style = {styles.liveButton}
+            onPress = {this.startSubmission.bind(this, 'live')}
+            underlayColor = '#88D4f5'
+          >
+            <Text style = {styles.buttonText}> Live </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style = {styles.recordButton}
+            onPress = {this.startSubmission.bind(this, 'record')}
+            underlayColor = '#88D4f5'
+          >
+            <Text style = {styles.buttonText}> Record </Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -107,19 +118,25 @@ const styles = StyleSheet.create({
     flex: 4,
     backgroundColor: 'black'
   },
-  loginButton: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#48BBEC'
-  },
-  requestButton: {
+  buttonContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 2,
-    backgroundColor: '#48BBEC'
+  },
+  liveButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'green'
+  },
+  recordButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'red'
   },
   backButton: {
     // flexDirection: 'row',
