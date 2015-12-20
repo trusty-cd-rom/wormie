@@ -33,7 +33,7 @@ var styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1.5,
-    backgroundColor: '#9E6FFF', 
+    backgroundColor: '#8949E0', 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems:'center'

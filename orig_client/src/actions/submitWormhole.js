@@ -1,4 +1,4 @@
-import { TOGGLE_VIDEO_UPLOADING, UPDATE_SUBMISSION_INPUT_TEXT } from '../constants/actions';
+import { TOGGLE_VIDEO_UPLOADING, UPDATE_SUBMISSION_INPUT_TEXT, INIT_WORMHOLE_SUBMISSION_COORDINATES } from '../constants/actions';
 var youtube = require('../utils/youtubeApi');
 var api = require('../utils/api');
 
@@ -48,3 +48,10 @@ export function updateInputText(field, text) {
     text
   };
 };
+
+export function initSubmissionCoordinates() {
+  return {
+    type: INIT_WORMHOLE_SUBMISSION_COORDINATES
+  }
+};
+

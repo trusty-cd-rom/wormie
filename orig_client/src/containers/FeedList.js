@@ -4,7 +4,6 @@ import FeedList from '../components/FeedList';
 import * as FeedListActions from '../actions/feedList';
 
 function mapStateToProps(state) {
-	// console.log('feed state!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ', state);
   return {
     feed: state.feed,
     currentUser: state.userProfile.currentUser,

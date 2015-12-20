@@ -40,8 +40,16 @@ function myCurrentWormholeList(state = {}, action) {
   }
 };
 
+var initialState = {
+  isAnimating: false,
+  wormhole: {},
+  submission: {},
+  submissionsForWormholes: [],
+  clickedUser: {},
+  peekClickedUser: false,
+}
 
-function profile(state = {isAnimating: false}, action) {
+function profile(state = initialState, action) {
   switch (action.type) {
     // single matched wormhole from wormhole list
     case UPDATE_MY_CURRENT_WORMHOLE:

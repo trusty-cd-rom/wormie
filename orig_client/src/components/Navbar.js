@@ -1,11 +1,13 @@
 import React, {
   Component,
-  TabBarIOS,
   StyleSheet,
 } from 'react-native';
 import Profile from '../containers/Profile';
 import Discover from '../containers/Discover';
 import FeedList from '../containers/FeedList';
+import Explore from '../containers/Explore';
+var { TabBarIOS, } = require('react-native-icons');
+var TabBarItemIOS = TabBarIOS.Item;
 // import api from '../Utils/api';
 
 
@@ -13,7 +15,7 @@ class Navbar extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'feeds'
+      selectedTab: 'home'
     }
   }
 
@@ -21,48 +23,54 @@ class Navbar extends Component{
     let { setClickedProfile, currentUser } = this.props;
     return (
       <TabBarIOS
-        // tintColor="C"
-        // barTintColor="black"
         selectedTab={this.state.selectedTab}
-      >
-        <TabBarIOS.Item
-          systemIcon="search"
-          selected={this.state.selectedTab === 'feeds'}
-          icon={{uri:'featured'}}
+        tintColor={'#875FFF'}
+        barTintColor={'#000000'}>
+        <TabBarItemIOS
+          name="map"
+          iconName={'ion|map'}
+          selectedIconName={'ion|map'}
+          title={''}
+          iconSize={32}
+          accessibilityLabel="Map Tab"
+          selected={this.state.selectedTab === 'map'}
           onPress={() => {
             this.setState({
-              selectedTab: 'feeds',
+              selectedTab: 'map',
             });
-            // this.goToFeedList.bind(this)
           }}>
-          <FeedList navigator={this.props.navigator} />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          systemIcon="search"
-          selected={this.state.selectedTab === 'discover'}
-          icon={{uri:'featured'}}
-          onPress={() => {
+          <Explore navigator={this.props.navigator} />
+        </TabBarItemIOS>
+        <TabBarItemIOS
+            name="discover"
+            iconName={'fontawesome|rocket'}
+            selectedIconName={'fontawesome|rocket'}
+            title={''}
+            iconSize={32}
+            accessibilityLabel="Discover Tab"
+            selected={this.state.selectedTab === 'discover'}
+            onPress={() => {
             this.setState({
               selectedTab: 'discover',
             });
-            // this.goToFeedList.bind(this)
           }}>
           <Discover navigator={this.props.navigator} />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          systemIcon="contacts"
-          selected={this.state.selectedTab === 'profile'}
-          icon={{uri:'contacts'}}
-          onPress={() => {
-            setClickedProfile(currentUser);
+        </TabBarItemIOS>
+        <TabBarItemIOS
+            name="profile"
+            iconName={'ion|person'}
+            selectedIconName={'ion|person'}
+            title={''}
+            iconSize={32}
+            accessibilityLabel="Profile Tab"
+            selected={this.state.selectedTab === 'profile'}
+            onPress={() => {
             this.setState({
               selectedTab: 'profile',
             });
-            // this.goToProfile.bind(this)
           }}>
-          <Profile navigator={this.props.navigator} />
-        </TabBarIOS.Item>
-
+          <Profile navigator={this.props.navigator}/>
+        </TabBarItemIOS>
       </TabBarIOS>
     );
   }
