@@ -140,7 +140,7 @@ class SearchLocation extends React.Component{
             },
           }}
 
-          currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+          currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
           currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
           GoogleReverseGeocodingQuery={{

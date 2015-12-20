@@ -128,14 +128,31 @@ class DiscoverSearch extends React.Component{
     if (rowData.name === 'default') {
       return (
         <View
-          style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
+          style={{flex:1, flexDirection: 'row',}}
         >
-          <View style={{flexDirection: 'column'}}>
-            <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 15}}
+          <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{flex:1}}></View>
+            <View
+              style={{alignSelf: 'center', flex: 8}}
             >
-              Search Any Location With Wormie!
-            </Text>
+              <Image 
+                source = {require('../assets/small-red-wormie.png')}
+                style={{flex: 10, alignSelf: 'center', width: 225, height: 322}}
+              />
+            </View>
+            <View
+              style={{flex: 3, marginTop: 10, alignSelf: 'center'}}
+            >
+              <Text
+                style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30, flexWrap:'wrap', marginTop: 20}}
+              >
+              Search Any Location
+              </Text>
+              <Text
+                style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30}}
+              >With Wormie!</Text>
+            </View>
+            <View style={{flex:1}}></View>
           </View>
         </View>
       )
