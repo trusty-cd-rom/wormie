@@ -40,13 +40,6 @@ class Navbar extends Component{
             });
           }}>
           <Explore navigator={this.props.navigator} />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          systemIcon="search"
-          selected={this.state.selectedTab === 'discover'}
-          icon={{uri:'featured'}}
-          onPress={() => {
-          <FeedList navigator={this.props.navigator} />
         </TabBarItemIOS>
         <TabBarItemIOS
             name="discover"
