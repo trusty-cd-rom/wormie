@@ -125,35 +125,51 @@ class DiscoverSearch extends React.Component{
         <Text key={index} style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
       );
     })
-    return (
-      <View>
-        <TouchableHighlight
-          style={styles.container}
-          onPress={this.setTarget.bind(this, rowData)}
-          underlayColor = 'rgba(222,93,74,0.1)'
+    if (rowData.name === 'default') {
+      return (
+        <View
+          style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
         >
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Image 
-              source = {{uri: rowData['image_url']}} 
-              style={styles.image}
-            />
-            <View>
-              <View
-                style={{alignSelf: 'flex-end'}}
-              >
-                <Text style={styles.name}> {rowData.name || ''} </Text>
-                <Image 
-                  source = {{uri: rowData['rating_img_url']}} 
-                  style={styles.ratingImage}
-                />
-                { list }
+          <View style={{flexDirection: 'column'}}>
+            <Text
+              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 15}}
+            >
+              Search Any Location With Wormie!
+            </Text>
+          </View>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <TouchableHighlight
+            style={styles.container}
+            onPress={this.setTarget.bind(this, rowData)}
+            underlayColor = 'rgba(222,93,74,0.1)'
+          >
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <Image 
+                source = {{uri: rowData['image_url']}} 
+                style={styles.image}
+              />
+              <View>
+                <View
+                  style={{alignSelf: 'flex-end'}}
+                >
+                  <Text style={styles.name}> {rowData.name || ''} </Text>
+                  <Image 
+                    source = {{uri: rowData['rating_img_url']}} 
+                    style={styles.ratingImage}
+                  />
+                  { list }
+                </View>
               </View>
             </View>
-          </View>
-        </TouchableHighlight>
-        { this.separator() }
-      </View>
-    )
+          </TouchableHighlight>
+          { this.separator() }
+        </View>
+      )    
+    }
   }
 
   _renderList(ds) {

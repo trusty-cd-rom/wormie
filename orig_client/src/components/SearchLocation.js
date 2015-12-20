@@ -6,8 +6,8 @@ import React, {
 } from 'react-native';
 var {GooglePlacesAutocomplete} = require('react-native-google-places-autocomplete');
 
-const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
+// const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
+// const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +54,7 @@ class SearchLocation extends React.Component{
     setCurrentLocation(location);
   }
 
+  // THROTTLE
   time() {
     if (this.running) {
       clearTimeout(this.currentTimeout);
@@ -154,7 +155,7 @@ class SearchLocation extends React.Component{
 
           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
-          predefinedPlaces={[homePlace, workPlace]}
+          // predefinedPlaces={[homePlace, workPlace]}
         />
       </View>
     );

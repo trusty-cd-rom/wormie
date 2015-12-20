@@ -50,8 +50,8 @@ class Navbar extends Component{
         </TabBarItemIOS>
         <TabBarItemIOS
             name="discover"
-            iconName={'ion|planet'}
-            selectedIconName={'ion|planet'}
+            iconName={'fontawesome|rocket'}
+            selectedIconName={'fontawesome|rocket'}
             title={''}
             iconSize={32}
             accessibilityLabel="Discover Tab"
