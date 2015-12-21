@@ -11,13 +11,6 @@ function mapStateToProps(state) {
   };
 }
 
-  // return {
-  //   onClick: function (id) {
-  //     dispatch(toggleTodo(id));
-  //   } 
-  // }
-
-// createUserInfo, updateInputText
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(UpdateUserProfileActions, dispatch);
 }
