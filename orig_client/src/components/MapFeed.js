@@ -9,7 +9,6 @@ var {
   StyleSheet,
   Component,
   View,
-  StatusBarIOS,
   Image,
 } = React;
 
@@ -54,7 +53,6 @@ var MapFeed = React.createClass({
   },
 
   render: function() {
-    StatusBarIOS.setHidden(true);
     console.log("Rendering map");
     console.log("state is:", this.state);
     return (
