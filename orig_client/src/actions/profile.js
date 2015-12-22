@@ -45,6 +45,18 @@ export function getUserInfo(id) {
   }
 }
 
+export function getUserDetailsForLoggedInUser() {
+
+  return dispatch => {
+      return api.fetchFacebookProfileFromFacebook((res) => {
+        return api.getUserDetailsByFacebookID(res.id)
+              .then((res) => {
+                dispatch(setCurrentUser(res));
+        });
+      });
+  }
+}
+
 // export function updateClickedUser(id) {
 //   // console.log('update my current wormhole', wormhole)
 //   return dispatch => {

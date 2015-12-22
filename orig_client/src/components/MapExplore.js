@@ -23,7 +23,6 @@ var {
   Component,
   Text,
   View,
-  StatusBarIOS,
   Image,
 } = React;
 
@@ -193,7 +192,6 @@ var MapExplore = React.createClass({
 
   render: function() {
     var {feed, currentWormhole } = this.props;
-    StatusBarIOS.setHidden(true);
     return (
       <View style={styles.container}>
         <Mapbox
