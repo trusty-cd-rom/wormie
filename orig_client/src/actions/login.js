@@ -1,5 +1,4 @@
 import  { STORE_FACEBOOK_TOKEN_IN_ASYNC_STORAGE, SET_CURRENT_USER } from '../constants/actions';
-// import async from '../utils/asyncStorage';
 import api from '../utils/api';
 
 
@@ -10,7 +9,6 @@ export function storeToken(token) {
     'token': token
   };
 };
-
 
 export function getUserDetails(cb) {
 

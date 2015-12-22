@@ -23,7 +23,6 @@ var STORAGE_KEY = 'facebook';
 class FacebookLogin extends React.Component {
 
   goToSignup() {
-    console.log('about to go to signup');
     this.props.navigator.replace({
       component: Signup
     });
@@ -40,7 +39,6 @@ class FacebookLogin extends React.Component {
   }
 
   _removeStorage() {
-    console.log("TRYING TO REMOVE THE ITEM FROM STORAGE");
     AsyncStorage.removeItem(STORAGE_KEY); 
   }
 

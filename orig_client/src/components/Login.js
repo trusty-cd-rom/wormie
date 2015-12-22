@@ -52,24 +52,11 @@ class Login extends Component {
   _checkFacebookStatus() {
     
     var { login, getUserDetails } = this.props;
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log("login.facebook is: ", login.facebook);
 
     if ( login.facebook !== "init" ) {
 
-      // this._getCurrentUser();
-      
-      // return (
-      //   <ActivityIndicatorIOS
-      //     animating = {true}
-      //     color = 'white'
-      //     size = 'large'
-      //   ></ActivityIndicatorIOS>
-      // )
+      this.goToHome();      
 
-      this.goToHome();
-
-      
     } else if ( login.facebook === "init" ) {
 
       // show facebook login
