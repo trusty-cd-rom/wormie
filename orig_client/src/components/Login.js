@@ -135,7 +135,6 @@ class Login extends Component {
           }}
         >
           <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
-          <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
           {this._checkFacebookStatus()}
         </View>
         <View style={{ flex:2 }}>

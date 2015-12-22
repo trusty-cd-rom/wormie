@@ -15,7 +15,7 @@ class Navbar extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'home'
+      selectedTab: 'map'
     };
   }
 
