@@ -39,10 +39,14 @@ class Login extends Component {
       console.log("login.facebook");
 
       getUserDetails(() => {
-        this.props.navigator.push({
-          component: Navbar,
-        });
+        this.goToHome();
       });
+  }
+
+  goToHome() {
+    this.props.navigator.replace({
+      component: Navbar
+    });
   }
 
   _checkFacebookStatus() {
@@ -54,9 +58,16 @@ class Login extends Component {
     if ( login.facebook !== "init" ) {
 
       // this._getCurrentUser();
-          this.props.navigator.push({
-          component: Navbar,
-        });
+      
+      // return (
+      //   <ActivityIndicatorIOS
+      //     animating = {true}
+      //     color = 'white'
+      //     size = 'large'
+      //   ></ActivityIndicatorIOS>
+      // )
+
+      this.goToHome();
 
       
     } else if ( login.facebook === "init" ) {
