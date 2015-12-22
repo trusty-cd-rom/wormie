@@ -98,26 +98,29 @@ class MyWormholes extends Component{
     let { wormholes, isAnimating } = this.props;
     let requestor, submitList;
 
-    return wormholes.map((wormhole, outerIndex) => {
-      return (
+    if (wormholes) {
+      return wormholes.map((wormhole, outerIndex) => {
+        return (
 
-        <View 
-          style = {styles.requestList}
-        >
-          <TouchableHighlight
-            onPress = {this.viewRequest.bind(this, wormhole)}
-            underlayColor = 'rgba(125,125,125,0.2)'
-            style={styles.request}
+          <View 
+            style = {styles.requestList}
           >
-            <View>
-              <Text style={styles.buttonText}>{wormhole.title} </Text>
-              <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
-              <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-      );
-    });
+            <TouchableHighlight
+              onPress = {this.viewRequest.bind(this, wormhole)}
+              underlayColor = 'rgba(125,125,125,0.2)'
+              style={styles.request}
+            >
+              <View>
+                <Text style={styles.buttonText}>{wormhole.title} </Text>
+                <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
+                <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+        );
+      });      
+    }
+    return <View />
   }
 
   handleScroll(e) {

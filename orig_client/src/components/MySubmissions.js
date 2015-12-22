@@ -62,29 +62,32 @@ class MySubmissions extends Component{
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { submissions } = this.props;
-    return submissions.map((submission, index) => {
-      console.log(submission);
-      return (
-        <View 
-          key={index}
-          style={styles.submissionList}
-        >
-          <TouchableHighlight
-            onPress = {this.viewRequest.bind(this, index)}
-            underlayColor = 'rgba(125,125,125,0.2)'
-            style={styles.submission}
+    if (submissions) {
+      return submissions.map((submission, index) => {
+        console.log(submission);
+        return (
+          <View 
+            key={index}
+            style={styles.submissionList}
           >
-            <View>
-              <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
-              <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
-              <Text>{submission.wormhole.notes} </Text>
-              <Text style={{fontWeight:'bold'}}>My notes:</Text>
-              <Text>{submission.notes} </Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-      );
-    });
+            <TouchableHighlight
+              onPress = {this.viewRequest.bind(this, index)}
+              underlayColor = 'rgba(125,125,125,0.2)'
+              style={styles.submission}
+            >
+              <View>
+                <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
+                <Text style={{fontWeight:'bold'}}>Requester's notes:</Text> 
+                <Text>{submission.wormhole.notes} </Text>
+                <Text style={{fontWeight:'bold'}}>My notes:</Text>
+                <Text>{submission.notes} </Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+        );
+      });
+    }
+    return <View />
   }
 
   handleScroll(e) {

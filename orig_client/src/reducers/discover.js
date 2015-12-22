@@ -11,7 +11,7 @@ var initialState = {
       "mobile_url": "https://www.google.com",  
       "rating_img_url": "", 
       "review_count": "", 
-      "name": "", 
+      "name": "default", 
       "rating_img_url_small": "", 
       "url": "", 
       "categories": [], 

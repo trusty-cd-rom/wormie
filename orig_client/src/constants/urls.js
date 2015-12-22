@@ -8,6 +8,7 @@ const urls = {
   usersByFacebookID: `${host}/users/fb/`,
 	accounts: `${host}/accounts/`,
   convertToken: `${authHost}/convert\-token/`,
+  discover: `${host}/discover/`,
 }
 
 export default urls;

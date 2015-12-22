@@ -1,6 +1,7 @@
+import urls from '../constants/urls';
 var api = {
   queryInfo: function(category, term, location) {
-    var url = `http://localhost:8000/api/discover/?term=${term}&location=${location}`;
+    var url = urls.discover + `?term=${term}&location=${location}`;
     if (category !== 'all') {
       url += `&category_filter=${category}`;
     }

@@ -125,35 +125,68 @@ class DiscoverSearch extends React.Component{
         <Text key={index} style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
       );
     })
-    return (
-      <View>
-        <TouchableHighlight
-          style={styles.container}
-          onPress={this.setTarget.bind(this, rowData)}
-          underlayColor = 'rgba(222,93,74,0.1)'
+    if (rowData.name === 'default') {
+      return (
+        <View
+          style={{flex:1, flexDirection: 'row',}}
         >
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Image 
-              source = {{uri: rowData['image_url']}} 
-              style={styles.image}
-            />
-            <View>
-              <View
-                style={{alignSelf: 'flex-end'}}
+          <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{flex:1}}></View>
+            <View
+              style={{alignSelf: 'center', flex: 8}}
+            >
+              <Image 
+                source = {require('../assets/small-red-wormie.png')}
+                style={{flex: 10, alignSelf: 'center', width: 225, height: 322}}
+              />
+            </View>
+            <View
+              style={{flex: 3, marginTop: 10, alignSelf: 'center'}}
+            >
+              <Text
+                style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30, flexWrap:'wrap', marginTop: 20}}
               >
-                <Text style={styles.name}> {rowData.name || ''} </Text>
-                <Image 
-                  source = {{uri: rowData['rating_img_url']}} 
-                  style={styles.ratingImage}
-                />
-                { list }
+              Search Any Location
+              </Text>
+              <Text
+                style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30}}
+              >With Wormie!</Text>
+            </View>
+            <View style={{flex:1}}></View>
+          </View>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <TouchableHighlight
+            style={styles.container}
+            onPress={this.setTarget.bind(this, rowData)}
+            underlayColor = 'rgba(222,93,74,0.1)'
+          >
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <Image 
+                source = {{uri: rowData['image_url']}} 
+                style={styles.image}
+              />
+              <View>
+                <View
+                  style={{alignSelf: 'flex-end'}}
+                >
+                  <Text style={styles.name}> {rowData.name || ''} </Text>
+                  <Image 
+                    source = {{uri: rowData['rating_img_url']}} 
+                    style={styles.ratingImage}
+                  />
+                  { list }
+                </View>
               </View>
             </View>
-          </View>
-        </TouchableHighlight>
-        { this.separator() }
-      </View>
-    )
+          </TouchableHighlight>
+          { this.separator() }
+        </View>
+      )    
+    }
   }
 
   _renderList(ds) {
