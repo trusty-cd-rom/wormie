@@ -15,12 +15,19 @@ class Navbar extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'home'
-    }
+      selectedTab: 'map'
+    };
+  }
+
+  componentWillMount() {
+    var { currentUser, getUserDetailsForLoggedInUser } = this.props;
+    console.log("COMPONENT WILL MOUNT");
+    getUserDetailsForLoggedInUser();
   }
 
   render() {
-    let { setClickedProfile, currentUser } = this.props;
+    let { currentUser, setClickedProfile } = this.props;
+
     return (
       <TabBarIOS
         selectedTab={this.state.selectedTab}

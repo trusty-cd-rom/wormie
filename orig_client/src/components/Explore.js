@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
+    paddingTop: 20,
     flexDirection: 'row',
     backgroundColor: '#39247F',
-    height: 50
+    height: 55
   },
   profilePic: {
-    marginTop: 10,
     marginLeft: 10,
     height: 30,
     width: 30,
@@ -100,8 +100,6 @@ const styles = StyleSheet.create({
     flex:1,
   },
   segmentedControl:{
-    marginTop: 10,
-    marginBottom: 10,
     marginRight: 10,
     fontFamily: 'Lato-Regular',
     fontSize: 24,
