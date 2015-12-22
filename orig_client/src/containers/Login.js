@@ -6,8 +6,11 @@ import * as LoginActions from '../actions/login';
 function mapStateToProps(state) {
   console.log('Login state: ', state);
   return {
-    updateProfile: state.userProfile.updateProfile,
+    login: state.login,
+    feed: state.feed,
     currentUser: state.userProfile.currentUser,
+    peekClickedUser: state.profile.peekClickedUser,
+    currentWormhole: state.currentWormhole,
   };
 }
 

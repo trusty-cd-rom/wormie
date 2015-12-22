@@ -6,13 +6,82 @@ import React, {
   Image,
   Text,
   View,
+  AsyncStorage,
   TouchableHighlight,
+  ActivityIndicatorIOS,
 } from 'react-native';
 import Signup from '../containers/Signup';
+import Navbar from '../containers/Navbar';
+
+var STORAGE_KEY = 'facebook';
 
 class Login extends Component {
+  
+  componentDidMount() {
+      this._loadInitialState().done()  
+  }
+
+  async _loadInitialState() {
+    var {storeToken} = this.props;
+    var value = await AsyncStorage.getItem(STORAGE_KEY);
+    if ( value !== null) {
+      console.log("The value is: ", value);
+      storeToken(value);
+
+    } else {
+      console.log("Nothing stored");
+    }
+  }
+
+  _getCurrentUser() {
+      var { getUserDetails, login } = this.props;
+
+      console.log("login.facebook");
+
+      getUserDetails(() => {
+        this.props.navigator.push({
+          component: Navbar,
+        });
+      });
+  }
+
+  _checkFacebookStatus() {
+    
+    var { login, getUserDetails } = this.props;
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log("login.facebook is: ", login.facebook);
+
+    if ( login.facebook !== "init" ) {
+
+      // this._getCurrentUser();
+          this.props.navigator.push({
+          component: Navbar,
+        });
+
+      
+    } else if ( login.facebook === "init" ) {
+
+      // show facebook login
+      return (
+        <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
+      )
+
+    } else {
+
+      return (
+        <ActivityIndicatorIOS
+          animating = {true}
+          color = 'white'
+          size = 'large'
+        ></ActivityIndicatorIOS>
+      )
+      
+    }
+
+
+  }
+
   render() {
-    // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
       <View
         style={{
@@ -69,6 +138,7 @@ class Login extends Component {
         >
           <Text style={styles.subtitle}>LET'S GO EXPLORING</Text>
           <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
+          {this._checkFacebookStatus()}
         </View>
         <View style={{ flex:2 }}>
         </View>

@@ -15,8 +15,10 @@ var {
 
 var {
   View,
+  AsyncStorage,
 } = React;
 
+var STORAGE_KEY = 'facebook';
 
 class FacebookLogin extends React.Component {
 
@@ -37,6 +39,11 @@ class FacebookLogin extends React.Component {
     });
   }
 
+  _removeStorage() {
+    console.log("TRYING TO REMOVE THE ITEM FROM STORAGE");
+    AsyncStorage.removeItem(STORAGE_KEY); 
+  }
+
   render () {
     return (
       <View>
@@ -49,12 +56,17 @@ class FacebookLogin extends React.Component {
                 alert('Login cancelled.');
               } else {
                 FBSDKAccessToken.getCurrentAccessToken((token) => {
+                  console.log(token);
                   this.convertToken(token.tokenString);
+                  AsyncStorage.setItem(STORAGE_KEY, token.tokenString);
                 });
               }
             }
           }}
-          onLogooutFinished={() => alert('Logged out.')}
+          onLogoutFinished={() => {
+            // Remove from async storage
+            this._removeStorage();
+          }}
           readPermissions={[]}
           publishPermissions={['publish_actions']}/>
       </View>
