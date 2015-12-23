@@ -16,7 +16,6 @@ import Topbar from './Topbar';
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flex: 1,
     flexDirection: 'column', 
     alignItems: 'stretch'
@@ -32,7 +31,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    flex: 1.5,
+    flex: 1,
     backgroundColor: '#8949E0', 
     flexDirection: 'row',
     justifyContent: 'center',
@@ -76,7 +75,7 @@ class DiscoverRequest extends React.Component{
           />
         </View>
         <View
-          style={{flex: 15}}
+          style={{flex: 10}}
         >
           <WebView 
             url={target['mobile_url']}

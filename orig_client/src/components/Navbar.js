@@ -72,9 +72,10 @@ class Navbar extends Component{
             accessibilityLabel="Profile Tab"
             selected={this.state.selectedTab === 'profile'}
             onPress={() => {
-            this.setState({
-              selectedTab: 'profile',
-            });
+              setClickedProfile(currentUser);
+              this.setState({
+                selectedTab: 'profile',
+              });
           }}>
           <Profile navigator={this.props.navigator}/>
         </TabBarItemIOS>
