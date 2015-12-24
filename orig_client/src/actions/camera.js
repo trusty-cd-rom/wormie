@@ -52,10 +52,10 @@ export function updateSubmissionVideo(video) {
   }
 };
 
-export function updateSubmissionCoordinates(coordinates) {
+export function updateSubmissionCoordinates(newLocation) {
   return {
     type: UPDATE_WORMHOLE_SUBMISSION_COORDINATES,
-    coordinates
+    coordinates: [Number(newLocation.coords.latitude.toFixed(7)), Number(newLocation.coords.longitude.toFixed(7))]
   }
 };
 

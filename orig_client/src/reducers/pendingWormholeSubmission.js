@@ -56,6 +56,7 @@ function pendingWormholeSubmission(state = initialState, action) {
 };
 
 function locationData(state, action) {
+	// console.log(action);
 	return [
 		...state,
 		action.coordinates

@@ -14,11 +14,11 @@ var Video = require('react-native-video');
 class SubmitWormhole extends Component {
   componentWillMount() {
     let { pendingWormholeSubmission, updateInputText } = this.props;
-    let route = pendingWormholeSubmission.locationData.map((val) => {
-      return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
-    });
-    console.log(JSON.stringify(route));
-    updateInputText('notes', JSON.stringify(route));
+    // let route = pendingWormholeSubmission.locationData.map((val) => {
+    //   return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
+    // });
+    // console.log(JSON.stringify(route));
+    updateInputText('notes', JSON.stringify(pendingWormholeSubmission.locationData));
   }
   back() {
     let {initSubmissionCoordinates} = this.props;
