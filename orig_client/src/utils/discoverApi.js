@@ -1,6 +1,6 @@
 var api = {
   queryInfo: function(category, term, location) {
-    var url = `http://localhost:8000/api/discover/?term=${term}&location=${location}`;
+    var url = `http://wormie-4-dev.elasticbeanstalk.com/api/discover/?term=${term}&location=${location}`;
     if (category !== 'all') {
       url += `&category_filter=${category}`;
     }
