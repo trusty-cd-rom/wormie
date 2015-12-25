@@ -22,7 +22,7 @@ var api = {
 	    // body: JSON.stringify({ "title": "fat ugly face party party at ikea", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"make it phat", "status": "zip line", "requestor": 2})
 	  })
 	  .then((res, a) => {
-	  	// console.log('got this back from server on wormhole create post', res, a);
+	  	console.log('catdog got this back from server on wormhole create post', res, a);
 	  	return res.json();
 	  })
 	  ;
