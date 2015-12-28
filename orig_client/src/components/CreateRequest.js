@@ -120,6 +120,15 @@ class CreateRequest extends Component {
     );
   }
 
+  _renderMapBox() {
+    // if target from yelp exist
+    var target = this.props.requestedTarget || '';
+    // if (this.props.requestedTarget) {
+    //   this.setState({center: target.location.coordinate})
+    // }
+    return <MapFeed />
+  }
+
   render() {
     let { inputText } = this.props;
     return (
@@ -147,12 +156,12 @@ class CreateRequest extends Component {
         </View>
 
         <ScrollView style = {styles.contentContainer}>
-
-          <MapFeed />
+          {this._renderMapBox.bind(this)()}
           
           <View style = {styles.inputField}>
             <TitleField
               value = {inputText.title}
+              placeholder={this.props.requestedTarget.name || ''}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
             />
           </View>
