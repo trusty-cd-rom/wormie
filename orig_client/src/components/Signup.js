@@ -29,6 +29,7 @@ class Signup extends Component {
   }
 
   goToHome() {
+
     this.props.navigator.replace({
       component: Navbar
     });
@@ -36,7 +37,7 @@ class Signup extends Component {
 
   handleSubmit(cb) {
 
-    var { updateProfile, updateUserProfile, currentUser } = this.props;
+    var { updateProfile, updateUserProfile, currentUser, createWormie } = this.props;
 
     username = updateProfile.username || currentUser.username;
     about_me = updateProfile.about_me || currentUser.about_me;
@@ -54,7 +55,12 @@ class Signup extends Component {
       about_me: about_me
     };
 
+    var hex = accountUpdate.wormie_color.slice(1);
+ 
+    createWormie(hex);
+
     updateUserProfile(accountUpdate, cb);
+
 
   }
 

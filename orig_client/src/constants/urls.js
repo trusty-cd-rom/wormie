@@ -6,6 +6,7 @@ const authHost = 'http://wormie-4-dev.elasticbeanstalk.com/auth';
 
 // const host = 'http://localhost:8000/api';
 // const authHost = 'http://localhost:8000/auth';
+const wormieHost = 'http://localhost:7878';
 
 const urls = {
 	wormholes: `${host}/wormholes/`,
@@ -19,6 +20,10 @@ const urls = {
   discover: `${host}/discover/`,
   filter: `${host}/filter/`,
   sortBy: `${host}/sort_by/`,
+  createWormie: `${wormieHost}/wormie/`,
+  createHeart: `${wormieHost}/heart/`,
+  getWormie: `${wormieHost}/static/`,
+  getHeart: `${wormieHost}/static/heart/`,
 }
 
 export default urls;

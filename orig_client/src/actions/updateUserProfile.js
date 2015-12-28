@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, UPDATE_SIGNUP_SLIDER, TOGGLE_FETCH, SET_CURRENT_USER } from '../constants/actions';
+import { ADD_USER_INFO, UPDATE_SIGNUP_INPUT_TEXT, UPDATE_SIGNUP_SLIDER, TOGGLE_FETCH, SET_CURRENT_USER, CREATE_WORMIE } from '../constants/actions';
 
 
 export function getUserDataFromFB() {
@@ -16,6 +16,15 @@ export function getUserDataFromFB() {
       });
   }
 }
+
+export function createWormie(hexcode) {
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  console.log("hexcode is: ", hexcode);
+  return dispatch => {
+    return api.createWormie(hexcode);
+  };
+}
+
 
 export function updateUserProfile(accountUpdate, cb) {
   return dispatch => {

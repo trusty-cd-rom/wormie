@@ -8,6 +8,9 @@ var mapRef = 'mapRef';
 // Random number util
 var randomInRange = require('../utils/random');
 
+// urls
+var urls = require('../constants/urls');
+
 // Youtube
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
@@ -46,15 +49,16 @@ var MapExplore = React.createClass({
 
     for ( var wormhole in feed ) {
 
-     annotations.push({
+     // SAMPLE POLYLINES!
+     // annotations.push({
 
-        coordinates: [ [parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)], [parseFloat(feed[wormhole].latitude) + randomInRange(0.01), parseFloat(feed[wormhole].longitude) + randomInRange(0.01)]],
-        'type': 'polyline',
-        'strokeColor': feed[wormhole].requestor.wormie_color,
-        'strokeWidth': 4,
-        'strokeAlpha': 0.9,
-        id: wormhole + "_trail"
-      });
+     //    coordinates: [ [parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)], [parseFloat(feed[wormhole].latitude) + randomInRange(0.01), parseFloat(feed[wormhole].longitude) + randomInRange(0.01)]],
+     //    'type': 'polyline',
+     //    'strokeColor': feed[wormhole].requestor.wormie_color,
+     //    'strokeWidth': 4,
+     //    'strokeAlpha': 0.9,
+     //    id: wormhole + "_trail"
+     //  });
 
      annotations.push({
 
@@ -67,9 +71,9 @@ var MapExplore = React.createClass({
           width: 25
         },
         annotationImage: {
-          url: feed[wormhole].requestor.picture_url,
+          url: urls.getWormie + feed[wormhole].requestor.wormie_color.slice(1) + '.png',
           height: 35,
-          width: 35
+          width: 30
         },
         // id is the index of the wormhole in the feed
         id: wormhole

@@ -245,6 +245,23 @@ var api = {
 
 	// TODO: Add a refresh token API call using the stored refresh OAuth2 token
 
+	// 
+
+	createWormie(hexcode) {
+		console.log("$$$$$$$$$$$$$$$$");
+		console.log("url is: ", `${urls.createWormie}${hexcode}`);
+		return fetch(`${urls.createWormie}${hexcode}`)
+		.then((res) => {
+			console.log("Wormie color created");
+		})
+		.catch((err) => {
+			console.log("error creating wormie color");
+			console.error(err);
+		});
+	},
+
+	// createHeart
+
 };
 
 module.exports = api;
