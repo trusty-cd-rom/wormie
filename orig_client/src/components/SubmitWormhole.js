@@ -6,25 +6,37 @@ import React, {
   TouchableHighlight,
   TextInput,
   ActivityIndicatorIOS,
+  Image,
+  ScrollView,
 } from 'react-native';
 // var YouTube = require('react-native-youtube');
 import Navbar from '../containers/Navbar';
 var Video = require('react-native-video');
+var moment = require('moment');
 
-class SubmitWormhole extends Component {
+// Mapbox
+var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
+var mapRef = 'mapRef';
+
+
+var SubmitWormhole = React.createClass({
+
+  mixins: [Mapbox.Mixin],
+
   componentWillMount() {
     let { pendingWormholeSubmission, updateInputText } = this.props;
-    let route = pendingWormholeSubmission.locationData.map((val) => {
-      return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
-    });
-    console.log(JSON.stringify(route));
-    updateInputText('notes', JSON.stringify(route));
-  }
+    // let route = pendingWormholeSubmission.locationData.map((val) => {
+    //   return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
+    // });
+    // console.log(JSON.stringify(route));
+    updateInputText('notes', JSON.stringify(pendingWormholeSubmission.locationData));
+  },
   back() {
     let {initSubmissionCoordinates} = this.props;
     initSubmissionCoordinates();
     this.props.navigator.pop();
-  }
+  },
   submit() {
     let { pendingWormholeSubmission, currentUser, uploadWormholeSubmission, initSubmissionCoordinates } = this.props;
     uploadWormholeSubmission(pendingWormholeSubmission, currentUser, () => {
@@ -33,18 +45,20 @@ class SubmitWormhole extends Component {
         component: Navbar
       });
     });
-  }
+  },
   _renderSubmitButton() {
     let { pendingWormholeSubmission } = this.props;
     if(!pendingWormholeSubmission.isUploading) {
       return (
-        <TouchableHighlight
-          style = {styles.back}
-          onPress = {this.submit.bind(this)}
-          underlayColor = 'purple'
-        >
-          <Text style = {styles.buttonText}> Submit </Text>
-        </TouchableHighlight>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style = {styles.submitButton}
+            onPress = {this.submit.bind(this)}
+            underlayColor = '#88D4f5'
+          >
+            <Text style = {styles.buttonText}> Submit </Text>
+          </TouchableHighlight>
+        </View>
       )
     } else {
       return (
@@ -55,29 +69,18 @@ class SubmitWormhole extends Component {
         ></ActivityIndicatorIOS>
       )
     }
-  }
+  },
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
-  }
+  },
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     let { pendingWormholeSubmission, currentUser } = this.props;
     return (
-      <View 
-        automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
-        scrollEventThrottle={200}
-        style={styles.container}>
-        <TouchableHighlight
-          style = {styles.back}
-          onPress = {this.back.bind(this)}
-          underlayColor = 'purple'
-        >
-          <Text style = {styles.buttonText}> Back </Text>
-        </TouchableHighlight>
+      <View style={styles.container}>
         <Video source={{uri: pendingWormholeSubmission.video}}
-               rate={1.0}
+               rate={1.5}
                volume={1.0}
                muted={false}
                paused={false}
@@ -85,89 +88,155 @@ class SubmitWormhole extends Component {
                repeat={true}
                onError={console.log('error in video playback load')}
                style={styles.backgroundVideo} />
+        <View style={styles.backgroundOverlay} />
 
-        <View style={styles.loginButton}>
+        <View style = {styles.headerContainer}>
+
+          <TouchableHighlight
+            style = {styles.backButton}
+            onPress = {this.back.bind(this)}
+          >
+            <Text style = {styles.backText}> {'X'} </Text>
+          </TouchableHighlight>
+          
+          <Text style={styles.backText}>
+            {pendingWormholeSubmission.wormhole.requestor.username}
+          </Text>
+          <Image 
+            style = {styles.profilePic}
+            source = {{uri: (pendingWormholeSubmission.wormhole.requestor) ? pendingWormholeSubmission.wormhole.requestor.picture_url : ""}}
+          />
+
+        </View>
+
+        <Mapbox
+          style={[styles.mapContainer, {opacity: 0.7}]}
+          direction={0}
+          rotateEnabled={true}
+          scrollEnabled={true}
+          zoomEnabled={true}
+          showsUserLocation={false}
+          attributionButtonIsHidden={true}
+          logoIsHidden={true}
+          compassIsHidden={true}
+          ref={mapRef}
+          accessToken={mapboxConfig.accessToken}
+          styleURL={mapboxConfig.styleURL}
+          userTrackingMode={this.userTrackingMode.follow}
+          zoomLevel={15}
+          annotations={[]}
+        />
+
+        <ScrollView style = {styles.contentContainer}>
+          
+          <Text style={[styles.text, styles.alignLeft]}>
+            Due {moment(pendingWormholeSubmission.wormhole.deadline).fromNow()}
+          </Text>
+
           <Text style={styles.title}>
             {pendingWormholeSubmission.wormhole.title}
           </Text>
-        </View>
-        <View style={styles.loginButton}>
-          <Text style={styles.title}>
-            {pendingWormholeSubmission.wormhole.owner_name}
+
+          <Text style={styles.text}>
+            {`${pendingWormholeSubmission.wormhole.latitude} , ${pendingWormholeSubmission.wormhole.longitude}`}
           </Text>
-        </View>
-        <View style={styles.loginButton}>
-          <Text style={styles.title}>
-            {currentUser.username}
-          </Text>
-        </View>
-        <View style={styles.loginButton}>
-          <Text style={styles.title}>
-            {new Date().toJSON().slice(0,10)}
-          </Text>
-        </View>
-        <View style={styles.loginButton}>
-          <Text style={styles.title}>
+
+          <Text style={styles.text}>
             {pendingWormholeSubmission.wormhole.notes}
           </Text>
-        </View>
-        <View style={styles.loginButton}>
-          <Text style={styles.buttonText}>
-            {pendingWormholeSubmission.submissionForm.notes}
-          </Text>
-        </View>
+
+        </ScrollView>
+
         {this._renderSubmitButton()}
       </View>
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    marginTop: 20
+    backgroundColor: 'transparent',
   },
-  loginButton: {
+  headerContainer: {
+    paddingTop: 20,
     flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+    backgroundColor: '#39247F',
+    paddingRight: 10,
+    paddingLeft: 10,
+    alignItems: 'flex-start',
     flex: 1,
-    backgroundColor: 'black'
   },
-  back: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+  backButton: {
     flex: 1,
-    backgroundColor: '#48BBEC'
+  },
+  backText: {
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 20,
+  },
+  profilePic: {
+    // marginTop: 10,
+    marginLeft: 10,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+  },
+  backgroundOverlay: {
+    opacity: 0.5,
+    backgroundColor: '#ffffff',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  mapContainer: {
+    flex: 6,
+  },
+  contentContainer: {
+    flex: 7,
+    padding: 20,
+    paddingTop: 5,
+    flexDirection: 'column',
+  },
+  text: {
+    fontFamily: 'Lato-Bold',
+    // fontSize: 20,
+    marginBottom: 10,
+  },
+  alignLeft: {
+    textAlign: 'right',
   },
   title: {
-    marginBottom: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#fff'
+    fontFamily: 'Lato-Bold',
+    fontSize: 30,
+    marginBottom: 10,
+  },
+  submitButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
+    // backgroundColor: 'green'
   },
   buttonText: {
-    fontSize: 12,
-    color: 'white',
-    alignSelf: 'center'
+    fontSize: 27,
+    fontFamily: 'Lato-Bold',
+    color: '#39247F',
+    // alignSelf: 'center'
   },
-  searchInput: {
-    height: 100,
-    padding: 4,
-    margin: 7,
-    fontSize: 23,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    color: 'white'
+  buttonContainer: {
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
   },
   backgroundVideo: {
-    alignSelf: 'stretch',
-    height: 220,
-    backgroundColor: '#48BBEC',
-    marginBottom: 0
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   }
 });
 
