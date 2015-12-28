@@ -9,6 +9,8 @@ const urls = {
 	accounts: `${host}/accounts/`,
   convertToken: `${authHost}/convert\-token/`,
   discover: `${host}/discover/`,
+  filter: `${host}/filter/`,
+  sortBy: `${host}/sort_by/`,
 }
 
 export default urls;

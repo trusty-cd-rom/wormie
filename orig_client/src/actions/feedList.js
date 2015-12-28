@@ -51,3 +51,30 @@ function checkClickedUser() {
     status: true
   }
 }
+
+export function filterByStatus(status) {
+  console.log(status);
+  return dispatch => {
+    return api.filterByStatus(status)
+      .then(function (res) {
+        dispatch(refreshFeedDataAction(res))
+      })
+  }
+}
+
+export function sortList(criteria) {
+  console.log(criteria);
+  return dispatch => {
+    return api.sortList(criteria)
+      .then(function (res) {
+        dispatch(refreshFeedDataAction(res))
+      })
+  }
+}
+
+function refreshFeedDataAction(data) {
+  return {
+    type: UPDATE_FEED,
+    data: data
+  };
+};
