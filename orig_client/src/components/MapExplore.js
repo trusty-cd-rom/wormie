@@ -234,7 +234,11 @@ var MapExplore = React.createClass({
         <View style={styles.littleRow}>
           <Image 
                 style = {styles.heart}
-                source = {{uri: urls.getHeart + currentWormhole.requestor.wormie_color.slice(1) + "_" + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
+                source = {{uri: urls.getLeftHeart + currentWormhole.requestor.wormie_color.slice(1) + ".png" }}
+              />
+          <Image 
+                style = {styles.heart}
+                source = {{uri: urls.getRightHeart + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
               />
           <Text style={styles.cardRequestor}> Wormhole opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
         </View>
@@ -348,7 +352,7 @@ var styles = StyleSheet.create({
   },
   heart: {
     height: 28,
-    width: 35,
+    width: 18,
   },
 
 });

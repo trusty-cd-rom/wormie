@@ -24,6 +24,8 @@ const urls = {
   createHeart: `${wormieHost}/heart/`,
   getWormie: `${wormieHost}/static/`,
   getHeart: `${wormieHost}/static/heart/`,
+  getLeftHeart: `${wormieHost}/static/left/`,
+  getRightHeart: `${wormieHost}/static/right/`,
 }
 
 export default urls;

@@ -16,6 +16,9 @@ module.exports = {
     var hex = '#' + req.hex;
     var newFile = '/' + req.hex +'.png';
 
+    var left = '/' + req.hex +'.png';
+    var right = '/' + req.hex +'.png';
+
     gm(dir + '/wormie2.png')
     .transparent('white')
     .fuzz(50)
@@ -25,10 +28,31 @@ module.exports = {
     .opaque('red')
     .write(dir + newFile, function (err) {
       if (err) return console.dir(arguments);
-      res.status(200).send('wormie created successfully');
-
     });
 
+    gm(dir + '/left.png')
+    .transparent('white')
+    .fuzz(50)
+    .fill('white')
+    .opaque('green')
+    .fill(hex)
+    .opaque('red')
+    .write(dir + '/left' + left, function (err) {
+      if (err) return console.dir(arguments);
+    });
+
+    gm(dir + '/right.png')
+    .transparent('white')
+    .fuzz(50)
+    .fill('white')
+    .opaque('green')
+    .fill(hex)
+    .opaque('red')
+    .write(dir + '/right' + right, function (err) {
+      if (err) return console.dir(arguments);
+    });
+
+    res.status(200).send("started job to created wormie images");
 
   }
 

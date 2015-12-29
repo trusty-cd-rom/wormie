@@ -83,19 +83,6 @@ class Signup extends Component {
 
     updateSignUpSlider(data.field, data.value);
 
-    // Not using Redux here because too slow!!
-    // if ( data.field === "wormie_red") {
-    //   updateProfile.wormie_red = data.value;
-    // }
-
-    // if ( data.field === "wormie_green") {
-    //   updateProfile.wormie_green = data.value;
-    // }
-
-    // if ( data.field === "wormie_blue") {
-    //   updateProfile.wormie_blue = data.value;
-    // }
-
   }
 
   render() {

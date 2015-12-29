@@ -6,7 +6,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use('/static', express.static('routes/img'));
 
-// Routes to get wormie images
+// Routes to get wormie images (now also creates left and right heart pieces)
 var wormieRouter = express.Router();
 app.use('/wormie', wormieRouter);
 require('./routes/wormieRoutes.js')(wormieRouter);
