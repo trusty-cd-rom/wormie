@@ -322,7 +322,7 @@ def sorted_list(request):
     print('inside filtered_list')
     print(Wormhole.objects.all())
     sorting_criteria = request.GET.get('sort_by', '')
-    if request.method === 'GET':
+    if request.method == 'GET':
         wormholes = Wormhole.objects.all().filter()
         serializer = WormholeSerializer(wormholes, many=True)
         return Response(serializer.data)
@@ -335,7 +335,7 @@ def filtered_list(request):
     """
 
     filter_criteria = request.GET.get('status', '')
-    if request.method === 'GET':
+    if request.method == 'GET':
         wormholes = Wormhole.objects.all().filter(status=filter_criteria)
         serializer = WormholeSerializer(wormholes, many=True)
         return Response(serializer.data)

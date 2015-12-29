@@ -27,7 +27,7 @@ class Navbar extends Component{
 
   render() {
     let { currentUser, setClickedProfile } = this.props;
-
+    
     return (
       <TabBarIOS
         selectedTab={this.state.selectedTab}

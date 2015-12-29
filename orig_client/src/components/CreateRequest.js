@@ -10,9 +10,11 @@ import React, {
   DatePickerIOS,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
-import { MKTextField } from 'react-native-material-kit';
+import Profile from '../containers/Profile';
+import { MKTextField, MKButton } from 'react-native-material-kit';
 var Accordion = require('react-native-collapsible/Accordion');
 import MapFeed from './MapFeed';
+import { Icon } from 'react-native-icons';
 var moment = require('moment');
 
 var SECTIONS = [
@@ -34,22 +36,30 @@ class CreateRequest extends Component {
 
   componentWillMount() {
     let { updateInputText } = this.props;
-    // navigator.geolocation.getCurrentPosition(
-    //   (position) => {
-    //     let initialPosition = JSON.stringify(position);
-    //     console.log(initialPosition);
-    //     //replace with call to action function, update state via reducer
-    //     console.log(typeof position.coords.latitude);
-    //     updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
-    //   },
-    //   (error) => alert(error.message),
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    // );
+
+    /*
+     Get location from phone
+     */
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let initialPosition = JSON.stringify(position);
+        console.log(initialPosition);
+        //replace with call to action function, update state via reducer
+        console.log(typeof position.coords.latitude);
+        updateInputText('location', `${position.coords.latitude.toFixed(7)} , ${position.coords.longitude.toFixed(7)}`);
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
 
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-
     updateInputText('deadline', tomorrow);
+
+    if (this.props.requestedTarget) {
+      updateInputText('title', this.props.requestedTarget.name);
+    }
+
   }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
@@ -57,27 +67,33 @@ class CreateRequest extends Component {
   }
   updateDate(date) {
     let { updateInputText } = this.props;
-    console.log(date);
     updateInputText('deadline', date);
   }
   back() {
+    let { updateInputText } = this.props;
+    updateInputText('notes', '');
+    updateInputText('title', '');
     this.props.navigator.pop();
   }
   submitRequest() {
     // debugger;
     console.log('about to submit request from create request screen');
-    let { createRequest, currentUser, inputText } = this.props;
+    let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
+    
     let newRequestData = {
       title: inputText.title,
-      latitude: inputText.location ? inputText.location.split(',')[0].trim() : 37.786140,
-      longitude: inputText.location ? inputText.location.split(',')[1].trim() : -122.405754,
+      latitude: inputText.location ? Number(inputText.location.split(',')[0].trim()) : 37.786140,
+      longitude: inputText.location ? Number(inputText.location.split(',')[1].trim()) : -122.405754,
       deadline: inputText.deadline,
       notes: inputText.notes,
       status: 'open',
       requestor: currentUser.id,
     };
-    // console.log(newRequestData);
+
     createRequest(newRequestData, () => {
+      setCurrentTarget(null);
+      this.props.updateInputText('notes', '');
+      this.props.updateInputText('title', '');
       this.props.navigator.replace({
         component: Navbar
       });
@@ -92,7 +108,7 @@ class CreateRequest extends Component {
         </Text>
       );
     } else {
-      return <View />
+      return <View><Text>{this.props.inputText.location}</Text></View>
     }
   }
 
@@ -126,11 +142,15 @@ class CreateRequest extends Component {
     // if (this.props.requestedTarget) {
     //   this.setState({center: target.location.coordinate})
     // }
-    return <MapFeed />
+    return (
+      <View style={{top: -20}}>
+        <MapFeed />
+      </View>
+    );
   }
 
   render() {
-    let { inputText } = this.props;
+    let { inputText, setCurrentTarget } = this.props;
     return (
       <View style={styles.container}>
 
@@ -147,7 +167,9 @@ class CreateRequest extends Component {
 
           <TouchableHighlight
             style = {styles.createButton}
-            onPress = {this.submitRequest.bind(this)}
+            onPress = {() => {
+              this.submitRequest.bind(this)();
+            }}
             underlayColor = '#88D4f5'
           >
             <Text style = {styles.createText}> Create </Text>
@@ -161,7 +183,6 @@ class CreateRequest extends Component {
           <View style = {styles.inputField}>
             <TitleField
               value = {inputText.title}
-              placeholder={this.props.requestedTarget.name || ''}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
             />
           </View>
@@ -178,14 +199,41 @@ class CreateRequest extends Component {
           <View style = {styles.inputField}>
             <NoteField
               value = {inputText.notes}
-              onEndEditing = {this.handleInputChange.bind(this,'notes')}
+              onChange = {(event) => {
+                console.log('ON END EDITING');
+                this.handleInputChange.bind(this, 'notes', event)();
+              }}
             />
           </View>
 
 
           {this._renderYelpLocation.bind(this)()}
+          <View
+            style={styles.buttonContainer}
+            >
+            <MKButton
+              backgroundColor={'#39247F'}
+              styles={{flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems:'center',
+                      }}
+              width={250}
+              height={30}
+              shadowRadius={2}
+              shadowOffset={{width:0, height:2}}
+              shadowOpacity={.7}
+              shadowColor="black"
+              onPress={() => {
+                console.log('hi, raised button!');
+              }}
+              >
+              <Text pointerEvents="none"
+                    style={{color: 'white', fontWeight: 'bold',}}>
+                Send Request
+              </Text>
+            </MKButton>
 
-
+          </View>
           <ActivityIndicatorIOS
             animating = {inputText.isFetching==='true'}
             color = 'white'
@@ -295,6 +343,15 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  buttonContainer: {
+    flex: 1,
+    backgroundColor: '#39247F', 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    margin: 50,
+    marginTop: 50
+  },
 });
 
 const TitleField = MKTextField.textfieldWithFloatingLabel()
@@ -317,6 +374,21 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
   })
   .build();
 
+// const SendRequest = new MKButton.Builder()
+//   .withBackgroundColor('#39247F')
+//   // .withShadowRadius(2)
+//   .withShadowOffset({width:0, height:2})
+//   .withShadowOpacity(.7)
+//   .withShadowColor('black')
+//   .withOnPress(() => {
+//     console.log('hi, raised button!');
+//   })
+//   .withTextStyle({
+//     color: 'white',
+//     fontWeight: 'bold',
+//   })
+//   .withText('Send Request')
+//   .build();
 
 
 export default CreateRequest;
