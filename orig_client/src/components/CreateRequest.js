@@ -8,6 +8,8 @@ import React, {
   TextInput,
   ActivityIndicatorIOS,
   DatePickerIOS,
+  DeviceEventEmitter,
+  LayoutAnimation,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
 import Profile from '../containers/Profile';
@@ -20,6 +22,8 @@ var moment = require('moment');
 var Mapbox = require('react-native-mapbox-gl');
 var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
+
+var KeyboardSpacer = require('react-native-keyboard-spacer');
 
 var SECTIONS = [
   {
@@ -66,6 +70,23 @@ var CreateRequest = React.createClass({
       updateInputText('title', target.name);
     }
 
+  },
+  componentDidMount() {
+    DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
+    DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)  
+  },
+  updateKeyboardSpace(frames) {
+    let { updateInputText } = this.props;
+    console.log('this is frames', frames);
+    if (!frames.endCoordinates)
+      return;
+    LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+    updateInputText('keyboardSpace', frames.endCoordinates.height);
+  },
+  resetKeyboardSpace() {
+    let { updateInputText } = this.props;
+    LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+    updateInputText('keyboardSpace', 0);
   },
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
@@ -202,48 +223,54 @@ var CreateRequest = React.createClass({
 
         </View>
 
-        <Mapbox
-          style={{flex: 5}}
-          direction={0}
-          rotateEnabled={true}
-          scrollEnabled={true}
-          zoomEnabled={true}
-          showsUserLocation={false}
-          attributionButtonIsHidden={true}
-          logoIsHidden={true}
-          compassIsHidden={true}
-          ref={mapRef}
-          accessToken={mapboxConfig.accessToken}
-          styleURL={mapboxConfig.styleURL}
-          userTrackingMode={this.userTrackingMode.follow}
-          zoomLevel={15}
-          annotations={[]}
-        />
 
-        <ScrollView style = {styles.contentContainer}>
+          // {this._renderMapBox.bind(this)()}
+        <ScrollView 
+          style = {styles.contentContainer}
+          contentOffset = {{x: 0, y: inputText.keyboardSpace}}
+        >
 
-          {this._renderMapBox.bind(this)()}
+          <Mapbox
+            style={{height: 300}}
+            direction={0}
+            rotateEnabled={true}
+            scrollEnabled={true}
+            zoomEnabled={true}
+            showsUserLocation={false}
+            attributionButtonIsHidden={true}
+            logoIsHidden={true}
+            compassIsHidden={true}
+            ref={mapRef}
+            accessToken={mapboxConfig.accessToken}
+            styleURL={mapboxConfig.styleURL}
+            userTrackingMode={this.userTrackingMode.follow}
+            zoomLevel={15}
+            annotations={[]}
+          />
+
           
           <View style = {styles.inputField}>
             <TitleField
               value = {title}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
+              onChange = {this.handleInputChange.bind(this,'title')}
             />
           </View>
           
-          <View style = {styles.inputField}>
-            <NoteField
-              value = {inputText.notes}
-              onEndEditing = {this.handleInputChange.bind(this,'notes')}
-            />
-          </View>
-
           <View style = {styles.inputField}>
             <Accordion
               sections={SECTIONS}
               renderHeader={this._renderHeader.bind(this)}
               renderContent={this._renderContent.bind(this)}
               underlayColor='transparent'
+            />
+          </View>
+
+          <View style = {styles.inputField}>
+            <NoteField
+              value = {inputText.notes}
+              onEndEditing = {this.handleInputChange.bind(this,'notes')}
+              onChange = {this.handleInputChange.bind(this,'notes')}
             />
           </View>
           
@@ -257,7 +284,7 @@ var CreateRequest = React.createClass({
             />
           </View>
 
-
+          <View style={{height: inputText.keyboardSpace, left: 0, right: 0, bottom: 0}}/>
 
           {this._renderYelpLocation.bind(this)()}
           <View
@@ -445,3 +472,33 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
 
 
 export default CreateRequest;
+
+
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const animations = {
+    layout: {
+        spring: {
+            duration: 500,
+            create: {
+                duration: 300,
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.opacity
+            },
+            update: {
+                type: LayoutAnimation.Types.spring,
+                springDamping: 200
+            }
+        },
+        easeInEaseOut: {
+            duration: 300,
+            create: {
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.scaleXY
+            },
+            update: {
+                delay: 100,
+                type: LayoutAnimation.Types.easeInEaseOut
+            }
+        }
+    }
+};

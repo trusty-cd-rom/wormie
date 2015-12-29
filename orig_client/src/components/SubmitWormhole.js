@@ -30,7 +30,7 @@ var SubmitWormhole = React.createClass({
     //   return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
     // });
     // console.log(JSON.stringify(route));
-    updateInputText('notes', JSON.stringify(pendingWormholeSubmission.locationData));
+    updateInputText('location', JSON.stringify(pendingWormholeSubmission.locationData));
   },
   back() {
     let {initSubmissionCoordinates} = this.props;
