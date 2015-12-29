@@ -19,6 +19,7 @@ class Explore extends Component {
   
   constructor(props){
     super(props);
+    console.log('hit Explore');
     this.state = {
       focus: <MapExplore navigator={this.props.navigator}/>
     }
@@ -32,6 +33,7 @@ class Explore extends Component {
 
   render() {
     var { currentUser } = this.props;
+    console.log(currentUser['picture_url']);
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -42,7 +44,7 @@ class Explore extends Component {
             underlayColor='#39247F'>
             <Image 
               style = {styles.profilePic}
-              source = {{uri: (currentUser) ? currentUser.picture_url : ""}}
+              source = {{uri: currentUser['picture_url']}}
             />
           </TouchableHighlight>
           <Text style={styles.title}></Text>
@@ -80,12 +82,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
+    paddingTop: 20,
     flexDirection: 'row',
     backgroundColor: '#39247F',
-    height: 50
+    height: 55
   },
   profilePic: {
-    marginTop: 10,
     marginLeft: 10,
     height: 30,
     width: 30,
@@ -100,8 +102,6 @@ const styles = StyleSheet.create({
     flex:1,
   },
   segmentedControl:{
-    marginTop: 10,
-    marginBottom: 10,
     marginRight: 10,
     fontFamily: 'Lato-Regular',
     fontSize: 24,

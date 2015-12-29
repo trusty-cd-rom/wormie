@@ -11,12 +11,12 @@ import CreateRequest from '../containers/CreateRequest';
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#f0f0f0',
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'flex-start',
     flex: 1,
-    paddingTop: 20,
+    padding: 8,
     marginBottom: 23
   },
   infoContainer: {
@@ -130,7 +130,7 @@ class Badge extends React.Component{
           >
             <View
               style={{
-                backgroundColor:'#39247f',
+                backgroundColor:'#4CC6EA',
                 width: 30,
                 height: 30,
               }}>

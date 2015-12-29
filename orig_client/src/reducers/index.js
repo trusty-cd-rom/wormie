@@ -7,6 +7,7 @@ import pendingWormholeSubmission from './pendingWormholeSubmission';
 import profile from './profile';
 import discover from './discover';
 import liveCamera from './liveCamera';
+import login from './login';
 const rootReducer = combineReducers({
 	userProfile,
 	currentWormhole,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   profile,
   discover,
   liveCamera,
+  login,
 });
 
 export default rootReducer;

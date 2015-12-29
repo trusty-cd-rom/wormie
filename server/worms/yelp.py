@@ -1,8 +1,6 @@
 import rauth
 import time
 
-## ASK CHARLIE: is 'pip install rauth' ok?
-
 def yelpMain(category_filter, term, location):
     # category = "restaurants"
     # term = "tacos"

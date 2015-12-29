@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
   container:{
     marginBottom: 49,
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f9f9f9',
     alignSelf: 'stretch',
     justifyContent: 'center',
   },
@@ -35,7 +35,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   badgeContainer: {
-    marginTop: 10, 
+    // marginTop: 10, 
     marginBottom: -20, 
     alignSelf: 'stretch', 
     flexDirection: 'row'
@@ -43,21 +43,6 @@ var styles = StyleSheet.create({
 });
 
 class Profile extends Component{
-        // <MyWormholes 
-        //   wormholes = {this.props.wormholes}
-        //   updateCurrentWormhole = {this.props.updateMyCurrentWormhole}
-        //   updateMyCurrentWormhole = {this.props.updateMyCurrentWormhole}
-        //   myCurrentWormhole = {this.props.myCurrentWormhole}
-        //   navigator = {this.props.navigator}
-        // />
-        // <MySubmissions
-        //   submissions = {this.props.submissions}
-        //   updateMyCurrentSubmission = {this.props.updateMyCurrentSubmission}
-        //   updateCurrentSubmission = {this.props.updateMyCurrentSubmission}
-        //   myCurrentSubmission = {this.props.myCurrentSubmission}
-        //   navigator = {this.props.navigator}
-        // />
-        // <ScrollableTabView renderTabBar={() => <CustomTabBar someProp={'here'} />}>
   componentWillMount() {
     let { peekClickedUser, setClickedProfile, currentUser } = this.props;
     // if there is no clicked user(friends/others)
@@ -74,7 +59,7 @@ class Profile extends Component{
 
   // TODO: updateProfile
   topbar() {
-    let { profile, stopClickedUser, currentUser, clickedUser, fromFeed } = this.props;
+    let { profile, currentUser, clickedUser, fromFeed } = this.props;
     // toggle peek_clicked_user(friends/others)
     console.log('current username: ',currentUser.username);
     console.log('clicked user: ', clickedUser.username);
@@ -83,19 +68,24 @@ class Profile extends Component{
     // if clicked user === current user
     // if the request is not from feedlist
     if ( (clickedUser && !fromFeed && (clickedUser.username == currentUser.username )) || (profile === 'true')) {
-      return <View />
+      return (
+        <View>
+          <Topbar 
+            topbarTitle={'Profile'}
+            noIcon={true}
+            navigator={this.props.navigator}
+          />
+        </View>
+      )
 
     // if the request if from feedList
     } else {
       console.log('topbar!!!')
       return (
-        <View
-          style={{paddingTop: 20, flex: 0.07}}
-        >
+        <View>
           <Topbar 
             topbarTitle={clickedUser.username}
             navigator={this.props.navigator}
-            stopClickedUser={this.props.stopClickedUser}
           />
         </View>
       );

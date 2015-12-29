@@ -131,7 +131,7 @@ class FeedList extends React.Component{
   }
 
   render() {
-    var { feed, getUserInfo } = this.props;
+    var { feed, getUserInfo, filterByStatus, sortList } = this.props;
     var list = feed.map((item, index) => {
       // console.log(item);
       return (
@@ -188,7 +188,6 @@ class FeedList extends React.Component{
     //             />
     //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
     //           </View>
-          
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
@@ -197,6 +196,38 @@ class FeedList extends React.Component{
         scrollEventThrottle={200}
         style={styles.container}>
         {list}
+        <View
+          style={{
+            position: 'absolute',
+            flex: 1,
+            top: 30,
+            left: 5,
+            backgroundColor: '#494949',
+          }}
+        >
+          <TouchableHighlight
+            onPress={() => { 
+              filterByStatus('completed');
+            }}
+          >
+            <Text style={{color: 'white', fontSize: 20}}>Complete</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => { filterByStatus('open') }}
+          >
+            <Text style={{color: 'white', fontSize: 20}}>Open</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => { sortList('nearby') }}
+          >
+            <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => { sortList('recent') }}
+          >
+            <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
+          </TouchableHighlight>
+        </View>
       </ScrollView>
     );
   }

@@ -84,7 +84,6 @@ var MapExample = React.createClass({
     console.log('long pressed', location);
   },
   render: function() {
-    StatusBarIOS.setHidden(true);
     return (
       <View style={styles.container}>
         <Mapbox

@@ -4,9 +4,8 @@ import React, {
   NavigatorIOS,
 } from 'react-native';
 import { Provider } from 'react-redux/native';
-import Login from './src/components/Login';
+import Login from './src/containers/Login';
 import configureStore from './src/store/configureStore';
-// import MapExample from './src/components/MapExample';
 
 const store = configureStore();
 

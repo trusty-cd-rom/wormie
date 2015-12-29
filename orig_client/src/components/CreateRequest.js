@@ -10,19 +10,36 @@ import React, {
   DatePickerIOS,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
+import Profile from '../containers/Profile';
+import { MKTextField, MKButton } from 'react-native-material-kit';
+var Accordion = require('react-native-collapsible/Accordion');
+import RequestMapFeed from './RequestMapFeed';
+import { Icon } from 'react-native-icons';
+var moment = require('moment');
+
+var SECTIONS = [
+  {
+    title: 'First',
+    content: 'Lorem ipsum...',
+  }
+];
 
 class CreateRequest extends Component {
   /**************************************
-   target is available as this.props.requestedTarget
+   target is available as this.props.target
    it has same structure with yelp data
-   let coords = this.props.requestedTarget.location.coordinate;
-   name: this.props.requestedTarget.name
-   latitude: this.props.requestedTarget.location.coordinate.latitude
-   longitude: this.props.requestedTarget.location.coordinate.longitude
+   let coords = this.props.target.location.coordinate;
+   name: this.props.target.name
+   latitude: this.props.target.location.coordinate.latitude
+   longitude: this.props.target.location.coordinate.longitude
    *************************************/
 
   componentWillMount() {
-    let { updateInputText } = this.props;
+    let { updateInputText, inputText, target } = this.props;
+
+    /*
+     Get location from phone
+     */
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let initialPosition = JSON.stringify(position);
@@ -34,7 +51,15 @@ class CreateRequest extends Component {
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
-    updateInputText('deadline', new Date());
+
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    updateInputText('deadline', tomorrow);
+
+    if (target) {
+      updateInputText('title', target.name);
+    }
+
   }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
@@ -42,27 +67,32 @@ class CreateRequest extends Component {
   }
   updateDate(date) {
     let { updateInputText } = this.props;
-    console.log(date);
     updateInputText('deadline', date);
   }
   back() {
+    let { updateInputText } = this.props;
     this.props.navigator.pop();
+    updateInputText('notes', '');
+    updateInputText('title', '');
   }
   submitRequest() {
-    // debugger;
     console.log('about to submit request from create request screen');
-    let { createRequest, currentUser, inputText } = this.props;
+    let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
+    
     let newRequestData = {
       title: inputText.title,
-      latitude: inputText.location ? inputText.location.split(',')[0].trim() : 37.786140,
-      longitude: inputText.location ? inputText.location.split(',')[1].trim() : -122.405754,
+      latitude: inputText.location ? Number(inputText.location.split(',')[0].trim()) : 37.786140,
+      longitude: inputText.location ? Number(inputText.location.split(',')[1].trim()) : -122.405754,
       deadline: inputText.deadline,
       notes: inputText.notes,
       status: 'open',
       requestor: currentUser.id,
     };
-    // console.log(newRequestData);
+
     createRequest(newRequestData, () => {
+      setCurrentTarget('');
+      this.props.updateInputText('notes', '');
+      this.props.updateInputText('title', '');
       this.props.navigator.replace({
         component: Navbar
       });
@@ -70,82 +100,163 @@ class CreateRequest extends Component {
   }
 
   _renderYelpLocation() {
-    if (this.props.requestedTarget) {
+    if (this.props.target) {
       return (
         <Text style={styles.title}>
-          {this.props.requestedTarget.location.coordinate.latitude} {this.props.requestedTarget.location.coordinate.longitude}
+          {this.props.target.location.coordinate.latitude} {this.props.target.location.coordinate.longitude}
         </Text>
       );
     } else {
-      return <View />
+      return <View><Text>{this.props.inputText.location}</Text></View>
     }
   }
 
-  render() {
+  _renderHeader(section) {
+    let { inputText } = this.props;
+    console.log(inputText.deadline, typeof inputText.deadline);
+    return (
+      <View>
+        <Text style = {styles.datePicker} > Due {moment(inputText.deadline).fromNow()} </Text>
+        <View style = {styles.seperator} />
+      </View>
+    );
+  }
+
+  _renderContent(section) {
     let { inputText } = this.props;
     return (
-      <ScrollView style={styles.container}>
-        <TouchableHighlight
-          style = {styles.backButton}
-          onPress = {this.back.bind(this)}
-        >
-          <Text style = {styles.backText}> {'<'} </Text>
-        </TouchableHighlight>
-        <View style = {styles.contentContainer}>
-          <Text style={styles.title}>
-            Title
-          </Text>
-          <TextInput
-            ref='a'
-            style = {styles.searchInput}
-            value = {inputText.title}
-            onChange = {this.handleInputChange.bind(this,'title')}
-          />
+      <DatePickerIOS
+        date={new Date(inputText.deadline)}
+        mode="datetime"
+        minimumDate={new Date()}
+        minuteInterval= {15}
+        onDateChange = {this.updateDate.bind(this)}
+      />
+    );
+  }
 
-          <Text style={styles.title}>
-            Location
-          </Text>
-          <TextInput
-            style = {styles.searchInput}
-            value = {inputText.location}
-            onChange = {this.handleInputChange.bind(this,'location')}
-          />
-          {this._renderYelpLocation.bind(this)()}
-          <Text style={styles.title}>
-            Deadline
-          </Text>
+  _renderMapBox() {
+    let { inputText, target } = this.props;
+    console.log(target);
+    console.log(inputText);
+    if (this.props.yelp) {
+      console.log('from yelp');
+      var lat = target.location.coordinate.latitude;
+      var lon = target.location.coordinate.longitude;
+    } else {
+      if (inputText.location) {
+        var lat = Number(inputText.location.split(',')[0].trim());
+        var lon = Number(inputText.location.split(',')[1].trim());
+      } else {
+        var lat = 37.786140;
+        var lon = -122.405754;
+      }
+    }
+    return (
+      <View style={{top: -20}}>
+        <RequestMapFeed 
+          lat={lat}
+          lon={lon}
+        />
+      </View>
+    );
+  }
+
+  render() {
+    let { inputText, setCurrentTarget } = this.props;
+    var title = inputText.title || 'Required';
+    var notes = inputText.notes || 'Optional';
+
+    return (
+      <View style={styles.container}>
+
+        <View style = {styles.headerContainer}>
+
+          <TouchableHighlight
+            style = {styles.backButton}
+            onPress = {this.back.bind(this)}
+          >
+            <Text style = {styles.backText}> {'X'} </Text>
+          </TouchableHighlight>
+
+          <Text style = {styles.headerTitle}> New Wormhole </Text>
+
+          <TouchableHighlight
+            style = {styles.createButton}
+            onPress = {() => {
+              this.submitRequest.bind(this)();
+            }}
+            underlayColor = '#4CC6EA'
+          >
+            <Text style = {styles.createText}> Create </Text>
+          </TouchableHighlight>
+
+        </View>
+
+        <ScrollView style = {styles.contentContainer}>
+          {this._renderMapBox.bind(this)()}
           
-          <DatePickerIOS
-            date={new Date(inputText.deadline)}
-            mode="datetime"
-            minimumDate={new Date()}
-            minuteInterval= {15}
-            onDateChange = {this.updateDate.bind(this)}
-          />
+          <View style = {styles.inputField}>
+            <TitleField
+              value = {title}
+              onEndEditing = {this.handleInputChange.bind(this,'title')}
+            />
+          </View>
+          
+          <View style = {styles.inputField}>
+            <Accordion
+              sections={SECTIONS}
+              renderHeader={this._renderHeader.bind(this)}
+              renderContent={this._renderContent.bind(this)}
+              underlayColor='transparent'
+            />
+          </View>
+          
+          <View style = {styles.inputField}>
+            <NoteField
+              value = {notes}
+              onChange = {(event) => {
+                console.log('ON END EDITING');
+                this.handleInputChange.bind(this, 'notes', event)();
+              }}
+            />
+          </View>
 
-          <Text style={styles.title}>
-            Description
-          </Text>
-          <TextInput
-            style = {styles.searchInput}
-            value = {inputText.notes}
-            onChange = {this.handleInputChange.bind(this,'notes')}
-          />
 
+          {this._renderYelpLocation.bind(this)()}
+          <View
+            style={styles.buttonContainer}
+            >
+            <MKButton
+              backgroundColor={'#4CC6EA'}
+              styles={{flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems:'center',
+                      }}
+              width={250}
+              height={30}
+              shadowRadius={2}
+              shadowOffset={{width:0, height:2}}
+              shadowOpacity={.7}
+              shadowColor="black"
+              onPress={() => {
+                console.log('hi, raised button!');
+              }}
+              >
+              <Text pointerEvents="none"
+                    style={{color: 'white', fontWeight: 'bold',}}>
+                Send Request
+              </Text>
+            </MKButton>
+
+          </View>
           <ActivityIndicatorIOS
             animating = {inputText.isFetching==='true'}
             color = 'white'
             size = 'large'
           ></ActivityIndicatorIOS>
-        </View>
-        <TouchableHighlight
-          style = {styles.requestButton}
-          onPress = {this.submitRequest.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Request! </Text>
-        </TouchableHighlight>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -153,39 +264,69 @@ class CreateRequest extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: 'white',
-    marginTop: 20
   },
   contentContainer: {
-    flex:15,
+    flex: 12,
   },
+  headerContainer: {
+    height: 60,
+    flexDirection: 'row',
+    backgroundColor: '#4CC6EA',
+    padding: 10,
+    alignItems: 'center',
+  },
+  backButton: {
+    flex: 1,
+    color: 'white',
+  },
+  backText: {
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 18,
+  },
+  headerTitle: {
+    flex: 4,
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 20,
+  },
+  createButton: {
+    flex: 2,
+    color: 'white',
+  },
+  createText: {
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 18,
+    textAlign: 'right',
+    // paddingRight: 10,
+  },
+
+  textfieldWithFloatingLabel: {
+    height: 50,  // have to do it on iOS
+    marginTop: 5,
+    marginLeft: 9,
+    marginRight: 9,
+    fontSize: 18
+  },
+  datePicker: {
+    marginTop: 25,
+    marginLeft: 5,
+    marginBottom: 7,
+    fontSize: 17,
+    color: '#757575'
+  },
+  inputField: {
+    paddingTop: 10,
+    // paddingLeft: 10,
+    // paddingRight: 10,
+  },
+
   text: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  splashImage: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 4,
-    backgroundColor: 'white'
-  },
-  requestButton: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 2,
-    backgroundColor: '#48BBEC'
-  },
-  requestButton: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 2,
-    backgroundColor: '#48BBEC'
   },
   loginButton: {
     flexDirection: 'row',
@@ -193,24 +334,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     backgroundColor: '#48BBEC'
-  },
-  backButton: {
-    // flexDirection: 'row',
-    // alignSelf: 'stretch',
-    justifyContent: 'flex-start',
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  backText: {
-    fontSize: 30,
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginLeft: 5
-  },
-  buttonText: {
-    fontSize: 24,
-    color: 'black',
-    alignSelf: 'center'
   },
   title: {
     marginBottom: 20,
@@ -229,6 +352,59 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: 'black'
   },
+  seperator: {
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  buttonContainer: {
+    flex: 1,
+    backgroundColor: '#39247F', 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    margin: 50,
+    marginTop: 50
+  },
 });
+
+const TitleField = MKTextField.textfieldWithFloatingLabel()
+  .withPlaceholder('Enter Title')
+  .withStyle(styles.textfieldWithFloatingLabel)
+  .withFloatingLabelFont({
+    fontSize: 15,
+    fontStyle: 'italic',
+    fontWeight: '200',
+  })
+  .build();
+
+const NoteField = MKTextField.textfieldWithFloatingLabel()
+  .withPlaceholder('Add Notes')
+  .withStyle(styles.textfieldWithFloatingLabel)
+  .withFloatingLabelFont({
+    fontSize: 15,
+    fontStyle: 'italic',
+    fontWeight: '200',
+  })
+  .build();
+
+// const SendRequest = new MKButton.Builder()
+//   .withBackgroundColor('#39247F')
+//   // .withShadowRadius(2)
+//   .withShadowOffset({width:0, height:2})
+//   .withShadowOpacity(.7)
+//   .withShadowColor('black')
+//   .withOnPress(() => {
+//     console.log('hi, raised button!');
+//   })
+//   .withTextStyle({
+//     color: 'white',
+//     fontWeight: 'bold',
+//   })
+//   .withText('Send Request')
+//   .build();
+
 
 export default CreateRequest;

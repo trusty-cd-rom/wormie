@@ -22,7 +22,7 @@ var api = {
 	    // body: JSON.stringify({ "title": "fat ugly face party party at ikea", "latitude":50, "longitude": 35, "deadline":"2015-12-09T23:37:58.271497Z", "notes":"make it phat", "status": "zip line", "requestor": 2})
 	  })
 	  .then((res, a) => {
-	  	// console.log('got this back from server on wormhole create post', res, a);
+	  	console.log('catdog got this back from server on wormhole create post', res, a);
 	  	return res.json();
 	  })
 	  ;
@@ -211,6 +211,36 @@ var api = {
 		// Invoke the fetchProfileRequest
     return fetchProfileRequest.start();
 	
+	},
+
+	/*
+	 Sorting and filtering
+	 */
+
+	filterByStatus(status) {
+		var url = urls.filter + '?status=' + status;
+		return fetch(urls.filterByStatus, {
+			method: 'GET'
+		})
+		.then(function (data) {
+			res.json();
+		})
+		.catch(function (err) {
+			console.log(err);
+		})
+	},
+
+	sortList(criteria) {
+		var url = urls.sortBy + '?sort_by=' + criteria;
+		return fetch(urls.sortList, {
+			method: 'GET'
+		})
+		.then(function (data) {
+			res.json();
+		})
+		.catch(function (err) {
+			console.log(err);
+		})
 	}
 
 	// TODO: Add a refresh token API call using the stored refresh OAuth2 token

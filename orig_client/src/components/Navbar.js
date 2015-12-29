@@ -15,16 +15,23 @@ class Navbar extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'home'
-    }
+      selectedTab: 'map'
+    };
+  }
+
+  componentWillMount() {
+    var { currentUser, getUserDetailsForLoggedInUser } = this.props;
+    console.log("COMPONENT WILL MOUNT");
+    getUserDetailsForLoggedInUser();
   }
 
   render() {
-    let { setClickedProfile, currentUser } = this.props;
+    let { currentUser, setClickedProfile } = this.props;
+    
     return (
       <TabBarIOS
         selectedTab={this.state.selectedTab}
-        tintColor={'#875FFF'}
+        tintColor={'#4CC6EA'}
         barTintColor={'#000000'}>
         <TabBarItemIOS
           name="map"
@@ -65,9 +72,10 @@ class Navbar extends Component{
             accessibilityLabel="Profile Tab"
             selected={this.state.selectedTab === 'profile'}
             onPress={() => {
-            this.setState({
-              selectedTab: 'profile',
-            });
+              setClickedProfile(currentUser);
+              this.setState({
+                selectedTab: 'profile',
+              });
           }}>
           <Profile navigator={this.props.navigator}/>
         </TabBarItemIOS>

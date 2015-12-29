@@ -3,11 +3,17 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
 import CameraView from '../containers/Camera';
 var LiveCamera = require('../containers/LiveCamera.js');
+import MapFeed from './MapFeed';
+var moment = require('moment');
+import { Icon } from 'react-native-icons';
+
 
 class OpenWormhole extends Component {
   back() {
@@ -27,64 +33,71 @@ class OpenWormhole extends Component {
     return (
       <View style={styles.container}>
 
-        <TouchableHighlight
-          style = {styles.backButton}
-          onPress = {this.back.bind(this)}
-        >
-          <Text style = {styles.backText}> {'<'} </Text>
-        </TouchableHighlight>
-        <View style = {styles.contentContainer}>
-          <Text style={styles.title}>
-            Title
+        <View style = {styles.headerContainer}>
+
+          <TouchableHighlight
+            style = {styles.backButton}
+            onPress = {this.back.bind(this)}
+          >
+            <Text style = {styles.backText}> {'X'} </Text>
+          </TouchableHighlight>
+          
+          <Text style={styles.backText}>
+            {currentWormhole.requestor.username}
           </Text>
-          <Text style={styles.text}>
+          <Image 
+            style = {styles.profilePic}
+            source = {{uri: (currentWormhole.requestor) ? currentWormhole.requestor.picture_url : ""}}
+          />
+
+        </View>
+
+        <View style = {styles.mapContainer}>
+          <MapFeed />
+        </View>
+
+        <ScrollView style = {styles.contentContainer}>
+          
+          <Text style={[styles.text, styles.alignLeft]}>
+            Due {moment(currentWormhole.deadline).fromNow()}
+          </Text>
+
+          <Text style={styles.headerTitle}>
             {currentWormhole.title}
           </Text>
 
-          <Text style={styles.title}>
-            Requester
-          </Text>
-          <Text style={styles.text}>
-            {currentWormhole.requestor.username}
-          </Text>
-
-          <Text style={styles.title}>
-            Location
-          </Text>
           <Text style={styles.text}>
             {`${currentWormhole.latitude} , ${currentWormhole.longitude}`}
           </Text>
 
-          <Text style={styles.title}>
-            Deadline
-          </Text>
-          <Text style={styles.text}>
-            {currentWormhole.deadline}
-          </Text>
-
-          <Text style={styles.title}>
-            Notes
-          </Text>
           <Text style={styles.text}>
             {currentWormhole.notes}
           </Text>
-        </View>
+
+        </ScrollView>
+
         <View style={styles.buttonContainer}>
           <TouchableHighlight
             style = {styles.liveButton}
             onPress = {this.startSubmission.bind(this, 'live')}
             underlayColor = '#88D4f5'
           >
-            <Text style = {styles.buttonText}> Live </Text>
+            <Text style = {styles.buttonText}> LIVE! </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style = {styles.recordButton}
             onPress = {this.startSubmission.bind(this, 'record')}
             underlayColor = '#88D4f5'
           >
-            <Text style = {styles.buttonText}> Record </Text>
+            <Icon
+              name='fontawesome|video-camera'
+              size={30}
+              color='#39247F'
+              style={styles.ionic}
+            />
           </TouchableHighlight>
         </View>
+
       </View>
     );
   }
@@ -93,74 +106,72 @@ class OpenWormhole extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: 'black',
-    marginTop: 20
+  },
+  headerContainer: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    backgroundColor: '#39247F',
+    paddingRight: 10,
+    paddingLeft: 10,
+    alignItems: 'flex-start',
+    flex: 1,
+  },
+  backButton: {
+    flex: 1,
+  },
+  backText: {
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 20,
+  },
+  mapContainer: {
+    flex: 6,
   },
   contentContainer: {
-    flex:15,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: 'black',
-    // marginTop: 20
-  },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 7,
-    color: 'white',
-  },
-  splashImage: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 4,
-    backgroundColor: 'black'
+    flex: 7,
+    padding: 20,
+    paddingTop: 5,
+    flexDirection: 'column',
   },
   buttonContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    flex: 2,
+    flex: 1,
+  },
+  headerTitle: {
+    flex: 8,
+    fontFamily: 'Lato-Bold',
+    fontSize: 30,
+    marginBottom: 10,
+  },
+  text: {
+    fontFamily: 'Lato-Bold',
+    // fontSize: 20,
+    marginBottom: 10,
+  },
+  alignLeft: {
+    textAlign: 'right',
   },
   liveButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'green'
+    // backgroundColor: 'green'
+  },
+  buttonText: {
+    fontSize: 27,
+    fontFamily: 'Lato-Bold',
+    color: '#39247F',
+    // alignSelf: 'center'
   },
   recordButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'red'
-  },
-  backButton: {
-    // flexDirection: 'row',
-    // alignSelf: 'stretch',
-    justifyContent: 'flex-start',
-    flex: 1,
-    backgroundColor: 'black'
-  },
-  backText: {
-    fontSize: 30,
-    color: 'white',
-    alignSelf: 'flex-start',
-    marginLeft: 5
-  },
-  buttonText: {
-    fontSize: 24,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  title: {
-    marginBottom: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#fff'
+    // backgroundColor: 'red'
   },
   searchInput: {
     height: 50,
@@ -172,6 +183,78 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: 'white'
   },
+  profilePic: {
+    // marginTop: 10,
+    marginLeft: 10,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+  },
+  ionic: { 
+    width: 30, 
+    height: 30,
+  },
 });
 
 export default OpenWormhole;
+
+
+
+// <TouchableHighlight
+//           style = {styles.backButton}
+//           onPress = {this.back.bind(this)}
+//         >
+//           <Text style = {styles.backText}> {'<'} </Text>
+//         </TouchableHighlight>
+//         <View style = {styles.contentContainer}>
+//           <Text style={styles.title}>
+//             Title
+//           </Text>
+//           <Text style={styles.text}>
+//             {'currentWormhole.title'}
+//           </Text>
+
+//           <Text style={styles.title}>
+//             Requester
+//           </Text>
+//           <Text style={styles.text}>
+//             {'currentWormhole.requestor.username'}
+//           </Text>
+
+//           <Text style={styles.title}>
+//             Location
+//           </Text>
+//           <Text style={styles.text}>
+//             {`${'currentWormhole.latitude'} , ${'currentWormhole.longitude'}`}
+//           </Text>
+
+//           <Text style={styles.title}>
+//             Deadline
+//           </Text>
+//           <Text style={styles.text}>
+//             {'currentWormhole.deadline'}
+//           </Text>
+
+//           <Text style={styles.title}>
+//             Notes
+//           </Text>
+//           <Text style={styles.text}>
+//             {'currentWormhole.notes'}
+//           </Text>
+//         </View>
+//         <View style={styles.buttonContainer}>
+//           <TouchableHighlight
+//             style = {styles.liveButton}
+//             onPress = {this.startSubmission.bind(this, 'live')}
+//             underlayColor = '#88D4f5'
+//           >
+//             <Text style = {styles.buttonText}> Live </Text>
+//           </TouchableHighlight>
+//           <TouchableHighlight
+//             style = {styles.recordButton}
+//             onPress = {this.startSubmission.bind(this, 'record')}
+//             underlayColor = '#88D4f5'
+//           >
+//             <Text style = {styles.buttonText}> Record </Text>
+//           </TouchableHighlight>
+//         </View>

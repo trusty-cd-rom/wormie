@@ -7,6 +7,7 @@ function mapStateToProps(state) {
   return {
   	cameraState: state.camera,
   	pendingWormholeSubmission: state.pendingWormholeSubmission,
+  	currentUser: state.userProfile.currentUser,
   };
 }
 
