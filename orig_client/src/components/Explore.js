@@ -56,7 +56,7 @@ class Explore extends Component {
               source = {{uri: currentUser['picture_url']}}
             />
           </TouchableHighlight>
-          <Text style={styles.title}></Text>
+          <Text style={styles.title}>Explore</Text>
           <SegmentedControlIOS 
             values={['Map', 'List']}
             style={styles.segmentedControl}
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
   },
   title:{
     fontFamily: 'Lato-Bold',
-    marginTop: 12,
-    fontSize: 22,
+    marginTop: 4,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
     flex:1,

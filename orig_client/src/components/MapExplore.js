@@ -195,6 +195,60 @@ var MapExplore = React.createClass({
 
   },
 
+  _timeSince(date) {
+
+      var seconds = Math.floor((new Date() - date) / 1000);
+
+      var interval = Math.floor(seconds / 31536000);
+
+      if (interval > 1) {
+          return interval + "y";
+      }
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+          return interval + "mo";
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval > 1) {
+          return interval + "d";
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval > 1) {
+          return interval + "h";
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval > 1) {
+          return interval + "m";
+      }
+      return Math.floor(seconds) + "s";
+  },
+
+  _renderHeartDetails(){
+    
+    var { currentWormhole } = this.props;
+
+    var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
+
+    if ( currentWorm && currentWorm.submissions.length ) {
+      return (
+        <View style={styles.littleRow}>
+          <Image 
+                style = {styles.heart}
+                source = {{uri: urls.getHeart + currentWormhole.requestor.wormie_color.slice(1) + "_" + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
+              />
+          <Text style={styles.cardRequestor}> Wormhole opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
+        </View>
+      );
+    } else {
+      
+      return (
+        <View style={styles.littleRow}>
+        </View>
+      );
+    }
+
+  },
+
   render: function() {
     var {feed, currentWormhole } = this.props;
     return (
@@ -229,8 +283,9 @@ var MapExplore = React.createClass({
                     source = {{uri: (currentWormhole.requestor) ? currentWormhole.requestor.picture_url : ""}}
                   />
               <Text style={styles.cardRequestor}>{ (currentWormhole.requestor) ? currentWormhole.requestor.username : ""}</Text>
+              {this._renderSubmitterDetails()}
             </View>
-            {this._renderSubmitterDetails()}
+            {this._renderHeartDetails()}
           </View>
         </View>
       </View>
@@ -275,13 +330,25 @@ var styles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 12,
     color: '#727272',
-    marginLeft: 10,
-    marginTop: 5
+    marginLeft: 5,
+    marginTop: 5,
+    marginRight: 5,
+  },
+  cardLikes: {
+    marginTop: 5,
+    marginBottom: 10,
+    fontFamily: 'Lato-Semibold',
+    fontSize: 12,
+    color: '#727272',
   },
   profilePic: {
     height: 30,
     width: 30,
     borderRadius: 15,
+  },
+  heart: {
+    height: 28,
+    width: 35,
   },
 
 });
