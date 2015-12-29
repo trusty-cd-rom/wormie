@@ -13,7 +13,7 @@ import Navbar from '../containers/Navbar';
 import Profile from '../containers/Profile';
 import { MKTextField, MKButton } from 'react-native-material-kit';
 var Accordion = require('react-native-collapsible/Accordion');
-import MapFeed from './MapFeed';
+import RequestMapFeed from './RequestMapFeed';
 import { Icon } from 'react-native-icons';
 var moment = require('moment');
 
@@ -56,6 +56,10 @@ class CreateRequest extends Component {
     tomorrow.setDate(tomorrow.getDate() + 1);
     updateInputText('deadline', tomorrow);
 
+    if (target) {
+      updateInputText('title', target.name);
+    }
+
   }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
@@ -72,7 +76,6 @@ class CreateRequest extends Component {
     updateInputText('title', '');
   }
   submitRequest() {
-    // debugger;
     console.log('about to submit request from create request screen');
     let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
     
@@ -87,7 +90,7 @@ class CreateRequest extends Component {
     };
 
     createRequest(newRequestData, () => {
-      setCurrentTarget(null);
+      setCurrentTarget('');
       this.props.updateInputText('notes', '');
       this.props.updateInputText('title', '');
       this.props.navigator.replace({
@@ -134,24 +137,26 @@ class CreateRequest extends Component {
 
   _renderMapBox() {
     let { inputText, target } = this.props;
-
+    console.log(target);
+    console.log(inputText);
     if (this.props.yelp) {
       console.log('from yelp');
       var lat = target.location.coordinate.latitude;
       var lon = target.location.coordinate.longitude;
     } else {
       if (inputText.location) {
-        var lat = Number(inputText.location.split(',')[0].trim()) || 37.786140;
-        var lon = Number(inputText.location.split(',')[1].trim()) || -122.405754;  
+        var lat = Number(inputText.location.split(',')[0].trim());
+        var lon = Number(inputText.location.split(',')[1].trim());
+      } else {
+        var lat = 37.786140;
+        var lon = -122.405754;
       }
     }
-
-    debugger;
     return (
       <View style={{top: -20}}>
-        <MapFeed 
+        <RequestMapFeed 
           lat={lat}
-          lon={lon} 
+          lon={lon}
         />
       </View>
     );
@@ -161,9 +166,7 @@ class CreateRequest extends Component {
     let { inputText, setCurrentTarget } = this.props;
     var title = inputText.title || 'Required';
     var notes = inputText.notes || 'Optional';
-    console.log(inputText.location);
-    debugger;
-    
+
     return (
       <View style={styles.container}>
 
@@ -183,7 +186,7 @@ class CreateRequest extends Component {
             onPress = {() => {
               this.submitRequest.bind(this)();
             }}
-            underlayColor = '#88D4f5'
+            underlayColor = '#4CC6EA'
           >
             <Text style = {styles.createText}> Create </Text>
           </TouchableHighlight>
@@ -225,7 +228,7 @@ class CreateRequest extends Component {
             style={styles.buttonContainer}
             >
             <MKButton
-              backgroundColor={'#39247F'}
+              backgroundColor={'#4CC6EA'}
               styles={{flexDirection: 'row',
                       justifyContent: 'center',
                       alignItems:'center',
@@ -269,7 +272,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     height: 60,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     padding: 10,
     alignItems: 'center',
   },

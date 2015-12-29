@@ -71,7 +71,6 @@ function stopPosting() {
 export function updateInputText(field, text) {
   console.log('UPDATE_INPUT_TEXT');
   console.log(field, text);
-  debugger;
   return {
     type: UPDATE_INPUT_TEXT,
     field,

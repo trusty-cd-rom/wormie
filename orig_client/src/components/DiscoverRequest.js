@@ -52,13 +52,6 @@ class DiscoverRequest extends React.Component{
     setCurrentTarget(data);
   } 
 
-  // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
-  // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
-
-//         <WebView url={target['mobile_url']}/>
-// <View style={styles.webViewContainer}>
-//           <WebView url={target['mobile_url']}/>
-//         </Vie
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);
@@ -79,7 +72,6 @@ class DiscoverRequest extends React.Component{
         >
           <WebView 
             url={target['mobile_url']}
-            // style={{width: 300, height: 200}}
           />
         </View>
         <View
