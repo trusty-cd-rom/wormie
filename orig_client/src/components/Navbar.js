@@ -31,7 +31,7 @@ class Navbar extends Component{
     return (
       <TabBarIOS
         selectedTab={this.state.selectedTab}
-        tintColor={'#875FFF'}
+        tintColor={'#4CC6EA'}
         barTintColor={'#000000'}>
         <TabBarItemIOS
           name="map"

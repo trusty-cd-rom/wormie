@@ -26,16 +26,16 @@ var SECTIONS = [
 
 class CreateRequest extends Component {
   /**************************************
-   target is available as this.props.requestedTarget
+   target is available as this.props.target
    it has same structure with yelp data
-   let coords = this.props.requestedTarget.location.coordinate;
-   name: this.props.requestedTarget.name
-   latitude: this.props.requestedTarget.location.coordinate.latitude
-   longitude: this.props.requestedTarget.location.coordinate.longitude
+   let coords = this.props.target.location.coordinate;
+   name: this.props.target.name
+   latitude: this.props.target.location.coordinate.latitude
+   longitude: this.props.target.location.coordinate.longitude
    *************************************/
 
   componentWillMount() {
-    let { updateInputText } = this.props;
+    let { updateInputText, inputText, target } = this.props;
 
     /*
      Get location from phone
@@ -56,10 +56,6 @@ class CreateRequest extends Component {
     tomorrow.setDate(tomorrow.getDate() + 1);
     updateInputText('deadline', tomorrow);
 
-    if (this.props.requestedTarget) {
-      updateInputText('title', this.props.requestedTarget.name);
-    }
-
   }
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
@@ -71,9 +67,9 @@ class CreateRequest extends Component {
   }
   back() {
     let { updateInputText } = this.props;
+    this.props.navigator.pop();
     updateInputText('notes', '');
     updateInputText('title', '');
-    this.props.navigator.pop();
   }
   submitRequest() {
     // debugger;
@@ -101,10 +97,10 @@ class CreateRequest extends Component {
   }
 
   _renderYelpLocation() {
-    if (this.props.requestedTarget) {
+    if (this.props.target) {
       return (
         <Text style={styles.title}>
-          {this.props.requestedTarget.location.coordinate.latitude} {this.props.requestedTarget.location.coordinate.longitude}
+          {this.props.target.location.coordinate.latitude} {this.props.target.location.coordinate.longitude}
         </Text>
       );
     } else {
@@ -137,20 +133,37 @@ class CreateRequest extends Component {
   }
 
   _renderMapBox() {
-    // if target from yelp exist
-    var target = this.props.requestedTarget || '';
-    // if (this.props.requestedTarget) {
-    //   this.setState({center: target.location.coordinate})
-    // }
+    let { inputText, target } = this.props;
+
+    if (this.props.yelp) {
+      console.log('from yelp');
+      var lat = target.location.coordinate.latitude;
+      var lon = target.location.coordinate.longitude;
+    } else {
+      if (inputText.location) {
+        var lat = Number(inputText.location.split(',')[0].trim()) || 37.786140;
+        var lon = Number(inputText.location.split(',')[1].trim()) || -122.405754;  
+      }
+    }
+
+    debugger;
     return (
       <View style={{top: -20}}>
-        <MapFeed />
+        <MapFeed 
+          lat={lat}
+          lon={lon} 
+        />
       </View>
     );
   }
 
   render() {
     let { inputText, setCurrentTarget } = this.props;
+    var title = inputText.title || 'Required';
+    var notes = inputText.notes || 'Optional';
+    console.log(inputText.location);
+    debugger;
+    
     return (
       <View style={styles.container}>
 
@@ -182,7 +195,7 @@ class CreateRequest extends Component {
           
           <View style = {styles.inputField}>
             <TitleField
-              value = {inputText.title}
+              value = {title}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
             />
           </View>
@@ -198,7 +211,7 @@ class CreateRequest extends Component {
           
           <View style = {styles.inputField}>
             <NoteField
-              value = {inputText.notes}
+              value = {notes}
               onChange = {(event) => {
                 console.log('ON END EDITING');
                 this.handleInputChange.bind(this, 'notes', event)();
@@ -365,7 +378,7 @@ const TitleField = MKTextField.textfieldWithFloatingLabel()
   .build();
 
 const NoteField = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Add Note')
+  .withPlaceholder('Add Notes')
   .withStyle(styles.textfieldWithFloatingLabel)
   .withFloatingLabelFont({
     fontSize: 15,

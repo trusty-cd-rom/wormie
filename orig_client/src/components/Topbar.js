@@ -16,7 +16,7 @@ var styles = StyleSheet.create({
   },
   topbar: {
     color: 'white', 
-    backgroundColor: '#39247f',
+    backgroundColor: '#4CC6EA',
     // borderRadius: 4,
     borderWidth: 0.5,
     // borderColor: '#d6d7da',
@@ -70,7 +70,7 @@ class Topbar extends Component{
       >
         <TouchableHighlight
           onPress={this.back.bind(this)}
-          underlayColor='#39247f'
+          underlayColor='#4CC6EA'
           color='white'
           style={styles.back}
         > 

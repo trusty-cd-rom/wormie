@@ -90,7 +90,7 @@ class DiscoverRequest extends React.Component{
             onPress={() => {
               this.props.navigator.push({
                 component: CreateRequest,
-                passProps: {requestedTarget: this.props.target}
+                passProps: {'yelp': true}
               });
             }}
           >

@@ -17,12 +17,14 @@ var MapFeed = React.createClass({
   mixins: [Mapbox.Mixin],
   
   getInitialState() {
-
+    console.log('MAPFEED')
+    // lat = this.props.lat ? this.props.lat : 37.7861400;
+    // lon = this.props.lon ? this.props.lon : -122.4057540;
     return {
-      center: {
-        latitude: 37.7861400,
-        longitude: -122.4057540
-      },
+      // center: {
+      //   latitude: lat,
+      //   longitude: lon
+      // },
       zoom: 11,
       annotations: [],
     };
@@ -55,6 +57,13 @@ var MapFeed = React.createClass({
   render: function() {
     console.log("Rendering map");
     console.log("state is:", this.state);
+    console.log(this.props.lat);
+    console.log(this.props.lon);
+    var center = {
+      latitude: this.props.lat,
+      longitude: this.props.lon
+    }
+
     return (
       <View style={styles.container}>
         <Mapbox
@@ -68,7 +77,7 @@ var MapFeed = React.createClass({
           accessToken={mapboxConfig.accessToken}
           styleURL={mapboxConfig.styleURL}
           userTrackingMode={false}
-          centerCoordinate={this.state.center}
+          centerCoordinate={center}
           zoomLevel={this.state.zoom}
           onRegionChange={this.onRegionChange}
           onRegionWillChange={this.onRegionWillChange}
