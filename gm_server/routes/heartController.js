@@ -22,15 +22,15 @@ module.exports = {
 
     console.log(newFile);
 
-    gm(dir + '/heart.png')
-    .fuzz(100)
-    .fill(hexOne)
-    .opaque('black')
-    .fill('black')
-    .opaque('red')
-    .fill(hexTwo)
-    .opaque('black')
+    gm(dir + '/heart3.png')
     .transparent('white')
+    .fuzz(50)
+    .fill('white')
+    .opaque('green')
+    .fill(hexOne)
+    .opaque('blue')
+    .fill(hexTwo)
+    .opaque('red')
     .write(dir + newFile, function (err) {
       if (err) return console.dir(arguments);
       res.status(200).send('wormie created successfully');
