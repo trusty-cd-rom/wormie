@@ -133,13 +133,17 @@ var CameraView = React.createClass({
           <TouchableHighlight
             style = {styles.backButton}
             onPress = {this.back}
+            underlayColor = 'transparent'
           >
             <Text style = {styles.backText}> X </Text>
           </TouchableHighlight>
 
+          <View style = {{flex: 4}} />
+
           <TouchableHighlight
             style = {styles.cameraSwitchButton}
             onPress={this._switchCamera}
+            underlayColor = 'transparent'
           >
             <Icon
               name='ion|ios-reverse-camera'
@@ -181,7 +185,7 @@ var CameraView = React.createClass({
           <TouchableHighlight
             style = {styles.cameraToggleButton}
             onPress={this._takeVideo}
-            underlayColor = '#88D4f5'
+            underlayColor = 'transparent'
           >
             <Icon
               name= {cameraState.isRecording ? 'ion|stop' : 'ion|ios-circle-filled'}
@@ -206,7 +210,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   headerContainer: {
-    // paddingTop: 20,
+    paddingTop: 20,
     flexDirection: 'row',
     backgroundColor: '#39247F',
     paddingRight: 10,
@@ -239,7 +243,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   cameraSwitchButton: {
-    flex: 5,
+    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },

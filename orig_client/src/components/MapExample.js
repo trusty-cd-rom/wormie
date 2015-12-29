@@ -8,8 +8,8 @@ var {
   AppRegistry,
   StyleSheet,
   Text,
-  StatusBarIOS,
-  View
+  // StatusBarIOS,
+  View,
 } = React;
 
 var MapExample = React.createClass({

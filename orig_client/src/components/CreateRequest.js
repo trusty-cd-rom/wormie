@@ -16,6 +16,10 @@ var Accordion = require('react-native-collapsible/Accordion');
 import RequestMapFeed from './RequestMapFeed';
 import { Icon } from 'react-native-icons';
 var moment = require('moment');
+// Mapbox
+var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
+var mapRef = 'mapRef';
 
 var SECTIONS = [
   {
@@ -24,7 +28,7 @@ var SECTIONS = [
   }
 ];
 
-class CreateRequest extends Component {
+var CreateRequest = React.createClass({
   /**************************************
    target is available as this.props.target
    it has same structure with yelp data
@@ -33,6 +37,8 @@ class CreateRequest extends Component {
    latitude: this.props.target.location.coordinate.latitude
    longitude: this.props.target.location.coordinate.longitude
    *************************************/
+
+  mixins: [Mapbox.Mixin],
 
   componentWillMount() {
     let { updateInputText, inputText, target } = this.props;
@@ -60,21 +66,21 @@ class CreateRequest extends Component {
       updateInputText('title', target.name);
     }
 
-  }
+  },
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
-  }
+  },
   updateDate(date) {
     let { updateInputText } = this.props;
     updateInputText('deadline', date);
-  }
+  },
   back() {
     let { updateInputText } = this.props;
     this.props.navigator.pop();
     updateInputText('notes', '');
     updateInputText('title', '');
-  }
+  },
   submitRequest() {
     console.log('about to submit request from create request screen');
     let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
@@ -97,7 +103,7 @@ class CreateRequest extends Component {
         component: Navbar
       });
     });
-  }
+  },
 
   _renderYelpLocation() {
     if (this.props.target) {
@@ -109,7 +115,7 @@ class CreateRequest extends Component {
     } else {
       return <View><Text>{this.props.inputText.location}</Text></View>
     }
-  }
+  },
 
   _renderHeader(section) {
     let { inputText } = this.props;
@@ -120,7 +126,7 @@ class CreateRequest extends Component {
         <View style = {styles.seperator} />
       </View>
     );
-  }
+  },
 
   _renderContent(section) {
     let { inputText } = this.props;
@@ -133,7 +139,7 @@ class CreateRequest extends Component {
         onDateChange = {this.updateDate.bind(this)}
       />
     );
-  }
+  },
 
   _renderMapBox() {
     let { inputText, target } = this.props;
@@ -196,7 +202,26 @@ class CreateRequest extends Component {
 
         </View>
 
+        <Mapbox
+          style={{flex: 5}}
+          direction={0}
+          rotateEnabled={true}
+          scrollEnabled={true}
+          zoomEnabled={true}
+          showsUserLocation={false}
+          attributionButtonIsHidden={true}
+          logoIsHidden={true}
+          compassIsHidden={true}
+          ref={mapRef}
+          accessToken={mapboxConfig.accessToken}
+          styleURL={mapboxConfig.styleURL}
+          userTrackingMode={this.userTrackingMode.follow}
+          zoomLevel={15}
+          annotations={[]}
+        />
+
         <ScrollView style = {styles.contentContainer}>
+
           {this._renderMapBox.bind(this)()}
           
           <View style = {styles.inputField}>
@@ -206,6 +231,13 @@ class CreateRequest extends Component {
             />
           </View>
           
+          <View style = {styles.inputField}>
+            <NoteField
+              value = {inputText.notes}
+              onEndEditing = {this.handleInputChange.bind(this,'notes')}
+            />
+          </View>
+
           <View style = {styles.inputField}>
             <Accordion
               sections={SECTIONS}
@@ -224,6 +256,7 @@ class CreateRequest extends Component {
               }}
             />
           </View>
+
 
 
           {this._renderYelpLocation.bind(this)()}
@@ -261,8 +294,8 @@ class CreateRequest extends Component {
         </ScrollView>
       </View>
     );
-  }
-}
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -270,13 +303,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   contentContainer: {
-    flex: 12,
+    flex: 7,
   },
   headerContainer: {
     height: 60,
     flexDirection: 'row',
     backgroundColor: '#4CC6EA',
     padding: 10,
+    paddingTop: 20,
     alignItems: 'center',
   },
   backButton: {

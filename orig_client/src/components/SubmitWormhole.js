@@ -54,7 +54,7 @@ var SubmitWormhole = React.createClass({
           <TouchableHighlight
             style = {styles.submitButton}
             onPress = {this.submit.bind(this)}
-            underlayColor = '#88D4f5'
+            underlayColor = 'transparent'
           >
             <Text style = {styles.buttonText}> Submit </Text>
           </TouchableHighlight>
@@ -95,6 +95,7 @@ var SubmitWormhole = React.createClass({
           <TouchableHighlight
             style = {styles.backButton}
             onPress = {this.back.bind(this)}
+            underlayColor = 'transparent'
           >
             <Text style = {styles.backText}> {'X'} </Text>
           </TouchableHighlight>
