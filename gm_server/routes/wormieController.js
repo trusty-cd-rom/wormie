@@ -16,11 +16,13 @@ module.exports = {
     var hex = '#' + req.hex;
     var newFile = '/' + req.hex +'.png';
 
-    gm(dir + '/black.png')
-    .fuzz(50)
-    .fill(hex)
-    .opaque('black')
+    gm(dir + '/wormie2.png')
     .transparent('white')
+    .fuzz(50)
+    .fill('white')
+    .opaque('green')
+    .fill(hex)
+    .opaque('red')
     .write(dir + newFile, function (err) {
       if (err) return console.dir(arguments);
       res.status(200).send('wormie created successfully');

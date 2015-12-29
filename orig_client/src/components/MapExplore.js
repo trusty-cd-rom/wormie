@@ -73,7 +73,7 @@ var MapExplore = React.createClass({
         annotationImage: {
           url: urls.getWormie + feed[wormhole].requestor.wormie_color.slice(1) + '.png',
           height: 35,
-          width: 30
+          width: 25
         },
         // id is the index of the wormhole in the feed
         id: wormhole
