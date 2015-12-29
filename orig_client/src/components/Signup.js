@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
   },
   slider: {
     flex: 1,

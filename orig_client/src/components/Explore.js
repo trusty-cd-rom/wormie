@@ -50,7 +50,7 @@ class Explore extends Component {
             onPress={() => {
               this.goToSettings();
             }}
-            underlayColor='#39247F'>
+            underlayColor='#4CC6EA'>
             <Image 
               style = {styles.profilePic}
               source = {{uri: currentUser['picture_url']}}
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   row: {
     paddingTop: 20,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     height: 55
   },
   profilePic: {
