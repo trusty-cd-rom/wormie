@@ -28,7 +28,7 @@ var styles = StyleSheet.create({
   },
   topbarContainer: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'purple'
   },
   buttonContainer: {
     flex: 1,
@@ -52,6 +52,31 @@ class DiscoverRequest extends React.Component{
     setCurrentTarget(data);
   } 
 
+          // <TouchableHighlight
+          //   underlayColor={'#39247F'}
+          //   onPress={() => {
+          //     this.props.navigator.push({
+          //       component: CreateRequest,
+          //       passProps: {'yelp': true}
+          //     });
+          //   }}
+          // >
+          //   <View
+          //     style={{
+          //       flexDirection: 'row'
+          //     }}
+          //   >
+          //     <Text
+          //       style={styles.request}
+          //     >{'CREATE REQUEST'}</Text>
+          //     <Icon
+          //       name='ion|location'
+          //       size={35}
+          //       color='white'
+          //       style={styles.icon}
+          //     />
+          //   </View>
+          // </TouchableHighlight>
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);
@@ -60,49 +85,49 @@ class DiscoverRequest extends React.Component{
         style={styles.container}
       >
         <View
-          style={styles.topbarContainer}
-        >
-          <Topbar
-            topbarTitle={this.props.topbarTitle}
-            navigator={this.props.navigator}
-          />
-        </View>
-        <View
-          style={{flex: 10}}
+          style={{position: 'absolute', backgroundColor: 'red', top: 33, right: 0, left: 0, bottom: 0}}
         >
           <WebView 
             url={target['mobile_url']}
           />
         </View>
         <View
-          style={styles.buttonContainer}
+          style={{
+            position: 'absolute', 
+            top: 0, 
+            left: 0,
+            right: 0,
+            backgroundColor: '#4CC6EA'
+          }}
         >
-          <TouchableHighlight
-            underlayColor={'#39247F'}
-            onPress={() => {
-              this.props.navigator.push({
-                component: CreateRequest,
-                passProps: {'yelp': true}
-              });
-            }}
-          >
-            <View
-              style={{
-                flexDirection: 'row'
+          <Topbar
+            topbarTitle={this.props.topbarTitle}
+            navigator={this.props.navigator}
+          />
+          <View 
+            style={{
+              position: 'absolute', 
+              top: 20, 
+              padding:5, 
+              right: 5, 
+              backgroundColor: '#4CC6EA'
+            }}>
+            <TouchableHighlight
+              underlayColor={'#4CC6EA'}
+              onPress={() => {
+                this.props.navigator.push({
+                  component: CreateRequest,
+                  passProps: {'yelp': true}
+                });
               }}
             >
-              <Text
-                style={styles.request}
-              >{'CREATE REQUEST'}</Text>
-              <Icon
-                name='ion|location'
-                size={35}
-                color='white'
-                style={styles.icon}
-              />
-            </View>
-          </TouchableHighlight>
+              <Text style={{color: 'white', fontSize: 17, fontFamily: 'Lato-Regular', fontWeight: 'bold'}}>
+                Create
+              </Text>
+            </TouchableHighlight>
+          </View>
         </View>
+
       </View>
     );
   }

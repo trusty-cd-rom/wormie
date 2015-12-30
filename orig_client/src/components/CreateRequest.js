@@ -10,6 +10,7 @@ import React, {
   DatePickerIOS,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
+import Topbar from './Topbar';
 import Profile from '../containers/Profile';
 import { MKTextField, MKButton } from 'react-native-material-kit';
 var Accordion = require('react-native-collapsible/Accordion');
@@ -137,9 +138,6 @@ class CreateRequest extends Component {
 
   _renderMapBox() {
     let { inputText, target } = this.props;
-    console.log(target);
-    console.log(inputText);
-    console.log(target.location.coordinate.latitude);
     
     if (this.props.yelp) {
       console.log('from yelp');
@@ -169,33 +167,68 @@ class CreateRequest extends Component {
     var title = inputText.title || 'Required';
     var notes = inputText.notes || 'Optional';
 
+        // <View style = {styles.headerContainer}>
+
+        //   <TouchableHighlight
+        //     style = {styles.backButton}
+        //     onPress = {this.back.bind(this)}
+        //   >
+        //     <Text style = {styles.backText}> {'X'} </Text>
+        //   </TouchableHighlight>
+
+        //   <Text style = {styles.headerTitle}> New Wormhole </Text>
+
+        //   <TouchableHighlight
+        //     style = {styles.createButton}
+        //     onPress = {() => {
+              
+        //       this.submitRequest.bind(this)();
+        //     }}
+        //     underlayColor = '#4CC6EA'
+        //   >
+        //     <Text style = {styles.createText}> Create </Text>
+        //   </TouchableHighlight>
+
+        // </View>
     return (
       <View style={styles.container}>
 
-        <View style = {styles.headerContainer}>
-
-          <TouchableHighlight
-            style = {styles.backButton}
-            onPress = {this.back.bind(this)}
-          >
-            <Text style = {styles.backText}> {'X'} </Text>
-          </TouchableHighlight>
-
-          <Text style = {styles.headerTitle}> New Wormhole </Text>
-
-          <TouchableHighlight
-            style = {styles.createButton}
-            onPress = {() => {
-              
-              this.submitRequest.bind(this)();
-            }}
-            underlayColor = '#4CC6EA'
-          >
-            <Text style = {styles.createText}> Create </Text>
-          </TouchableHighlight>
-
+        <View
+          style={{
+            position: 'absolute', 
+            top: 0, 
+            left: 0,
+            right: 0,
+            backgroundColor: '#4CC6EA'
+          }}
+        >
+          <Topbar
+            topbarTitle={this.props.topbarTitle}
+            navigator={this.props.navigator}
+          />
+          <View 
+            style={{
+              position: 'absolute', 
+              top: 20, 
+              padding:5, 
+              right: 5, 
+              backgroundColor: '#4CC6EA'
+            }}>
+            <TouchableHighlight
+              underlayColor={'#4CC6EA'}
+              onPress={() => {
+                this.props.navigator.push({
+                  component: CreateRequest,
+                  passProps: {'yelp': true}
+                });
+              }}
+            >
+              <Text style={{color: 'white', fontSize: 17, fontFamily: 'Lato-Regular', fontWeight: 'bold'}}>
+                Create
+              </Text>
+            </TouchableHighlight>
+          </View>
         </View>
-
         <ScrollView style = {styles.contentContainer}>
           {this._renderMapBox.bind(this)()}
           

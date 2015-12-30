@@ -230,8 +230,11 @@ var api = {
 		})
 	},
 
-	sortList(criteria) {
+	sortList(criteria, longitude, latitude) {
 		var url = urls.sortBy + '?sort_by=' + criteria;
+		if (longitude && latitude) {
+			url += `&longitude=${longitude}&latitude=${latitude}`
+		}
 		return fetch(urls.sortList, {
 			method: 'GET'
 		})
