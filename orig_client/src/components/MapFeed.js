@@ -5,6 +5,8 @@ var Mapbox = require('react-native-mapbox-gl');
 var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
 
+var urls = require('../constants/urls');
+
 var {
   StyleSheet,
   Component,
@@ -18,13 +20,25 @@ var MapFeed = React.createClass({
   
   getInitialState() {
 
+    var { wormhole } = this.props;
+
     return {
       center: {
-        latitude: 37.7861400,
-        longitude: -122.4057540
+        latitude: parseFloat(wormhole.latitude),
+        longitude: parseFloat(wormhole.longitude)
       },
       zoom: 11,
-      annotations: [],
+      annotations: [{
+        coordinates: [parseFloat(wormhole.latitude), parseFloat(wormhole.longitude)],
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + wormhole.requestor.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }],
     };
   },
 

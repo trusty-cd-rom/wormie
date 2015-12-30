@@ -8,7 +8,8 @@ import {
   SET_CURRENT_USER,
   TOGGLE_ANIMATING,
   SET_CLICKED_USER,
-  TOGGLE_PEEK_CLICKED_USER
+  TOGGLE_PEEK_CLICKED_USER,
+  CREATE_WORMIE
 } from '../constants/actions';
 
 export function updateMyCurrentWormhole(wormhole) {

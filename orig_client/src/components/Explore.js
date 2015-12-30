@@ -50,13 +50,13 @@ class Explore extends Component {
             onPress={() => {
               this.goToSettings();
             }}
-            underlayColor='#39247F'>
+            underlayColor='#4CC6EA'>
             <Image 
               style = {styles.profilePic}
               source = {{uri: currentUser['picture_url']}}
             />
           </TouchableHighlight>
-          <Text style={styles.title}></Text>
+          <Text style={styles.title}>Explore</Text>
           <SegmentedControlIOS 
             values={['Map', 'List']}
             style={styles.segmentedControl}
@@ -89,13 +89,11 @@ class Explore extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    paddingTop: 10,
-    backgroundColor: '#39247F',
   },
   row: {
     paddingTop: 20,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     height: 55
   },
   profilePic: {
@@ -106,8 +104,8 @@ const styles = StyleSheet.create({
   },
   title:{
     fontFamily: 'Lato-Bold',
-    marginTop: 12,
-    fontSize: 22,
+    marginTop: 4,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
     flex:1,
