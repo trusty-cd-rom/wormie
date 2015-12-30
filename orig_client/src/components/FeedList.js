@@ -10,17 +10,25 @@ import React, {
   AsyncStorage,
 } from 'react-native';
 
+// var GoogleStaticMap = require('../utils/GoogleStaticMap');
+
 import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
-import MapFeed from './MapFeed';
-import MapExample from './MapExample';
+// import MapFeed from './MapFeed';
+// Mapbox
+var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
+var mapRef = 'mapRef';
 
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
 
-class FeedList extends React.Component{
+var FeedList = React.createClass({
+
+  mixins: [Mapbox.Mixin],
+
   componentWillMount() {
     let { peekClickedUser, setClickedProfile, currentUser, refreshFeedData_fromAsyncStorage } = this.props;
     // refreshFeedData();
@@ -31,11 +39,11 @@ class FeedList extends React.Component{
       // set currentUser to clickedUser
       setClickedProfile(currentUser);
     }
-  }
+  },
   componentDidMount() {
     let { refreshFeedData_fromAsyncStorage } = this.props;
     // refreshFeedData_fromAsyncStorage(AsyncStorage);
-  }
+  },
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
     // console.log('trying to view request: ', index, feed[index]);
@@ -49,23 +57,70 @@ class FeedList extends React.Component{
         component: OpenWormhole,
       });
     }
-  }
+  },
   _renderVideo(item, index) {
     // console.log('rendering video', item.submissions[0]);
-    if(item.submissions[0]) {
-      let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
-      return (
-        <Image 
-          style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-          source = {{uri: imageUrl}}
-        />
-      );
-    }else {
-      return (
-        <MapFeed wormhole={item} />
-      );
-    }
-  }
+    let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=13&size=400x300&markers=color:red%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
+    return (
+      <Image 
+        style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+        source = {{uri: imageUrl}}
+      />
+    );
+    // return (
+    //   <MapView
+    //     style={{height: 220}}
+    //     region={{
+    //       latitude: Number(item.latitude),
+    //       longitude: Number(item.longitude),
+    //       latitudeDelta: 0.1,
+    //       longitudeDelta: 0.1,
+    //     }}
+    //     annotations={[]}
+    //   />
+    // );
+    // if(item.submissions[0]) {
+    //   let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
+    //   return (
+    //     <Image 
+    //       style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+    //       source = {{uri: imageUrl}}
+    //     />
+    //   );
+    // }else {
+    //   return (
+    //     <Mapbox
+    //       style={{height: 220}}
+    //       direction={0}
+    //       rotateEnabled={false}
+    //       scrollEnabled={false}
+    //       zoomEnabled={true}
+    //       showsUserLocation={false}
+    //       ref={mapRef}
+    //       accessToken={mapboxConfig.accessToken}
+    //       styleURL={mapboxConfig.styleURL}
+    //       centerCoordinate={{
+    //         latitude: Number(item.latitude),
+    //         longitude: Number(item.longitude)
+    //       }}
+    //       zoomLevel={10}
+    //       annotations={[{
+    //         "coordinates": [Number(item.latitude), Number(item.longitude)],
+    //         "type": "point",
+    //         "strokeColor": "black",
+    //         "strokeWidth": 10,
+    //         "strokeAlpha": 0.9,
+    //         "annotationImage": {
+    //           url: 'http://emoji.fileformat.info/gemoji/bear.png',
+    //           height: 25,
+    //           width: 25
+    //         },
+    //         "id": `feedMap ${index}`
+    //       }]}
+    //     />
+    //   );
+    // }
+  },
               // this.viewProfile.bind(this)
   _showRequestorOnCard(item) {
     let { getUserInfo } = this.props;
@@ -74,10 +129,6 @@ class FeedList extends React.Component{
         <View style = {styles.row}>
           <TouchableHighlight
             onPress={()=>{
-              // console.log('submission', item.submissions[0]);
-              // get submisster account_id
-              // id(in database) = account_id + 1
-              // console.log('submitter', item.submissions[0].submitter['account_id']);
               var id = item.submissions[0].submitter['account_id'] + 1;
               getUserInfo(id, () => {
                 this.props.navigator.push({
@@ -102,7 +153,7 @@ class FeedList extends React.Component{
       return (<View />);
     }
 
-  }
+  },
   _timeSince(date) {
 
       var seconds = Math.floor((new Date() - date) / 1000);
@@ -129,7 +180,7 @@ class FeedList extends React.Component{
           return interval + "m";
       }
       return Math.floor(seconds) + "s";
-  }
+  },
 
   render() {
     var { feed, getUserInfo, filterByStatus, sortList } = this.props;
@@ -232,13 +283,14 @@ class FeedList extends React.Component{
         </View>
       </ScrollView>
     );
-  }
-};
+  },
+});
 
 var styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginBottom: 50,
   },
   buttonText: {
     fontFamily: 'Lato-Regular',
