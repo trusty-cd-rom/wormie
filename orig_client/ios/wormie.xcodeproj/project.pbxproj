@@ -92,6 +92,7 @@
 		CB4484091C213EA800655075 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484001C213EA800655075 /* Lato-Regular.ttf */; };
 		CB44840A1C213EA800655075 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484011C213EA800655075 /* Lato-Semibold.ttf */; };
 		CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484021C213EA800655075 /* Lato-Thin.ttf */; };
+		CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9663611C334FB90095C4C1 /* libSafariViewManager.a */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +229,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = C5DBB34B1AF2EF2B00E611A9;
 			remoteInfo = RCTMapboxGLTests;
+		};
+		CB9663601C334FB90095C4C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = SafariViewManager;
 		};
 		CBC9301A1C1CB0AE005EBA4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -386,6 +394,7 @@
 		CB4484001C213EA800655075 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../src/assets/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		CB4484011C213EA800655075 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "../src/assets/Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		CB4484021C213EA800655075 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/Lato-Thin.ttf"; sourceTree = "<group>"; };
+		CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -401,6 +410,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */,
+				CB245E321C22480100A92EF6 /* libz.tbd in Frameworks */,
 				CB245E301C2247F800A92EF6 /* libsqlite3.tbd in Frameworks */,
 				CB245E2E1C2247F000A92EF6 /* libc++.tbd in Frameworks */,
 				68DF53E91C2D13D70072365A /* libc.tbd in Frameworks */,
@@ -712,6 +723,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */,
 				13EA60831C1FCDBF006EE751 /* RCTFBSDKLogin.xcodeproj */,
 				1321B92C1C1CF576002DEA85 /* ReactNativeIcons.xcodeproj */,
 				CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */,
@@ -774,6 +786,14 @@
 			children = (
 				CB245E191C22470900A92EF6 /* libRCTMapboxGL.a */,
 				CB245E1B1C22470900A92EF6 /* RCTMapboxGLTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB9663491C334FB90095C4C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB9663611C334FB90095C4C1 /* libSafariViewManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -978,6 +998,14 @@
 					ProductGroup = 1321B92D1C1CF576002DEA85 /* Products */;
 					ProjectRef = 1321B92C1C1CF576002DEA85 /* ReactNativeIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = 6851D5551C24783700C03D33 /* Products */;
+					ProjectRef = 6851D5541C24783700C03D33 /* RNBackgroundGeolocation.xcodeproj */;
+				},
+				{
+					ProductGroup = CB9663491C334FB90095C4C1 /* Products */;
+					ProjectRef = CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1112,6 +1140,13 @@
 			fileType = wrapper.cfbundle;
 			path = RCTMapboxGLTests.xctest;
 			remoteRef = CB245E1A1C22470900A92EF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB9663611C334FB90095C4C1 /* libSafariViewManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSafariViewManager.a;
+			remoteRef = CB9663601C334FB90095C4C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */ = {

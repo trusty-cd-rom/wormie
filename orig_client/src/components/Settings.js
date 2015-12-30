@@ -13,6 +13,7 @@ import React, {
 import Facebook from '../containers/Facebook';
 import Navbar from '../containers/Navbar';
 import colorUtil from '../utils/color';
+import SafariView from 'react-native-safari-view';
 
 class Settings extends Component{
 
@@ -72,6 +73,45 @@ class Settings extends Component{
     updateSignUpSlider(data.field, data.value);
   }
 
+  safariOpen() {
+    SafariView.isAvailable()
+      .then(SafariView.show({
+        url: "http://www.wormieapp.com"
+      }))
+      .catch(error => {
+        console.log("Link didn't work");
+      });
+  }
+
+  sunyoung() {
+    SafariView.isAvailable()
+      .then(SafariView.show({
+        url: "https://github.com/SunyoungKim508"
+      }))
+      .catch(error => {
+        console.log("Link didn't work");
+      });
+  }
+
+  nick() {
+    SafariView.isAvailable()
+      .then(SafariView.show({
+        url: "http://www.nickfujita.com"
+      }))
+      .catch(error => {
+        console.log("Link didn't work");
+      });
+  }
+
+  charlie() {
+    SafariView.isAvailable()
+      .then(SafariView.show({
+        url: "http://www.whatrocks.org"
+      }))
+      .catch(error => {
+        console.log("Link didn't work");
+      });
+  }
 
   render() {
     var {updateProfile, currentUser} = this.props;
@@ -132,8 +172,32 @@ class Settings extends Component{
             source = {require('../assets/wormie-logo2.png')}
           />
           <Text style={styles.titleText}> WORMIE 1.0.0 </Text>
-          <Text style={styles.aboutText}> By Sun, Nick, & Charlie </Text>
-          <Text style={styles.aboutText}> © 2015-2016 wormieapp.com </Text>
+          <View style={styles.row}>
+            <Text style={styles.aboutText}>By </Text>
+            <TouchableHighlight
+              onPress = {this.sunyoung.bind(this)}
+              underlayColor='white'>
+              <Text style={styles.link}>Sunyoung Kim</Text>
+            </TouchableHighlight>
+            <Text style={styles.aboutText}>, </Text>
+            <TouchableHighlight
+              onPress = {this.nick.bind(this)}
+              underlayColor='white'>
+              <Text style={styles.link}>Nick Fujita</Text>
+            </TouchableHighlight>
+            <Text style={styles.aboutText}>, & </Text>
+            <TouchableHighlight
+              onPress = {this.charlie.bind(this)}
+              underlayColor='white'>
+              <Text style={styles.link}>Charlie Harrington</Text>
+            </TouchableHighlight>
+          </View>
+          <Text style={styles.aboutText}> © 2015-2016 </Text>
+          <TouchableHighlight
+            onPress = {this.safariOpen.bind(this)}
+            underlayColor='white'>
+            <Text style={styles.link}>wormieapp.com</Text>
+          </TouchableHighlight>
           <Text style={styles.aboutText}> Made in San Francisco </Text>
         </View>
       </View>
@@ -144,6 +208,9 @@ class Settings extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  row: {
+    flexDirection: 'row',
   },
   body: {
     flex: 1,
@@ -177,6 +244,12 @@ const styles = StyleSheet.create({
     color: '#727272',
     fontSize: 12,
     fontFamily: 'Lato-Semibold',
+  },
+  link: {
+    color: '#727272',
+    fontSize: 12,
+    fontFamily: 'Lato-Semibold',
+    textDecorationLine: 'underline',
   },
   slider: {
     flex: 1,
