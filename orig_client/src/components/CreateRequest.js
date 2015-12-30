@@ -12,6 +12,7 @@ import React, {
   LayoutAnimation,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
+import Topbar from './Topbar';
 import Profile from '../containers/Profile';
 import { MKTextField, MKButton } from 'react-native-material-kit';
 var Accordion = require('react-native-collapsible/Accordion');
@@ -204,42 +205,36 @@ var CreateRequest = React.createClass({
     var title = inputText.title || 'Required';
     var notes = inputText.notes || 'Optional';
 
+        // <View style = {styles.headerContainer}>
+
+        //   <TouchableHighlight
+        //     style = {styles.backButton}
+        //     onPress = {this.back.bind(this)}
+        //   >
+        //     <Text style = {styles.backText}> {'X'} </Text>
+        //   </TouchableHighlight>
+
+        //   <Text style = {styles.headerTitle}> New Wormhole </Text>
+
+        //   <TouchableHighlight
+        //     style = {styles.createButton}
+        //     onPress = {() => {
+              
+        //       this.submitRequest.bind(this)();
+        //     }}
+        //     underlayColor = '#4CC6EA'
+        //   >
+        //     <Text style = {styles.createText}> Create </Text>
+        //   </TouchableHighlight>
+
+        // </View>
     return (
       <View style={styles.container}>
-
-        <View style = {styles.headerContainer}>
-
-          <TouchableHighlight
-            style = {styles.backButton}
-            onPress = {this.back.bind(this)}
-          >
-            <Text style = {styles.backText}> {'X'} </Text>
-          </TouchableHighlight>
-
-          <Text style = {styles.headerTitle}> New Wormhole </Text>
-
-          <TouchableHighlight
-            style = {styles.createButton}
-            onPress = {() => {
-              
-              this.submitRequest.bind(this)();
-            }}
-            underlayColor = '#4CC6EA'
-          >
-            <Text style = {styles.createText}> Create </Text>
-          </TouchableHighlight>
-
-        </View>
-
-
         <ScrollView 
           style = {styles.contentContainer}
           contentOffset = {{x: 0, y: inputText.keyboardSpace}}
         >
-
           {this._renderMapBox.bind(this)()}
-
-          
           <View style = {styles.inputField}>
             <TitleField
               value = {inputText.title}

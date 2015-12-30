@@ -130,7 +130,7 @@ class Badge extends React.Component{
           >
             <View
               style={{
-                backgroundColor:'#4CC6EA',
+                backgroundColor:'#035283',
                 width: 30,
                 height: 30,
               }}>
