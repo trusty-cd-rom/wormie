@@ -62,7 +62,7 @@ class FeedList extends React.Component{
       );
     }else {
       return (
-        <MapFeed />
+        <MapFeed wormhole={item} />
       );
     }
   }

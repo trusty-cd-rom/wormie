@@ -2,6 +2,7 @@ var React = require('react-native');
 var FBSDKLogin = require('react-native-fbsdklogin');
 var FBSDKCore = require('react-native-fbsdkcore');
 import Signup from '../containers/Signup';
+import Login from '../containers/Login';
 
 
 var {
@@ -28,6 +29,12 @@ class FacebookLogin extends React.Component {
     });
   }
 
+  goToLogin() {
+    this.props.navigator.replace({
+      component: Login
+    });
+  }
+
   convertToken(token){
 
     // PYTHON(FIX)
@@ -41,7 +48,9 @@ class FacebookLogin extends React.Component {
   }
 
   _removeStorage() {
-    AsyncStorage.removeItem(STORAGE_KEY); 
+    AsyncStorage.removeItem(STORAGE_KEY, () => {
+      this.goToLogin();
+    });
   }
 
   render () {

@@ -100,11 +100,11 @@ class Badge extends React.Component{
           <Text style={styles.handle}>{clickedUser['about_me']}</Text>
         </View>
       );
-    } else if ( updateProfile.username.length > 0 ){
+    } else if ( updateProfile.username.length > 0 || updateProfile.about_me.length > 0 ){
       return (
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>{updateProfile['username']}</Text>
-          <Text style={styles.handle}>{updateProfile['about_me']}</Text>
+          <Text style={styles.name}>{updateProfile['username'] || currentUser['username'] }</Text>
+          <Text style={styles.handle}>{updateProfile['about_me'] || currentUser['about_me'] }</Text>
         </View>
       );
     // clicked user exist
