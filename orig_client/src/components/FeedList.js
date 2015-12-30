@@ -139,10 +139,29 @@ var FeedList = React.createClass({
       return Math.floor(seconds) + "s";
   },
 
+  // coords() {
+  //   var dist;
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       let initialPosition = JSON.stringify(position);
+  //       console.log(initialPosition);
+  //       //replace with call to action function, update state via reducer
+  //       console.log(typeof position.coords.latitude);
+  //       dist = [position.coords.latitude.toFixed(7), position.coords.longitude.toFixed(7)];
+  //     },
+  //     (error) => alert(error.message),
+  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+  //   );
+  //   return dist;
+  // }
+
   render() {
     var { feed, getUserInfo, filterByStatus, sortList } = this.props;
     var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
-      // console.log(item);
+    // var coordinates = this.coords();
+    // var lat = coordinates ? coordinates[0] : 0;
+    // var lon = coordinates ? coordinates[1] : 0;
+    // console.log(lat, lon);
       return (
         <View key = {feed.length - 1 - index}>
           <TouchableHighlight
@@ -192,13 +211,6 @@ var FeedList = React.createClass({
       );
     });
 
-    // <View style = {styles.row}>
-    //             <Image 
-    //               style = {[styles.profilePic, styles.marginLeft]}
-    //               source = {{uri: item.requestor.picture_url}}
-    //             />
-    //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
-    //           </View>
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
@@ -215,18 +227,6 @@ var FeedList = React.createClass({
             backgroundColor: '#494949',
           }}
         >
-          <TouchableHighlight
-            onPress={() => { 
-              filterByStatus('completed');
-            }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Complete</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { filterByStatus('open') }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Open</Text>
-          </TouchableHighlight>
           <TouchableHighlight
             onPress={() => { sortList('nearby') }}
           >

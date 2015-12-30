@@ -62,10 +62,10 @@ export function filterByStatus(status) {
   }
 }
 
-export function sortList(criteria) {
-  console.log(criteria);
+export function sortList(criteria, longitude, latitude) {
+  console.log(criteria, longitude, latitude);
   return dispatch => {
-    return api.sortList(criteria)
+    return api.sortList(criteria, longitude, latitude)
       .then(function (res) {
         dispatch(refreshFeedDataAction(res))
       })
