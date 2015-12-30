@@ -93,7 +93,7 @@ class OpenWormhole extends Component {
             <Icon
               name='fontawesome|video-camera'
               size={30}
-              color='#39247F'
+              color='#4CC6EA'
               style={styles.ionic}
             />
           </TouchableHighlight>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 25,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     paddingRight: 10,
     paddingLeft: 10,
     alignItems: 'flex-start',
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 27,
     fontFamily: 'Lato-Bold',
-    color: '#39247F',
+    color: '#4CC6EA',
     // alignSelf: 'center'
   },
   recordButton: {

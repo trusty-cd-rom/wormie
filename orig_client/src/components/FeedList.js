@@ -24,6 +24,7 @@ var mapRef = 'mapRef';
 
 var YouTube = require('react-native-youtube');
 var Video = require('react-native-video');
+var urls = require('../constants/urls');
 
 var FeedList = React.createClass({
 
@@ -59,67 +60,23 @@ var FeedList = React.createClass({
     }
   },
   _renderVideo(item, index) {
-    // console.log('rendering video', item.submissions[0]);
-    let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=13&size=400x300&markers=color:red%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
-    return (
-      <Image 
-        style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-        source = {{uri: imageUrl}}
-      />
-    );
-    // return (
-    //   <MapView
-    //     style={{height: 220}}
-    //     region={{
-    //       latitude: Number(item.latitude),
-    //       longitude: Number(item.longitude),
-    //       latitudeDelta: 0.1,
-    //       longitudeDelta: 0.1,
-    //     }}
-    //     annotations={[]}
-    //   />
-    // );
-    // if(item.submissions[0]) {
-    //   let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
-    //   return (
-    //     <Image 
-    //       style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-    //       source = {{uri: imageUrl}}
-    //     />
-    //   );
-    // }else {
-    //   return (
-    //     <Mapbox
-    //       style={{height: 220}}
-    //       direction={0}
-    //       rotateEnabled={false}
-    //       scrollEnabled={false}
-    //       zoomEnabled={true}
-    //       showsUserLocation={false}
-    //       ref={mapRef}
-    //       accessToken={mapboxConfig.accessToken}
-    //       styleURL={mapboxConfig.styleURL}
-    //       centerCoordinate={{
-    //         latitude: Number(item.latitude),
-    //         longitude: Number(item.longitude)
-    //       }}
-    //       zoomLevel={10}
-    //       annotations={[{
-    //         "coordinates": [Number(item.latitude), Number(item.longitude)],
-    //         "type": "point",
-    //         "strokeColor": "black",
-    //         "strokeWidth": 10,
-    //         "strokeAlpha": 0.9,
-    //         "annotationImage": {
-    //           url: 'http://emoji.fileformat.info/gemoji/bear.png',
-    //           height: 25,
-    //           width: 25
-    //         },
-    //         "id": `feedMap ${index}`
-    //       }]}
-    //     />
-    //   );
-    // }
+    if(item.submissions[0]) {
+      let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
+      return (
+        <Image 
+          style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+          source = {{uri: imageUrl}}
+        />
+      );
+    }else {
+      let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=13&size=400x280&markers=icon:${encodeURIComponent(urls.getWormie+item.requestor.wormie_color.slice(1)+'.png')}%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
+      return (
+        <Image 
+          style = {{height: 220}}
+          source = {{uri: imageUrl}}
+        />
+      );
+    }
   },
               // this.viewProfile.bind(this)
   _showRequestorOnCard(item) {
@@ -379,3 +336,57 @@ export default FeedList;
         //   onError={(e)=>{console.log('youtube error: ', e.error)}}
         //   style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
         // />
+
+            // return (
+    //   <MapView
+    //     style={{height: 220}}
+    //     region={{
+    //       latitude: Number(item.latitude),
+    //       longitude: Number(item.longitude),
+    //       latitudeDelta: 0.1,
+    //       longitudeDelta: 0.1,
+    //     }}
+    //     annotations={[]}
+    //   />
+    // );
+    // if(item.submissions[0]) {
+    //   let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
+    //   return (
+    //     <Image 
+    //       style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+    //       source = {{uri: imageUrl}}
+    //     />
+    //   );
+    // }else {
+    //   return (
+    //     <Mapbox
+    //       style={{height: 220}}
+    //       direction={0}
+    //       rotateEnabled={false}
+    //       scrollEnabled={false}
+    //       zoomEnabled={true}
+    //       showsUserLocation={false}
+    //       ref={mapRef}
+    //       accessToken={mapboxConfig.accessToken}
+    //       styleURL={mapboxConfig.styleURL}
+    //       centerCoordinate={{
+    //         latitude: Number(item.latitude),
+    //         longitude: Number(item.longitude)
+    //       }}
+    //       zoomLevel={10}
+    //       annotations={[{
+    //         "coordinates": [Number(item.latitude), Number(item.longitude)],
+    //         "type": "point",
+    //         "strokeColor": "black",
+    //         "strokeWidth": 10,
+    //         "strokeAlpha": 0.9,
+    //         "annotationImage": {
+    //           url: 'http://emoji.fileformat.info/gemoji/bear.png',
+    //           height: 25,
+    //           width: 25
+    //         },
+    //         "id": `feedMap ${index}`
+    //       }]}
+    //     />
+    //   );
+    // }
