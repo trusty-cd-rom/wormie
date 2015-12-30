@@ -28,14 +28,17 @@ var styles = StyleSheet.create({
   },
   topbarContainer: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    flexDirection: 'row',
   },
   buttonContainer: {
     flex: 1,
     backgroundColor: '#8949E0', 
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems:'center'
+    alignItems:'center',
+    width: 150,
+    borderRadius: 10,
   },
   request: {
     fontFamily: 'Lato-Regular',
@@ -51,32 +54,24 @@ class DiscoverRequest extends React.Component{
     console.log(data);
     setCurrentTarget(data);
   } 
-
-          // <TouchableHighlight
-          //   underlayColor={'#39247F'}
-          //   onPress={() => {
-          //     this.props.navigator.push({
-          //       component: CreateRequest,
-          //       passProps: {'yelp': true}
-          //     });
-          //   }}
+//4CC6EA
+          // <View
+          //   style={{position:'absolute', top: 24, right: 5, backgroundColor: 'red'}}
           // >
-          //   <View
-          //     style={{
-          //       flexDirection: 'row'
+          //   <TouchableHighlight
+          //     underlayColor={'#F888A4'}
+          //     onPress={() => {
+          //       this.props.navigator.push({
+          //         component: CreateRequest,
+          //         passProps: {'yelp': true}
+          //       });
           //     }}
           //   >
           //     <Text
-          //       style={styles.request}
-          //     >{'CREATE REQUEST'}</Text>
-          //     <Icon
-          //       name='ion|location'
-          //       size={35}
-          //       color='white'
-          //       style={styles.icon}
-          //     />
-          //   </View>
-          // </TouchableHighlight>
+          //       style={{fontSize: 17, paddingBottom: 4}}
+          //     >Create</Text>
+          //   </TouchableHighlight>
+          // </View>
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);
@@ -91,28 +86,6 @@ class DiscoverRequest extends React.Component{
             topbarTitle={this.props.topbarTitle}
             navigator={this.props.navigator}
           />
-          <View 
-            style={{
-              position: 'absolute', 
-              top: 20, 
-              padding:5, 
-              right: 5, 
-              backgroundColor: '#4CC6EA'
-            }}>
-            <TouchableHighlight
-              underlayColor={'#4CC6EA'}
-              onPress={() => {
-                this.props.navigator.push({
-                  component: CreateRequest,
-                  passProps: {'yelp': true}
-                });
-              }}
-            >
-              <Text style={{color: 'white', fontSize: 17, fontFamily: 'Lato-Regular', fontWeight: 'bold'}}>
-                Create
-              </Text>
-            </TouchableHighlight>
-          </View>
         </View>
         <View
           style={{flex: 10}}
