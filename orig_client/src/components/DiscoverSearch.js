@@ -195,7 +195,7 @@ class DiscoverSearch extends React.Component{
             top: 120,
             order: 99,
             width: 380,
-            height: 520,
+            height: 540,
           }}
         />
       );

@@ -1,0 +1,107 @@
+import React, {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight,
+  ListView,
+  WebView,
+} from 'react-native';
+
+import CreateRequest from '../containers/CreateRequest';
+import { Icon } from 'react-native-icons';
+import Topbar from './Topbar';
+
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column', 
+    alignItems: 'stretch'
+  },
+  icon: {
+    width: 35,
+    height: 35,
+    paddingLeft: 30,
+    alignSelf: 'center'
+  },
+  topbarContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    flex: 1,
+    backgroundColor: '#8949E0', 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    width: 150,
+    borderRadius: 10,
+  },
+  request: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 25,
+    color: 'white',
+  }
+})
+
+class DiscoverRequest extends React.Component{
+
+  setTarget(data) {
+    let { setCurrentTarget } = this.props;
+    console.log(data);
+    setCurrentTarget(data);
+  } 
+//4CC6EA
+          // <View
+          //   style={{position:'absolute', top: 24, right: 5, backgroundColor: 'red'}}
+          // >
+          //   <TouchableHighlight
+          //     underlayColor={'#F888A4'}
+          //     onPress={() => {
+          //       this.props.navigator.push({
+          //         component: CreateRequest,
+          //         passProps: {'yelp': true}
+          //       });
+          //     }}
+          //   >
+          //     <Text
+          //       style={{fontSize: 17, paddingBottom: 4}}
+          //     >Create</Text>
+          //   </TouchableHighlight>
+          // </View>
+  render() {
+    let { target } = this.props;
+    console.log(target['mobile_url']);
+    return (
+      <View
+        style={styles.container}
+      >
+        <View
+          style={styles.topbarContainer}
+        >
+          <Topbar
+            topbarTitle={this.props.topbarTitle}
+            navigator={this.props.navigator}
+          />
+        </View>
+        <View
+          style={{flex: 10}}
+        >
+          <WebView 
+            url={target['mobile_url']}
+          />
+        </View>
+      </View>
+    );
+  }
+}
+              // style={{backgroundColor: 'blue', height: 100}}
+
+DiscoverRequest.propTypes = {
+  responseList: React.PropTypes.object.isRequired
+}
+
+export default DiscoverRequest;

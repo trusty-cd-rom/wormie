@@ -52,6 +52,31 @@ class DiscoverRequest extends React.Component{
     setCurrentTarget(data);
   } 
 
+          // <TouchableHighlight
+          //   underlayColor={'#39247F'}
+          //   onPress={() => {
+          //     this.props.navigator.push({
+          //       component: CreateRequest,
+          //       passProps: {'yelp': true}
+          //     });
+          //   }}
+          // >
+          //   <View
+          //     style={{
+          //       flexDirection: 'row'
+          //     }}
+          //   >
+          //     <Text
+          //       style={styles.request}
+          //     >{'CREATE REQUEST'}</Text>
+          //     <Icon
+          //       name='ion|location'
+          //       size={35}
+          //       color='white'
+          //       style={styles.icon}
+          //     />
+          //   </View>
+          // </TouchableHighlight>
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);
@@ -66,6 +91,28 @@ class DiscoverRequest extends React.Component{
             topbarTitle={this.props.topbarTitle}
             navigator={this.props.navigator}
           />
+          <View 
+            style={{
+              position: 'absolute', 
+              top: 20, 
+              padding:5, 
+              right: 5, 
+              backgroundColor: '#4CC6EA'
+            }}>
+            <TouchableHighlight
+              underlayColor={'#4CC6EA'}
+              onPress={() => {
+                this.props.navigator.push({
+                  component: CreateRequest,
+                  passProps: {'yelp': true}
+                });
+              }}
+            >
+              <Text style={{color: 'white', fontSize: 17, fontFamily: 'Lato-Regular', fontWeight: 'bold'}}>
+                Create
+              </Text>
+            </TouchableHighlight>
+          </View>
         </View>
         <View
           style={{flex: 10}}
