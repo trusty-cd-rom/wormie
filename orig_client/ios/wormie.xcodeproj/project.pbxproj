@@ -94,6 +94,8 @@
 		CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484021C213EA800655075 /* Lato-Thin.ttf */; };
 		CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9663611C334FB90095C4C1 /* libSafariViewManager.a */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
+		CBD013241C34907000E65EBD /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD013231C34907000E65EBD /* Lato-Semibold.ttf */; };
+		CBD013261C34912300E65EBD /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD013251C34912300E65EBD /* Lato-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -396,6 +398,8 @@
 		CB4484021C213EA800655075 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/Lato-Thin.ttf"; sourceTree = "<group>"; };
 		CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
+		CBD013231C34907000E65EBD /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
+		CBD013251C34912300E65EBD /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -573,6 +577,8 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				CBD013251C34912300E65EBD /* Lato-Bold.ttf */,
+				CBD013231C34907000E65EBD /* Lato-Semibold.ttf */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -1170,6 +1176,7 @@
 				CB245E1E1C22476900A92EF6 /* Mapbox.bundle in Resources */,
 				CB4484061C213EA800655075 /* Lato-Heavy.ttf in Resources */,
 				13FCEF071C1CFF7C00E41510 /* FAKFontAwesome.h in Resources */,
+				CBD013261C34912300E65EBD /* Lato-Bold.ttf in Resources */,
 				13FCEF081C1CFF7C00E41510 /* FAKFontAwesome.m in Resources */,
 				13FCEF091C1CFF7C00E41510 /* FAKFoundationIcons.h in Resources */,
 				CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */,
@@ -1195,6 +1202,7 @@
 				1321B94C1C1CF943002DEA85 /* foundation-icons.ttf in Resources */,
 				1321B94D1C1CF943002DEA85 /* Material-Design-Iconic-Font.ttf in Resources */,
 				CB44840A1C213EA800655075 /* Lato-Semibold.ttf in Resources */,
+				CBD013241C34907000E65EBD /* Lato-Semibold.ttf in Resources */,
 				1321B94A1C1CF8DC002DEA85 /* ionicons.ttf in Resources */,
 				CB4484081C213EA800655075 /* Lato-Medium.ttf in Resources */,
 				680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */,
