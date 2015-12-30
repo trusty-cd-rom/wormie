@@ -89,8 +89,6 @@ class Explore extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    paddingTop: 10,
-    backgroundColor: '#39247F',
   },
   row: {
     paddingTop: 20,

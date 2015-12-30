@@ -36,9 +36,9 @@ var MapExplore = React.createClass({
 
   componentDidMount() {
     var { refreshFeedData, currentWormhole, feed, updateCurrentWormhole, refreshFeedData_fromAsyncStorage } = this.props;
-    // refreshFeedData_fromAsyncStorage(AsyncStorage, () => {
-      // this.getWormholeAnnotations();
-    // });
+    refreshFeedData_fromAsyncStorage(AsyncStorage, () => {
+      this.getWormholeAnnotations();
+    });
   },
 
   getWormholeAnnotations() {

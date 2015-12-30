@@ -54,7 +54,7 @@ class OpenWormhole extends Component {
         </View>
 
         <View style = {styles.mapContainer}>
-          <MapFeed />
+          <MapFeed wormhole={currentWormhole} />
         </View>
 
         <ScrollView style = {styles.contentContainer}>

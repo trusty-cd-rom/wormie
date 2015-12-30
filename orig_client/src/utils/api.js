@@ -241,7 +241,7 @@ var api = {
 		.catch(function (err) {
 			console.log(err);
 		})
-	}
+	},
 
 	// TODO: Add a refresh token API call using the stored refresh OAuth2 token
 
