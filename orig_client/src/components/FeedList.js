@@ -7,6 +7,7 @@ import React, {
   Component,
   TouchableHighlight,
   Image,
+  AsyncStorage,
 } from 'react-native';
 
 import ViewRequest from '../containers/ViewRequest';
@@ -21,14 +22,19 @@ var Video = require('react-native-video');
 
 class FeedList extends React.Component{
   componentWillMount() {
-    let { peekClickedUser, setClickedProfile, currentUser, refreshFeedData, clickedUser } = this.props;
-    refreshFeedData();
+    let { peekClickedUser, setClickedProfile, currentUser, refreshFeedData_fromAsyncStorage } = this.props;
+    // refreshFeedData();
+    // refreshFeedData_fromAsyncStorage(AsyncStorage);
     // if there is no clicked user(friends/others)
     if (!peekClickedUser) {
-      console.log('hit feed list no peekClickedUser', currentUser);
+      // console.log('hit feed list no peekClickedUser', currentUser);
       // set currentUser to clickedUser
       setClickedProfile(currentUser);
     }
+  }
+  componentDidMount() {
+    let { refreshFeedData_fromAsyncStorage } = this.props;
+    // refreshFeedData_fromAsyncStorage(AsyncStorage);
   }
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
@@ -47,16 +53,11 @@ class FeedList extends React.Component{
   _renderVideo(item, index) {
     // console.log('rendering video', item.submissions[0]);
     if(item.submissions[0]) {
+      let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
       return (
-        <YouTube 
-          videoId={item.submissions[0].video_url}
-          play={false}
-          hidden={false}
-          playsInline={false}
-          showinfo={false}
-          modestbranding={true}
-          onError={(e)=>{console.log('youtube error: ', e.error)}}
-          style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+        <Image 
+          style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+          source = {{uri: imageUrl}}
         />
       );
     }else {
@@ -73,10 +74,10 @@ class FeedList extends React.Component{
         <View style = {styles.row}>
           <TouchableHighlight
             onPress={()=>{
-              console.log('submission', item.submissions[0]);
+              // console.log('submission', item.submissions[0]);
               // get submisster account_id
               // id(in database) = account_id + 1
-              console.log('submitter', item.submissions[0].submitter['account_id']);
+              // console.log('submitter', item.submissions[0].submitter['account_id']);
               var id = item.submissions[0].submitter['account_id'] + 1;
               getUserInfo(id, () => {
                 this.props.navigator.push({
@@ -132,29 +133,31 @@ class FeedList extends React.Component{
 
   render() {
     var { feed, getUserInfo, filterByStatus, sortList } = this.props;
-    var list = feed.map((item, index) => {
+    var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
       // console.log(item);
       return (
-        <View key = {index}>
+        <View key = {feed.length - 1 - index}>
           <TouchableHighlight
             style = {styles.loginButton}
-            onPress = {this.viewRequest.bind(this, index)}
+            onPress = {this.viewRequest.bind(this, feed.length - 1 - index)}
           >
-            <View style={[styles.cardTitleContainer, styles.row]}>
-              <Text style = {styles.cardTitle}> {item.title} </Text>
-              <View style={styles.spaceBuffer} />
-              <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
+            <View style = {{flex: 1}}>
+              <View style={[styles.cardTitleContainer, styles.row]}>
+                <Text style = {styles.cardTitle}> {item.title} </Text>
+                <View style={styles.spaceBuffer} />
+                <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
+              </View>
+              {this._renderVideo(item, feed.length - 1 - index)}
             </View>
           </TouchableHighlight> 
-          {this._renderVideo(item, index)}
           <View style={styles.cardInfoContainer}>
             <View style = {styles.row}>
               <TouchableHighlight
                 onPress={()=>{
-                  console.log('requests', item);
+                  // console.log('requests', item);
                   // get submisster account_id
                   // id(in database) = account_id + 1
-                  console.log('requestor id', item.requestor['account_id'] + 1);
+                  // console.log('requestor id', item.requestor['account_id'] + 1);
                   var id = item.requestor['account_id'] + 1;
                   getUserInfo(id, () => {
                     this.props.navigator.push({
@@ -192,7 +195,6 @@ class FeedList extends React.Component{
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
         automaticallyAdjustContentInsets={false}
-        onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
         style={styles.container}>
         {list}
@@ -314,3 +316,14 @@ var styles = StyleSheet.create({
 });
 
 export default FeedList;
+
+        // <YouTube 
+        //   videoId={item.submissions[0].video_url}
+        //   play={false}
+        //   hidden={false}
+        //   playsInline={false}
+        //   showinfo={false}
+        //   modestbranding={true}
+        //   onError={(e)=>{console.log('youtube error: ', e.error)}}
+        //   style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+        // />
