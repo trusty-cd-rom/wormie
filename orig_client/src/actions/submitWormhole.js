@@ -22,7 +22,7 @@ export function uploadWormholeSubmission(pendingWormholeSubmission, currentUser,
                 notes: pendingWormholeSubmission.submissionForm.notes,
     			video_url: JSON.parse(res.data).id,
                 location: JSON.stringify(pendingWormholeSubmission.locationData),
-                video_thumbnail: JSON.parse(res.data).thumbnails.medium,
+                video_thumbnail: JSON.parse(res.data).snippet.thumbnails.medium,
     		})
     	})
     	.then((res) => {
