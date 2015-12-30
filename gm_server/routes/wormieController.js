@@ -20,6 +20,7 @@ module.exports = {
     var right = '/' + req.hex +'.png';
 
     gm(dir + '/wormie2.png')
+    .resize(50, 72)
     .transparent('white')
     .fuzz(50)
     .fill('white')
@@ -31,6 +32,7 @@ module.exports = {
     });
 
     gm(dir + '/left.png')
+    .resize(50, 72)
     .transparent('white')
     .fuzz(50)
     .fill('white')
@@ -42,6 +44,7 @@ module.exports = {
     });
 
     gm(dir + '/right.png')
+    .resize(50, 72)
     .transparent('white')
     .fuzz(50)
     .fill('white')
