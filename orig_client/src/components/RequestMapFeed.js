@@ -61,7 +61,7 @@ var RequestMapFeed = React.createClass({
     var annotations = [{
       coordinates: [this.props.lat, this.props.lon],
       'type': 'point',
-      title: 'This is marker 1',
+      title: 'Ouch!',
       subtitle: 'It has a rightCalloutAccessory too',
       rightCalloutAccessory: {
         url: 'https://cldup.com/9Lp0EaBw5s.png',

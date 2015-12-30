@@ -90,7 +90,7 @@ class CreateRequest extends Component {
     };
 
     createRequest(newRequestData, () => {
-      setCurrentTarget('');
+      setCurrentTarget({location: {coordinate: {longitude: '', latitude: }}});
       this.props.updateInputText('notes', '');
       this.props.updateInputText('title', '');
       this.props.navigator.replace({
@@ -139,6 +139,8 @@ class CreateRequest extends Component {
     let { inputText, target } = this.props;
     console.log(target);
     console.log(inputText);
+    console.log(target.location.coordinate.latitude);
+    
     if (this.props.yelp) {
       console.log('from yelp');
       var lat = target.location.coordinate.latitude;
@@ -184,6 +186,7 @@ class CreateRequest extends Component {
           <TouchableHighlight
             style = {styles.createButton}
             onPress = {() => {
+              
               this.submitRequest.bind(this)();
             }}
             underlayColor = '#4CC6EA'

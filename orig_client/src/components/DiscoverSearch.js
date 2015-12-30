@@ -140,7 +140,7 @@ class DiscoverSearch extends React.Component{
             style={{marginTop: 10, alignSelf: 'center'}}
           >
             <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30, flexWrap:'wrap', marginTop: 20}}
+              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 20, flexWrap:'wrap', marginTop: 20}}
             >
             Search Any Location
             </Text>
