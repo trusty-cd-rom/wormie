@@ -81,7 +81,7 @@ var CreateRequest = React.createClass({
     if (!frames.endCoordinates)
       return;
     LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-    updateInputText('keyboardSpace', frames.endCoordinates.height);
+    updateInputText('keyboardSpace', frames.endCoordinates.height - 100);
   },
   resetKeyboardSpace() {
     let { updateInputText } = this.props;
@@ -166,7 +166,7 @@ var CreateRequest = React.createClass({
     let { inputText, target } = this.props;
     console.log(target);
     console.log(inputText);
-    console.log(target.location.coordinate.latitude);
+    // console.log(target.location.coordinate.latitude);
     
     if (this.props.yelp) {
       console.log('from yelp');
@@ -224,34 +224,18 @@ var CreateRequest = React.createClass({
         </View>
 
 
-          // {this._renderMapBox.bind(this)()}
         <ScrollView 
           style = {styles.contentContainer}
           contentOffset = {{x: 0, y: inputText.keyboardSpace}}
         >
 
-          <Mapbox
-            style={{height: 300}}
-            direction={0}
-            rotateEnabled={true}
-            scrollEnabled={true}
-            zoomEnabled={true}
-            showsUserLocation={false}
-            attributionButtonIsHidden={true}
-            logoIsHidden={true}
-            compassIsHidden={true}
-            ref={mapRef}
-            accessToken={mapboxConfig.accessToken}
-            styleURL={mapboxConfig.styleURL}
-            userTrackingMode={this.userTrackingMode.follow}
-            zoomLevel={15}
-            annotations={[]}
-          />
+          {this._renderMapBox.bind(this)()}
 
           
           <View style = {styles.inputField}>
             <TitleField
-              value = {title}
+              value = {inputText.title}
+              placeHolder = {'Required'}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
               onChange = {this.handleInputChange.bind(this,'title')}
             />
@@ -269,24 +253,15 @@ var CreateRequest = React.createClass({
           <View style = {styles.inputField}>
             <NoteField
               value = {inputText.notes}
+              placeHolder = {'Optional'}
               onEndEditing = {this.handleInputChange.bind(this,'notes')}
               onChange = {this.handleInputChange.bind(this,'notes')}
             />
           </View>
-          
-          <View style = {styles.inputField}>
-            <NoteField
-              value = {notes}
-              onChange = {(event) => {
-                console.log('ON END EDITING');
-                this.handleInputChange.bind(this, 'notes', event)();
-              }}
-            />
-          </View>
+
 
           <View style={{height: inputText.keyboardSpace, left: 0, right: 0, bottom: 0}}/>
 
-          {this._renderYelpLocation.bind(this)()}
           <View
             style={styles.buttonContainer}
             >
@@ -435,7 +410,7 @@ const styles = StyleSheet.create({
 });
 
 const TitleField = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Enter Title')
+  .withPlaceholder('Enter Title (Required)')
   .withStyle(styles.textfieldWithFloatingLabel)
   .withFloatingLabelFont({
     fontSize: 15,
@@ -445,7 +420,7 @@ const TitleField = MKTextField.textfieldWithFloatingLabel()
   .build();
 
 const NoteField = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Add Notes')
+  .withPlaceholder('Add Notes (Optional)')
   .withStyle(styles.textfieldWithFloatingLabel)
   .withFloatingLabelFont({
     fontSize: 15,
@@ -453,6 +428,8 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
     fontWeight: '200',
   })
   .build();
+
+          // {this._renderYelpLocation.bind(this)()}
 
 // const SendRequest = new MKButton.Builder()
 //   .withBackgroundColor('#39247F')
