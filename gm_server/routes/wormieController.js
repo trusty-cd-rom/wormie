@@ -52,7 +52,7 @@ module.exports = {
       if (err) return console.dir(arguments);
     });
 
-    res.status(200).send("started job to created wormie images");
+    res.status(200).send(dir);
 
   }
 
