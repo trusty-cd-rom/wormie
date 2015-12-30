@@ -4,7 +4,7 @@ import Login from '../components/Login';
 import * as LoginActions from '../actions/login';
 
 function mapStateToProps(state) {
-  console.log('Login state: ', state);
+  // console.log('Login state: ', state);
   return {
     login: state.login,
     feed: state.feed,

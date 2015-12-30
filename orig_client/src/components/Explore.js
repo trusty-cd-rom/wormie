@@ -6,12 +6,14 @@ import React, {
   Image,
   StyleSheet,
   TouchableHighlight,
+  AsyncStorage,
 } from 'react-native';
 
 import MapExplore from '../containers/MapExplore';
 // import MapExample from '../components/MapExample';
 import FeedList from '../containers/FeedList';
 import Settings from '../containers/Settings';
+import api from '../utils/api';
 
 // var focus = <MapExample/>;
 
@@ -24,6 +26,13 @@ class Explore extends Component {
       focus: <MapExplore navigator={this.props.navigator}/>
     }
   }
+
+  componentWillMount() {
+    let { refreshFeedAsyncStorage } = this.props;
+    // console.log('coffeefrog Explorer mounted, and we about to call refresh from asycn storage', refreshFeedAsyncStorage);
+    refreshFeedAsyncStorage(AsyncStorage);
+  }
+
 
   goToSettings(){
     this.props.navigator.push({
@@ -61,7 +70,7 @@ class Explore extends Component {
   }
 
   _onChange(event) {
-    console.log("click:", event.nativeEvent.value);
+    // console.log("click:", event.nativeEvent.value);
     var touchEvent = event.nativeEvent.value;
     
     if ( touchEvent === "Map") {
@@ -80,6 +89,8 @@ class Explore extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+    paddingTop: 10,
+    backgroundColor: '#39247F',
   },
   row: {
     paddingTop: 20,

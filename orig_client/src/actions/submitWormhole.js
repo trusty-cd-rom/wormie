@@ -15,12 +15,14 @@ export function uploadWormholeSubmission(pendingWormholeSubmission, currentUser,
     return youtube.postVideo(pendingWormholeSubmission.video)
     	.then((res) => {
     		// sent the new submission record to our server to add to the db
-            // console.log('this is the response from upload video', 'this is the id i am gonna use for the video!', JSON.parse(res.data));
+            console.log('this is the response from upload video', 'this is the id i am gonna use for the video!', JSON.parse(res.data));
     		return api.createSubmission({
     			wormhole: pendingWormholeSubmission.wormhole.id,
     			submitter: currentUser.id,
-                notes: pendingWormholeSubmission.submissionForm.notes || 'why you no leave msg',
-    			video_url: JSON.parse(res.data).id
+                notes: pendingWormholeSubmission.submissionForm.notes,
+    			video_url: JSON.parse(res.data).id,
+                location: JSON.stringify(pendingWormholeSubmission.locationData),
+                video_thumbnail: JSON.parse(res.data).snippet.thumbnails.medium,
     		})
     	})
     	.then((res) => {

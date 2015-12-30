@@ -110,8 +110,8 @@ var api = {
 
 	getUserDetailsByFacebookID(fb_id) {
 		console.log("getUserDetailsByFacebookID");
-		console.log(`${urls.usersByFacebookID}/${fb_id}`);
-		return fetch(`${urls.usersByFacebookID}/${fb_id}`)
+		console.log(`${urls.usersByFacebookID}${fb_id}`);
+		return fetch(`${urls.usersByFacebookID}${fb_id}`)
 		.then((res) => res.json())
 		;
 	},

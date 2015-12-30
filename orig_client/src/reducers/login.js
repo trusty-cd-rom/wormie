@@ -7,7 +7,7 @@ var initialState = {
 };
 
 function storeToken(state = initialState, action) {
-  console.log("reducer storeToken with action: ", action);
+  // console.log("reducer storeToken with action: ", action);
   switch(action.type) {
     case STORE_FACEBOOK_TOKEN_IN_ASYNC_STORAGE:
       return {

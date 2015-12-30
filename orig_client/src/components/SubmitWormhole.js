@@ -30,7 +30,7 @@ var SubmitWormhole = React.createClass({
     //   return [val.coords.latitude.toFixed(7), val.coords.longitude.toFixed(7)];
     // });
     // console.log(JSON.stringify(route));
-    updateInputText('notes', JSON.stringify(pendingWormholeSubmission.locationData));
+    updateInputText('location', JSON.stringify(pendingWormholeSubmission.locationData));
   },
   back() {
     let {initSubmissionCoordinates} = this.props;
@@ -54,7 +54,7 @@ var SubmitWormhole = React.createClass({
           <TouchableHighlight
             style = {styles.submitButton}
             onPress = {this.submit.bind(this)}
-            underlayColor = '#88D4f5'
+            underlayColor = 'transparent'
           >
             <Text style = {styles.buttonText}> Submit </Text>
           </TouchableHighlight>
@@ -95,6 +95,7 @@ var SubmitWormhole = React.createClass({
           <TouchableHighlight
             style = {styles.backButton}
             onPress = {this.back.bind(this)}
+            underlayColor = 'transparent'
           >
             <Text style = {styles.backText}> {'X'} </Text>
           </TouchableHighlight>

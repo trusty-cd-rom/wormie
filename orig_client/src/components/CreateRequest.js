@@ -8,6 +8,8 @@ import React, {
   TextInput,
   ActivityIndicatorIOS,
   DatePickerIOS,
+  DeviceEventEmitter,
+  LayoutAnimation,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
 import Profile from '../containers/Profile';
@@ -16,6 +18,12 @@ var Accordion = require('react-native-collapsible/Accordion');
 import RequestMapFeed from './RequestMapFeed';
 import { Icon } from 'react-native-icons';
 var moment = require('moment');
+// Mapbox
+var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
+var mapRef = 'mapRef';
+
+var KeyboardSpacer = require('react-native-keyboard-spacer');
 
 var SECTIONS = [
   {
@@ -24,7 +32,7 @@ var SECTIONS = [
   }
 ];
 
-class CreateRequest extends Component {
+var CreateRequest = React.createClass({
   /**************************************
    target is available as this.props.target
    it has same structure with yelp data
@@ -33,6 +41,8 @@ class CreateRequest extends Component {
    latitude: this.props.target.location.coordinate.latitude
    longitude: this.props.target.location.coordinate.longitude
    *************************************/
+
+  mixins: [Mapbox.Mixin],
 
   componentWillMount() {
     let { updateInputText, inputText, target } = this.props;
@@ -60,21 +70,38 @@ class CreateRequest extends Component {
       updateInputText('title', target.name);
     }
 
-  }
+  },
+  componentDidMount() {
+    DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
+    DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)  
+  },
+  updateKeyboardSpace(frames) {
+    let { updateInputText } = this.props;
+    console.log('this is frames', frames);
+    if (!frames.endCoordinates)
+      return;
+    LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+    updateInputText('keyboardSpace', frames.endCoordinates.height - 100);
+  },
+  resetKeyboardSpace() {
+    let { updateInputText } = this.props;
+    LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+    updateInputText('keyboardSpace', 0);
+  },
   handleInputChange(fieldName, event) {
     let { updateInputText } = this.props;
     updateInputText(fieldName, event.nativeEvent.text);
-  }
+  },
   updateDate(date) {
     let { updateInputText } = this.props;
     updateInputText('deadline', date);
-  }
+  },
   back() {
     let { updateInputText } = this.props;
     this.props.navigator.pop();
     updateInputText('notes', '');
     updateInputText('title', '');
-  }
+  },
   submitRequest() {
     console.log('about to submit request from create request screen');
     let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
@@ -97,7 +124,7 @@ class CreateRequest extends Component {
         component: Navbar
       });
     });
-  }
+  },
 
   _renderYelpLocation() {
     if (this.props.target) {
@@ -109,7 +136,7 @@ class CreateRequest extends Component {
     } else {
       return <View><Text>{this.props.inputText.location}</Text></View>
     }
-  }
+  },
 
   _renderHeader(section) {
     let { inputText } = this.props;
@@ -120,7 +147,7 @@ class CreateRequest extends Component {
         <View style = {styles.seperator} />
       </View>
     );
-  }
+  },
 
   _renderContent(section) {
     let { inputText } = this.props;
@@ -133,13 +160,13 @@ class CreateRequest extends Component {
         onDateChange = {this.updateDate.bind(this)}
       />
     );
-  }
+  },
 
   _renderMapBox() {
     let { inputText, target } = this.props;
     console.log(target);
     console.log(inputText);
-    console.log(target.location.coordinate.latitude);
+    // console.log(target.location.coordinate.latitude);
     
     if (this.props.yelp) {
       console.log('from yelp');
@@ -162,7 +189,7 @@ class CreateRequest extends Component {
         />
       </View>
     );
-  }
+  },
 
   render() {
     let { inputText, setCurrentTarget } = this.props;
@@ -196,13 +223,21 @@ class CreateRequest extends Component {
 
         </View>
 
-        <ScrollView style = {styles.contentContainer}>
+
+        <ScrollView 
+          style = {styles.contentContainer}
+          contentOffset = {{x: 0, y: inputText.keyboardSpace}}
+        >
+
           {this._renderMapBox.bind(this)()}
+
           
           <View style = {styles.inputField}>
             <TitleField
-              value = {title}
+              value = {inputText.title}
+              placeHolder = {'Required'}
               onEndEditing = {this.handleInputChange.bind(this,'title')}
+              onChange = {this.handleInputChange.bind(this,'title')}
             />
           </View>
           
@@ -214,19 +249,19 @@ class CreateRequest extends Component {
               underlayColor='transparent'
             />
           </View>
-          
+
           <View style = {styles.inputField}>
             <NoteField
-              value = {notes}
-              onChange = {(event) => {
-                console.log('ON END EDITING');
-                this.handleInputChange.bind(this, 'notes', event)();
-              }}
+              value = {inputText.notes}
+              placeHolder = {'Optional'}
+              onEndEditing = {this.handleInputChange.bind(this,'notes')}
+              onChange = {this.handleInputChange.bind(this,'notes')}
             />
           </View>
 
 
-          {this._renderYelpLocation.bind(this)()}
+          <View style={{height: inputText.keyboardSpace, left: 0, right: 0, bottom: 0}}/>
+
           <View
             style={styles.buttonContainer}
             >
@@ -261,8 +296,8 @@ class CreateRequest extends Component {
         </ScrollView>
       </View>
     );
-  }
-}
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -270,13 +305,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   contentContainer: {
-    flex: 12,
+    flex: 7,
   },
   headerContainer: {
     height: 60,
     flexDirection: 'row',
     backgroundColor: '#4CC6EA',
     padding: 10,
+    paddingTop: 20,
     alignItems: 'center',
   },
   backButton: {
@@ -374,7 +410,7 @@ const styles = StyleSheet.create({
 });
 
 const TitleField = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Enter Title')
+  .withPlaceholder('Enter Title (Required)')
   .withStyle(styles.textfieldWithFloatingLabel)
   .withFloatingLabelFont({
     fontSize: 15,
@@ -384,7 +420,7 @@ const TitleField = MKTextField.textfieldWithFloatingLabel()
   .build();
 
 const NoteField = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Add Notes')
+  .withPlaceholder('Add Notes (Optional)')
   .withStyle(styles.textfieldWithFloatingLabel)
   .withFloatingLabelFont({
     fontSize: 15,
@@ -392,6 +428,8 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
     fontWeight: '200',
   })
   .build();
+
+          // {this._renderYelpLocation.bind(this)()}
 
 // const SendRequest = new MKButton.Builder()
 //   .withBackgroundColor('#39247F')
@@ -411,3 +449,33 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
 
 
 export default CreateRequest;
+
+
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const animations = {
+    layout: {
+        spring: {
+            duration: 500,
+            create: {
+                duration: 300,
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.opacity
+            },
+            update: {
+                type: LayoutAnimation.Types.spring,
+                springDamping: 200
+            }
+        },
+        easeInEaseOut: {
+            duration: 300,
+            create: {
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.scaleXY
+            },
+            update: {
+                delay: 100,
+                type: LayoutAnimation.Types.easeInEaseOut
+            }
+        }
+    }
+};

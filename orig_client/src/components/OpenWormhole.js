@@ -38,6 +38,7 @@ class OpenWormhole extends Component {
           <TouchableHighlight
             style = {styles.backButton}
             onPress = {this.back.bind(this)}
+            underlayColor = 'transparent'
           >
             <Text style = {styles.backText}> {'X'} </Text>
           </TouchableHighlight>
@@ -80,14 +81,14 @@ class OpenWormhole extends Component {
           <TouchableHighlight
             style = {styles.liveButton}
             onPress = {this.startSubmission.bind(this, 'live')}
-            underlayColor = '#88D4f5'
+            underlayColor = 'transparent'
           >
             <Text style = {styles.buttonText}> LIVE! </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style = {styles.recordButton}
             onPress = {this.startSubmission.bind(this, 'record')}
-            underlayColor = '#88D4f5'
+            underlayColor = 'transparent'
           >
             <Icon
               name='fontawesome|video-camera'
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    paddingTop: 20,
+    paddingTop: 25,
     flexDirection: 'row',
     backgroundColor: '#39247F',
     paddingRight: 10,

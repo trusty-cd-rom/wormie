@@ -24,17 +24,18 @@ var {
   Text,
   View,
   Image,
+  AsyncStorage,
 } = React;
 
 var MapExplore = React.createClass({
 
   mixins: [Mapbox.Mixin],
 
-  componentWillMount() {
-    var { refreshFeedData, currentWormhole, feed, updateCurrentWormhole } = this.props;
-    refreshFeedData(() => {
-      this.getWormholeAnnotations();
-    });
+  componentDidMount() {
+    var { refreshFeedData, currentWormhole, feed, updateCurrentWormhole, refreshFeedData_fromAsyncStorage } = this.props;
+    // refreshFeedData_fromAsyncStorage(AsyncStorage, () => {
+      // this.getWormholeAnnotations();
+    // });
   },
 
   getWormholeAnnotations() {
@@ -97,27 +98,27 @@ var MapExplore = React.createClass({
   },
 
   onRegionWillChange(location) {
-    console.log(location);
+    // console.log(location);
   },
 
   onUpdateUserLocation(location) {
-    console.log(location);
+    // console.log(location);
   },
 
   onOpenAnnotation(annotation){
-    console.log(this.props);
+    // console.log(this.props);
     var {feed, updateCurrentWormhole} = this.props;
     updateCurrentWormhole(feed[annotation.id]);
   },
 
   // 
   onRightAnnotationTapped(e) {
-    console.log(e);
+    // console.log(e);
     this.viewRequest();
   },
 
   onLongPress(location){
-    console.log('long pressed', location);
+    // console.log('long pressed', location);
   },
 
   viewRequest() {
