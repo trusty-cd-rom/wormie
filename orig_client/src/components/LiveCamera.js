@@ -304,7 +304,7 @@ var styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 20,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     paddingRight: 10,
     paddingLeft: 10,
     alignItems: 'center',

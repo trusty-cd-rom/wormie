@@ -78,7 +78,7 @@ class DiscoverRequest extends React.Component{
           style={styles.buttonContainer}
         >
           <TouchableHighlight
-            underlayColor={'#39247F'}
+            underlayColor={'#4CC6EA'}
             onPress={() => {
               this.props.navigator.push({
                 component: CreateRequest,

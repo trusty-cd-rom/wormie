@@ -105,11 +105,14 @@ var CreateRequest = React.createClass({
   submitRequest() {
     console.log('about to submit request from create request screen');
     let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
+
+    let coords = this._getLatLong();
+    console.log('frogmog',coords);
     
     let newRequestData = {
       title: inputText.title,
-      latitude: inputText.location ? Number(inputText.location.split(',')[0].trim()) : 37.786140,
-      longitude: inputText.location ? Number(inputText.location.split(',')[1].trim()) : -122.405754,
+      latitude: coords.lat.toFixed(7),
+      longitude: coords.lon.toFixed(7),
       deadline: inputText.deadline,
       notes: inputText.notes,
       status: 'open',
@@ -162,11 +165,8 @@ var CreateRequest = React.createClass({
     );
   },
 
-  _renderMapBox() {
+  _getLatLong() {
     let { inputText, target } = this.props;
-    console.log(target);
-    console.log(inputText);
-    // console.log(target.location.coordinate.latitude);
     
     if (this.props.yelp) {
       console.log('from yelp');
@@ -181,11 +181,19 @@ var CreateRequest = React.createClass({
         var lon = -122.405754;
       }
     }
+    console.log('frogdog', lat, lon);
+    return {lat, lon};
+  },
+
+  _renderMapBox() {
+
+    let coords = this._getLatLong();
+
     return (
       <View style={{top: -20}}>
         <RequestMapFeed 
-          lat={lat}
-          lon={lon}
+          lat={coords.lat}
+          lon={coords.lon}
         />
       </View>
     );
@@ -400,7 +408,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: '#39247F', 
+    backgroundColor: '#4CC6EA', 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems:'center',
@@ -432,7 +440,7 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
           // {this._renderYelpLocation.bind(this)()}
 
 // const SendRequest = new MKButton.Builder()
-//   .withBackgroundColor('#39247F')
+//   .withBackgroundColor('#4CC6EA')
 //   // .withShadowRadius(2)
 //   .withShadowOffset({width:0, height:2})
 //   .withShadowOpacity(.7)

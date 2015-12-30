@@ -76,7 +76,7 @@ var styles = StyleSheet.create({
     margin: 5,
   },
   name: {
-    color: '#39247F',
+    color: '#4CC6EA',
     fontFamily: 'Lato-Bold',
     fontSize: 18,
     marginTop: 8,
