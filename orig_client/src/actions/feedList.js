@@ -77,6 +77,7 @@ function refreshFeedDataAction(data) {
     type: UPDATE_FEED,
     data: data
   };
+};
   
 export function refreshFeedAsyncStorage(asyncStorage) {
   return dispatch => {

@@ -189,7 +189,7 @@ var CreateRequest = React.createClass({
         />
       </View>
     );
-  }
+  },
 
   render() {
     let { inputText, setCurrentTarget } = this.props;
