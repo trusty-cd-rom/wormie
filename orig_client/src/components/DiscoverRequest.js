@@ -16,7 +16,6 @@ import Topbar from './Topbar';
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flex: 1,
     flexDirection: 'column', 
     alignItems: 'stretch'
@@ -32,7 +31,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    flex: 1.5,
+    flex: 1,
     backgroundColor: '#8949E0', 
     flexDirection: 'row',
     justifyContent: 'center',
@@ -53,13 +52,6 @@ class DiscoverRequest extends React.Component{
     setCurrentTarget(data);
   } 
 
-  // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
-  // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
-
-//         <WebView url={target['mobile_url']}/>
-// <View style={styles.webViewContainer}>
-//           <WebView url={target['mobile_url']}/>
-//         </Vie
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);
@@ -76,11 +68,10 @@ class DiscoverRequest extends React.Component{
           />
         </View>
         <View
-          style={{flex: 15}}
+          style={{flex: 10}}
         >
           <WebView 
             url={target['mobile_url']}
-            // style={{width: 300, height: 200}}
           />
         </View>
         <View
@@ -91,7 +82,7 @@ class DiscoverRequest extends React.Component{
             onPress={() => {
               this.props.navigator.push({
                 component: CreateRequest,
-                passProps: {requestedTarget: this.props.target}
+                passProps: {'yelp': true}
               });
             }}
           >

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
-    marginTop: 20
+    // marginTop: 20
   },
   text: {
     fontSize: 20,

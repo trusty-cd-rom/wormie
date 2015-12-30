@@ -63,7 +63,7 @@ class SearchLocation extends React.Component{
     this.currentTimeout = setTimeout(() => {
       this.sendInfo();
       this.running = false;
-    }, 2000);
+    }, 500);
   }
 
   sendInfo() {

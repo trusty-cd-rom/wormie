@@ -32,6 +32,10 @@ class WormholeList(APIView):
     """
 
     def get(self, request, format=None):
+        # status = APIView.GET.get('status','')
+        # print(status)
+        print('wormholelist')
+        print(Wormhole.objects.all())
         wormholes = Wormhole.objects.all()
         serializer = WormholeSerializer(wormholes, many=True)
         return Response(serializer.data)
@@ -97,7 +101,8 @@ class SubmissionList(APIView):
     # serializer_class = SubmissionSerializer
 
     def get(self, request, format=None):
-        submissions = Submission.objects.all()
+        print(APIView.GET.get('api',''))
+        submissions = Submission.objects.all().filter(status='completed')
         serializer = SubmissionSerializer(submissions, many=True)
         return Response(serializer.data)
 
@@ -292,6 +297,7 @@ class AccountDetail(APIView):
 
 @api_view(['GET', 'POST'])
 
+
 def yelp_list(request):
 
     """
@@ -305,3 +311,33 @@ def yelp_list(request):
     if request.method == 'GET':
         yelp_data = yelpMain(category_filter, term, location)
         return Response(yelp_data)
+
+
+def sorted_list(request):
+
+    """
+    Sorting criteria: nearby, recent
+    """
+
+    print('inside filtered_list')
+    print(Wormhole.objects.all())
+    sorting_criteria = request.GET.get('sort_by', '')
+    if request.method == 'GET':
+        wormholes = Wormhole.objects.all().filter()
+        serializer = WormholeSerializer(wormholes, many=True)
+        return Response(serializer.data)
+
+
+def filtered_list(request):
+
+    """
+    Sorting criteria: complete, incomplete
+    """
+
+    filter_criteria = request.GET.get('status', '')
+    if request.method == 'GET':
+        wormholes = Wormhole.objects.all().filter(status=filter_criteria)
+        serializer = WormholeSerializer(wormholes, many=True)
+        return Response(serializer.data)
+
+

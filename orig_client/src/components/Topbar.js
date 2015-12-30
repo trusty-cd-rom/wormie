@@ -15,10 +15,13 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   topbar: {
-    color: '#39247f', 
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
+    color: 'white', 
+    backgroundColor: '#4CC6EA',
+    // borderRadius: 4,
+    // borderWidth: 0.5,
+    // borderColor: '#d6d7da',
+    paddingTop: 20,
+    paddingBottom: 5,
     flexDirection: 'row',
     // flex: 1
   },
@@ -29,10 +32,10 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   ionic: { 
-    width: 30, 
-    height: 30, 
+    width: 25, 
+    height: 25, 
     marginLeft: 5, 
-    marginTop: 5,
+    marginTop: 0,
   },
 });
 
@@ -44,6 +47,21 @@ class Topbar extends Component{
     this.props.navigator.pop();
   }
 
+  _renderIcon() {
+    if (this.props.noIcon) {
+      return <View />
+    } else {
+      return (
+        <Icon
+          name='ion|chevron-left'
+          size={25}
+          color='white'
+          style={styles.ionic}
+        />
+      )
+    }
+  }
+
   render() {
     let { topbarTitle } = this.props;
     return (
@@ -52,16 +70,11 @@ class Topbar extends Component{
       >
         <TouchableHighlight
           onPress={this.back.bind(this)}
-          underlayColor='white'
+          underlayColor='#4CC6EA'
           color='white'
           style={styles.back}
         > 
-          <Icon
-            name='ion|chevron-left'
-            size={30}
-            color='#39247f'
-            style={styles.ionic}
-          />
+          { this._renderIcon() }
         </TouchableHighlight>
         <View
           style={styles.topBarText}
@@ -69,8 +82,11 @@ class Topbar extends Component{
           <Text
             style={{
               fontWeight: 'bold',
-              color: '#39247f',
-              fontSize: 15,
+              fontFamily: 'Lato-regular',
+              color: 'white',
+              fontSize: 18,
+              paddingBottom: 3,
+              paddingTop: 3,
             }}
           >{ topbarTitle }      </Text>
         </View>

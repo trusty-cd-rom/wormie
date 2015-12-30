@@ -13,7 +13,7 @@ import { Icon } from 'react-native-icons';
 
 var styles = StyleSheet.create({
   container:{
-    marginTop: 20,
+    // marginTop: 20,
     flex:1
   },
   back: {

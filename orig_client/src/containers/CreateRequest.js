@@ -8,6 +8,7 @@ function mapStateToProps(state) {
   return {
     currentUser: state.userProfile.currentUser,
     inputText: state.userProfile.createRequest,
+    target: state.discover.target,
   };
 }
 

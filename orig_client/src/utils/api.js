@@ -211,6 +211,36 @@ var api = {
 		// Invoke the fetchProfileRequest
     return fetchProfileRequest.start();
 	
+	},
+
+	/*
+	 Sorting and filtering
+	 */
+
+	filterByStatus(status) {
+		var url = urls.filter + '?status=' + status;
+		return fetch(urls.filterByStatus, {
+			method: 'GET'
+		})
+		.then(function (data) {
+			res.json();
+		})
+		.catch(function (err) {
+			console.log(err);
+		})
+	},
+
+	sortList(criteria) {
+		var url = urls.sortBy + '?sort_by=' + criteria;
+		return fetch(urls.sortList, {
+			method: 'GET'
+		})
+		.then(function (data) {
+			res.json();
+		})
+		.catch(function (err) {
+			console.log(err);
+		})
 	}
 
 	// TODO: Add a refresh token API call using the stored refresh OAuth2 token
