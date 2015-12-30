@@ -90,7 +90,7 @@ class CreateRequest extends Component {
     };
 
     createRequest(newRequestData, () => {
-      setCurrentTarget({location: {coordinate: {longitude: '', latitude: }}});
+      setCurrentTarget({location: {coordinate: {longitude: '', latitude: ''}}});
       this.props.updateInputText('notes', '');
       this.props.updateInputText('title', '');
       this.props.navigator.replace({

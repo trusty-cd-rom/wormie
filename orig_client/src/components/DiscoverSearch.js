@@ -103,9 +103,6 @@ class DiscoverSearch extends React.Component{
     });
   } 
 
-  // <View><Text> {rowData.location.coordinate.longitude || ''} </Text></View>
-  // <View><Text> {rowData.location.coordinate.latitude || ''} </Text></View>
-
   separator(){
     let { responseList } = this.props;
     if (responseList[0].location['display_address'].length === 0) {
@@ -156,7 +153,7 @@ class DiscoverSearch extends React.Component{
           <TouchableHighlight
             style={styles.container}
             onPress={this.setTarget.bind(this, rowData)}
-            underlayColor = 'rgba(222,93,74,0.1)'
+            underlayColor = 'rgba(76,198,234,0.1)'
           >
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Image 
