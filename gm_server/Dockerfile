@@ -12,6 +12,6 @@ ADD . /app/
 
 RUN npm install
 
-EXPOSE 7878
+EXPOSE 80
 
 CMD ["npm", "start"]
