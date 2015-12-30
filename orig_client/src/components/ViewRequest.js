@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 30,
     flexDirection: 'row',
-    backgroundColor: '#39247F',
+    backgroundColor: '#4CC6EA',
     paddingRight: 10,
     paddingLeft: 10,
     alignItems: 'flex-start',
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 27,
     fontFamily: 'Lato-Bold',
-    color: '#39247F',
+    color: '#4CC6EA',
     // alignSelf: 'center'
   },
   buttonContainer: {

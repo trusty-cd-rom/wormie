@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: '#39247F', 
+    backgroundColor: '#4CC6EA', 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems:'center',
@@ -432,7 +432,7 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
           // {this._renderYelpLocation.bind(this)()}
 
 // const SendRequest = new MKButton.Builder()
-//   .withBackgroundColor('#39247F')
+//   .withBackgroundColor('#4CC6EA')
 //   // .withShadowRadius(2)
 //   .withShadowOffset({width:0, height:2})
 //   .withShadowOpacity(.7)

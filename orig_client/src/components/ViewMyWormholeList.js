@@ -23,7 +23,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   topbar: {
-    color: '#39247f', 
+    color: '#4CC6EA', 
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
@@ -44,7 +44,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 15,
-    color: '#39247f',
+    color: '#4CC6EA',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold'
@@ -171,7 +171,7 @@ class ViewMyWormholeList extends Component{
   //         <Icon
   //           name='ion|chevron-left'
   //           size={30}
-  //           color='#39247f'
+  //           color='#4CC6EA'
   //           style={styles.ionic}
   //         />
   //       </TouchableHighlight>
@@ -181,7 +181,7 @@ class ViewMyWormholeList extends Component{
   //         <Text
   //           style={{
   //             fontWeight: 'bold',
-  //             color: '#39247f',
+  //             color: '#4CC6EA',
   //             fontSize: 15,
   //           }}
   //         >Wormholes      </Text>

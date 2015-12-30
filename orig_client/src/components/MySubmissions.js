@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 15,
-    color: '#39247f',
+    color: '#4CC6EA',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold'
