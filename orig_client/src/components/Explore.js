@@ -17,6 +17,9 @@ import { Icon } from 'react-native-icons';
 
 import api from '../utils/api';
 
+
+import HeartFloater from '../components/Heart';
+
 // var focus = <MapExample/>;
 
 class Explore extends Component {
@@ -58,7 +61,7 @@ class Explore extends Component {
 
   goToSettings(){
     this.props.navigator.push({
-      component: Settings,
+      component: HeartFloater,
     });
   }
 

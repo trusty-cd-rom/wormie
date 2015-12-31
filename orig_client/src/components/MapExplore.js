@@ -20,7 +20,6 @@ import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
-
 var {
   StyleSheet,
   Component,
