@@ -20,15 +20,137 @@ import ViewRequest from '../containers/ViewRequest';
 import OpenWormhole from '../containers/OpenWormhole';
 import Profile from '../containers/Profile';
 
+////////////////////////////////////////////////
+// Hearts
+////////////////////////////////////////////////
+var Dimensions = require('Dimensions');
+var {
+  width: deviceWidth,
+  height: deviceHeight
+} = Dimensions.get('window');
 
+var ANIMATION_END_Y = Math.ceil(deviceHeight * .5);
+var NEGATIVE_END_Y = ANIMATION_END_Y * -1;
+var startCount = 1;
+
+
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+// Native components
 var {
   StyleSheet,
   Component,
+  Animated,
+  TouchableWithoutFeedback,
   Text,
   View,
   Image,
   AsyncStorage,
 } = React;
+
+////////////////////////////////////////////////
+// Heart classes
+////////////////////////////////////////////////
+
+var Heart = React.createClass({
+  
+  render: function() {
+
+    var { currentWormhole } = this.props;
+    
+    return (
+      <View {...this.props} style={[this.props.style]}>
+        <View style={styles.littleHeartRow}>
+          <Image 
+                style = {styles.heart}
+                source = {{uri: urls.getLeftHeart + currentWormhole.requestor.wormie_color.slice(1) + ".png" }}
+              />
+          <Image 
+                style = {styles.heart}
+                source = {{uri: urls.getRightHeart + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
+              />
+        </View>
+      </View>
+    )
+  }
+});
+
+var AnimatedHeart = React.createClass({
+  getDefaultProps: function() {
+      return {
+          onComplete: function() {}  
+      };
+  },
+  getInitialState: function() {
+
+      var {currentWormhole} = this.props;
+
+      return {
+          position: new Animated.Value(0)  
+      };
+  },
+  componentWillMount: function() {
+      this._yAnimation = this.state.position.interpolate({
+        inputRange: [NEGATIVE_END_Y, 0],
+        outputRange: [ANIMATION_END_Y, 0]
+      });
+
+      this._opacityAnimation = this._yAnimation.interpolate({
+        inputRange: [0, ANIMATION_END_Y],
+        outputRange: [1, 0]
+      });
+
+      this._scaleAnimation = this._yAnimation.interpolate({
+        inputRange: [0, 15, 30],
+        outputRange: [0, 1.2, 1],
+        extrapolate: 'clamp'
+      });
+
+      this._xAnimation = this._yAnimation.interpolate({
+        inputRange: [0, ANIMATION_END_Y/2, ANIMATION_END_Y],
+        outputRange: [0, 15, 0]
+      });
+
+      this._rotateAnimation = this._yAnimation.interpolate({
+        inputRange: [0, ANIMATION_END_Y/4, ANIMATION_END_Y/3, ANIMATION_END_Y/2, ANIMATION_END_Y ],
+        outputRange: ['0deg', '-2deg', '0deg', '2deg', '0deg']
+      });
+  },
+  componentDidMount: function() {
+      Animated.timing(this.state.position, {
+        duration: 2000,
+        toValue: NEGATIVE_END_Y
+      }).start(this.props.onComplete);
+  },
+  getHeartAnimationStyle: function() {
+    return {
+      transform: [
+        {translateY: this.state.position},
+        {translateX: this._xAnimation},
+        {scale: this._scaleAnimation},
+        {rotate: this._rotateAnimation}
+      ],
+      opacity: this._opacityAnimation
+    }
+  },
+  render: function() {
+
+    var {currentWormhole} = this.props;
+
+    return (
+      <Animated.View style={[styles.heartWrap, this.getHeartAnimationStyle(), this.props.style]}>
+        <Heart currentWormhole={currentWormhole}/>
+      </Animated.View>
+    )
+  }
+});
+
+
+////////////////////////////////////////////////
+// MapExplore component - the main view of page
+////////////////////////////////////////////////
 
 var MapExplore = React.createClass({
 
@@ -39,6 +161,23 @@ var MapExplore = React.createClass({
     refreshFeedData_fromAsyncStorage(AsyncStorage, () => {
       this.getWormholeAnnotations();
     });
+  },
+
+  addHeart() {
+    startCount += 1;
+    this.state.hearts.push({
+      id: startCount,
+      right: getRandomNumber(50, 150)
+    });
+    this.setState(this.state);
+  },
+
+  removeHeart(v) {
+    var index = this.state.hearts.findIndex(function(heart) {
+      return heart.id === v;
+    });
+    this.state.hearts.splice(index, 1);
+    this.setState(this.state);
   },
 
   getWormholeAnnotations() {
@@ -95,6 +234,7 @@ var MapExplore = React.createClass({
       },
       zoom: 11,
       annotations: [],
+      hearts: []
     };
   },
 
@@ -228,20 +368,36 @@ var MapExplore = React.createClass({
     
     var { currentWormhole } = this.props;
 
+    console.log("currentWormhole!!!!!!!!!!!!!:", currentWormhole);
+
     var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
 
     if ( currentWorm && currentWorm.submissions.length ) {
       return (
-        <View style={styles.littleRow}>
-          <Image 
-                style = {styles.heart}
-                source = {{uri: urls.getLeftHeart + currentWormhole.requestor.wormie_color.slice(1) + ".png" }}
-              />
-          <Image 
-                style = {styles.heart}
-                source = {{uri: urls.getRightHeart + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
-              />
-          <Text style={styles.cardRequestor}> Wormhole opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
+        <View style={styles.container}>
+          {
+            this.state.hearts.map(function (v, i) {
+              return (
+                <AnimatedHeart
+                  key={v.id}
+                  onComplete={this.removeHeart.bind(this, v.id)}
+                  style={{right: this.state.hearts[i].right}}
+                  currentWormhole={currentWormhole}
+                />
+              )
+            }, this)
+          }
+          <View style={styles.littleRow}>
+            <Image 
+                  style = {styles.heart}
+                  source = {{uri: urls.getLeftHeart + currentWormhole.requestor.wormie_color.slice(1) + ".png" }}
+                />
+            <Image 
+                  style = {styles.heart}
+                  source = {{uri: urls.getRightHeart + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
+                />
+            <Text style={styles.cardRequestor}> Wormhole opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
+          </View>
         </View>
       );
     } else {
@@ -280,17 +436,21 @@ var MapExplore = React.createClass({
           onLongPress={this.onLongPress} />
         <View style={styles.row}>
           {this._renderYoutube()}
-          <View>
-            <Text style={styles.cardTitle}>{currentWormhole.title}</Text>
-            <View style={styles.littleRow}>
-              <Image 
-                    style = {styles.profilePic}
-                    source = {{uri: (currentWormhole.requestor) ? currentWormhole.requestor.picture_url : ""}}
-                  />
-              <Text style={styles.cardRequestor}>{ (currentWormhole.requestor) ? currentWormhole.requestor.username : ""}</Text>
-              {this._renderSubmitterDetails()}
-            </View>
-            {this._renderHeartDetails()}
+          <View style={styles.container}>
+            <TouchableWithoutFeedback style={styles.container} onPress={this.addHeart}>
+              <View style={styles.container}>
+                <Text style={styles.cardTitle}>{currentWormhole.title}</Text>
+                <View style={styles.littleRow}>
+                  <Image 
+                        style = {styles.profilePic}
+                        source = {{uri: (currentWormhole.requestor) ? currentWormhole.requestor.picture_url : ""}}
+                      />
+                  <Text style={styles.cardRequestor}>{ (currentWormhole.requestor) ? currentWormhole.requestor.username : ""}</Text>
+                  {this._renderSubmitterDetails()}
+                </View>
+                {this._renderHeartDetails()}
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </View>
@@ -350,6 +510,15 @@ var styles = StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 15,
+  },
+  littleHeartRow: {
+    flexDirection: 'row',
+    height: 170,
+  },
+  heartWrap: {
+    position: 'absolute',
+    bottom: 30,
+    backgroundColor: 'transparent'
   },
   heart: {
     height: 28,
