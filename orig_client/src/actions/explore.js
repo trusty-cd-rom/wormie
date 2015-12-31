@@ -1,4 +1,4 @@
-import { UPDATE_FEED, UPDATE_CURRENT_WORMHOLE } from '../constants/actions';
+import { UPDATE_FEED, UPDATE_CURRENT_WORMHOLE, SET_USER_LOCATION, SET_CURRENT_FEED_TAB } from '../constants/actions';
 import api from '../utils/api';
 
 export function refreshFeedData(cb) {
@@ -49,3 +49,30 @@ export function refreshFeedData_fromAsyncStorage(asyncStorage, cb) {
     })
   }
 };
+
+export function setCurrentLocation(lon, lat) {
+  return {
+    type: SET_USER_LOCATION,
+    longitude: lon,
+    latitude: lat
+  }
+}
+
+export function sortList(criteria, longitude, latitude) {
+  return dispatch => {
+    console.log(criteria, longitude, latitude);
+    return api.sortList(criteria, longitude, latitude)
+      .then(function (res) {
+        console.log('res', res);
+        dispatch(refreshFeedDataAction(res))
+      })
+  }
+}
+
+export function setCurrentFeedTab(tab) {
+  return {
+    type: SET_CURRENT_FEED_TAB,
+    tab
+  }
+}
+

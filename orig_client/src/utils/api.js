@@ -230,14 +230,19 @@ var api = {
 		})
 	},
 
-	sortList(criteria) {
-		var url = urls.sortBy + '?sort_by=' + criteria;
-		return fetch(urls.sortList, {
+	sortList(criteria, longitude, latitude) {
+		var url = `${urls.sortBy}?sort_by=${criteria}`;
+		if (longitude) {
+			url += `&longitude=${longitude}`
+		}
+		if (latitude) {
+			url += `&latitude=${latitude}`
+		}
+		console.log(url);
+		return fetch(url, {
 			method: 'GET'
 		})
-		.then(function (data) {
-			res.json();
-		})
+		.then((res) => res.json())
 		.catch(function (err) {
 			console.log(err);
 		})

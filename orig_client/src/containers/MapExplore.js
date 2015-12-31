@@ -5,7 +5,7 @@ import * as MapExploreActions from '../actions/mapExplore';
 
 function mapStateToProps(state) {
   return {
-    feed: state.feed,
+    feed: state.feed.list,
     currentUser: state.userProfile.currentUser,
     peekClickedUser: state.profile.peekClickedUser,
     currentWormhole: state.currentWormhole,

@@ -32,7 +32,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 15,
-    color: '#4CC6EA',
+    color: 'navy',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold'

@@ -13,6 +13,8 @@ import MapExplore from '../containers/MapExplore';
 // import MapExample from '../components/MapExample';
 import FeedList from '../containers/FeedList';
 import Settings from '../containers/Settings';
+import { Icon } from 'react-native-icons';
+
 import api from '../utils/api';
 
 // var focus = <MapExample/>;
@@ -33,6 +35,26 @@ class Explore extends Component {
     refreshFeedAsyncStorage(AsyncStorage);
   }
 
+  componentDidMount() {
+     let { setCurrentLocation, currentLocation} = this.props;
+
+     if (!currentLocation) {
+        console.log('CURRENT LOCATION DOES NOT EXIST')
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            var dist = [];
+            let initialPosition = JSON.stringify(position);
+            console.log(initialPosition);
+            console.log(typeof position.coords.latitude);
+            //replace with call to action function, update state via reducer
+            setCurrentLocation(position.coords.longitude.toFixed(7), position.coords.latitude.toFixed(7));
+          },
+          (error) => alert(error.message),
+          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        );
+     }
+  }
+
 
   goToSettings(){
     this.props.navigator.push({
@@ -42,7 +64,7 @@ class Explore extends Component {
 
   render() {
     var { currentUser } = this.props;
-    console.log(currentUser['picture_url']);
+
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -56,28 +78,103 @@ class Explore extends Component {
               source = {{uri: currentUser['picture_url']}}
             />
           </TouchableHighlight>
-          <Text style={styles.title}>Explore</Text>
-          <SegmentedControlIOS 
-            values={['Map', 'List']}
-            style={styles.segmentedControl}
-            tintColor="white"
-            selectedIndex={0} 
-            onChange={this._onChange.bind(this)}/>
+          <View
+            style={{flex:10}}
+          >
+            {this._renderControl()}
+          </View>
+          {this._renderTabButton()}
+          
         </View>
         {this.state.focus}
       </View>
     );
   }
 
-  _onChange(event) {
-    // console.log("click:", event.nativeEvent.value);
+  _renderTabButton() {
+    let { currentFeedTab } = this.props;
+    if (currentFeedTab === 'List') {
+      return (
+        <TouchableHighlight
+          onPress={this._onChangeFocus.bind(this, 'Map')}
+          underlayColor='#4CC6EA'>
+          <Icon
+            name='ion|ios-navigate-outline'
+            size={30}
+            color='white'
+            style={styles.listIcon}
+          />
+        </TouchableHighlight>
+      )
+    } else {
+      return (
+        <TouchableHighlight
+          onPress={this._onChangeFocus.bind(this, 'List')}
+          underlayColor='#4CC6EA'>
+          <Icon
+            name='ion|android-menu'
+            size={30}
+            color='white'
+            style={styles.listIcon}
+          />
+        </TouchableHighlight>
+      )
+    }
+  }
+
+  _renderControl() {
+    let { currentFeedTab } = this.props;
+    if (currentFeedTab === 'List') {
+      return (
+        <View style={styles.sort}>
+          <SegmentedControlIOS 
+            values={['Recent', 'Nearby', 'Popular']}
+            style={styles.segmentedControl}
+            tintColor="white"
+            selectedIndex={0} 
+            onChange={this._onChangeSorting.bind(this)}/>
+        </View>    
+      )
+    } else {
+      return <Text 
+        style={{
+          color: 'white',
+          justifyContent: 'center',
+          paddingTop: 3,
+          fontFamily: 'Lato-Bold', 
+          textAlign: 'center',
+          fontSize: 18
+        }}>Explore</Text>
+    }
+  }
+
+  _onChangeSorting(event) {
+    let { sortList, currentLocation } = this.props;
+
+    var lat = currentLocation ? currentLocation.latitude : "0";
+    var lon = currentLocation ? currentLocation.longitude : "0";
+
     var touchEvent = event.nativeEvent.value;
-    
+    if ( touchEvent === "Recent") {
+      sortList('recent');
+    } else if ( touchEvent === "Nearby") {
+      sortList('nearby', lon, lat);
+    } else if ( touchEvent === "Popular") {
+      sortList('recent');
+    }
+  }
+
+  _onChangeFocus(value, event) {
+    // debugger;
+    let { setCurrentFeedTab } = this.props;
+    var touchEvent = value;
     if ( touchEvent === "Map") {
+      setCurrentFeedTab('Map');
       this.setState({
         focus: <MapExplore navigator={this.props.navigator}/>
       });
     } else {
+      setCurrentFeedTab('List');
       this.setState({
         focus: <FeedList navigator={this.props.navigator}/>
       });
@@ -89,12 +186,34 @@ class Explore extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#4CC6EA',
   },
   row: {
     paddingTop: 20,
+    flex: 0.053,
     flexDirection: 'row',
     backgroundColor: '#4CC6EA',
     height: 55
+  },
+  mapIcon: {
+    width: 30,
+    height: 30,
+    paddingBottom: 2,
+    paddingLeft: 20,
+    alignSelf: 'center'
+  },
+  listIcon: {
+    width: 20,
+    height: 20,
+    padding: 20,
+    paddingTop: 10,
+    alignSelf: 'center'
+  },
+  sort: {
+    flexDirection: 'row',
+    backgroundColor: '#4CC6EA',
+    height: 40
   },
   profilePic: {
     marginLeft: 10,
@@ -110,11 +229,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flex:1,
   },
-  segmentedControl:{
-    marginRight: 10,
-    fontFamily: 'Lato-Regular',
+  segmentedControl: {
+    fontFamily: 'Lato-Bold',
     fontSize: 24,
-    width: 100,
+    flex: 1,
+    // marginBottom: 5,
+    paddingBottom:15,
+    marginLeft: 35,
+    marginRight: 35,
+    // width: 200,
   }
 });
 
