@@ -32,7 +32,7 @@ var Heart = React.createClass({
   render: function() {
     return (
       <View {...this.props} style={[this.props.style]}>
-        <View style={styles.littleRow}>
+        <View style={styles.littleHeartRow}>
           <Image 
                 style = {styles.heart}
                 source = {{uri: "http://52.53.249.61/static/left/008080.png" }}
@@ -170,7 +170,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  littleRow: {
+  littleHeartRow: {
     flexDirection: 'row',
     height: 170,
   },
