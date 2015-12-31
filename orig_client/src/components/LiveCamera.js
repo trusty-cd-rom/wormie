@@ -60,6 +60,9 @@ class LiveCamera extends Component{
     socket.on('leave', (socketId) => {
       this.leave(socketId);
     });
+    socket.on('message', (data) => {
+      this.newMessage(data);
+    });
   }
   componentWillMount() {
     this.initStream();
@@ -75,19 +78,11 @@ class LiveCamera extends Component{
     console.log(liveCamera, this.joinRoom);
     this.joinRoom.call(this,liveCamera.roomID);
   }
-  // _press(event) {
-  //   let { liveCamera, updateCameraState } = this.props;
-  //   // this.refs.roomID.blur();
-  //   updateCameraState('status', 'connect');
-  //   updateCameraState('info', 'Connecting');
-  //   console.log(liveCamera, this.joinRoom);
-  //   this.joinRoom.call(this,liveCamera.roomID);
-  // }
   getLocalStream() {
     let { liveCamera, updateCameraState } = this.props;
     console.log('getLocalStream', liveCamera.selfViewSrc);
     if(liveCamera.selfViewSrc === null) {
-      navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+      navigator.getUserMedia({ "audio": true, "video": true, "videoType": "front" }, function (stream) {
         updateCameraState('localStream', stream);
         updateCameraState('selfViewSrc', stream.toURL());
         updateCameraState('status', 'ready');
@@ -352,85 +347,3 @@ var styles = StyleSheet.create({
 
 export default LiveCamera;
 
-          // <TouchableHighlight
-          //   style = {styles.cameraToggleButton}
-          //   onPress={this._press.bind(this)}
-          //   underlayColor = '#88D4f5'
-          // >
-          //   <Icon
-          //     name= 'ion|ios-circle-filled'
-          //     size={90}
-          //     color='red'
-          //     style={styles.cameraToggleIcon}
-          //   />
-          // </TouchableHighlight>
-
-// {this.renderCameras()}
-
-  // headerContainer: {
-  //   alignSelf: 'stretch',
-  //   flexDirection: 'row',
-  //   flex: 1
-  // },
-  // selfView: {
-  //   flex: 10,
-  //   alignSelf: 'stretch',
-  // },
-  // remoteView: {
-  //   width: 100,
-  //   height: 100,
-  // },
-  // headerStatus: {
-  //   flex: 1,
-  // },
-  // spacer: {
-  //   flex: 1,
-  //   backgroundColor: 'red'
-  // },
-  // backButton: {
-  //   // flexDirection: 'row',
-  //   // alignSelf: 'stretch',
-  //   justifyContent: 'flex-start',
-  //   flex: 1,
-  //   backgroundColor: 'black'
-  // },
-  // backText: {
-  //   fontSize: 30,
-  //   color: 'white',
-  //   alignSelf: 'flex-start',
-  //   marginLeft: 5
-  // },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   flexDirection: 'column',
-  //   marginTop: 20
-  // },
-  // engageButton: {
-  //   // alignSelf: 'stretch',
-  //   // flexDirection: 'row',
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'green',
-  // },
-
-        //   <View style = {styles.headerContainer}>
-        //   <TouchableHighlight
-        //     style = {styles.backButton}
-        //     onPress = {this.back.bind(this)}
-        //   >
-        //     <Text style = {styles.backText}> {'<'} </Text>
-        //   </TouchableHighlight>
-        //   <Text style={styles.headerStatus}>
-        //     {liveCamera.info}
-        //   </Text>
-        //   <View style={styles.spacer}/>
-        // </View>
-        // {this.renderCameras()}
-        // <TouchableHighlight
-        //   style={styles.engageButton}
-        //   onPress={this._press.bind(this)}>
-        //   <Text>Engage!</Text>
-        // </TouchableHighlight>
