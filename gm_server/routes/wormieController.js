@@ -19,35 +19,38 @@ module.exports = {
     var left = '/' + req.hex +'.png';
     var right = '/' + req.hex +'.png';
 
-    gm(dir + '/wormie2.png')
+    gm(dir + '/wormieBig.png')
     .transparent('white')
-    .fuzz(50)
+    .fuzz(100)
     .fill('white')
     .opaque('green')
     .fill(hex)
     .opaque('red')
+    .resize(50, 72)
     .write(dir + newFile, function (err) {
       if (err) return console.dir(arguments);
     });
 
-    gm(dir + '/left.png')
+    gm(dir + '/leftBig.png')
     .transparent('white')
-    .fuzz(50)
+    .fuzz(100)
     .fill('white')
     .opaque('green')
     .fill(hex)
     .opaque('red')
+    .resize(50, 72)
     .write(dir + '/left' + left, function (err) {
       if (err) return console.dir(arguments);
     });
 
-    gm(dir + '/right.png')
+    gm(dir + '/rightBig.png')
     .transparent('white')
-    .fuzz(50)
+    .fuzz(100)
     .fill('white')
     .opaque('green')
     .fill(hex)
     .opaque('red')
+    .resize(50, 72)
     .write(dir + '/right' + right, function (err) {
       if (err) return console.dir(arguments);
     });
