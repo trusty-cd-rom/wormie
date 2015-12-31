@@ -11,11 +11,11 @@ const urls = {
   submissions: `${host}/submissions/`,
   users: `${host}/users/`,
   
-  // FIX(python) 
-  usersByFacebookID: `${host}/users/fb`,
+  // Main
+  // usersByFacebookID: `${host}/users/fb`,
 
   // Local
-  // usersByFacebookID: `${host}/users/fb/`,
+  usersByFacebookID: `${host}/users/fb/`,
   
   accounts: `${host}/accounts/`,
   convertToken: `${authHost}/convert\-token/`,

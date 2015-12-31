@@ -42,7 +42,6 @@ class Explore extends Component {
 
   render() {
     var { currentUser } = this.props;
-    console.log(currentUser['picture_url']);
     return (
       <View style={styles.container}>
         <View style={styles.row}>
