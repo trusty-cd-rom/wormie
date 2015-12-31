@@ -24,7 +24,6 @@ var Mapbox = require('react-native-mapbox-gl');
 var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
 
-var KeyboardSpacer = require('react-native-keyboard-spacer');
 
 var SECTIONS = [
   {

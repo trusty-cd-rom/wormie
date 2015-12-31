@@ -9,11 +9,13 @@ var {
   View,
   TextInput,
   Component,
+  // LayoutAnimation,
+  ScrollView,
 } = React;
 
 window.navigator.userAgent = "react-native";
 var io = require('socket.io-client/socket.io');
-var socket = io.connect('http://react-native-webrtc.herokuapp.com');
+var socket = io.connect('http://52.53.249.61:8083');
 var configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 var WebRTC = require('react-native-webrtc');
 var {
@@ -47,10 +49,10 @@ function peerConnected() {
 }
 
 
-class LiveCamera extends Component{
-
+// class LiveCamera extends Component{
+var LiveCamera = React.createClass({
   initStream() {
-    let { initCameraState, currentWormhole, updateCameraState } = this.props;
+    let { initCameraState, currentWormhole, updateCameraState, newChatMessage } = this.props;
 
     updateCameraState('roomID', `wormhole${currentWormhole.id}`);
 
@@ -60,34 +62,32 @@ class LiveCamera extends Component{
     socket.on('leave', (socketId) => {
       this.leave(socketId);
     });
-  }
+    socket.on('message', (data) => {
+      console.log('newmessage', data);
+      newChatMessage(data);
+    });
+  },
   componentWillMount() {
     this.initStream();
-  }
+  },
   componentDidMount() {
-    let { liveCamera, updateCameraState } = this.props;
-    RTCSetting.setAudioOutput('speaker');
-    RTCSetting.setKeepScreenOn(true);
-    RTCSetting.setProximityScreenOff(true);
-    this.getLocalStream();
-    updateCameraState('status', 'connect');
-    updateCameraState('info', 'Connecting');
-    console.log(liveCamera, this.joinRoom);
-    this.joinRoom.call(this,liveCamera.roomID);
-  }
-  // _press(event) {
-  //   let { liveCamera, updateCameraState } = this.props;
-  //   // this.refs.roomID.blur();
-  //   updateCameraState('status', 'connect');
-  //   updateCameraState('info', 'Connecting');
-  //   console.log(liveCamera, this.joinRoom);
-  //   this.joinRoom.call(this,liveCamera.roomID);
-  // }
+    let { liveCamera, updateCameraState, currentWormhole } = this.props;
+    setTimeout(() => {
+      RTCSetting.setAudioOutput('speaker');
+      RTCSetting.setKeepScreenOn(true);
+      RTCSetting.setProximityScreenOff(true);
+      this.getLocalStream();
+      updateCameraState('status', 'connect');
+      updateCameraState('info', 'Connecting');
+      console.log(liveCamera, this.joinRoom);
+      this.joinRoom.call(this,`wormhole${currentWormhole.id}`);
+    }, 500);
+  },
   getLocalStream() {
     let { liveCamera, updateCameraState } = this.props;
     console.log('getLocalStream', liveCamera.selfViewSrc);
     if(liveCamera.selfViewSrc === null) {
-      navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+      navigator.getUserMedia({ "audio": true, "video": true, "videoType": "front" }, function (stream) {
         updateCameraState('localStream', stream);
         updateCameraState('selfViewSrc', stream.toURL());
         updateCameraState('status', 'ready');
@@ -96,7 +96,7 @@ class LiveCamera extends Component{
     } else {
       updateCameraState('status', 'ready');
     }
-  }
+  },
   joinRoom(roomID) {
     let { updateCameraState } = this.props;
     console.log('about to joing room', roomID);
@@ -111,7 +111,7 @@ class LiveCamera extends Component{
         this.createPC(socketId, true);
       }
     });
-  }
+  },
   createPC(socketId, isOffer) {
     let { liveCamera, updateCameraState } = this.props;
     var pc = new RTCPeerConnection(configuration);
@@ -161,7 +161,7 @@ class LiveCamera extends Component{
     };
     pc.addStream(liveCamera.localStream);
     return pc;
-  }
+  },
   exchange(data) {
     let { liveCamera, updateCameraState } = this.props;
     var fromId = data.from;
@@ -188,7 +188,7 @@ class LiveCamera extends Component{
       console.log('exchange candidate', data);
       pc.addIceCandidate(new RTCIceCandidate(data.candidate));
     }
-  }
+  },
   leave(socketId) {
     let { liveCamera, updateCameraState } = this.props;
     console.log('leave', socketId);
@@ -205,11 +205,11 @@ class LiveCamera extends Component{
     delete remoteList[socketId]
     updateCameraState('remoteList', remoteList );
     updateCameraState('info', 'One peer leave!');
-  }
+  },
   back() {
     socket.disconnect();
     this.props.navigator.pop();
-  }
+  },
   renderCameras() {
     let { liveCamera } = this.props;
     let streamURL = liveCamera.selfViewSrc;
@@ -230,12 +230,35 @@ class LiveCamera extends Component{
         <RTCView streamURL={liveCamera.selfViewSrc} style={styles.camera}/>
       );
     }
-  }
+  },
   _switchCamera() {
     //this is where the new logic will go that will allow us to swap between the front camera view and the rear camera view
-  }
+  },
+  newMessage(event) {
+    let { newChatMessage, currentUser } = this.props;
+    let messageData = {
+      user: {
+        username: currentUser.username,
+        picture_url: currentUser.picture_url
+      },
+      text:event.nativeEvent.text
+    };
+    console.log('messageData', messageData);
+    socket.emit('message',messageData);
+    // newChatMessage(messageData);
+  },
   render() {
-    let { liveCamera, updateCameraState } = this.props;
+    let { liveCamera } = this.props;
+
+    let chatList = liveCamera.liveChatMessages.map((item, index) => {
+      
+      return (
+        <View style={styles.chatMessageContainer}>
+          <Text style = {styles.chatMessage}> {item.user.username} - {item.text} </Text>
+        </View>
+      );
+
+    });
     return (
       <View style={styles.container}>
 
@@ -269,16 +292,20 @@ class LiveCamera extends Component{
             />
           </TouchableHighlight>
         </View>
-
-        <View style={{flex: 11}} />
-
-        <View style={{flex: 1, alignItems: 'center', paddingBottom: 50}}>
+        <TextInput
+          style = {[styles.searchInput]}
+          placeholder = ' Say something...'
+          placeholderTextColor = 'white'
+          onSubmitEditing = {this.newMessage}
+        />
+        <View style={{flex: 12}}>
+          {chatList}
         </View>
 
       </View>
     );
-  }
-};
+  },
+});
 
 var styles = StyleSheet.create({
   container: {
@@ -347,90 +374,36 @@ var styles = StyleSheet.create({
   cameraToggleIcon: {
     height: 100,
     width: 100,
-  }
+  },
+  searchInput: {
+    fontFamily: 'Lato-Regular',
+    height: 35,
+    width: 350,
+    padding: 4,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: 'white',
+    marginLeft: 12,
+    marginTop: 7,
+    backgroundColor: 'black',
+    opacity: 0.5,
+  },
+  chatMessage: {
+    fontFamily: 'Lato-Regular',
+    color: 'black',
+  },
+  chatMessageContainer: {
+    height: 35,
+    padding: 4,
+    fontSize: 16,
+    borderRadius: 8,
+    marginLeft: 12,
+    marginTop: 7,
+    backgroundColor: 'white',
+    opacity: 0.8,
+  },
 });
 
 export default LiveCamera;
-
-          // <TouchableHighlight
-          //   style = {styles.cameraToggleButton}
-          //   onPress={this._press.bind(this)}
-          //   underlayColor = '#88D4f5'
-          // >
-          //   <Icon
-          //     name= 'ion|ios-circle-filled'
-          //     size={90}
-          //     color='red'
-          //     style={styles.cameraToggleIcon}
-          //   />
-          // </TouchableHighlight>
-
-// {this.renderCameras()}
-
-  // headerContainer: {
-  //   alignSelf: 'stretch',
-  //   flexDirection: 'row',
-  //   flex: 1
-  // },
-  // selfView: {
-  //   flex: 10,
-  //   alignSelf: 'stretch',
-  // },
-  // remoteView: {
-  //   width: 100,
-  //   height: 100,
-  // },
-  // headerStatus: {
-  //   flex: 1,
-  // },
-  // spacer: {
-  //   flex: 1,
-  //   backgroundColor: 'red'
-  // },
-  // backButton: {
-  //   // flexDirection: 'row',
-  //   // alignSelf: 'stretch',
-  //   justifyContent: 'flex-start',
-  //   flex: 1,
-  //   backgroundColor: 'black'
-  // },
-  // backText: {
-  //   fontSize: 30,
-  //   color: 'white',
-  //   alignSelf: 'flex-start',
-  //   marginLeft: 5
-  // },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   flexDirection: 'column',
-  //   marginTop: 20
-  // },
-  // engageButton: {
-  //   // alignSelf: 'stretch',
-  //   // flexDirection: 'row',
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'green',
-  // },
-
-        //   <View style = {styles.headerContainer}>
-        //   <TouchableHighlight
-        //     style = {styles.backButton}
-        //     onPress = {this.back.bind(this)}
-        //   >
-        //     <Text style = {styles.backText}> {'<'} </Text>
-        //   </TouchableHighlight>
-        //   <Text style={styles.headerStatus}>
-        //     {liveCamera.info}
-        //   </Text>
-        //   <View style={styles.spacer}/>
-        // </View>
-        // {this.renderCameras()}
-        // <TouchableHighlight
-        //   style={styles.engageButton}
-        //   onPress={this._press.bind(this)}>
-        //   <Text>Engage!</Text>
-        // </TouchableHighlight>

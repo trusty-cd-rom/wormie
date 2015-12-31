@@ -71,7 +71,7 @@ var FeedList = React.createClass({
         />
       );
     }else {
-      let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=13&size=400x280&markers=icon:${encodeURIComponent(urls.getWormie+item.requestor.wormie_color.slice(1)+'.png')}%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
+      let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=10&size=400x280&markers=icon:${encodeURIComponent(urls.getWormie+item.requestor.wormie_color.slice(1)+'.png')}%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
       return (
         <Image 
           style = {{height: 220}}
@@ -141,15 +141,14 @@ var FeedList = React.createClass({
   },
 
   render() {
-    var { feed, getUserInfo, filterByStatus } = this.props;
-    // var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
 
+    var { feed, getUserInfo, filterByStatus, sortList } = this.props;
     var list = feed.map((item, index) => {
       return (
-        <View key = {feed.length - 1 - index}>
+        <View key = {index}>
           <TouchableHighlight
             style = {styles.loginButton}
-            onPress = {this.viewRequest.bind(this, feed.length - 1 - index)}
+            onPress = {this.viewRequest.bind(this, index)}
           >
             <View style = {{flex: 1}}>
               <View style={[styles.cardTitleContainer, styles.row]}>
@@ -157,7 +156,7 @@ var FeedList = React.createClass({
                 <View style={styles.spaceBuffer} />
                 <Text style = {styles.cardDate}> {this._timeSince(Date.parse(item.created_at))} </Text>
               </View>
-              {this._renderVideo(item, feed.length - 1 - index)}
+              {this._renderVideo(item, index)}
             </View>
           </TouchableHighlight> 
           <View style={styles.cardInfoContainer}>
@@ -311,68 +310,3 @@ var styles = StyleSheet.create({
 });
 
 export default FeedList;
-
-        // <YouTube 
-        //   videoId={item.submissions[0].video_url}
-        //   play={false}
-        //   hidden={false}
-        //   playsInline={false}
-        //   showinfo={false}
-        //   modestbranding={true}
-        //   onError={(e)=>{console.log('youtube error: ', e.error)}}
-        //   style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-        // />
-
-            // return (
-    //   <MapView
-    //     style={{height: 220}}
-    //     region={{
-    //       latitude: Number(item.latitude),
-    //       longitude: Number(item.longitude),
-    //       latitudeDelta: 0.1,
-    //       longitudeDelta: 0.1,
-    //     }}
-    //     annotations={[]}
-    //   />
-    // );
-    // if(item.submissions[0]) {
-    //   let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
-    //   return (
-    //     <Image 
-    //       style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-    //       source = {{uri: imageUrl}}
-    //     />
-    //   );
-    // }else {
-    //   return (
-    //     <Mapbox
-    //       style={{height: 220}}
-    //       direction={0}
-    //       rotateEnabled={false}
-    //       scrollEnabled={false}
-    //       zoomEnabled={true}
-    //       showsUserLocation={false}
-    //       ref={mapRef}
-    //       accessToken={mapboxConfig.accessToken}
-    //       styleURL={mapboxConfig.styleURL}
-    //       centerCoordinate={{
-    //         latitude: Number(item.latitude),
-    //         longitude: Number(item.longitude)
-    //       }}
-    //       zoomLevel={10}
-    //       annotations={[{
-    //         "coordinates": [Number(item.latitude), Number(item.longitude)],
-    //         "type": "point",
-    //         "strokeColor": "black",
-    //         "strokeWidth": 10,
-    //         "strokeAlpha": 0.9,
-    //         "annotationImage": {
-    //           url: 'http://emoji.fileformat.info/gemoji/bear.png',
-    //           height: 25,
-    //           width: 25
-    //         },
-    //         "id": `feedMap ${index}`
-    //       }]}
-    //     />
-    //   );
-    // }
