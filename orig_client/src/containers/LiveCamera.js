@@ -7,7 +7,8 @@ function mapStateToProps(state) {
 	console.log('livecamera state', state.currentWormhole);
   return {
   	liveCamera: state.liveCamera,
-  	currentWormhole: state.currentWormhole
+  	currentWormhole: state.currentWormhole,
+  	currentUser: state.userProfile.currentUser
   };
 }
 

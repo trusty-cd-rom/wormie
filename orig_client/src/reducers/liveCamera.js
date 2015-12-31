@@ -1,4 +1,4 @@
-import { INIT_LIVE_CAMERA, UPDATE_LIVE_CAMERA } from '../constants/actions';
+import { INIT_LIVE_CAMERA, UPDATE_LIVE_CAMERA, ADD_LIVE_CHAT_MESSAGE } from '../constants/actions';
 
 var initialState = {
       info: 'Initializing',
@@ -7,7 +7,8 @@ var initialState = {
       selfViewSrc: null,
       remoteList: {},
       pcPeers: {},
-      streamMaster: false
+      streamMaster: false,
+      liveChatMessages: []
     };
 
 function liveCamera(state = initialState, action) {
@@ -16,6 +17,11 @@ function liveCamera(state = initialState, action) {
 	    return action.cameraState;
 	  case UPDATE_LIVE_CAMERA:
 	  	return updateLiveCamera(state, action)
+	  case ADD_LIVE_CHAT_MESSAGE:
+	  	return {
+	  		...state,
+	  		liveChatMessages: newChatMessage(state.liveChatMessages, action)
+	  	}
 	  default:
 	    return state;
   }
@@ -31,4 +37,11 @@ function updateLiveCamera(state, action) {
 		...state,
 		...updatedField
 	}
+};
+
+function newChatMessage(state, action) {
+	return [
+		...state,
+		action.message
+	];
 };
