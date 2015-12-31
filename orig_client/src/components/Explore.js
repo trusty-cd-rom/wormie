@@ -61,7 +61,7 @@ class Explore extends Component {
 
   goToSettings(){
     this.props.navigator.push({
-      component: HeartFloater,
+      component: Settings,
     });
   }
 
