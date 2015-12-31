@@ -80,6 +80,7 @@ var MapExplore = React.createClass({
       });
 
     }
+    console.log(annotations);
 
     this.addAnnotations(mapRef, annotations);
 
