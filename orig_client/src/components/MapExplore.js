@@ -193,7 +193,7 @@ var MapExplore = React.createClass({
 
     var annotations = [];
 
-    for ( var wormhole in feed ) {
+    for ( var wormhole in feed.slice(0,10) ) {
 
      // SAMPLE POLYLINES!
      // annotations.push({

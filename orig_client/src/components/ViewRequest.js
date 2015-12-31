@@ -10,6 +10,7 @@ import React, {
 
 // import YouTube from 'react-native-youtube';
 var YouTube = require('react-native-youtube');
+var urls = require('../constants/urls');
 
 var moment = require('moment');
 
@@ -27,6 +28,46 @@ var ViewRequest = React.createClass({
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     // console.log(this.props.currentWormhole);
     let { currentWormhole } = this.props;
+    // console.log('currentWormhole.submissions[0].location', currentWormhole.submissions[0].location, typeof currentWormhole.submissions[0].location, typeof JSON.parse(currentWormhole.submissions[0].location));
+    let locationData = JSON.parse(currentWormhole.submissions[0].location);
+    console.log(locationData, typeof locationData, Array.isArray(locationData));
+    let mapCenter = locationData.length>0 ? [locationData[locationData.length-1][0],locationData[locationData.length-1][1]] : [Number(currentWormhole.latitude),Number(currentWormhole.longitude)];
+    console.log('mapCenter', mapCenter);
+
+    let annotation;
+    if(locationData.length>0) {
+      annotation = [{
+        "coordinates": locationData,
+        "type": "polyline",
+        "strokeColor": "black",
+        "strokeWidth": 5,
+        "strokeAlpha": 0.9,
+        "id": "cameraPath"
+      }, {
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    } else {
+      annotation = [{
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    }
+
     return (
 
       <View style={styles.container}>
@@ -54,6 +95,8 @@ var ViewRequest = React.createClass({
         <View style={{flexDirection: 'row', flex: 10}}>
           
           <YouTube 
+            ref="youtubePlayer"
+            style={{flex: 1}}
             videoId={currentWormhole.submissions[0].video_url}
             play={false}
             hidden={false}
@@ -61,7 +104,7 @@ var ViewRequest = React.createClass({
             showinfo={false}
             modestbranding={true}
             onError={(e)=>{console.log('youtube error: ', e.error)}}
-            style={{flex: 1}}
+            onProgress={(e)=>{if((e.duration - e.currentTime) < 1) {this.refs.youtubePlayer.seekTo(0)}}}
           />
           
           <Mapbox
@@ -77,9 +120,10 @@ var ViewRequest = React.createClass({
             ref={mapRef}
             accessToken={mapboxConfig.accessToken}
             styleURL={mapboxConfig.styleURL}
-            userTrackingMode={this.userTrackingMode.follow}
+            userTrackingMode={this.userTrackingMode.none}
+            centerCoordinate={{latitude: mapCenter[0], longitude: mapCenter[1]}}
             zoomLevel={15}
-            annotations={[]}
+            annotations={annotation}
           />
 
         </View>
@@ -208,82 +252,4 @@ const styles = StyleSheet.create({
 
 export default ViewRequest;
 
-            // <View style={{flexDirection: 'column', alignContent: 'flex-end', justifyContent: 'flex-end', alignSelf: 'flex-end'}}>
-
-
-      // <View style={styles.container}>
-
-      //   <TouchableHighlight
-      //     style = {styles.back}
-      //     onPress = {this.back.bind(this)}
-      //     underlayColor = 'purple'
-      //   >
-      //     <Text style = {styles.buttonText}> Back </Text>
-      //   </TouchableHighlight>
-
-
-      //   <View style={styles.loginButton}>
-      //     <Text style={styles.title}>
-      //       {currentWormhole.title}
-      //     </Text>
-      //   </View>
-      //   <View style={styles.loginButton}>
-      //     <Text style={styles.title}>
-      //       {currentWormhole.owner_name}
-      //     </Text>
-      //   </View>
-      //   <View style={styles.loginButton}>
-      //     <Text style={styles.title}>
-      //       {currentWormhole.submissions[0].owner_name}
-      //     </Text>
-      //   </View>
-      //   <View style={styles.loginButton}>
-      //     <Text style={styles.title}>
-      //       {currentWormhole.submissions[0].created_at}
-      //     </Text>
-      //   </View>
-      //   <View style={styles.loginButton}>
-      //     <Text style={styles.title}>
-      //       {currentWormhole.notes}
-      //     </Text>
-      //   </View>
-      // </View>
-
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'black',
-  //   marginTop: 20
-  // },
-  // buttonText: {
-  //   fontFamily: 'Lato-Regular',
-  //   fontSize: 25,
-  //   color: 'white',
-  //   alignSelf: 'center'
-  // },
-  // loginButton: {
-  //   flexDirection: 'row',
-  //   alignSelf: 'stretch',
-  //   justifyContent: 'center',
-  //   flex: 1,
-  //   backgroundColor: '#48BBEC'
-  // },
-  // back: {
-  //   flexDirection: 'row',
-  //   alignSelf: 'stretch',
-  //   justifyContent: 'center',
-  //   flex: 1,
-  //   backgroundColor: '#48BBEC'
-  // },
-  // title: {
-  //   marginBottom: 20,
-  //   fontSize: 25,
-  //   textAlign: 'center',
-  //   color: '#fff'
-  // },
-  // buttonText: {
-  //   fontSize: 24,
-  //   color: 'white',
-  //   alignSelf: 'center'
-  // },
+            // onChangeState={(e)=>{if(e.state === 'ended') {this.refs.youtubePlayer.seekTo(0)}}}

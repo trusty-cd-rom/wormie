@@ -13,6 +13,7 @@ import React, {
 import Navbar from '../containers/Navbar';
 var Video = require('react-native-video');
 var moment = require('moment');
+var urls = require('../constants/urls');
 
 // Mapbox
 var Mapbox = require('react-native-mapbox-gl');
@@ -77,6 +78,46 @@ var SubmitWormhole = React.createClass({
   render() {
     // var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     let { pendingWormholeSubmission, currentUser } = this.props;
+    let locationData = pendingWormholeSubmission.locationData;
+    // console.log(locationData, typeof locationData, Array.isArray(locationData));
+    let mapCenter = locationData.length>0 ? [locationData[locationData.length-1][0],locationData[locationData.length-1][1]] : [Number(pendingWormholeSubmission.wormhole.latitude),Number(pendingWormholeSubmission.wormhole.longitude)];
+    console.log('mapCenter', mapCenter);
+
+    let annotation;
+    if(locationData.length>0) {
+      console.log('annotating a path', locationData);
+      annotation = [{
+        "coordinates": locationData,
+        "type": "polyline",
+        "strokeColor": "black",
+        "strokeWidth": 5,
+        "strokeAlpha": 0.9,
+        "id": "cameraPath"
+      }, {
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + currentUser.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    } else {
+      console.log('annotating a point', locationData);
+      annotation = [{
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + currentUser.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    }
     return (
       <View style={styles.container}>
         <Video source={{uri: pendingWormholeSubmission.video}}
@@ -123,9 +164,10 @@ var SubmitWormhole = React.createClass({
           ref={mapRef}
           accessToken={mapboxConfig.accessToken}
           styleURL={mapboxConfig.styleURL}
-          userTrackingMode={this.userTrackingMode.follow}
+          userTrackingMode={this.userTrackingMode.none}
+          centerCoordinate={{latitude: mapCenter[0], longitude: mapCenter[1]}}
           zoomLevel={15}
-          annotations={[]}
+          annotations={annotation}
         />
 
         <ScrollView style = {styles.contentContainer}>
