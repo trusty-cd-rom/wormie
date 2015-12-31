@@ -67,10 +67,12 @@ var LiveCamera = React.createClass({
       newChatMessage(data);
     });
   },
+  componentWillMount() {
+    this.initStream();
+  },
   componentDidMount() {
-    let { liveCamera, updateCameraState } = this.props;
+    let { liveCamera, updateCameraState, currentWormhole } = this.props;
     setTimeout(() => {
-      this.initStream();
       RTCSetting.setAudioOutput('speaker');
       RTCSetting.setKeepScreenOn(true);
       RTCSetting.setProximityScreenOff(true);
@@ -78,7 +80,7 @@ var LiveCamera = React.createClass({
       updateCameraState('status', 'connect');
       updateCameraState('info', 'Connecting');
       console.log(liveCamera, this.joinRoom);
-      this.joinRoom.call(this,liveCamera.roomID);
+      this.joinRoom.call(this,`wormhole${currentWormhole.id}`);
     }, 500);
   },
   getLocalStream() {
@@ -243,7 +245,7 @@ var LiveCamera = React.createClass({
     };
     console.log('messageData', messageData);
     socket.emit('message',messageData);
-    newChatMessage(messageData);
+    // newChatMessage(messageData);
   },
   render() {
     let { liveCamera } = this.props;

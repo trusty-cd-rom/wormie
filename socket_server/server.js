@@ -49,7 +49,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('message', function(data){
-    console.log('message');
+    console.log('message', data, socket.room);
     if (socket.room) {
       var room = socket.room;
       io.to(room).emit('message', data);
