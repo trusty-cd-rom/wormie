@@ -28,21 +28,6 @@
 		13EA60811C1FCD9F006EE751 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EA607F1C1FCD9F006EE751 /* FBSDKCoreKit.framework */; };
 		13EA60821C1FCD9F006EE751 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EA60801C1FCD9F006EE751 /* FBSDKLoginKit.framework */; };
 		13EA60891C1FCDE7006EE751 /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EA60881C1FCDBF006EE751 /* libRCTFBSDKLogin.a */; };
-		13FCEF021C1CFF0C00E41510 /* FAKIonIcons.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93B1C1CF678002DEA85 /* FAKIonIcons.h */; };
-		13FCEF031C1CFF0C00E41510 /* FAKIonIcons.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93C1C1CF678002DEA85 /* FAKIonIcons.m */; };
-		13FCEF041C1CFF3300E41510 /* FAKIcon.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9391C1CF678002DEA85 /* FAKIcon.h */; };
-		13FCEF051C1CFF3300E41510 /* FAKIcon.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93A1C1CF678002DEA85 /* FAKIcon.m */; };
-		13FCEF061C1CFF3300E41510 /* FontAwesomeKit.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9441C1CF678002DEA85 /* FontAwesomeKit.h */; };
-		13FCEF071C1CFF7C00E41510 /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9351C1CF678002DEA85 /* FAKFontAwesome.h */; };
-		13FCEF081C1CFF7C00E41510 /* FAKFontAwesome.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9361C1CF678002DEA85 /* FAKFontAwesome.m */; };
-		13FCEF091C1CFF7C00E41510 /* FAKFoundationIcons.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9371C1CF678002DEA85 /* FAKFoundationIcons.h */; };
-		13FCEF0A1C1CFF7C00E41510 /* FAKFoundationIcons.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9381C1CF678002DEA85 /* FAKFoundationIcons.m */; };
-		13FCEF0B1C1CFF7C00E41510 /* FAKMaterial.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93D1C1CF678002DEA85 /* FAKMaterial.h */; };
-		13FCEF0C1C1CFF7C00E41510 /* FAKMaterial.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93E1C1CF678002DEA85 /* FAKMaterial.m */; };
-		13FCEF0D1C1CFF7C00E41510 /* FAKOcticons.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B93F1C1CF678002DEA85 /* FAKOcticons.h */; };
-		13FCEF0E1C1CFF7C00E41510 /* FAKOcticons.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9401C1CF678002DEA85 /* FAKOcticons.m */; };
-		13FCEF0F1C1CFF7C00E41510 /* FAKZocial.h in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9411C1CF678002DEA85 /* FAKZocial.h */; };
-		13FCEF101C1CFF7C00E41510 /* FAKZocial.m in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9421C1CF678002DEA85 /* FAKZocial.m */; };
 		13FCEF111C1CFF7C00E41510 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9481C1CF678002DEA85 /* octicons.ttf */; };
 		13FCEF121C1CFF7C00E41510 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1321B9491C1CF678002DEA85 /* zocial-regular-webfont.ttf */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -92,6 +77,7 @@
 		CB4484091C213EA800655075 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484001C213EA800655075 /* Lato-Regular.ttf */; };
 		CB44840A1C213EA800655075 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484011C213EA800655075 /* Lato-Semibold.ttf */; };
 		CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484021C213EA800655075 /* Lato-Thin.ttf */; };
+		CB6AFE571C34B07200E71692 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = CB6AFE561C34B07200E71692 /* iTunesArtwork */; };
 		CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9663611C334FB90095C4C1 /* libSafariViewManager.a */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
 		CBD013241C34907000E65EBD /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD013231C34907000E65EBD /* Lato-Semibold.ttf */; };
@@ -396,6 +382,7 @@
 		CB4484001C213EA800655075 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../src/assets/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		CB4484011C213EA800655075 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "../src/assets/Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		CB4484021C213EA800655075 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/Lato-Thin.ttf"; sourceTree = "<group>"; };
+		CB6AFE561C34B07200E71692 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
 		CBD013231C34907000E65EBD /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
@@ -578,6 +565,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				CBD013251C34912300E65EBD /* Lato-Bold.ttf */,
+				CB6AFE561C34B07200E71692 /* iTunesArtwork */,
 				CBD013231C34907000E65EBD /* Lato-Semibold.ttf */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -1175,29 +1163,14 @@
 				CB245E201C22478300A92EF6 /* Settings.bundle in Resources */,
 				CB245E1E1C22476900A92EF6 /* Mapbox.bundle in Resources */,
 				CB4484061C213EA800655075 /* Lato-Heavy.ttf in Resources */,
-				13FCEF071C1CFF7C00E41510 /* FAKFontAwesome.h in Resources */,
 				CBD013261C34912300E65EBD /* Lato-Bold.ttf in Resources */,
-				13FCEF081C1CFF7C00E41510 /* FAKFontAwesome.m in Resources */,
-				13FCEF091C1CFF7C00E41510 /* FAKFoundationIcons.h in Resources */,
 				CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */,
-				13FCEF0A1C1CFF7C00E41510 /* FAKFoundationIcons.m in Resources */,
-				13FCEF0B1C1CFF7C00E41510 /* FAKMaterial.h in Resources */,
 				CB4484071C213EA800655075 /* Lato-Light.ttf in Resources */,
 				CB4484091C213EA800655075 /* Lato-Regular.ttf in Resources */,
 				CB4484051C213EA800655075 /* Lato-Hairline.ttf in Resources */,
 				CB4484041C213EA800655075 /* Lato-Bold.ttf in Resources */,
-				13FCEF0C1C1CFF7C00E41510 /* FAKMaterial.m in Resources */,
-				13FCEF0D1C1CFF7C00E41510 /* FAKOcticons.h in Resources */,
-				13FCEF0E1C1CFF7C00E41510 /* FAKOcticons.m in Resources */,
-				13FCEF0F1C1CFF7C00E41510 /* FAKZocial.h in Resources */,
-				13FCEF101C1CFF7C00E41510 /* FAKZocial.m in Resources */,
 				13FCEF111C1CFF7C00E41510 /* octicons.ttf in Resources */,
 				13FCEF121C1CFF7C00E41510 /* zocial-regular-webfont.ttf in Resources */,
-				13FCEF041C1CFF3300E41510 /* FAKIcon.h in Resources */,
-				13FCEF051C1CFF3300E41510 /* FAKIcon.m in Resources */,
-				13FCEF061C1CFF3300E41510 /* FontAwesomeKit.h in Resources */,
-				13FCEF021C1CFF0C00E41510 /* FAKIonIcons.h in Resources */,
-				13FCEF031C1CFF0C00E41510 /* FAKIonIcons.m in Resources */,
 				1321B94B1C1CF943002DEA85 /* FontAwesome.otf in Resources */,
 				1321B94C1C1CF943002DEA85 /* foundation-icons.ttf in Resources */,
 				1321B94D1C1CF943002DEA85 /* Material-Design-Iconic-Font.ttf in Resources */,
@@ -1207,6 +1180,7 @@
 				CB4484081C213EA800655075 /* Lato-Medium.ttf in Resources */,
 				680C61241C18FA4B006F6E87 /* YTPlayerView-iframe-player.html in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CB6AFE571C34B07200E71692 /* iTunesArtwork in Resources */,
 				CB4484031C213EA800655075 /* Lato-Black.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -1441,7 +1415,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Harrington (RZSUQBEMS7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Charles Harrington (RZSUQBEMS7)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
