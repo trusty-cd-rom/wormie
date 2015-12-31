@@ -1,4 +1,4 @@
-import { UPDATE_FEED, UPDATE_CURRENT_WORMHOLE } from '../constants/actions';
+import { UPDATE_FEED, UPDATE_CURRENT_WORMHOLE, UPDATE_LIKES } from '../constants/actions';
 import api from '../utils/api';
 
 export function refreshFeedData(cb) {
@@ -10,6 +10,19 @@ export function refreshFeedData(cb) {
     })
   }
 };
+
+export function updateLikes(currentUser, currentWormhole) {
+  return dispatch => {
+    return api.updateLikes(currentUser, currentWormhole)
+    .then((res) => {
+      return api.getWormholeDetails(currentWormhole.id)
+        .then((res) => {
+          dispatch(updateCurrentWormhole(res));
+        });
+    });
+  };
+};
+
 
 export function refreshFeedDataAction(data) {
   return {
