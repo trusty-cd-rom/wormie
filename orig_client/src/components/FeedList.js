@@ -43,20 +43,9 @@ var FeedList = React.createClass({
 
   },
   componentDidMount() {
-    let { refreshFeedData_fromAsyncStorage, setCurrentLocation, } = this.props;
+    let { refreshFeedData_fromAsyncStorage, } = this.props;
     // refreshFeedData_fromAsyncStorage(AsyncStorage);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var dist = [];
-        let initialPosition = JSON.stringify(position);
-        console.log(initialPosition);
-        console.log(typeof position.coords.latitude);
-        //replace with call to action function, update state via reducer
-        setCurrentLocation(position.coords.longitude.toFixed(7), position.coords.latitude.toFixed(7));
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
+    
   },
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
@@ -152,10 +141,8 @@ var FeedList = React.createClass({
   },
 
   render() {
-    var { feed, getUserInfo, filterByStatus, sortList, currentLocation } = this.props;
+    var { feed, getUserInfo, filterByStatus } = this.props;
     // var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
-    var lat = currentLocation ? currentLocation.latitude : "0";
-    var lon = currentLocation ? currentLocation.longitude : "0";
 
     var list = feed.map((item, index) => {
       return (
@@ -207,6 +194,18 @@ var FeedList = React.createClass({
       );
     });
 
+          // <TouchableHighlight
+          //   onPress={() => { sortList('nearby', lon, lat) }}
+          // >
+          //   <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
+          // </TouchableHighlight>
+          // <TouchableHighlight
+          //   onPress={() => { 
+          //     sortList('recent');
+          //   }}
+          // >
+          //   <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
+          // </TouchableHighlight>
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
@@ -220,21 +219,9 @@ var FeedList = React.createClass({
             flex: 1,
             top: 30,
             left: 5,
-            backgroundColor: '#494949',
+            backgroundColor: 'red',
           }}
         >
-          <TouchableHighlight
-            onPress={() => { sortList('nearby', lon, lat) }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { 
-              sortList('recent');
-            }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
-          </TouchableHighlight>
         </View>
       </ScrollView>
     );
@@ -245,6 +232,7 @@ var styles = StyleSheet.create({
   container:{
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 3,
     marginBottom: 50,
   },
   buttonText: {
@@ -312,7 +300,7 @@ var styles = StyleSheet.create({
     marginRight: 7,
   },
   spaceBuffer: {
-    flex: 2
+    flex: 2,
   },
   backgroundVideo: {
     alignSelf: 'stretch',

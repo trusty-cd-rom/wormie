@@ -10,7 +10,6 @@ import React, {
 } from 'react-native';
 
 import CreateRequest from '../containers/CreateRequest';
-import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
 
 
@@ -52,31 +51,6 @@ class DiscoverRequest extends React.Component{
     setCurrentTarget(data);
   } 
 
-          // <TouchableHighlight
-          //   underlayColor={'#39247F'}
-          //   onPress={() => {
-          //     this.props.navigator.push({
-          //       component: CreateRequest,
-          //       passProps: {'yelp': true}
-          //     });
-          //   }}
-          // >
-          //   <View
-          //     style={{
-          //       flexDirection: 'row'
-          //     }}
-          //   >
-          //     <Text
-          //       style={styles.request}
-          //     >{'CREATE REQUEST'}</Text>
-          //     <Icon
-          //       name='ion|location'
-          //       size={35}
-          //       color='white'
-          //       style={styles.icon}
-          //     />
-          //   </View>
-          // </TouchableHighlight>
   render() {
     let { target } = this.props;
     console.log(target['mobile_url']);

@@ -5,7 +5,6 @@ import {
   UPDATE_FEED, 
   COPY_CURRENT_USER, 
   TOGGLE_PEEK_CLICKED_USER,
-  SET_USER_LOCATION,
 } from '../constants/actions';
 
 import api from '../utils/api';
@@ -61,28 +60,6 @@ function checkClickedUser() {
   }
 }
 
-export function filterByStatus(status) {
-  console.log(status);
-  return dispatch => {
-    return api.filterByStatus(status)
-      .then(function (res) {
-        dispatch(refreshFeedDataAction(res))
-      })
-  }
-}
-
-export function sortList(criteria, longitude, latitude) {
-  return dispatch => {
-    console.log(criteria, longitude, latitude);
-    console.log('going to api');
-    return api.sortList(criteria, longitude, latitude)
-      .then(function (res) {
-        console.log('res', res);
-        dispatch(refreshFeedDataAction(res))
-      })
-  }
-}
-
 function refreshFeedDataAction(data) {
   return {
     type: UPDATE_FEED,
@@ -115,10 +92,3 @@ export function refreshFeedData_fromAsyncStorage(asyncStorage, cb) {
   }
 };
 
-export function setCurrentLocation(lon, lat) {
-  return {
-    type: SET_USER_LOCATION,
-    longitude: lon,
-    latitude: lat
-  }
-}

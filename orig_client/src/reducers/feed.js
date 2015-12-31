@@ -1,4 +1,4 @@
-import { UPDATE_FEED, SET_USER_LOCATION, } from '../constants/actions';
+import { UPDATE_FEED, SET_USER_LOCATION, SET_CURRENT_FEED_TAB} from '../constants/actions';
 
 var initialState = [];
 
@@ -16,6 +16,11 @@ function feed(state = initialState, action) {
           longitude: action.longitude,
           latitude: action.latitude
         }
+      }
+    case SET_CURRENT_FEED_TAB:
+      return {
+        ...state,
+        tab: action.tab
       }
 	  default:
 	    return state;
