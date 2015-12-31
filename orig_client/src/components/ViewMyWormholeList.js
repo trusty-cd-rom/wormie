@@ -10,11 +10,21 @@ import React, {
 import ViewMyWormhole from '../containers/ViewMyWormhole';
 import Topbar from './Topbar';
 import { Icon } from 'react-native-icons';
+var YouTube = require('react-native-youtube');
 
 var styles = StyleSheet.create({
   container:{
     // marginTop: 20,
-    flex:1
+    flex:1,
+    alignItems: 'stretch',
+  },
+  submitterName: {
+    fontSize: 18,
+    color: '#00ADC7',
+    alignSelf: 'flex-start',
+    flex: 1,
+    fontWeight: 'bold',
+    paddingBottom: 10,
   },
   back: {
     flexDirection: 'row', 
@@ -50,17 +60,33 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   image: {
-    height: 20,
-    width: 20
+    height: 50,
+    width: 50,
+    borderRadius: 25,
   },
   submitterProfile: {
     flexDirection: 'row',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    backgroundColor: 'white',
   },
   requestList: {
     width: 375,
     color: '#575757',
-    padding: 5,
   },
+  noMatch: {
+    margin: 8, 
+    borderRadius: 10, 
+    fontFamily: 'Lato-Bold',
+    color: 'white',
+    backgroundColor: '#00ADC7',
+    // backgroundColor: '#A88FFF',
+    fontSize: 20,
+    padding: 10,
+    alignSelf: 'center',
+  },
+  ouch: {color: '#ffa950', justifyContent: 'center', alignSelf: 'center', fontFamily: 'Lato-Bold', fontSize: 30}
 });
 
 class ViewMyWormholeList extends Component{
@@ -82,14 +108,20 @@ class ViewMyWormholeList extends Component{
     });
   }
 
-  showStatus() {
+  showWormhole() {
     var { myCurrentWormholeList } = this.props;
 
     if (myCurrentWormholeList.submissions.length) {
-      // return (
-      //   <Text>There is a Match!</Text>
-      // )
-      return <View />          
+      return (
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={{backgroundColor: 'white'}}
+        >
+          {this.createList()}
+        </ScrollView>
+      )       
     } else {
       return (
         <View
@@ -97,15 +129,83 @@ class ViewMyWormholeList extends Component{
             flex:1, 
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: 'white'
           }}
         >
-          <Text>There is No Match Yet.</Text>
+          <View
+            style={{alignSelf: 'center'}}
+          >
+            <Text style={styles.ouch}>
+              OUCH!
+            </Text>
+            <Image 
+              source = {require('../assets/small-red-wormie.png')}
+              style={{alignSelf: 'center', width: 150, height: 215}}
+            />
+            <Text style={styles.noMatch}>No Match Found</Text>
+          </View>
         </View>
       )
     }
+
   }
 
+  video() {
+    let { myCurrentSubmission } = this.props;
+    return (
+      <YouTube 
+        videoId={myCurrentSubmission.video_url}
+        play={false}
+        hidden={false}
+        playsInline={true}
+        showinfo={false}
+        modestbranding={true}
+        onError={(e)=>{console.log('youtube error: ', e.error)}}
+        style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+      />
+    );
+  }
 
+                // <Image 
+                //   source = {{uri: imageUrl}}
+                //   style={{alignSelf: 'center', width: 150, height: 215}}
+                // />
+
+// return (
+//           <TouchableHighlight
+//             onPress = {this.viewRequest.bind(this, index)}
+//             underlayColor = 'rgba(125,125,125,0.2)'
+//             key={index}
+//           >
+//             <View
+//               style={{marginTop: 14}}
+//             >
+//               <View 
+//                 style = {styles.submitterProfile}
+//               >
+//                 <Image 
+//                   style = {styles.image}
+//                   source = {{uri: imageUrl}}
+//                 />
+//                 <Text> Submitter: {submission.submitter.username} </Text>
+//               </View>
+//               <Text>Notes: { submission.notes }</Text>
+//               <View
+//                 style={{alignSelf: 'center', backgroundColor: 'red', height: 400, width: 310, marginBottom: 30}}
+//               >
+//                 <YouTube 
+//                   videoId={submission['video_url']}
+//                   play={false}
+//                   hidden={false}
+//                   playsInline={true}
+//                   showinfo={false}
+//                   modestbranding={true}
+//                   onError={(e)=>{console.log('youtube error: ', e.error)}}
+//                   style={{height: 570, backgroundColor: 'white', }}
+//                 />
+//               </View>
+//             </View>
+//           </TouchableHighlight>
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { myCurrentWormholeList } = this.props;
@@ -114,28 +214,39 @@ class ViewMyWormholeList extends Component{
     if (myCurrentWormholeList.submissions.length > 0) {
       console.log('working well');
       submitList = myCurrentWormholeList.submissions.map((submission, index) => {
-        console.log(submission);
+        let imageUrl = `https://i.ytimg.com/vi/${submission['video_url']}/mqdefault.jpg`;
+        console.log('submission', submission);
         return (
-          <TouchableHighlight
-            onPress = {this.viewRequest.bind(this, index)}
-            underlayColor = 'rgba(125,125,125,0.2)'
-            key={index}
+          <View
+            style={{marginTop: 10, backgroundColor: '#f0f0f0'}}
           >
-            <View
-              style={{marginTop: 14}}
+            <View 
+              style = {styles.submitterProfile}
             >
-              <View 
-                style = {styles.submitterProfile}
-              >
-                <Image 
-                  style = {styles.image}
-                  source = {{uri: submission.submitter['picture_url']}}
-                />
-                <Text> Submitter: {submission.submitter.username} </Text>
+              <Image 
+                style = {styles.image}
+                source = {{uri: submission.submitter.picture_url}}
+              />
+              <View>
+                <Text style={styles.submitterName}> Submitter: {submission.submitter.username} </Text>
               </View>
-              <Text>Notes: { submission.notes }</Text>
             </View>
-          </TouchableHighlight>
+            <Text style={{marginLeft: 20,marginRight: 20,}}>Notes: { submission.notes }</Text>
+            <View
+              style={{alignSelf: 'center', height: 700, width: 350, marginTop: 20, marginBottom: 20}}
+            >
+              <YouTube 
+                videoId={submission['video_url']}
+                play={false}
+                hidden={false}
+                playsInline={true}
+                showinfo={false}
+                modestbranding={true}
+                onError={(e)=>{console.log('youtube error: ', e.error)}}
+                style={{height: 700, backgroundColor: 'white', }}
+              />
+            </View>
+          </View>
         );
       });
 
@@ -157,39 +268,6 @@ class ViewMyWormholeList extends Component{
     );
   }
 
-  // topbar() {
-  //   return (
-  //     <View
-  //       style={styles.topbar}
-  //     >
-  //       <TouchableHighlight
-  //         onPress={this.back.bind(this)}
-  //         underlayColor='white'
-  //         color='white'
-  //         style={styles.back}
-  //       > 
-  //         <Icon
-  //           name='ion|chevron-left'
-  //           size={30}
-  //           color='#4CC6EA'
-  //           style={styles.ionic}
-  //         />
-  //       </TouchableHighlight>
-  //       <View 
-  //         style={styles.topBarText}
-  //       >
-  //         <Text
-  //           style={{
-  //             fontWeight: 'bold',
-  //             color: '#4CC6EA',
-  //             fontSize: 15,
-  //           }}
-  //         >Wormholes      </Text>
-  //       </View>
-  //     </View>
-  //   );
-  // }
-
   render() {
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
@@ -200,17 +278,11 @@ class ViewMyWormholeList extends Component{
           topbarTitle={"Wormholes"} 
           navigator={this.props.navigator}
         />
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          onScroll={() => { console.log('onScroll!'); }}
-          scrollEventThrottle={200}
-          style={{flex: 10}}
+        <View
+          style={{flex: 1}}
         >
-          <View>
-            {this.showStatus()}
-          </View>
-          {this.createList()}
-        </ScrollView>
+          {this.showWormhole()}
+        </View>
       </View>
     );
   }

@@ -264,32 +264,6 @@ var CreateRequest = React.createClass({
 
           <View style={{height: inputText.keyboardSpace, left: 0, right: 0, bottom: 0}}/>
 
-          <View
-            style={styles.buttonContainer}
-            >
-            <MKButton
-              backgroundColor={'#4CC6EA'}
-              styles={{flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems:'center',
-                      }}
-              width={250}
-              height={30}
-              shadowRadius={2}
-              shadowOffset={{width:0, height:2}}
-              shadowOpacity={.7}
-              shadowColor="black"
-              onPress={() => {
-                console.log('hi, raised button!');
-              }}
-              >
-              <Text pointerEvents="none"
-                    style={{color: 'white', fontWeight: 'bold',}}>
-                Send Request
-              </Text>
-            </MKButton>
-
-          </View>
           <ActivityIndicatorIOS
             animating = {inputText.isFetching==='true'}
             color = 'white'

@@ -297,7 +297,6 @@ var MapExplore = React.createClass({
           onError={(e)=>{console.log('youtube error: ', e.error)}}
           style={{height: 121, width: 121, marginRight: 10}}
         />
-
       );
     } else {
       return (

@@ -10,15 +10,12 @@ import React, {
 } from 'react-native';
 import ViewMyWormholeList from '../containers/ViewMyWormholeList';
 import Spinner from './Spinner';
-
+var urls = require('../constants/urls');
 var styles = StyleSheet.create({
   handle: {
     alignSelf: 'center',
     fontSize: 16,
     color: 'white'
-  },
-  container:{
-
   },
   list: {
     flex: 1,
@@ -30,12 +27,29 @@ var styles = StyleSheet.create({
   submitterProfile: {
     flexDirection: 'row',
   },
+  myNote: {
+    margin: 8, 
+    borderRadius: 5, 
+    fontFamily: 'Lato-Bold',
+    color: '#0090a5', 
+    fontSize: 15, 
+    paddingLeft: 2,
+  },
+  notes: {
+    backgroundColor: '#f0f0f0', 
+    color: '#585858', 
+    fontSize: 15, 
+    fontFamily: 'Lato-Regular', 
+    padding: 10, 
+    paddingTop: -3
+  },
   buttonText: {
     fontSize: 18,
     color: '#00ADC7',
     alignSelf: 'flex-start',
     flex: 1,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingBottom: 10,
   },
   requestList: {
     flex: 1,
@@ -47,7 +61,7 @@ var styles = StyleSheet.create({
   request: {
     flex: 1,
     flexDirection: 'column',
-    marginBottom: 5,
+    marginBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -91,15 +105,23 @@ class MyWormholes extends Component{
     });
   }
 
-  showStatus(status) {
-    if (status === 'completed') {
+  _renderVideo(item, index) {
+    if(item.submissions[0]) {
+      let imageUrl = `https://i.ytimg.com/vi/${item.submissions[0].video_url}/mqdefault.jpg`;
       return (
-        <Text>There is a Match!</Text>
-      )          
-    } else if (status === 'open') {
+        <Image 
+          style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+          source = {{uri: imageUrl}}
+        />
+      );
+    }else {
+      let imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${item.latitude},${item.longitude}&zoom=13&size=400x280&markers=icon:${encodeURIComponent(urls.getWormie+item.requestor.wormie_color.slice(1)+'.png')}%7C${item.latitude},${item.longitude}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
       return (
-        <Text>There is no Match Yet.</Text>
-      )
+        <Image 
+          style = {{height: 220}}
+          source = {{uri: imageUrl}}
+        />
+      );
     }
   }
 
@@ -122,9 +144,13 @@ class MyWormholes extends Component{
             >
               <View>
                 <Text style={styles.buttonText}>{wormhole.title} </Text>
-                <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
-                <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
-                <View style={styles.separator} />
+                {this._renderVideo(wormhole, outerIndex)}
+                <View style={{ backgroundColor: '#f0f0f0', flex:1, flexDirection: 'row'}}>
+                  <Text style={styles.myNote}>My Notes</Text>
+                </View>
+                <Text style={styles.notes}>
+                  {wormhole.notes}
+                </Text>
               </View>
             </TouchableHighlight>
           </View>

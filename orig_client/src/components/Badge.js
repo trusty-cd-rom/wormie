@@ -128,6 +128,7 @@ class Badge extends React.Component{
         <View style={ styles.button }>
           <TouchableHighlight
             onPress = { this.goToCreateRequest.bind(this)}
+            underlayColor='#4CC6EA'
             style={{flex:1, marginTop: 20, marginRight: 6}}
           >
             <Icon
