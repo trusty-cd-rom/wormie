@@ -11,7 +11,7 @@ import CreateRequest from '../containers/CreateRequest';
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#4CC6EA',
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'flex-start',
@@ -21,37 +21,39 @@ var styles = StyleSheet.create({
   },
   infoContainer: {
     // color: 'black',
+    paddingTop: 20,
     alignSelf: 'flex-start'
   },
   name: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#3e3e3e',
+    color: 'white',
     marginTop: 10,
     marginBottom: 5,
   },
   handle: {
     fontSize: 16,
-    color: '#727272'
+    color: '#b8f6ff'
   },
   image: {
     height: 70,
     width: 70,
     borderRadius: 35,
-    marginTop: 2,
+    marginTop: 22,
     alignSelf: 'center',
     marginLeft: 8,
     marginRight: 10
   },
   button: {
+    paddingTop: 15,
     flex: 1,
     flexDirection:'column',
     alignItems:'flex-end',
     paddingRight: 7,
   },
   ionic: { 
-    width: 30, 
-    height: 30,
+    width: 40, 
+    height: 40,
   }
 });
 
@@ -128,19 +130,12 @@ class Badge extends React.Component{
             onPress = { this.goToCreateRequest.bind(this)}
             style={{flex:1, marginTop: 20, marginRight: 6}}
           >
-            <View
-              style={{
-                backgroundColor:'navy',
-                width: 30,
-                height: 30,
-              }}>
-              <Icon
-                name='ion|plus-round'
-                size={30}
-                color='white'
-                style={styles.ionic}
-              />
-            </View>
+            <Icon
+              name='ion|plus-round'
+              size={40}
+              color='white'
+              style={styles.ionic}
+            />
           </TouchableHighlight>
         </View>
       );

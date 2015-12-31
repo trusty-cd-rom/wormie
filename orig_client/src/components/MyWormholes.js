@@ -31,8 +31,8 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonText: {
-    fontSize: 15,
-    color: 'navy',
+    fontSize: 18,
+    color: '#00ADC7',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold'
@@ -48,7 +48,8 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginBottom: 5,
-    paddingLeft: 0
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   centering: {
     alignItems: 'center',
@@ -60,6 +61,15 @@ var styles = StyleSheet.create({
   horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 5,
+    marginTop: 15,
+    marginBottom: 4,
+    marginRight: 5
   },
 });
 
@@ -107,13 +117,14 @@ class MyWormholes extends Component{
           >
             <TouchableHighlight
               onPress = {this.viewRequest.bind(this, wormhole)}
-              underlayColor = 'rgba(125,125,125,0.2)'
+              underlayColor = 'rgba(125,125,125,0)'
               style={styles.request}
             >
               <View>
                 <Text style={styles.buttonText}>{wormhole.title} </Text>
                 <Text style={{fontWeight:'bold'}}>{this.showStatus(wormhole.status)}</Text>
                 <Text style={{fontWeight:'bold'}}>Notes:</Text><Text>{wormhole.notes} </Text>
+                <View style={styles.separator} />
               </View>
             </TouchableHighlight>
           </View>
