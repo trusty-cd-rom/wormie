@@ -52,9 +52,6 @@ class Profile extends Component{
       setClickedProfile(currentUser);
     // this will be set from feedlist
     } 
-    // else {
-    //   setClickedProfile(clickedUser);
-    // }
   }
 
   // TODO: updateProfile

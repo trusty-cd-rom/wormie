@@ -231,16 +231,18 @@ var api = {
 	},
 
 	sortList(criteria, longitude, latitude) {
-		var url = urls.sortBy + '?sort_by=' + criteria;
-		if (longitude && latitude) {
-			url += `&longitude=${longitude}&latitude=${latitude}`
+		var url = `${urls.sortBy}?sort_by=${criteria}`;
+		if (longitude) {
+			url += `&longitude=${longitude}`
 		}
-		return fetch(urls.sortList, {
+		if (latitude) {
+			url += `&latitude=${latitude}`
+		}
+		console.log(url);
+		return fetch(url, {
 			method: 'GET'
 		})
-		.then(function (data) {
-			res.json();
-		})
+		.then((res) => res.json())
 		.catch(function (err) {
 			console.log(err);
 		})

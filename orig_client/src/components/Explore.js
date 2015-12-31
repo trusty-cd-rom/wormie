@@ -64,6 +64,8 @@ class Explore extends Component {
             selectedIndex={0} 
             onChange={this._onChange.bind(this)}/>
         </View>
+        <View style={styles.sort}>
+        </View>
         {this.state.focus}
       </View>
     );
@@ -95,6 +97,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#4CC6EA',
     height: 55
+  },
+  sort: {
+    flexDirection: 'row',
+    backgroundColor: '#f0f0f0',
+    height: 40
   },
   profilePic: {
     marginLeft: 10,

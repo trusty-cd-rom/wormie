@@ -15,7 +15,7 @@ class Wormhole(models.Model):
     requestor = models.ForeignKey(User, related_name='wormholes')
 
     class Meta:
-        ordering = ('created_at',)
+        ordering = ('-created_at',)
 
 
 class Submission(models.Model):
@@ -29,7 +29,7 @@ class Submission(models.Model):
     submitter = models.ForeignKey(User, related_name='submissions')
 
     class Meta:
-        ordering = ('created_at',)
+        ordering = ('-created_at',)
 
 
 class Account(models.Model):
