@@ -12,6 +12,7 @@ import React, {
   LayoutAnimation,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
+import Topbar from './Topbar';
 import Profile from '../containers/Profile';
 import { MKTextField, MKButton } from 'react-native-material-kit';
 var Accordion = require('react-native-collapsible/Accordion');
@@ -203,7 +204,6 @@ var CreateRequest = React.createClass({
     let { inputText, setCurrentTarget } = this.props;
     var title = inputText.title || 'Required';
     var notes = inputText.notes || 'Optional';
-
     return (
       <View style={styles.container}>
 
@@ -230,16 +230,11 @@ var CreateRequest = React.createClass({
           </TouchableHighlight>
 
         </View>
-
-
         <ScrollView 
           style = {styles.contentContainer}
           contentOffset = {{x: 0, y: inputText.keyboardSpace}}
         >
-
           {this._renderMapBox.bind(this)()}
-
-          
           <View style = {styles.inputField}>
             <TitleField
               value = {inputText.title}

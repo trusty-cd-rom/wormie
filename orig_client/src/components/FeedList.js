@@ -40,10 +40,23 @@ var FeedList = React.createClass({
       // set currentUser to clickedUser
       setClickedProfile(currentUser);
     }
+
   },
   componentDidMount() {
-    let { refreshFeedData_fromAsyncStorage } = this.props;
+    let { refreshFeedData_fromAsyncStorage, setCurrentLocation, } = this.props;
     // refreshFeedData_fromAsyncStorage(AsyncStorage);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var dist = [];
+        let initialPosition = JSON.stringify(position);
+        console.log(initialPosition);
+        console.log(typeof position.coords.latitude);
+        //replace with call to action function, update state via reducer
+        setCurrentLocation(position.coords.longitude.toFixed(7), position.coords.latitude.toFixed(7));
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   },
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
@@ -78,7 +91,6 @@ var FeedList = React.createClass({
       );
     }
   },
-              // this.viewProfile.bind(this)
   _showRequestorOnCard(item) {
     let { getUserInfo } = this.props;
     if(item.submissions[0]) {
@@ -140,9 +152,12 @@ var FeedList = React.createClass({
   },
 
   render() {
-    var { feed, getUserInfo, filterByStatus, sortList } = this.props;
-    var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
-      // console.log(item);
+    var { feed, getUserInfo, filterByStatus, sortList, currentLocation } = this.props;
+    // var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
+    var lat = currentLocation ? currentLocation.latitude : "0";
+    var lon = currentLocation ? currentLocation.longitude : "0";
+
+    var list = feed.map((item, index) => {
       return (
         <View key = {feed.length - 1 - index}>
           <TouchableHighlight
@@ -192,13 +207,6 @@ var FeedList = React.createClass({
       );
     });
 
-    // <View style = {styles.row}>
-    //             <Image 
-    //               style = {[styles.profilePic, styles.marginLeft]}
-    //               source = {{uri: item.requestor.picture_url}}
-    //             />
-    //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
-    //           </View>
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
@@ -216,24 +224,14 @@ var FeedList = React.createClass({
           }}
         >
           <TouchableHighlight
-            onPress={() => { 
-              filterByStatus('completed');
-            }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Complete</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { filterByStatus('open') }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Open</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { sortList('nearby') }}
+            onPress={() => { sortList('nearby', lon, lat) }}
           >
             <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            onPress={() => { sortList('recent') }}
+            onPress={() => { 
+              sortList('recent');
+            }}
           >
             <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
           </TouchableHighlight>

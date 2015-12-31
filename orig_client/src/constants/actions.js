@@ -39,10 +39,14 @@ export const TOGGLE_PEEK_CLICKED_USER = 'TOGGLE_PEEK_CLICKED_USER';
 export const CREATE_WORMIE = 'CREATE_WORMIE';
 export const CREATE_HEART = 'CREATE_HEART';
 
-// yelp
+// yelp for query
 export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
 export const SET_CURRENT_TERM = 'SET_CURRENT_TERM';
 export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
+
+// user location
+export const SET_USER_LOCATION = 'SET_USER_LOCATION';
+
 export const SET_RESULT_LIST = 'SET_RESULT_LIST';
 export const SET_CURRENT_TARGET = 'SET_CURRENT_TARGET';
 

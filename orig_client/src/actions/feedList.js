@@ -1,4 +1,13 @@
-import { SET_CLICKED_USER, SET_CURRENT_USER, UPDATE_CURRENT_WORMHOLE, UPDATE_FEED, COPY_CURRENT_USER,  TOGGLE_PEEK_CLICKED_USER, } from '../constants/actions';
+import { 
+  SET_CLICKED_USER, 
+  SET_CURRENT_USER, 
+  UPDATE_CURRENT_WORMHOLE, 
+  UPDATE_FEED, 
+  COPY_CURRENT_USER, 
+  TOGGLE_PEEK_CLICKED_USER,
+  SET_USER_LOCATION,
+} from '../constants/actions';
+
 import api from '../utils/api';
 
 export function updateCurrentWormhole(wormhole) {
@@ -62,11 +71,13 @@ export function filterByStatus(status) {
   }
 }
 
-export function sortList(criteria) {
-  console.log(criteria);
+export function sortList(criteria, longitude, latitude) {
   return dispatch => {
-    return api.sortList(criteria)
+    console.log(criteria, longitude, latitude);
+    console.log('going to api');
+    return api.sortList(criteria, longitude, latitude)
       .then(function (res) {
+        console.log('res', res);
         dispatch(refreshFeedDataAction(res))
       })
   }
@@ -103,3 +114,11 @@ export function refreshFeedData_fromAsyncStorage(asyncStorage, cb) {
     })
   }
 };
+
+export function setCurrentLocation(lon, lat) {
+  return {
+    type: SET_USER_LOCATION,
+    longitude: lon,
+    latitude: lat
+  }
+}
