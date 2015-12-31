@@ -1,4 +1,12 @@
-import { SET_CLICKED_USER, SET_CURRENT_USER, UPDATE_CURRENT_WORMHOLE, UPDATE_FEED, COPY_CURRENT_USER,  TOGGLE_PEEK_CLICKED_USER, } from '../constants/actions';
+import { 
+  SET_CLICKED_USER, 
+  SET_CURRENT_USER, 
+  UPDATE_CURRENT_WORMHOLE, 
+  UPDATE_FEED, 
+  COPY_CURRENT_USER, 
+  TOGGLE_PEEK_CLICKED_USER,
+} from '../constants/actions';
+
 import api from '../utils/api';
 
 export function updateCurrentWormhole(wormhole) {
@@ -52,26 +60,6 @@ function checkClickedUser() {
   }
 }
 
-export function filterByStatus(status) {
-  console.log(status);
-  return dispatch => {
-    return api.filterByStatus(status)
-      .then(function (res) {
-        dispatch(refreshFeedDataAction(res))
-      })
-  }
-}
-
-export function sortList(criteria) {
-  console.log(criteria);
-  return dispatch => {
-    return api.sortList(criteria)
-      .then(function (res) {
-        dispatch(refreshFeedDataAction(res))
-      })
-  }
-}
-
 function refreshFeedDataAction(data) {
   return {
     type: UPDATE_FEED,
@@ -103,3 +91,4 @@ export function refreshFeedData_fromAsyncStorage(asyncStorage, cb) {
     })
   }
 };
+

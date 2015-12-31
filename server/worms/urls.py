@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^api/accounts/(?P<pk>[0-9]+)/$', views.AccountDetail.as_view()),
     url(r'^api/discover/$', views.yelp_list),
     url(r'^api/sort_by/$', views.sorted_list),
-    url(r'^api/filter/$', views.filtered_list),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

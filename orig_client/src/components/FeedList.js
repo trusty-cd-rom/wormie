@@ -40,10 +40,12 @@ var FeedList = React.createClass({
       // set currentUser to clickedUser
       setClickedProfile(currentUser);
     }
+
   },
   componentDidMount() {
-    let { refreshFeedData_fromAsyncStorage } = this.props;
+    let { refreshFeedData_fromAsyncStorage, } = this.props;
     // refreshFeedData_fromAsyncStorage(AsyncStorage);
+    
   },
   viewRequest(index) {
     var { feed, updateCurrentWormhole } = this.props;
@@ -78,7 +80,6 @@ var FeedList = React.createClass({
       );
     }
   },
-              // this.viewProfile.bind(this)
   _showRequestorOnCard(item) {
     let { getUserInfo } = this.props;
     if(item.submissions[0]) {
@@ -140,9 +141,10 @@ var FeedList = React.createClass({
   },
 
   render() {
-    var { feed, getUserInfo, filterByStatus, sortList } = this.props;
-    var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
-      // console.log(item);
+    var { feed, getUserInfo, filterByStatus } = this.props;
+    // var list = feed.slice(feed.length-10,feed.length).reverse().map((item, index) => {
+
+    var list = feed.map((item, index) => {
       return (
         <View key = {feed.length - 1 - index}>
           <TouchableHighlight
@@ -192,13 +194,18 @@ var FeedList = React.createClass({
       );
     });
 
-    // <View style = {styles.row}>
-    //             <Image 
-    //               style = {[styles.profilePic, styles.marginLeft]}
-    //               source = {{uri: item.requestor.picture_url}}
-    //             />
-    //             <Text style = {styles.cardRequestor}> {item.requestor.username} </Text>
-    //           </View>
+          // <TouchableHighlight
+          //   onPress={() => { sortList('nearby', lon, lat) }}
+          // >
+          //   <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
+          // </TouchableHighlight>
+          // <TouchableHighlight
+          //   onPress={() => { 
+          //     sortList('recent');
+          //   }}
+          // >
+          //   <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
+          // </TouchableHighlight>
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
@@ -212,31 +219,9 @@ var FeedList = React.createClass({
             flex: 1,
             top: 30,
             left: 5,
-            backgroundColor: '#494949',
+            backgroundColor: 'red',
           }}
         >
-          <TouchableHighlight
-            onPress={() => { 
-              filterByStatus('completed');
-            }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Complete</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { filterByStatus('open') }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Open</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { sortList('nearby') }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => { sortList('recent') }}
-          >
-            <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
-          </TouchableHighlight>
         </View>
       </ScrollView>
     );
@@ -247,6 +232,7 @@ var styles = StyleSheet.create({
   container:{
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 3,
     marginBottom: 50,
   },
   buttonText: {
@@ -314,7 +300,7 @@ var styles = StyleSheet.create({
     marginRight: 7,
   },
   spaceBuffer: {
-    flex: 2
+    flex: 2,
   },
   backgroundVideo: {
     alignSelf: 'stretch',

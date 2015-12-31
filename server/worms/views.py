@@ -15,7 +15,9 @@ from rest_framework.authtoken.models import Token
 
 # 
 from worms.yelp import yelpMain
+from worms.distance import distanceMain
 from rest_framework.decorators import api_view
+import json
 # from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 #############################
@@ -295,8 +297,13 @@ class AccountDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
 
+#############################
+# DISCOVER(YELP)
+#############################
+
+
+@api_view(['GET', 'POST'])
 
 def yelp_list(request):
 
@@ -313,31 +320,43 @@ def yelp_list(request):
         return Response(yelp_data)
 
 
+#############################
+# SORTING
+#############################
+
+
+@api_view(['GET', 'POST'])
 def sorted_list(request):
 
     """
     Sorting criteria: nearby, recent
     """
 
-    print('inside filtered_list')
-    print(Wormhole.objects.all())
     sorting_criteria = request.GET.get('sort_by', '')
+
     if request.method == 'GET':
-        wormholes = Wormhole.objects.all().filter()
-        serializer = WormholeSerializer(wormholes, many=True)
-        return Response(serializer.data)
+        
+        if sorting_criteria == 'recent':
+            wormholes = Wormhole.objects.all()
+            serializer = WormholeSerializer(wormholes, many=True)
+            return Response(serializer.data)
 
+        elif sorting_criteria == 'nearby':
+            wormholes = Wormhole.objects.all()
+            serializer = WormholeSerializer(wormholes, many=True).data
 
-def filtered_list(request):
+            lon2 = request.GET.get('longitude', '')
+            lat2 = request.GET.get('latitude', '')
 
-    """
-    Sorting criteria: complete, incomplete
-    """
+            # loop through wormholes and add distance key for each wormhole
+            for worm in serializer:
+                lon1 = worm.get('longitude')
+                lat1 = worm.get('latitude')
+                dist = distanceMain(lon1, lat1, lon2, lat2)
+                worm.distance = dist
 
-    filter_criteria = request.GET.get('status', '')
-    if request.method == 'GET':
-        wormholes = Wormhole.objects.all().filter(status=filter_criteria)
-        serializer = WormholeSerializer(wormholes, many=True)
-        return Response(serializer.data)
+            # sort by distance
+            sortedWormholes = sorted(serializer, key=lambda worm: worm.distance)
+            return Response(sortedWormholes)
 
 
