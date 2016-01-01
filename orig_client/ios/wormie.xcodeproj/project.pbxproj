@@ -78,6 +78,7 @@
 		CB44840A1C213EA800655075 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484011C213EA800655075 /* Lato-Semibold.ttf */; };
 		CB44840B1C213EA800655075 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4484021C213EA800655075 /* Lato-Thin.ttf */; };
 		CB6AFE571C34B07200E71692 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = CB6AFE561C34B07200E71692 /* iTunesArtwork */; };
+		CB7D49111C35F71C00F5B3BB /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7D49071C35F6F400F5B3BB /* libRCTPushNotification.a */; };
 		CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9663611C334FB90095C4C1 /* libSafariViewManager.a */; };
 		CBC9301C1C1CB141005EBA4F /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9301B1C1CB0AE005EBA4F /* libRCTFBSDKCore.a */; };
 		CBD013241C34907000E65EBD /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD013231C34907000E65EBD /* Lato-Semibold.ttf */; };
@@ -217,6 +218,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = C5DBB34B1AF2EF2B00E611A9;
 			remoteInfo = RCTMapboxGLTests;
+		};
+		CB7D49061C35F6F400F5B3BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB7D48F71C35F6F300F5B3BB /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
 		};
 		CB9663601C334FB90095C4C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -383,6 +391,7 @@
 		CB4484011C213EA800655075 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "../src/assets/Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		CB4484021C213EA800655075 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/Lato-Thin.ttf"; sourceTree = "<group>"; };
 		CB6AFE561C34B07200E71692 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		CB7D48F71C35F6F300F5B3BB /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		CBC930161C1CB0AE005EBA4F /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
 		CBD013231C34907000E65EBD /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
@@ -401,6 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB7D49111C35F71C00F5B3BB /* libRCTPushNotification.a in Frameworks */,
 				CB9663621C334FFA0095C4C1 /* libSafariViewManager.a in Frameworks */,
 				CB245E321C22480100A92EF6 /* libz.tbd in Frameworks */,
 				CB245E301C2247F800A92EF6 /* libsqlite3.tbd in Frameworks */,
@@ -717,6 +727,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CB7D48F71C35F6F300F5B3BB /* RCTPushNotification.xcodeproj */,
 				CB9663481C334FB90095C4C1 /* SafariViewManager.xcodeproj */,
 				13EA60831C1FCDBF006EE751 /* RCTFBSDKLogin.xcodeproj */,
 				1321B92C1C1CF576002DEA85 /* ReactNativeIcons.xcodeproj */,
@@ -780,6 +791,14 @@
 			children = (
 				CB245E191C22470900A92EF6 /* libRCTMapboxGL.a */,
 				CB245E1B1C22470900A92EF6 /* RCTMapboxGLTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB7D48F81C35F6F300F5B3BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB7D49071C35F6F400F5B3BB /* libRCTPushNotification.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -965,6 +984,10 @@
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = CB7D48F81C35F6F300F5B3BB /* Products */;
+					ProjectRef = CB7D48F71C35F6F300F5B3BB /* RCTPushNotification.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -1134,6 +1157,13 @@
 			fileType = wrapper.cfbundle;
 			path = RCTMapboxGLTests.xctest;
 			remoteRef = CB245E1A1C22470900A92EF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB7D49071C35F6F400F5B3BB /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = CB7D49061C35F6F400F5B3BB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CB9663611C334FB90095C4C1 /* libSafariViewManager.a */ = {
@@ -1322,6 +1352,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/fbsdkcore/**",
 					"$(SRCROOT)/../node_modules/react-native/fbsdklogin/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = wormie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1351,6 +1382,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/fbsdkcore/**",
 					"$(SRCROOT)/../node_modules/react-native/fbsdklogin/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = wormie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
