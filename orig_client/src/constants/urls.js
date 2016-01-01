@@ -1,9 +1,9 @@
-const host = 'http://wormie-4-dev.elasticbeanstalk.com/api';
-const authHost = 'http://wormie-4-dev.elasticbeanstalk.com/auth';
+// const host = 'http://wormie-4-dev.elasticbeanstalk.com/api';
+// const authHost = 'http://wormie-4-dev.elasticbeanstalk.com/auth';
 const wormieHost = 'http://52.53.249.61';
 
-// const host = 'http://localhost:8000/api';
-// const authHost = 'http://localhost:8000/auth';
+const host = 'http://localhost:8000/api';
+const authHost = 'http://localhost:8000/auth';
 
 // http://localhost:8000/api/sort_by/?sort_by=nearby&logitude=23.12312&latitude=29.32304
 const urls = {
