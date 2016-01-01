@@ -40,6 +40,8 @@ class Account(models.Model):
     about_me = models.CharField(max_length=255)
     wormie_color = models.CharField(max_length=100)
     fb_id = models.CharField(max_length=200, default="12345")
+    submission_likes = models.ManyToManyField(Submission, related_name='likers')
+    wormhole_likes = models.ManyToManyField(Wormhole, related_name='likers')
 
     class Meta:
         ordering = ('created_at',)

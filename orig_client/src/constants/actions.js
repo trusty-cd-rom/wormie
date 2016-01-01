@@ -48,6 +48,9 @@ export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
 // user location
 export const SET_USER_LOCATION = 'SET_USER_LOCATION';
 
+// likes
+export const UPDATE_LIKES = 'UPDATE_LIKES';
+
 export const SET_RESULT_LIST = 'SET_RESULT_LIST';
 export const SET_CURRENT_TARGET = 'SET_CURRENT_TARGET';
 export const SET_CURRENT_FEED_TAB = 'SET_CURRENT_FEED_TAB';
