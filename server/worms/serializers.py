@@ -31,7 +31,8 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        field = ('picture_url', 'location', 'about_me', 'wormie_color', 'fb_id')
+        field = ('picture_url', 'location', 'about_me', 'wormie_color',
+            'fb_id', 'submission_likes', 'wormhole_likes')
 
 
 class PersonBaseSerializer(serializers.ModelSerializer):
@@ -45,11 +46,14 @@ class PersonBaseSerializer(serializers.ModelSerializer):
     picture_url = serializers.ReadOnlyField(source='account.picture_url')
     wormie_color = serializers.ReadOnlyField(source='account.wormie_color')
     fb_id = serializers.ReadOnlyField(source='account.fb_id')
+    submission_likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True, source='account.submission_likes')
+    wormhole_likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True, source='account.wormhole_likes')
 
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name',
-            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color', 'fb_id')
+            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color',
+            'fb_id', 'submission_likes', 'wormhole_likes')
 
 
 class SubmissionSerializer(SubmissionBaseSerializer):
@@ -60,6 +64,7 @@ class SubmissionSerializer(SubmissionBaseSerializer):
 
     wormhole = WormholeBaseSerializer()
     submitter = PersonBaseSerializer()
+    likers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
 
 class WormholeSerializer(WormholeBaseSerializer):
@@ -70,6 +75,8 @@ class WormholeSerializer(WormholeBaseSerializer):
 
     requestor = PersonBaseSerializer()
     submissions = SubmissionSerializer(many=True, read_only=True)
+    likers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
 
 
 class PersonExpandedSerializer(PersonBaseSerializer):
@@ -83,7 +90,8 @@ class PersonExpandedSerializer(PersonBaseSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name',
-            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color', 'fb_id', 'wormholes', 'submissions')
+            'email', 'account_id', 'about_me', 'picture_url', 'wormie_color', 'fb_id',
+            'submission_likes', 'wormhole_likes', 'wormholes', 'submissions')
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -170,6 +170,13 @@ var MapExplore = React.createClass({
       right: getRandomNumber(50, 150)
     });
     this.setState(this.state);
+
+    // If the user hasn't already liked the submission, then this will fire off a like!
+    var { currentWormhole, currentUser, updateLikes} = this.props;
+    if ( currentWormhole.submissions[0].likers.indexOf(currentUser.account_id) === -1 ) {
+      updateLikes(currentUser, currentWormhole);
+    }
+
   },
 
   removeHeart(v) {
@@ -395,7 +402,8 @@ var MapExplore = React.createClass({
                   style = {styles.heart}
                   source = {{uri: urls.getRightHeart + currentWormhole.submissions[0].submitter.wormie_color.slice(1) + ".png" }}
                 />
-            <Text style={styles.cardRequestor}> Wormhole opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
+            <Text style={styles.cardRequestor}> { currentWormhole.submissions[0].likers.length === 1 ? currentWormhole.submissions[0].likers.length + " like" : currentWormhole.submissions[0].likers.length + " likes"} </Text>
+            <Text style={styles.date}> Opened {this._timeSince(Date.parse(currentWormhole.submissions[0].created_at))} ago</Text>
           </View>
         </View>
       );
@@ -481,7 +489,7 @@ var styles = StyleSheet.create({
   littleRow: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    height: 50
+    height: 50,
   },
   cardTitle: {
     marginTop: 5,
@@ -522,6 +530,14 @@ var styles = StyleSheet.create({
   heart: {
     height: 28,
     width: 18,
+  },
+  date: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 12,
+    color: '#727272',
+    marginLeft: 5,
+    marginTop: 5,
+    marginRight: 5,
   },
 
 });

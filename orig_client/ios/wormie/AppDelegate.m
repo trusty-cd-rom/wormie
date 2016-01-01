@@ -12,6 +12,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+#import "RCTPushNotificationManager.h"
+
 #import "RCTRootView.h"
 
 @implementation AppDelegate
@@ -40,7 +42,7 @@
   // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.90:8081/index.ios.bundle?platform=ios&dev=true"];
    // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
    // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.103:8081/index.ios.bundle?platform=ios&dev=true"];
-jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+//jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
@@ -52,6 +54,7 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
      // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
 //     jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
      // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
+     jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -60,6 +63,7 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
    */
 
   // jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   
   
   // Facebook
@@ -90,5 +94,17 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];
 }
+
+// Required for the register event.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+  [RCTPushNotificationManager application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+// Required for the notification event.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
+{
+  [RCTPushNotificationManager application:application didReceiveRemoteNotification:notification];
+}
+
 
 @end

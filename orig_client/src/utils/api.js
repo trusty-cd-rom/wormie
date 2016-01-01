@@ -40,9 +40,10 @@ var api = {
 	},
 
 	getWormholeDetails(id) {
-		return fetch(`${urls.wormholes}/${id}`)
-		.then((res) => res.json())
-		;
+		return fetch(`${urls.wormholes}${id}`)
+			.then((res) => {
+				return res.json();
+			});
 	},
 
 	updateWormholeDetails(wormholeId, wormholeData) {
@@ -57,7 +58,6 @@ var api = {
 	  })
 	  .then((res) => {
 	  	// console.log('just head back from the put, and they said: ', res);
-	  	res
 	  })
 	  ;
 	},
@@ -170,6 +170,49 @@ var api = {
 			res.json();
 		})
 	},
+
+	/*
+	/	 Update wormhole and submission likes for a given user 
+	*/
+	updateLikes(currentUser, currentWormhole) {
+
+		// PUT overwrites data, so need to include existing likes
+		var wormholeLikes = currentUser.wormhole_likes;
+		var submissionLikes = currentUser.submission_likes;
+
+		// the new likes
+		var wormholeID = currentWormhole.id;
+		var submissionID = currentWormhole.submissions[0].id;
+
+		// Add the new likes to the existing likes
+		wormholeLikes.push(wormholeID);
+		submissionLikes.push(submissionID);
+
+		var data = {
+			"wormhole_likes": wormholeLikes,
+			"submission_likes": submissionLikes
+		}
+
+		var accountID = currentUser.account_id;
+
+		console.log("9999999999999999999999999");
+		console.log(data);
+
+		return fetch(`${urls.accounts}${accountID}/`, {
+			method: 'put',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		})
+		.then((res) => {
+			console.log(res);
+			res.json();
+		})
+
+	},
+
+
 
 	/*
 	/	 Convert facebook token to Oauth2, create new User in database

@@ -165,10 +165,6 @@ function updateProfile(state, action) {
         'wormie_red': action['wormie_red'],
         'wormie_green': action['wormie_green'],
         'wormie_blue': action['wormie_blue'],
-        // ...state,
-        // ...updateUserProfileActions
-        // 'about_me': action["about_me"],
-        // user: updateName(state.user, action)
       }
     default:
       return state;
@@ -176,30 +172,3 @@ function updateProfile(state, action) {
 }
 
 export default userProfile;
-
-
-
-// function createUserProfile(state = initialState2, action) {
-//   switch(action.type) {
-//     case ADD_USER_INFO:
-//       return {
-//         ...state,
-//         about_me: action["about_me"],
-//         user: updateName(state.user, action)
-//       }
-//     default:
-//       return state;
-//   }
-// }
-
-// function updateName(state = initialState3, action) {
-//   switch(action.type) {
-//     case ADD_USER_INFO:
-//       return {
-//         ...state,
-//         username: action.username
-//       }
-//     default:
-//       return state;
-//   }
-// }

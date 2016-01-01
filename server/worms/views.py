@@ -103,8 +103,7 @@ class SubmissionList(APIView):
     # serializer_class = SubmissionSerializer
 
     def get(self, request, format=None):
-        print(APIView.GET.get('api',''))
-        submissions = Submission.objects.all().filter(status='completed')
+        submissions = Submission.objects.all()
         serializer = SubmissionSerializer(submissions, many=True)
         return Response(serializer.data)
 
