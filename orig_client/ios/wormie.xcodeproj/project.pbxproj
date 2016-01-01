@@ -1338,7 +1338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Harrington (RZSUQBEMS7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = NO;
@@ -1360,7 +1360,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.wormie1;
 				PRODUCT_NAME = Wormie;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "22474bb1-9a03-4d87-b0ca-22461f5740c6";
 			};
 			name = Debug;
 		};
@@ -1368,7 +1368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Charles Harrington (RZSUQBEMS7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = NO;
@@ -1390,7 +1390,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.wormie1;
 				PRODUCT_NAME = Wormie;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "22474bb1-9a03-4d87-b0ca-22461f5740c6";
 			};
 			name = Release;
 		};

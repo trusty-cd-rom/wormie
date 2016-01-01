@@ -42,8 +42,8 @@
   // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.90:8081/index.ios.bundle?platform=ios&dev=true"];
    // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.101:8081/index.ios.bundle?platform=ios&dev=true"];
    // jsCodeLocation = [NSURL URLWithString:@"http://10.8.5.103:8081/index.ios.bundle?platform=ios&dev=true"];
-jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-// jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+//jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 //  jsCodeLocation = [NSURL URLWithString:@"http://192.168.0.105:8081/index.ios.bundle?platform=ios&dev=true"];
@@ -63,6 +63,7 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?p
    */
 
   // jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   
   
   // Facebook
