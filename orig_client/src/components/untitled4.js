@@ -18,12 +18,11 @@ var YouTube = require('react-native-youtube');
 
 var styles = StyleSheet.create({
   container:{
-    // marginTop: 20,
-    flex:1,
     alignItems: 'stretch',
+    flex: 1
   },
   submitterName: {
-    fontSize: 15,
+    fontSize: 18,
     color: '#00ADC7',
     alignSelf: 'flex-start',
     flex: 1,
@@ -56,15 +55,6 @@ var styles = StyleSheet.create({
     marginLeft: 5, 
     marginTop: 5,
   },
-  submissionNotes: {
-    borderRadius: 5, 
-    fontFamily: 'Lato-Bold',
-    fontSize: 15, 
-    paddingBottom: 10,
-    alignSelf: 'flex-start',
-    backgroundColor: '#f0f0f0', 
-    color: '#585858', 
-  },
   buttonText: {
     fontSize: 15,
     color: '#4CC6EA',
@@ -73,21 +63,21 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   image: {
-    height: 30,
-    width: 30,
-    borderRadius: 15,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
   },
   submitterProfile: {
     flexDirection: 'row',
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 3,
+    marginTop: 10,
     backgroundColor: 'white',
+    flex: 1,
   },
   requestList: {
-    color: 'purple',
-    flex: 3,
-    flexDirection: 'column',
+    width: 375,
+    color: '#575757',
   },
   noMatch: {
     margin: 8, 
@@ -100,17 +90,7 @@ var styles = StyleSheet.create({
     padding: 10,
     alignSelf: 'center',
   },
-  ouch: {color: '#ffa950', justifyContent: 'center', alignSelf: 'center', fontFamily: 'Lato-Bold', fontSize: 30},
-  buttonText: {
-    fontSize: 18,
-    color: '#00ADC7',
-    alignSelf: 'flex-start',
-    flex: 1,
-    fontWeight: 'bold',
-    paddingLeft: 20,
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
+  ouch: {color: '#ffa950', justifyContent: 'center', alignSelf: 'center', fontFamily: 'Lato-Bold', fontSize: 30}
 });
 
 var ViewMyWormholeList = React.createClass({
@@ -142,7 +122,7 @@ var ViewMyWormholeList = React.createClass({
           automaticallyAdjustContentInsets={false}
           onScroll={() => { console.log('onScroll!'); }}
           scrollEventThrottle={200}
-          style={{backgroundColor: 'white' }}
+          style={{backgroundColor: 'white', flex: 1}}
         >
           {this.createList()}
         </ScrollView>
@@ -152,13 +132,14 @@ var ViewMyWormholeList = React.createClass({
         <View
           style={{
             flex:1, 
+            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'white'
           }}
         >
           <View
-            style={{alignSelf: 'center'}}
+            style={{alignSelf: 'center', alignItems: 'center', justifyContent: 'center',}}
           >
             <Text style={styles.ouch}>
               OUCH!
@@ -196,8 +177,91 @@ var ViewMyWormholeList = React.createClass({
                 //   style={{alignSelf: 'center', width: 150, height: 215}}
                 // />
 
-
+// return (
+//           <TouchableHighlight
+//             onPress = {this.viewRequest.bind(this, index)}
+//             underlayColor = 'rgba(125,125,125,0.2)'
+//             key={index}
+//           >
+//             <View
+//               style={{marginTop: 14}}
+//             >
+//               <View 
+//                 style = {styles.submitterProfile}
+//               >
+//                 <Image 
+//                   style = {styles.image}
+//                   source = {{uri: imageUrl}}
+//                 />
+//                 <Text> Submitter: {submission.submitter.username} </Text>
+//               </View>
+//               <Text>Notes: { submission.notes }</Text>
+//               <View
+//                 style={{alignSelf: 'center', backgroundColor: 'red', height: 400, width: 310, marginBottom: 30}}
+//               >
+//                 <YouTube 
+//                   videoId={submission['video_url']}
+//                   play={false}
+//                   hidden={false}
+//                   playsInline={true}
+//                   showinfo={false}
+//                   modestbranding={true}
+//                   onError={(e)=>{console.log('youtube error: ', e.error)}}
+//                   style={{height: 570, backgroundColor: 'white', }}
+//                 />
+//               </View>
+//             </View>
+//           </TouchableHighlight>
   // if function returns jsx/array of jsx, it does not take .bind(this)
+
+
+
+// <View 
+//               style = {styles.submitterProfile}
+//             >
+//               <Image 
+//                 style = {styles.image}
+//                 source = {{uri: submission.submitter.picture_url}}
+//               />
+//               <View style={{backgroundColor: 'blue'}}>
+//                 <Text style={styles.submitterName}> Submitter: {submission.submitter.username} </Text>
+//               </View>
+//             </View>
+//             <View
+//               style={{backgroundColor: 'yellow', flex: 1, flexDirection: 'row'}}
+//             >
+//               <YouTube 
+//                 videoId={submission.video_url}
+//                 play={false}
+//                 hidden={false}
+//                 playsInline={true}
+//                 showinfo={false}
+//                 modestbranding={true}
+//                 onError={(e)=>{console.log('youtube error: ', e.error)}}
+//                 style={{flex: 1}}
+//               />
+              
+//               <Mapbox
+//                 style={{flex: 1, opacity: 0.7}}
+//                 direction={0}
+//                 rotateEnabled={true}
+//                 scrollEnabled={true}
+//                 zoomEnabled={true}
+//                 showsUserLocation={false}
+//                 attributionButtonIsHidden={true}
+//                 logoIsHidden={true}
+//                 compassIsHidden={true}
+//                 ref={mapRef}
+//                 accessToken={mapboxConfig.accessToken}
+//                 styleURL={mapboxConfig.styleURL}
+//                 userTrackingMode={this.userTrackingMode.follow}
+//                 zoomLevel={15}
+//                 annotations={[]}
+//               />
+//             </View>
+//             <Text style={{marginLeft: 20,marginRight: 20,}}>Notes: { submission.notes }</Text>   
+
+
   createList() {
     var { myCurrentWormholeList } = this.props;
     var submitList, submitters;
@@ -208,62 +272,19 @@ var ViewMyWormholeList = React.createClass({
         let imageUrl = `https://i.ytimg.com/vi/${submission['video_url']}/mqdefault.jpg`;
         console.log('submission', submission);
         return (
-          <View style={{height: 300}}>
-            <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
-            <View 
-              style = {styles.submitterProfile}
-            >
-              <Image 
-                style = {styles.image}
-                source = {{uri: submission.submitter.picture_url}}
-              />
-              <View>
-                <Text style={styles.submitterName}>{submission.submitter.username}</Text>
-                <Text style={styles.submissionNotes}>Notes: { submission.notes }</Text>
-              </View>
-            </View>
-            <View
-              style={{flex: 8, flexDirection: 'row', backgroundColor: 'red', margin: 20, marginTop: 0}}
-            >
-              <View style={{flex: 1}}>
-                <YouTube 
-                  videoId={submission.video_url}
-                  play={false}
-                  hidden={false}
-                  playsInline={true}
-                  showinfo={false}
-                  modestbranding={true}
-                  onError={(e)=>{console.log('youtube error: ', e.error)}}
-                  style={{flex: 1}}
-                />
-              </View>
-              <View style={{flex: 1}}>
-                <Mapbox
-                  style={{flex: 1, opacity: 1}}
-                  direction={0}
-                  rotateEnabled={true}
-                  scrollEnabled={true}
-                  zoomEnabled={true}
-                  showsUserLocation={false}
-                  attributionButtonIsHidden={true}
-                  logoIsHidden={true}
-                  compassIsHidden={true}
-                  ref={mapRef}
-                  accessToken={mapboxConfig.accessToken}
-                  styleURL={mapboxConfig.styleURL}
-                  userTrackingMode={this.userTrackingMode.follow}
-                  zoomLevel={15}
-                  annotations={[]}
-                />
-              </View>
-              
-            </View>
+          <View
+            style={{flex: 1, width: 375, color: 'red', padding: 5,}}
+          >
+
           </View>
+
         );
       });
 
       submitters = (
-        { submitList }
+        <View>
+          { submitList }
+        </View>
       )
     } else {
       submitters = <View />;
@@ -277,20 +298,30 @@ var ViewMyWormholeList = React.createClass({
       </View>
     );
   },
+            // <View
+            //   style={{alignSelf: 'center', height: 700, width: 350, marginTop: 20, marginBottom: 20}}
+            // >
+            //   <YouTube 
+            //     videoId={submission['video_url']}
+            //     play={false}
+            //     hidden={false}
+            //     playsInline={true}
+            //     showinfo={false}
+            //     modestbranding={true}
+            //     onError={(e)=>{console.log('youtube error: ', e.error)}}
+            //     style={{height: 700, backgroundColor: 'white', }}
+            //   />
+            // </View>
 
   render() {
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
-      <View
-        style={styles.container}
-      >
+      <View>
         <Topbar 
           topbarTitle={"Wormholes"} 
           navigator={this.props.navigator}
         />
-        <View
-          style={{flex: 1}}
-        >
+        <View>
           {this.showWormhole()}
         </View>
       </View>
