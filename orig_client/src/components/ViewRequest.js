@@ -251,5 +251,3 @@ const styles = StyleSheet.create({
 });
 
 export default ViewRequest;
-
-            // onChangeState={(e)=>{if(e.state === 'ended') {this.refs.youtubePlayer.seekTo(0)}}}

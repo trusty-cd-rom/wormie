@@ -210,6 +210,7 @@ var CreateRequest = React.createClass({
 
           <TouchableHighlight
             style = {styles.backButton}
+            underlayColor='#4CC6EA'
             onPress = {this.back.bind(this)}
           >
             <Text style = {styles.backText}> {'X'} </Text>
@@ -219,6 +220,8 @@ var CreateRequest = React.createClass({
 
           <TouchableHighlight
             style = {styles.createButton}
+            underlayColor = '#4CC6EA'
+            
             onPress = {() => {
               
               this.submitRequest.bind(this)();

@@ -89,6 +89,18 @@ var styles = StyleSheet.create({
     marginTop: 4,
     marginRight: 15
   },
+  noMatch: {
+    margin: 8, 
+    borderRadius: 10, 
+    fontFamily: 'Lato-Bold',
+    color: 'white',
+    backgroundColor: '#00ADC7',
+    // backgroundColor: '#A88FFF',
+    fontSize: 20,
+    padding: 10,
+    alignSelf: 'center',
+  },
+  ouch: {color: '#ffa950', justifyContent: 'center', alignSelf: 'center', fontFamily: 'Lato-Bold', fontSize: 30},
 });
 
 class DiscoverSearch extends React.Component{
@@ -124,26 +136,18 @@ class DiscoverSearch extends React.Component{
     })
     if (rowData.name === 'default') {
       return (
-        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{top: 90, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <View
-            style={{alignSelf: 'center', marginTop: 65}}
+            style={{alignSelf: 'center'}}
           >
+            <Text style={styles.ouch}>
+              YEAY!
+            </Text>
             <Image 
               source = {require('../assets/small-red-wormie.png')}
               style={{alignSelf: 'center', width: 150, height: 215}}
             />
-          </View>
-          <View
-            style={{marginTop: 10, alignSelf: 'center'}}
-          >
-            <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 20, flexWrap:'wrap', marginTop: 20}}
-            >
-            Search Any Location
-            </Text>
-            <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30}}
-            >With Wormie!</Text>
+            <Text style={styles.noMatch}>Search Place with Wormie!</Text>
           </View>
         </View>
       )

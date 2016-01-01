@@ -40,7 +40,8 @@ var styles = StyleSheet.create({
     color: '#00ADC7',
     alignSelf: 'flex-start',
     flex: 1,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   submissionList: {
     flex: 1,
@@ -82,6 +83,7 @@ class MySubmissions extends Component{
     if (submissions) {
       return submissions.map((submission, index) => {
         console.log(submission);
+        let imageUrl = `https://i.ytimg.com/vi/${submission.video_url}/mqdefault.jpg`;      
         return (
           <View 
             key={index}
@@ -94,6 +96,10 @@ class MySubmissions extends Component{
             >
               <View>
                 <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
+                <Image 
+                  style = {{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
+                  source = {{uri: imageUrl}}
+                />
                 <View style={{ backgroundColor: '#f0f0f0', flex:1, flexDirection: 'row'}}>
                   <Text style={styles.notes}>Requester's Notes</Text>
                 </View>
