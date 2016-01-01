@@ -151,7 +151,7 @@ var CameraView = React.createClass({
           annotations={[{
             "coordinates": pendingWormholeSubmission.locationData,
             "type": "polyline",
-            "strokeColor": "black",
+            "strokeColor": currentUser.wormie_color,
             "strokeWidth": 5,
             "strokeAlpha": 0.9,
             "id": "cameraPath"

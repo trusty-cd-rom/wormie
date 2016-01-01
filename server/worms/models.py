@@ -7,8 +7,8 @@ class Wormhole(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=100)
-    latitude = models.DecimalField(max_digits=9, decimal_places=7, validators=[MinValueValidator(-90), MaxValueValidator(90)])
-    longitude = models.DecimalField(max_digits=10, decimal_places=7, validators=[MinValueValidator(-180), MaxValueValidator(180)])
+    latitude = models.DecimalField(max_digits=11, decimal_places=9, validators=[MinValueValidator(-90), MaxValueValidator(90)])
+    longitude = models.DecimalField(max_digits=12, decimal_places=9, validators=[MinValueValidator(-180), MaxValueValidator(180)])
     deadline = models.DateTimeField()
     notes = models.CharField(max_length=2000, blank=True)
     status = models.CharField(max_length=100)
@@ -24,7 +24,6 @@ class Submission(models.Model):
     notes = models.TextField(max_length=2000, blank=True)
     location = models.TextField(max_length=2000)
     video_url = models.TextField(max_length=255)
-    video_thumbnail = models.TextField(max_length=255)
     wormhole = models.ForeignKey(Wormhole, related_name='submissions')
     submitter = models.ForeignKey(User, related_name='submissions')
 

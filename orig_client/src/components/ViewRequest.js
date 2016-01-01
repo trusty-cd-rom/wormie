@@ -39,7 +39,7 @@ var ViewRequest = React.createClass({
       annotation = [{
         "coordinates": locationData,
         "type": "polyline",
-        "strokeColor": "black",
+        "strokeColor": currentWormhole.submissions[0].submitter.wormie_color,
         "strokeWidth": 5,
         "strokeAlpha": 0.9,
         "id": "cameraPath"

@@ -1,4 +1,4 @@
-import { INIT_LIVE_CAMERA, UPDATE_LIVE_CAMERA, ADD_LIVE_CHAT_MESSAGE } from '../constants/actions';
+import { INIT_LIVE_CAMERA, UPDATE_LIVE_CAMERA, ADD_LIVE_CHAT_MESSAGE, POP_LIVE_CHAT_MESSAGE } from '../constants/actions';
 
 var initialState = {
       info: 'Initializing',
@@ -21,6 +21,11 @@ function liveCamera(state = initialState, action) {
 	  	return {
 	  		...state,
 	  		liveChatMessages: newChatMessage(state.liveChatMessages, action)
+	  	}
+	  case POP_LIVE_CHAT_MESSAGE:
+	  	return {
+	  		...state,
+	  		liveChatMessages: removeOldestMessage(state.liveChatMessages, action)
 	  	}
 	  default:
 	    return state;
@@ -45,3 +50,14 @@ function newChatMessage(state, action) {
 		action.message
 	];
 };
+
+function removeOldestMessage(state, action) {
+	console.log('frogdogmog i am removing the last chat message from the reducer', action);
+	if(state.length === 1) {
+		return [];
+	}
+
+	return state.slice(1,state.length);
+};
+
+
