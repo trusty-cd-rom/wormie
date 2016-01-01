@@ -452,4 +452,3 @@ const animations = {
         }
     }
 };
-

@@ -57,10 +57,10 @@ var styles = StyleSheet.create({
     marginTop: 5,
   },
   submissionNotes: {
-    borderRadius: 5, 
+    // borderRadius: 5, 
     fontFamily: 'Lato-Bold',
     fontSize: 15, 
-    paddingBottom: 10,
+    // paddingBottom: 10,
     alignSelf: 'flex-start',
     backgroundColor: '#f0f0f0', 
     color: '#585858', 
@@ -73,9 +73,10 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   image: {
-    height: 30,
-    width: 30,
-    borderRadius: 15,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    marginRight: 10,
   },
   submitterProfile: {
     flexDirection: 'row',
@@ -219,44 +220,47 @@ var ViewMyWormholeList = React.createClass({
               />
               <View>
                 <Text style={styles.submitterName}>{submission.submitter.username}</Text>
-                <Text style={styles.submissionNotes}>Notes: { submission.notes }</Text>
               </View>
             </View>
             <View
-              style={{flex: 8, flexDirection: 'row', backgroundColor: 'red', margin: 20, marginTop: 0}}
+              style={{flex: 8, flexDirection: 'column', backgroundColor: 'red', margin: 20, marginTop: 0}}
             >
-              <View style={{flex: 1}}>
-                <YouTube 
-                  videoId={submission.video_url}
-                  play={false}
-                  hidden={false}
-                  playsInline={true}
-                  showinfo={false}
-                  modestbranding={true}
-                  onError={(e)=>{console.log('youtube error: ', e.error)}}
-                  style={{flex: 1}}
-                />
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1}}>
+                  <YouTube 
+                    videoId={submission.video_url}
+                    play={false}
+                    hidden={false}
+                    playsInline={true}
+                    showinfo={false}
+                    modestbranding={true}
+                    onError={(e)=>{console.log('youtube error: ', e.error)}}
+                    style={{flex: 1}}
+                  />
+                </View>
+                <View style={{flex: 1}}>
+                  <Mapbox
+                    style={{flex: 1, opacity: 1}}
+                    direction={0}
+                    rotateEnabled={true}
+                    scrollEnabled={true}
+                    zoomEnabled={true}
+                    showsUserLocation={false}
+                    attributionButtonIsHidden={true}
+                    logoIsHidden={true}
+                    compassIsHidden={true}
+                    ref={mapRef}
+                    accessToken={mapboxConfig.accessToken}
+                    styleURL={mapboxConfig.styleURL}
+                    userTrackingMode={this.userTrackingMode.follow}
+                    zoomLevel={15}
+                    annotations={[]}
+                  />
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={styles.submissionNotes}>Notes: { submission.notes }</Text>
+                </View>
               </View>
-              <View style={{flex: 1}}>
-                <Mapbox
-                  style={{flex: 1, opacity: 1}}
-                  direction={0}
-                  rotateEnabled={true}
-                  scrollEnabled={true}
-                  zoomEnabled={true}
-                  showsUserLocation={false}
-                  attributionButtonIsHidden={true}
-                  logoIsHidden={true}
-                  compassIsHidden={true}
-                  ref={mapRef}
-                  accessToken={mapboxConfig.accessToken}
-                  styleURL={mapboxConfig.styleURL}
-                  userTrackingMode={this.userTrackingMode.follow}
-                  zoomLevel={15}
-                  annotations={[]}
-                />
-              </View>
-              
             </View>
           </View>
         );

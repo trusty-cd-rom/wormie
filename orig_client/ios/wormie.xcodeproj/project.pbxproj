@@ -919,7 +919,8 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = FG32U667X6;
+
+						DevelopmentTeam = 6J7ZEB8RF6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1358,7 +1359,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/**";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.Wormie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.wormie;
 				PRODUCT_NAME = Wormie;
 				PROVISIONING_PROFILE = "";
 			};
@@ -1388,7 +1389,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/**";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.Wormie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wormieapp.wormie;
 				PRODUCT_NAME = Wormie;
 				PROVISIONING_PROFILE = "";
 			};
