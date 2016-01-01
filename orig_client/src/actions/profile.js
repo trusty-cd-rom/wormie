@@ -2,6 +2,8 @@ var api = require('../utils/api');
 
 import { 
   UPDATE_MY_CURRENT_WORMHOLE,
+  // testing
+  UPDATE_CURRENT_WORMHOLE,
   UPDATE_MY_CURRENT_SUBMISSION,
   UPDATE_MY_CURRENT_WORMHOLE_LIST,
   GET_USER_INFO,
@@ -141,3 +143,11 @@ export function toggleAnimating(isAnimating) {
     });
   }
 }
+
+export function updateCurrentWormhole(wormhole) {
+  return {
+    type: UPDATE_CURRENT_WORMHOLE,
+    wormhole: wormhole
+
+  };
+};

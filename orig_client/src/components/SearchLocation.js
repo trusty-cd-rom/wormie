@@ -92,7 +92,7 @@ class SearchLocation extends React.Component{
           </View>
         </View>
         <GooglePlacesAutocomplete
-          placeholder='address, neighborhood, city, state or zip'
+          placeholder='city, please!'
           minLength={2} // minimum length of text to search
           autoFocus={false}
           enablePoweredByContainer={false}

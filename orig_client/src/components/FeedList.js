@@ -193,18 +193,6 @@ var FeedList = React.createClass({
       );
     });
 
-          // <TouchableHighlight
-          //   onPress={() => { sortList('nearby', lon, lat) }}
-          // >
-          //   <Text style={{color: 'white', fontSize: 20}}>Nearby</Text>
-          // </TouchableHighlight>
-          // <TouchableHighlight
-          //   onPress={() => { 
-          //     sortList('recent');
-          //   }}
-          // >
-          //   <Text style={{color: 'white', fontSize: 20}}>Recent</Text>
-          // </TouchableHighlight>
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <ScrollView 
