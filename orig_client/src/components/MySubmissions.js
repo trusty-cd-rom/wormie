@@ -21,8 +21,8 @@ var styles = StyleSheet.create({
     height: 350
   },
   buttonText: {
-    fontSize: 15,
-    color: 'navy',
+    fontSize: 18,
+    color: '#00ADC7',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold'
@@ -38,8 +38,18 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     color: '#444444',
     flex: 1,
-    paddingLeft: 0,
-    marginBottom: 5
+    marginBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 5,
+    marginTop: 15,
+    marginBottom: 4,
+    marginRight: 5
   },
 });
 
@@ -72,7 +82,7 @@ class MySubmissions extends Component{
           >
             <TouchableHighlight
               onPress = {this.viewRequest.bind(this, index)}
-              underlayColor = 'rgba(125,125,125,0.2)'
+              underlayColor = 'rgba(125,125,125,0)'
               style={styles.submission}
             >
               <View>
@@ -81,6 +91,7 @@ class MySubmissions extends Component{
                 <Text>{submission.wormhole.notes} </Text>
                 <Text style={{fontWeight:'bold'}}>My notes:</Text>
                 <Text>{submission.notes} </Text>
+                <View style={styles.separator} />
               </View>
             </TouchableHighlight>
           </View>

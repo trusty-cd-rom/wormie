@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
   container:{
     marginBottom: 49,
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#f4f4f4',
     alignSelf: 'stretch',
     justifyContent: 'center',
   },
@@ -36,7 +36,8 @@ var styles = StyleSheet.create({
   },
   badgeContainer: {
     // marginTop: 10, 
-    marginBottom: -20, 
+    // paddingTop: 20,
+    marginBottom: -25, 
     alignSelf: 'stretch', 
     flexDirection: 'row'
   }
@@ -128,10 +129,10 @@ class Profile extends Component{
       clickedUser,
       submissions
     } = this.props;
+        // { this.topbar() }
     return (
       //use {} for anything that is not html or text. this allows you to run JS in JSX
       <View style={styles.container}>
-        { this.topbar() }
         <View 
           style={styles.badgeContainer}
         >
