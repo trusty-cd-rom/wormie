@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
   },
   submitterName: {
     fontSize: 15,
-    color: '#00ADC7',
+    color: '#585858',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold',
@@ -58,9 +58,9 @@ var styles = StyleSheet.create({
   },
   submissionNotes: {
     // borderRadius: 5, 
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'Lato-Regular',
     fontSize: 15, 
-    // paddingBottom: 10,
+    padding: 10,
     alignSelf: 'flex-start',
     backgroundColor: '#f0f0f0', 
     color: '#585858', 
@@ -223,10 +223,10 @@ var ViewMyWormholeList = React.createClass({
               </View>
             </View>
             <View
-              style={{flex: 8, flexDirection: 'column', backgroundColor: 'red', margin: 20, marginTop: 0}}
+              style={{flex: 8, flexDirection: 'row', backgroundColor: '#f0f0f0', margin: 20, marginTop: 0}}
             >
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 7, flexDirection: 'row'}}>
                   <YouTube 
                     videoId={submission.video_url}
                     play={false}
@@ -237,8 +237,6 @@ var ViewMyWormholeList = React.createClass({
                     onError={(e)=>{console.log('youtube error: ', e.error)}}
                     style={{flex: 1}}
                   />
-                </View>
-                <View style={{flex: 1}}>
                   <Mapbox
                     style={{flex: 1, opacity: 1}}
                     direction={0}
