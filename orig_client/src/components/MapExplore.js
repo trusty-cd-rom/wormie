@@ -164,17 +164,26 @@ var MapExplore = React.createClass({
   },
 
   addHeart() {
-    startCount += 1;
-    this.state.hearts.push({
-      id: startCount,
-      right: getRandomNumber(50, 150)
-    });
-    this.setState(this.state);
 
     // If the user hasn't already liked the submission, then this will fire off a like!
     var { currentWormhole, currentUser, updateLikes} = this.props;
-    if ( currentWormhole.submissions[0].likers.indexOf(currentUser.account_id) === -1 ) {
-      updateLikes(currentUser, currentWormhole);
+    
+    var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
+
+    if ( currentWorm && currentWorm.submissions.length ) {
+
+      startCount += 1;
+      this.state.hearts.push({
+        id: startCount,
+        right: getRandomNumber(50, 150)
+      });
+      this.setState(this.state);
+
+      if ( currentWormhole.submissions[0].likers.indexOf(currentUser.account_id) === -1 ) {
+
+        updateLikes(currentUser, currentWormhole);
+      }
+
     }
 
   },
