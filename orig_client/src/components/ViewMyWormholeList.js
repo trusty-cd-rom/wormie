@@ -60,7 +60,9 @@ var styles = StyleSheet.create({
     // borderRadius: 5, 
     fontFamily: 'Lato-Regular',
     fontSize: 15, 
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 5,
+    flex: 1,
     alignSelf: 'flex-start',
     backgroundColor: '#f0f0f0', 
     color: '#585858', 
@@ -192,12 +194,6 @@ var ViewMyWormholeList = React.createClass({
     );
   },
 
-                // <Image 
-                //   source = {{uri: imageUrl}}
-                //   style={{alignSelf: 'center', width: 150, height: 215}}
-                // />
-
-
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { myCurrentWormholeList } = this.props;
@@ -209,7 +205,7 @@ var ViewMyWormholeList = React.createClass({
         let imageUrl = `https://i.ytimg.com/vi/${submission['video_url']}/mqdefault.jpg`;
         console.log('submission', submission);
         return (
-          <View style={{height: 300}}>
+          <View style={{height: 320}}>
             <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
             <View 
               style = {styles.submitterProfile}

@@ -10,6 +10,7 @@ function mapStateToProps(state) {
     term: state.discover.term,
     location: state.discover.location,
     responseList: state.discover.responseList,
+    coordinates: state.discover.coordinates,
   };
 }
 
