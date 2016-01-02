@@ -11,6 +11,8 @@ import Navbar from '../containers/Navbar';
 import CameraView from '../containers/Camera';
 var YouTube = require('react-native-youtube');
 var moment = require('moment');
+var urls = require('../constants/urls');
+
 
 // Mapbox
 var Mapbox = require('react-native-mapbox-gl');
@@ -24,6 +26,46 @@ var ViewMySubmission = React.createClass({
   },
   render() {
     let { myCurrentSubmission, currentUser } = this.props;
+    let { currentWormhole } = this.props;
+    // console.log('myCurrentSubmission.location', myCurrentSubmission.location, typeof myCurrentSubmission.location, typeof JSON.parse(myCurrentSubmission.location));
+    let locationData = JSON.parse(myCurrentSubmission.location);
+    console.log(locationData, typeof locationData, Array.isArray(locationData));
+    let mapCenter = locationData.length>0 ? [locationData[locationData.length-1][0],locationData[locationData.length-1][1]] : [myCurrentSubmission.wormhole.latitude,myCurrentSubmission.wormhole.longitude];
+    console.log('mapCenter', mapCenter);
+
+    let annotation;
+    if(locationData.length>0) {
+      annotation = [{
+        "coordinates": locationData,
+        "type": "polyline",
+        "strokeColor": myCurrentSubmission.submitter.wormie_color,
+        "strokeWidth": 5,
+        "strokeAlpha": 0.9,
+        "id": "cameraPath"
+      }, {
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + myCurrentSubmission.submitter.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    } else {
+      annotation = [{
+        coordinates: mapCenter,
+        'type': 'point',
+        title: 'Ouch!',
+        annotationImage: {
+          url: urls.getWormie + myCurrentSubmission.submitter.wormie_color.slice(1) + '.png',
+          height: 35,
+          width: 25
+        },
+        id: 'marker1'
+      }];
+    }
 
     return (
 
@@ -61,7 +103,7 @@ var ViewMySubmission = React.createClass({
             onError={(e)=>{console.log('youtube error: ', e.error)}}
             style={{flex: 1}}
           />
-          
+
           <Mapbox
             style={{flex: 1, opacity: 0.7}}
             direction={0}
@@ -75,9 +117,10 @@ var ViewMySubmission = React.createClass({
             ref={mapRef}
             accessToken={mapboxConfig.accessToken}
             styleURL={mapboxConfig.styleURL}
-            userTrackingMode={this.userTrackingMode.follow}
+            userTrackingMode={this.userTrackingMode.none}
+            centerCoordinate={{latitude: mapCenter[0], longitude: mapCenter[1]}}
             zoomLevel={15}
-            annotations={[]}
+            annotations={annotation}
           />
 
         </View>

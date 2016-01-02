@@ -15,6 +15,8 @@ var Mapbox = require('react-native-mapbox-gl');
 var mapboxConfig = require('../utils/mapboxConfig');
 var mapRef = 'mapRef';
 var YouTube = require('react-native-youtube');
+var urls = require('../constants/urls');
+
 
 var styles = StyleSheet.create({
   container:{
@@ -196,6 +198,7 @@ var ViewMyWormholeList = React.createClass({
 
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
+
     var { myCurrentWormholeList } = this.props;
     var submitList, submitters;
     console.log(myCurrentWormholeList.submissions.length);
@@ -203,6 +206,46 @@ var ViewMyWormholeList = React.createClass({
       console.log('working well');
       submitList = myCurrentWormholeList.submissions.map((submission, index) => {
         let imageUrl = `https://i.ytimg.com/vi/${submission['video_url']}/mqdefault.jpg`;
+        let { currentWormhole } = this.props;
+        // console.log('submission.location', submission.location, typeof submission.location, typeof JSON.parse(submission.location));
+        let locationData = JSON.parse(submission.location);
+        console.log(locationData, typeof locationData, Array.isArray(locationData));
+        let mapCenter = locationData.length>0 ? [locationData[locationData.length-1][0],locationData[locationData.length-1][1]] : [Number(currentWormhole.latitude),Number(currentWormhole.longitude)];
+        console.log('mapCenter', mapCenter);
+
+        let annotation;
+        if(locationData.length>0) {
+          annotation = [{
+            "coordinates": locationData,
+            "type": "polyline",
+            "strokeColor": submission.submitter.wormie_color,
+            "strokeWidth": 5,
+            "strokeAlpha": 0.9,
+            "id": "cameraPath"
+          }, {
+            coordinates: mapCenter,
+            'type': 'point',
+            title: 'Ouch!',
+            annotationImage: {
+              url: urls.getWormie + submission.submitter.wormie_color.slice(1) + '.png',
+              height: 35,
+              width: 25
+            },
+            id: 'marker1'
+          }];
+        } else {
+          annotation = [{
+            coordinates: mapCenter,
+            'type': 'point',
+            title: 'Ouch!',
+            annotationImage: {
+              url: urls.getWormie + submission.submitter.wormie_color.slice(1) + '.png',
+              height: 35,
+              width: 25
+            },
+            id: 'marker1'
+          }];
+        }
         console.log('submission', submission);
         return (
           <View style={{height: 320}}>
@@ -246,9 +289,10 @@ var ViewMyWormholeList = React.createClass({
                     ref={mapRef}
                     accessToken={mapboxConfig.accessToken}
                     styleURL={mapboxConfig.styleURL}
-                    userTrackingMode={this.userTrackingMode.follow}
-                    zoomLevel={15}
-                    annotations={[]}
+                    userTrackingMode={this.userTrackingMode.none}
+                    centerCoordinate={{latitude: mapCenter[0], longitude: mapCenter[1]}}
+                    zoomLevel={13}
+                    annotations={annotation}
                   />
                 </View>
                 <View style={{flex: 1}}>

@@ -143,7 +143,7 @@ var FeedList = React.createClass({
   render() {
 
     var { feed, getUserInfo, filterByStatus, sortList } = this.props;
-    var list = feed.map((item, index) => {
+    var list = feed.slice(0, 25).map((item, index) => {
       return (
         <View key = {index}>
           <TouchableHighlight

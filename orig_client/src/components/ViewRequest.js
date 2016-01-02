@@ -11,7 +11,6 @@ import React, {
 // import YouTube from 'react-native-youtube';
 var YouTube = require('react-native-youtube');
 var urls = require('../constants/urls');
-
 var moment = require('moment');
 
 // Mapbox
@@ -122,7 +121,7 @@ var ViewRequest = React.createClass({
             styleURL={mapboxConfig.styleURL}
             userTrackingMode={this.userTrackingMode.none}
             centerCoordinate={{latitude: mapCenter[0], longitude: mapCenter[1]}}
-            zoomLevel={15}
+            zoomLevel={13}
             annotations={annotation}
           />
 
