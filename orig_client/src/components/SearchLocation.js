@@ -85,6 +85,7 @@ class SearchLocation extends React.Component{
               style={styles.textInput} 
               onChangeText={(text) => {
                 this.setTerm(text);
+                this.time();
               }}
               placeholder={'tacos, cheap dinner, Max\'s'}
               autoFocus={true}
@@ -97,8 +98,10 @@ class SearchLocation extends React.Component{
           autoFocus={false}
           enablePoweredByContainer={false}
           fetchDetails={true}
-          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+          onPress={(data, details) => { // 'details' is provided when fetchDetails = true
+            console.log(details['formatted_address']);
             this.setLocation(details['formatted_address']);
+            this.props.setCoords(details.geometry.location);
             this.time();
           }}
           getDefaultValue={() => {
