@@ -1,6 +1,6 @@
 # Wormie
 
-Wormie is an iOS app for requesting video streams from around the world.
+Wormie is a React-Native iOS app to request videos and livestreams at specific locations around the world.
 
 ## Team
 
@@ -27,47 +27,56 @@ Current usecases involve capturing a subject or moment of interest at a specific
 
 ## Requirements
 
-### Backend
-
-- Python 3.5 
-- Django
-- Django REST framework
-- Postgres
-
 ### Frontend
 
-- React Native
-- React Native modules (TBD: GPS, TBD: Camera)
-- Redux
-- Auth0
-- ES6
-- Mapbox API
-- Youtube API
-- Facebook API
+- React Native: 0.15.0
+- React Native modules
+  - Camera: 0.3.8
+  - Collapsible: 0.5.4
+  - FacebookSDKCore: 0.0.7
+  - FacebookSDKLogin: 0.0.7
+  - File-Upload: 1.0.4
+  - Google-Place-Autocomplete: 1.1.6
+  - Google-Static-Map: 0.1.5
+  - Icons: 0.7.0
+  - Mapbox-GL: 2.0.0
+  - Material-Kit: 0.2.2
+  - Safari-View: 0.1.4
+  - Scrollable-Tab-View: 0.3.2
+  - Video: 0.6.1
+  - WebRTC: 0.2.2
+  - YouTube: 0.5.0
+- Redux: 3.0.4
+- Redux-Thunk: 1.0.0
+- Socket.io-Client: 1.3.7
+- Moment: 2.10.6
+- OAuth: 0.9.14
+- QueryString: 0.2.0
 
-### Dev tools
+### Backend
 
-- Webpack
-- Babel 5
+#### RESTful API Server
+- Python 3.4.3
+- Django: 1.9
+- Django REST Framework: 3.3.1
+- Postgres
+
+#### Micro-services
+- Node
+- GraphicsMagick
 
 ### Deployment
 
-- AWS (server)
-- Docker (server)
-- iOS Store (frontend)
-
-### Testing
-
-- Circle CI
-- TBD unit tests
+- AWS EC2
+- AWS ElasticBeanstalk
+- Docker
+- iOS Store
 
 ## Development
 
 ### Installing Dependencies
 
 From within the root directory:
-
-TBD
 
 EXAMPLE:
 
