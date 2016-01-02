@@ -121,7 +121,7 @@ class Settings extends Component{
         <View style={styles.topBar}>
           <Text style={styles.title}>Settings</Text>      
         </View>
-        <View style={styles.body}>
+        <ScrollView contentContainerStyle={styles.body}>
           <Text style={styles.titleBase}>
             Update your Wormie username:
           </Text>
@@ -159,18 +159,25 @@ class Settings extends Component{
             maximumValue={255.0}
             onValueChange={(value) => this.handleSliderChange({field: 'wormie_blue', value: value})}/>
           <TouchableHighlight
-            style={[styles.bottomButton, { 
+            style={[styles.container, { 
               backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue),
+              flexDirection: 'row',
+              justifyContent: 'center',
+              height: 90,
+              width: 75,
+              borderRadius: 10,
+              borderColor: 'white',
+              marginBottom: 120,
+              flex: 1,
               }]}
             onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
             underlayColor = '#88D4f5'>
-            <Text style = {styles.buttonText}> Okay! </Text>
+            <Image 
+              style={{height: 120, width: 85}}
+              source = {require('../assets/clearwormie2.png')}
+            />
           </TouchableHighlight>
           <Facebook navigator={this.props.navigator} style={styles.facebookButton}/>
-          <Image 
-            style={{height: 60, width: 75, marginTop: 10, marginBottom: 10}}
-            source = {require('../assets/wormie-logo2.png')}
-          />
           <Text style={styles.titleText}> WORMIE 1.0.0 </Text>
           <View style={styles.row}>
             <Text style={styles.aboutText}>By </Text>
@@ -199,7 +206,7 @@ class Settings extends Component{
             <Text style={styles.link}>wormieapp.com</Text>
           </TouchableHighlight>
           <Text style={styles.aboutText}> Made in San Francisco </Text>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -233,36 +240,41 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   facebookButton: {
-    paddingBottom: 10
+    marginTop: 10,
+    paddingBottom: 20
   },
   titleText: {
     fontSize: 14,
+    marginTop: 20,
+    marginBottom: 10,
     color: '#3e3e3e',
     fontFamily: 'Lato-Semibold',
   },
   aboutText: {
     color: '#727272',
+    marginBottom: 5,
     fontSize: 12,
     fontFamily: 'Lato-Semibold',
   },
   link: {
     color: '#727272',
     fontSize: 12,
+    marginBottom: 5,
     fontFamily: 'Lato-Semibold',
     textDecorationLine: 'underline',
   },
   slider: {
     flex: 1,
     width: 300,
-    height: 10,
-    marginTop:5,
-    marginBottom:5,
+    height: 20,
+    marginTop:10,
+    marginBottom:10,
   },
   bottomButton: {
     justifyContent: 'center',
     borderRadius: 5,
     borderColor: 'white',
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 15,
     width: 150,
     flex: 1,
@@ -285,9 +297,11 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontFamily: 'Lato-Regular',
-    height: 40,
+    height: 60,
     width: 350,
     padding: 4,
+    paddingTop: 10,
+    paddingBottom: 10,
     textAlign: 'center',
     marginLeft: 10,
     marginBottom: 5,
