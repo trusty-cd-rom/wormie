@@ -164,17 +164,26 @@ var MapExplore = React.createClass({
   },
 
   addHeart() {
-    startCount += 1;
-    this.state.hearts.push({
-      id: startCount,
-      right: getRandomNumber(50, 150)
-    });
-    this.setState(this.state);
 
     // If the user hasn't already liked the submission, then this will fire off a like!
     var { currentWormhole, currentUser, updateLikes} = this.props;
-    if ( currentWormhole.submissions[0].likers.indexOf(currentUser.account_id) === -1 ) {
-      updateLikes(currentUser, currentWormhole);
+    
+    var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
+
+    if ( currentWorm && currentWorm.submissions.length ) {
+
+      startCount += 1;
+      this.state.hearts.push({
+        id: startCount,
+        right: getRandomNumber(50, 150)
+      });
+      this.setState(this.state);
+
+      if ( currentWormhole.submissions[0].likers.indexOf(currentUser.account_id) === -1 ) {
+
+        updateLikes(currentUser, currentWormhole);
+      }
+
     }
 
   },
@@ -334,8 +343,8 @@ var MapExplore = React.createClass({
     } else {
       return (
         <Image 
-          style={{height: 121, width: 121, marginRight: 5}}
-          source = {require('../assets/dsnWormhole.jpg')}
+          style={{height: 50, width: 65, marginTop: 40, marginLeft: 5, marginRight: 5}}
+          source = {require('../assets/wormie-logo2.png')}
         />
 
       );
@@ -400,8 +409,6 @@ var MapExplore = React.createClass({
     
     var { currentWormhole } = this.props;
 
-    console.log("currentWormhole!!!!!!!!!!!!!:", currentWormhole);
-
     var currentWorm = (currentWormhole.requestor) ? currentWormhole : false;
 
     if ( currentWorm && currentWorm.submissions.length ) {
@@ -445,6 +452,7 @@ var MapExplore = React.createClass({
 
   render: function() {
     var {feed, currentWormhole } = this.props;
+    currentWormhole = currentWormhole || feed[0];
     return (
       <View style={styles.container}>
         <Mapbox
