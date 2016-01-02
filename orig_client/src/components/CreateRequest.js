@@ -6,6 +6,7 @@ import React, {
   ScrollView,
   TouchableHighlight,
   TextInput,
+  Image,
   ActivityIndicatorIOS,
   DatePickerIOS,
   DeviceEventEmitter,
@@ -19,10 +20,8 @@ var Accordion = require('react-native-collapsible/Accordion');
 import RequestMapFeed from './RequestMapFeed';
 import { Icon } from 'react-native-icons';
 var moment = require('moment');
-// Mapbox
-var Mapbox = require('react-native-mapbox-gl');
-var mapboxConfig = require('../utils/mapboxConfig');
-var mapRef = 'mapRef';
+
+var urls = require('../constants/urls');
 
 
 var SECTIONS = [
@@ -41,8 +40,6 @@ var CreateRequest = React.createClass({
    latitude: this.props.target.location.coordinate.latitude
    longitude: this.props.target.location.coordinate.longitude
    *************************************/
-
-  mixins: [Mapbox.Mixin],
 
   componentWillMount() {
     let { updateInputText, inputText, target } = this.props;
@@ -97,14 +94,15 @@ var CreateRequest = React.createClass({
     updateInputText('deadline', date);
   },
   back() {
-    let { updateInputText } = this.props;
+    let { updateInputText, setResultList } = this.props;
+    setResultList([{"name": "default", "location":{ "display_address": [""]}}]);  
     this.props.navigator.pop();
     updateInputText('notes', '');
     updateInputText('title', '');
   },
   submitRequest() {
     console.log('about to submit request from create request screen');
-    let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText } = this.props;
+    let { createRequest, currentUser, inputText, setCurrentTarget, updateInputText, setResultList } = this.props;
 
     let coords = this._getLatLong();
     console.log('frogmog',coords);
@@ -127,18 +125,9 @@ var CreateRequest = React.createClass({
         component: Navbar
       });
     });
-  },
 
-  _renderYelpLocation() {
-    if (this.props.target) {
-      return (
-        <Text style={styles.title}>
-          {this.props.target.location.coordinate.latitude} {this.props.target.location.coordinate.longitude}
-        </Text>
-      );
-    } else {
-      return <View><Text>{this.props.inputText.location}</Text></View>
-    }
+    // reset the responseList
+
   },
 
   _renderHeader(section) {
@@ -166,12 +155,18 @@ var CreateRequest = React.createClass({
   },
 
   _getLatLong() {
-    let { inputText, target } = this.props;
+    let { inputText, target, coords } = this.props;
     
+    // have data from yelp API
     if (this.props.yelp) {
       console.log('from yelp');
       var lat = target.location.coordinate.latitude;
       var lon = target.location.coordinate.longitude;
+    // need to get location from google API
+    } else if(this.props.google) {
+      var lat = coords.lat;
+      var lon = coords.lng;
+    // from profile page: this will use the current location of user
     } else {
       if (inputText.location) {
         var lat = Number(inputText.location.split(',')[0].trim());
@@ -186,17 +181,18 @@ var CreateRequest = React.createClass({
   },
 
   _renderMapBox() {
-
+    let { currentUser } = this.props;
     let coords = this._getLatLong();
-
+    let wormie_color = currentUser.wormie_color;
+    var imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${coords.lat},${coords.lon}&zoom=13&size=400x280&markers=icon:${encodeURIComponent(urls.getWormie+wormie_color.slice(1)+'.png')}%7C${coords.lat},${coords.lon}&key=AIzaSyAwp0Qycaz0CVQfNaNd4FtWew4tK3DRY9w`;
     return (
       <View style={{top: -20}}>
-        <RequestMapFeed 
-          lat={coords.lat}
-          lon={coords.lon}
+        <Image 
+          style = {{height: 265}}
+          source = {{uri: imageUrl}}
         />
       </View>
-    );
+    )
   },
 
   render() {
@@ -210,6 +206,7 @@ var CreateRequest = React.createClass({
 
           <TouchableHighlight
             style = {styles.backButton}
+            underlayColor='#4CC6EA'
             onPress = {this.back.bind(this)}
           >
             <Text style = {styles.backText}> {'X'} </Text>
@@ -219,6 +216,8 @@ var CreateRequest = React.createClass({
 
           <TouchableHighlight
             style = {styles.createButton}
+            underlayColor = '#4CC6EA'
+            
             onPress = {() => {
               
               this.submitRequest.bind(this)();
@@ -404,8 +403,6 @@ const NoteField = MKTextField.textfieldWithFloatingLabel()
     fontWeight: '200',
   })
   .build();
-
-          // {this._renderYelpLocation.bind(this)()}
 
 // const SendRequest = new MKButton.Builder()
 //   .withBackgroundColor('#4CC6EA')

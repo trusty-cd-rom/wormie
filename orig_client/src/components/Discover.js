@@ -91,7 +91,7 @@ class Discover extends React.Component{
     setCurrentCategoty(category);
     this.props.navigator.push({
       component: DiscoverSearch,
-      passProps: { topbarTitle: 'Search'}
+      passProps: { topbarTitle: 'Search', fromDiscover: true, responseList: [{name: "default"}]}
     });
   }
 

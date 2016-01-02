@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
   },
   submitterName: {
     fontSize: 15,
-    color: '#00ADC7',
+    color: '#585858',
     alignSelf: 'flex-start',
     flex: 1,
     fontWeight: 'bold',
@@ -57,10 +57,12 @@ var styles = StyleSheet.create({
     marginTop: 5,
   },
   submissionNotes: {
-    borderRadius: 5, 
-    fontFamily: 'Lato-Bold',
+    // borderRadius: 5, 
+    fontFamily: 'Lato-Regular',
     fontSize: 15, 
-    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingTop: 5,
+    flex: 1,
     alignSelf: 'flex-start',
     backgroundColor: '#f0f0f0', 
     color: '#585858', 
@@ -73,9 +75,10 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   image: {
-    height: 30,
-    width: 30,
-    borderRadius: 15,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    marginRight: 10,
   },
   submitterProfile: {
     flexDirection: 'row',
@@ -191,12 +194,6 @@ var ViewMyWormholeList = React.createClass({
     );
   },
 
-                // <Image 
-                //   source = {{uri: imageUrl}}
-                //   style={{alignSelf: 'center', width: 150, height: 215}}
-                // />
-
-
   // if function returns jsx/array of jsx, it does not take .bind(this)
   createList() {
     var { myCurrentWormholeList } = this.props;
@@ -208,7 +205,7 @@ var ViewMyWormholeList = React.createClass({
         let imageUrl = `https://i.ytimg.com/vi/${submission['video_url']}/mqdefault.jpg`;
         console.log('submission', submission);
         return (
-          <View style={{height: 300}}>
+          <View style={{height: 320}}>
             <Text style={styles.buttonText}>{submission.wormhole.title} </Text>
             <View 
               style = {styles.submitterProfile}
@@ -219,44 +216,45 @@ var ViewMyWormholeList = React.createClass({
               />
               <View>
                 <Text style={styles.submitterName}>{submission.submitter.username}</Text>
-                <Text style={styles.submissionNotes}>Notes: { submission.notes }</Text>
               </View>
             </View>
             <View
-              style={{flex: 8, flexDirection: 'row', backgroundColor: 'red', margin: 20, marginTop: 0}}
+              style={{flex: 8, flexDirection: 'row', backgroundColor: '#f0f0f0', margin: 20, marginTop: 0}}
             >
-              <View style={{flex: 1}}>
-                <YouTube 
-                  videoId={submission.video_url}
-                  play={false}
-                  hidden={false}
-                  playsInline={true}
-                  showinfo={false}
-                  modestbranding={true}
-                  onError={(e)=>{console.log('youtube error: ', e.error)}}
-                  style={{flex: 1}}
-                />
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 7, flexDirection: 'row'}}>
+                  <YouTube 
+                    videoId={submission.video_url}
+                    play={false}
+                    hidden={false}
+                    playsInline={true}
+                    showinfo={false}
+                    modestbranding={true}
+                    onError={(e)=>{console.log('youtube error: ', e.error)}}
+                    style={{flex: 1}}
+                  />
+                  <Mapbox
+                    style={{flex: 1, opacity: 1}}
+                    direction={0}
+                    rotateEnabled={true}
+                    scrollEnabled={true}
+                    zoomEnabled={true}
+                    showsUserLocation={false}
+                    attributionButtonIsHidden={true}
+                    logoIsHidden={true}
+                    compassIsHidden={true}
+                    ref={mapRef}
+                    accessToken={mapboxConfig.accessToken}
+                    styleURL={mapboxConfig.styleURL}
+                    userTrackingMode={this.userTrackingMode.follow}
+                    zoomLevel={15}
+                    annotations={[]}
+                  />
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={styles.submissionNotes}>Notes: { submission.notes }</Text>
+                </View>
               </View>
-              <View style={{flex: 1}}>
-                <Mapbox
-                  style={{flex: 1, opacity: 1}}
-                  direction={0}
-                  rotateEnabled={true}
-                  scrollEnabled={true}
-                  zoomEnabled={true}
-                  showsUserLocation={false}
-                  attributionButtonIsHidden={true}
-                  logoIsHidden={true}
-                  compassIsHidden={true}
-                  ref={mapRef}
-                  accessToken={mapboxConfig.accessToken}
-                  styleURL={mapboxConfig.styleURL}
-                  userTrackingMode={this.userTrackingMode.follow}
-                  zoomLevel={15}
-                  annotations={[]}
-                />
-              </View>
-              
             </View>
           </View>
         );

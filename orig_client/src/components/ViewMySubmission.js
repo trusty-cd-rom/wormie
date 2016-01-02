@@ -3,133 +3,201 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 import Navbar from '../containers/Navbar';
 import CameraView from '../containers/Camera';
 var YouTube = require('react-native-youtube');
+var moment = require('moment');
 
-class ViewMySubmission extends Component {
+// Mapbox
+var Mapbox = require('react-native-mapbox-gl');
+var mapboxConfig = require('../utils/mapboxConfig');
+var mapRef = 'mapRef';
+
+var ViewMySubmission = React.createClass({
+  mixins: [Mapbox.Mixin],
   back() {
     this.props.navigator.pop();
-  }
-  startSubmission() {
-    let { myCurrentSubmission } = this.props;
-    this.props.navigator.push({
-      component: CameraView
-    });
-  }
-
-  video() {
-    let { myCurrentSubmission } = this.props;
-    return (
-      <YouTube 
-        videoId={myCurrentSubmission.video_url}
-        play={false}
-        hidden={false}
-        playsInline={true}
-        showinfo={false}
-        modestbranding={true}
-        onError={(e)=>{console.log('youtube error: ', e.error)}}
-        style={{alignSelf: 'stretch', height: 220, backgroundColor: 'transparent', marginBottom: 0}}
-      />
-    );
-  }
-
+  },
   render() {
-    let { myCurrentSubmission } = this.props;
-    console.log('myCurrentSubmission: ', myCurrentSubmission);
+    let { myCurrentSubmission, currentUser } = this.props;
 
     return (
+
       <View style={styles.container}>
-        <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.back.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Back </Text>
-        </TouchableHighlight>
-        {this.video()}
-        <Text style={styles.title}>
-          Title: {myCurrentSubmission.wormhole.title}
-        </Text>
-        <Text style={styles.text}>
-          Requester: {myCurrentSubmission.submitter.username}
-        </Text>
-        <Text style={styles.text}>
-          Deadline: {myCurrentSubmission.wormhole.deadline}
-        </Text>
-        <Text style={styles.text}>
-          Status: {myCurrentSubmission.wormhole.status}
-        </Text>
-        <Text style={styles.title}>
-          Notes
-        </Text>
-        <Text style={styles.text}>
-          {myCurrentSubmission.notes}
-        </Text>
-        
-        <TouchableHighlight
-          style = {styles.loginButton}
-          onPress = {this.startSubmission.bind(this)}
-          underlayColor = '#88D4f5'
-        >
-          <Text style = {styles.buttonText}> Request! </Text>
-        </TouchableHighlight>
+
+        <View style = {styles.headerContainer}>
+
+          <TouchableHighlight
+            style = {styles.backButton}
+            onPress = {this.back.bind(this)}
+            underlayColor = 'transparent'
+          >
+            <Text style = {styles.backText}> {'X'} </Text>
+          </TouchableHighlight>
+          
+          <Text style={styles.backText}>
+            {currentUser.username}
+          </Text>
+          <Image 
+            style = {styles.requestorProfilePic}
+            source = {{uri: currentUser.picture_url}}
+          />
+
+        </View>
+
+        <View style={{flexDirection: 'row', flex: 10}}>
+          
+          <YouTube 
+            videoId={myCurrentSubmission.video_url}
+            play={false}
+            hidden={false}
+            playsInline={true}
+            showinfo={false}
+            modestbranding={true}
+            onError={(e)=>{console.log('youtube error: ', e.error)}}
+            style={{flex: 1}}
+          />
+          
+          <Mapbox
+            style={{flex: 1, opacity: 0.7}}
+            direction={0}
+            rotateEnabled={true}
+            scrollEnabled={true}
+            zoomEnabled={true}
+            showsUserLocation={false}
+            attributionButtonIsHidden={true}
+            logoIsHidden={true}
+            compassIsHidden={true}
+            ref={mapRef}
+            accessToken={mapboxConfig.accessToken}
+            styleURL={mapboxConfig.styleURL}
+            userTrackingMode={this.userTrackingMode.follow}
+            zoomLevel={15}
+            annotations={[]}
+          />
+
+        </View>
+
+        <ScrollView style = {styles.contentContainer}>
+          
+          <Text style={[styles.text, styles.timeAgo]}>
+            {moment(myCurrentSubmission.created_at).fromNow()}
+          </Text>
+
+          <Text style={styles.title}>
+            {myCurrentSubmission.wormhole.title}
+          </Text>
+
+          <Text style={styles.text}>
+            {`${myCurrentSubmission.wormhole.latitude} , ${myCurrentSubmission.wormhole.longitude}`}
+          </Text>
+
+          <Text style={styles.text}>
+            Request: {myCurrentSubmission.wormhole.notes}
+          </Text>
+
+          <Text style={styles.text}>
+            My Notes: {myCurrentSubmission.notes}
+          </Text>
+
+
+        </ScrollView>
+
       </View>
     );
-  }
-}
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    // marginTop: 20
+    backgroundColor: 'transparent',
+  },
+  headerContainer: {
+    paddingTop: 30,
+    flexDirection: 'row',
+    backgroundColor: '#4CC6EA',
+    paddingRight: 10,
+    paddingLeft: 10,
+    alignItems: 'flex-start',
+    flex: 1,
+  },
+  backButton: {
+    flex: 1,
+  },
+  backText: {
+    color: 'white',
+    fontFamily: 'Lato-Bold',
+    fontSize: 20,
+  },
+  requestorProfilePic: {
+    // marginTop: 10,
+    marginLeft: 10,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+  },
+  submitterProfilePic: {
+    // marginTop: 10,
+    marginRight: 3,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+  },
+  backgroundOverlay: {
+    opacity: 0.5,
+    backgroundColor: '#ffffff',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  mapContainer: {
+    flex: 6,
+  },
+  contentContainer: {
+    flex: 7,
+    padding: 20,
+    paddingTop: 0,
+    flexDirection: 'column',
   },
   text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'grey',
+    fontFamily: 'Lato-Bold',
+    // fontSize: 20,
+    marginBottom: 10,
   },
-  splashImage: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flex: 4,
-    backgroundColor: 'black'
+  timeAgo: {
+    textAlign: 'right',
   },
-  loginButton: {
+  title: {
+    fontFamily: 'Lato-Bold',
+    fontSize: 30,
+    marginBottom: 10,
+  },
+  submitButton: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#48BBEC'
+    // backgroundColor: 'green'
   },
   buttonText: {
-    fontSize: 24,
-    color: 'white',
-    alignSelf: 'center'
+    fontSize: 27,
+    fontFamily: 'Lato-Bold',
+    color: '#4CC6EA',
+    // alignSelf: 'center'
   },
-  title: {
-    marginBottom: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#fff'
-  },
-  searchInput: {
-    height: 50,
-    padding: 4,
-    marginRight: 5,
-    fontSize: 23,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    color: 'white'
+  buttonContainer: {
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    flex: 1,
   },
 });
+
 
 export default ViewMySubmission;

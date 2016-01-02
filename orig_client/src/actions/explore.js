@@ -63,7 +63,6 @@ export function sortList(criteria, longitude, latitude) {
     console.log(criteria, longitude, latitude);
     return api.sortList(criteria, longitude, latitude)
       .then(function (res) {
-        console.log('res', res);
         dispatch(refreshFeedDataAction(res))
       })
   }

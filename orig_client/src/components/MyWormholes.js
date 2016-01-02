@@ -134,7 +134,8 @@ class MyWormholes extends Component{
       return wormholes.map((wormhole, outerIndex) => {
         return (
 
-          <View 
+          <View
+            key={outerIndex}
             style = {styles.requestList}
           >
             <TouchableHighlight

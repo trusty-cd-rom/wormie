@@ -5,6 +5,7 @@ import * as ProfileActions from '../actions/profile';
 
 function mapStateToProps(state) {
   return {
+    currentUser: state.userProfile.currentUser,
     myCurrentSubmission: state.profile.submission,
   };
 }
