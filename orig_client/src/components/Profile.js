@@ -139,7 +139,12 @@ class Profile extends Component{
           { this.badge() }
         </View>
         <ScrollableTabView
-          style={{flexWrap: 'wrap'}}>
+          tabBarBackgroundColor='#4CC6EA'
+          tabBarActiveTextColor='white'
+          tabBarInactiveTextColor='#62ebff'
+          tabBarUnderlineColor='#00ADC7'
+          style={{flexWrap: 'wrap'}}
+          >
           <MyWormholes 
             tabLabel="Wormholes"
             {...this.props}

@@ -12,6 +12,7 @@ import { Icon } from 'react-native-icons';
 import Topbar from './Topbar';
 import SearchLocation from './SearchLocation';
 import DiscoverRequest from '../containers/DiscoverRequest';
+import CreateRequest from '../containers/CreateRequest';
 
 
 var styles = StyleSheet.create({
@@ -89,9 +90,48 @@ var styles = StyleSheet.create({
     marginTop: 4,
     marginRight: 15
   },
+  noMatch: {
+    margin: 8, 
+    borderRadius: 10, 
+    fontFamily: 'Lato-Bold',
+    color: 'white',
+    backgroundColor: '#00ADC7',
+    // backgroundColor: '#A88FFF',
+    fontSize: 20,
+    padding: 10,
+    alignSelf: 'center',
+  },
+  warning: {
+    margin: 8, 
+    borderRadius: 10, 
+    fontFamily: 'Lato-Bold',
+    color: 'white',
+    backgroundColor: '#F888A4',
+    // backgroundColor: '#A88FFF',
+    fontSize: 20,
+    padding: 10,
+    alignSelf: 'center',
+  },
+  click: {
+    padding: 10,
+    alignSelf: 'center',
+    fontFamily: 'Lato-Bold',
+  },
+  ouch: {
+    color: '#ffa950', 
+    justifyContent: 'center', 
+    alignSelf: 'center', 
+    fontFamily: 'Lato-Bold', 
+    fontSize: 30
+  },
 });
 
 class DiscoverSearch extends React.Component{
+
+  componentWillMount() {
+    let { setResultList } = this.props;
+    setResultList([{"name": "default", "location":{ "display_address": [""]}}]);  
+  }
 
   setTarget(data) {
     let { setCurrentTarget } = this.props;
@@ -122,28 +162,22 @@ class DiscoverSearch extends React.Component{
         <Text key={index} style={{fontFamily: 'Lato-Regular'}}> { address } </Text>
       );
     })
+
+    // when just get the page ( user did not search the location)
     if (rowData.name === 'default') {
       return (
-        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{top: 90, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <View
-            style={{alignSelf: 'center', marginTop: 65}}
+            style={{alignSelf: 'center'}}
           >
+            <Text style={styles.ouch}>
+              YAY!
+            </Text>
             <Image 
               source = {require('../assets/small-red-wormie.png')}
               style={{alignSelf: 'center', width: 150, height: 215}}
             />
-          </View>
-          <View
-            style={{marginTop: 10, alignSelf: 'center'}}
-          >
-            <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 20, flexWrap:'wrap', marginTop: 20}}
-            >
-            Search Any Location
-            </Text>
-            <Text
-              style={{alignSelf: 'center', fontFamily: 'Lato-Regular', fontSize: 30}}
-            >With Wormie!</Text>
+            <Text style={styles.noMatch}>Search Place with Wormie!</Text>
           </View>
         </View>
       )
@@ -182,26 +216,93 @@ class DiscoverSearch extends React.Component{
 
   _renderList(ds) {
     let { responseList } = this.props;
-    var rows = responseList;
+    console.log(responseList);
 
-    if (rows) {
+    // if location parameter is missing
+    if (responseList.id == "MISSING_PARAMETER" || responseList.id == "UNAVAILABLE_FOR_LOCATION") {
+      return (
+        <View />
+      )
+
+    // if yelp has list for the requested params
+    } else if (responseList) {
       return (
         <ListView
-          dataSource={ds.cloneWithRows(rows)}
+          dataSource={ds.cloneWithRows(responseList)}
           renderRow={this._renderRow.bind(this)}
           style={{
             backgroundColor:'white',
             position: 'absolute',
-            top: 120,
+            top: 133,
             order: 99,
             width: 380,
-            height: 540,
+            height: 523,
           }}
         />
       );
+    }
+  }
+
+  _renderMapWormie(ds) {
+    let { responseList } = this.props;
+    var rows = responseList;
+
+    // when location param is missing
+    if (responseList.id == "MISSING_PARAMETER") {
+      console.log(responseList.id);
+      var message = responseList.field.slice(0, 1).toUpperCase() + responseList.field.slice(1);
+      return (
+        <View style={{top: 90, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <View
+            style={{alignSelf: 'center'}}
+          >
+            <Text style={styles.ouch}>
+              OUCH!
+            </Text>
+            <Image 
+              source = {require('../assets/small-red-wormie.png')}
+              style={{alignSelf: 'center', width: 150, height: 215}}
+            />
+            <Text style={styles.warning}>Please, Fill {message}</Text>
+          </View>
+        </View>
+      )
+
+    // if yelp does not have data
+    } else if (responseList.length == 0 || responseList.id == "UNAVAILABLE_FOR_LOCATION") {
+      console.log("MAP WORMHOLE!!!!!!!!!!!!!!!!!!!!");
+      console.log(responseList.id);
+      return (
+        <View style={{top: 90, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <View
+            style={{alignSelf: 'center'}}
+          >
+            <Text style={[styles.ouch, {marginBottom: 10}]}>
+              Don't Panic
+            </Text>
+            <Image 
+              source = {require('../assets/small-red-wormie.png')}
+              style={{alignSelf: 'center', width: 150, height: 215}}
+            />
+            <TouchableHighlight
+              underlayColor='white'
+              onPress={() => {
+                this.props.navigator.push({
+                  component: CreateRequest,
+                  passProps: {coords: this.props.coordinates, google: true}
+                })
+              }}
+              style={{alignSelf: 'center', backgroundColor: 'white'}}
+            >
+              <Text style={[styles.noMatch, {backgroundColor: '#A88FFF'}]}>Open Wormhole!</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      )
     } else {
       return <View />
     }
+    
   }
 
   render() {
@@ -218,6 +319,7 @@ class DiscoverSearch extends React.Component{
         <SearchLocation
           setCurrentTerm={this.props.setCurrentTerm} 
           setCurrentLocation={this.props.setCurrentLocation}
+          setCoords={this.props.setCoords}
           searchInfo={this.props.searchInfo}
           category={this.props.category}
           term={this.props.term}
@@ -227,6 +329,7 @@ class DiscoverSearch extends React.Component{
             top: 20,
           }}
         />
+        { this._renderMapWormie(ds) }
       </View>
     );
   }

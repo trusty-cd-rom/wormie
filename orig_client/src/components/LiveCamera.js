@@ -423,7 +423,6 @@ var styles = StyleSheet.create({
 
 export default LiveCamera;
 
-
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
 const animations = {
     layout: {
@@ -452,4 +451,3 @@ const animations = {
         }
     }
 };
-
