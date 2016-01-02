@@ -5,6 +5,7 @@ import * as LiveCameraActions from '../actions/liveCamera';
 
 function mapStateToProps(state) {
 	console.log('livecamera state', state.currentWormhole);
+	console.log('livecamera state camera', state.liveCamera);
   return {
   	liveCamera: state.liveCamera,
   	currentWormhole: state.currentWormhole,

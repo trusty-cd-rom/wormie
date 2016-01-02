@@ -35,6 +35,16 @@ var CameraView = React.createClass({
     if(!cameraState.isRecording) {
       console.log('starting the capture');
       
+      //inital location pull
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          updateSubmissionCoordinates(position);
+        },
+        (error) => alert(error.message),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+
+      //set a interval to grab location every 5 seconds
       locationWatch = setInterval(() => {navigator.geolocation.getCurrentPosition(
         (position) => {
           updateSubmissionCoordinates(position);
@@ -83,37 +93,6 @@ var CameraView = React.createClass({
     // clearInterval(locationWatch);
     this.props.navigator.pop();
   },
-
-  // renderRecordButton() {
-  //   let { cameraState } = this.props;
-
-  //   console.log('!!!!!!!!cameraState.isRecording', cameraState.isRecording);
-
-  //   if(cameraState.isRecording) {
-
-  //     return (
-  //       <Icon
-  //         name= 'ion|stop'
-  //         size={90}
-  //         color='red'
-  //         style={styles.cameraToggleIcon}
-  //       />
-  //     )
-
-  //   } else {
-
-  //     return (
-  //       <Icon
-  //         name= 'ion|ios-circle-filled'
-  //         size={90}
-  //         color='red'
-  //         style={styles.cameraToggleIcon}
-  //       />
-  //     )
-
-  //   }
-
-  // },
 
   render() {
     let { cameraState, pendingWormholeSubmission, currentUser } = this.props;
@@ -172,7 +151,7 @@ var CameraView = React.createClass({
           annotations={[{
             "coordinates": pendingWormholeSubmission.locationData,
             "type": "polyline",
-            "strokeColor": "black",
+            "strokeColor": currentUser.wormie_color,
             "strokeWidth": 5,
             "strokeAlpha": 0.9,
             "id": "cameraPath"

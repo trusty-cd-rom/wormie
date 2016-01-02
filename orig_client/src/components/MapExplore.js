@@ -195,6 +195,49 @@ var MapExplore = React.createClass({
 
     for ( var wormhole in feed ) {
 
+      let annotation;
+      let thisWormhole = feed[wormhole];
+
+
+      if(feed[wormhole].submissions.length>0 && feed[wormhole].submissions[0].location && feed[wormhole].submissions[0].location !== '[]') {
+        console.log('aaaaaa', feed[wormhole].submissions[0].location);
+        let locationData = JSON.parse(feed[wormhole].submissions[0].location);
+        // console.log(locationData, typeof locationData, Array.isArray(locationData));
+        let mapCenter = [locationData[locationData.length-1][0],locationData[locationData.length-1][1]];
+        console.log('mapCenter', mapCenter);
+        annotations.push({
+          "coordinates": locationData,
+          "type": "polyline",
+          "strokeColor": feed[wormhole].submissions[0].submitter.wormie_color,
+          "strokeWidth": 5,
+          "strokeAlpha": 0.9,
+          "id": `${wormhole}path`
+        });
+        annotations.push({
+          coordinates: mapCenter,
+          'type': 'point',
+          title: 'Ouch!',
+          annotationImage: {
+            url: urls.getWormie + feed[wormhole].submissions[0].submitter.wormie_color.slice(1) + '.png',
+            height: 35,
+            width: 25
+          },
+          id: wormhole
+        });
+      } else {
+        annotations.push({
+          coordinates: [ parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)],
+          'type': 'point',
+          annotationImage: {
+            url: urls.getWormie + feed[wormhole].requestor.wormie_color.slice(1) + '.png',
+            height: 35,
+            width: 25
+          },
+          // id is the index of the wormhole in the feed
+          id: wormhole
+        });
+      }
+
      // SAMPLE POLYLINES!
      // annotations.push({
 
@@ -206,24 +249,7 @@ var MapExplore = React.createClass({
      //    id: wormhole + "_trail"
      //  });
 
-     annotations.push({
-
-        coordinates: [ parseFloat(feed[wormhole].latitude), parseFloat(feed[wormhole].longitude)],
-        'type': 'point',     
-        title: feed[wormhole].status,
-        rightCalloutAccessory: {
-          url: 'https://cldup.com/9Lp0EaBw5s.png',
-          height: 25,
-          width: 25
-        },
-        annotationImage: {
-          url: urls.getWormie + feed[wormhole].requestor.wormie_color.slice(1) + '.png',
-          height: 35,
-          width: 25
-        },
-        // id is the index of the wormhole in the feed
-        id: wormhole
-      });
+     // annotations.push(annotation);
 
     }
     console.log(annotations);

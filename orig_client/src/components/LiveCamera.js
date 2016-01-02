@@ -9,7 +9,7 @@ var {
   View,
   TextInput,
   Component,
-  // LayoutAnimation,
+  LayoutAnimation,
   ScrollView,
 } = React;
 
@@ -49,10 +49,16 @@ function peerConnected() {
 }
 
 
-// class LiveCamera extends Component{
 var LiveCamera = React.createClass({
+
+  getInitialState() {
+    return {
+      chatText: ''
+    };
+  },
+
   initStream() {
-    let { initCameraState, currentWormhole, updateCameraState, newChatMessage } = this.props;
+    let { initCameraState, currentWormhole, updateCameraState, newChatMessage, removeOldestMessage } = this.props;
 
     updateCameraState('roomID', `wormhole${currentWormhole.id}`);
 
@@ -64,7 +70,12 @@ var LiveCamera = React.createClass({
     });
     socket.on('message', (data) => {
       console.log('newmessage', data);
-      newChatMessage(data);
+      LayoutAnimation.configureNext(animations.layout.spring);
+      newChatMessage(data, () => {
+        console.log('lkasjdljkgnalskjdngjklasbdljkvansdjkgnalsjkdbgjklasdgn');
+        LayoutAnimation.configureNext(animations.layout.sping)
+        removeOldestMessage();
+      });
     });
   },
   componentWillMount() {
@@ -245,7 +256,7 @@ var LiveCamera = React.createClass({
     };
     console.log('messageData', messageData);
     socket.emit('message',messageData);
-    // newChatMessage(messageData);
+    this.setState({chatText: ''});
   },
   render() {
     let { liveCamera } = this.props;
@@ -294,9 +305,12 @@ var LiveCamera = React.createClass({
         </View>
         <TextInput
           style = {[styles.searchInput]}
+          value = {this.state.chatText}
+          onChange = {(event) => this.setState({chatText: event.nativeEvent.text})}
           placeholder = ' Say something...'
           placeholderTextColor = 'white'
           onSubmitEditing = {this.newMessage}
+          returnKeyType = 'send'
         />
         <View style={{flex: 12}}>
           {chatList}
@@ -397,6 +411,7 @@ var styles = StyleSheet.create({
   chatMessageContainer: {
     height: 35,
     padding: 4,
+    width: 350,
     fontSize: 16,
     borderRadius: 8,
     marginLeft: 12,
@@ -407,3 +422,34 @@ var styles = StyleSheet.create({
 });
 
 export default LiveCamera;
+
+
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const animations = {
+    layout: {
+        spring: {
+            duration: 500,
+            create: {
+                duration: 300,
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.opacity
+            },
+            update: {
+                type: LayoutAnimation.Types.spring,
+                springDamping: 200
+            }
+        },
+        easeInEaseOut: {
+            duration: 300,
+            create: {
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.scaleXY
+            },
+            update: {
+                delay: 100,
+                type: LayoutAnimation.Types.easeInEaseOut
+            }
+        }
+    }
+};
+
