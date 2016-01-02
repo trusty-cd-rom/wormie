@@ -1,4 +1,4 @@
-import { SET_RESULT_LIST, SET_CURRENT_CATEGORY, SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_CURRENT_TARGET } from '../constants/actions';
+import { SET_QUERY_COORDS, SET_RESULT_LIST, SET_CURRENT_CATEGORY, SET_CURRENT_TERM, SET_CURRENT_LOCATION, SET_CURRENT_TARGET } from '../constants/actions';
 
 var initialState = {
   category: '',
@@ -66,6 +66,11 @@ function discover(state = initialState, action) {
       return {
         ...state,
         location: action.location
+      }
+    case SET_QUERY_COORDS:
+      return {
+        ...state,
+        coordinates: action.coordinates
       }
     case SET_RESULT_LIST:
       console.log('set result list');

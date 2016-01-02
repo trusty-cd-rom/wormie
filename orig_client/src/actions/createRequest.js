@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, SET_CURRENT_TARGET, UPDATE_INPUT_TEXT} from '../constants/actions';
+import { SET_RESULT_LIST, CREATE_REQUEST, TOGGLE_FETCH, ADD_USER_INFO, SET_CURRENT_TARGET, UPDATE_INPUT_TEXT} from '../constants/actions';
 import { refreshFeedData } from './feedList';
 
 //this will be called by the create request component when the user submits the form for a new wormhole
@@ -83,5 +83,12 @@ export function setCurrentTarget(target) {
   return {
     type: SET_CURRENT_TARGET,
     target
+  }
+}
+
+export function setResultList(responseList) {
+  return {
+    type: SET_RESULT_LIST,
+    responseList
   }
 }

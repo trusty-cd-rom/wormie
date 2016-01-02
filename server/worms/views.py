@@ -340,6 +340,14 @@ def sorted_list(request):
             serializer = WormholeSerializer(wormholes, many=True)
             return Response(serializer.data)
 
+        elif sorting_criteria == 'popular':
+            wormholes = Wormhole.objects.all()
+            serializer = WormholeSerializer(wormholes, many=True).data
+
+            # sort by like
+            sortedWormholes = sorted(serializer, key=lambda worm: worm.likers[0])
+            return Response(sortedWormholes)
+
         elif sorting_criteria == 'nearby':
             wormholes = Wormhole.objects.all()
             serializer = WormholeSerializer(wormholes, many=True).data
