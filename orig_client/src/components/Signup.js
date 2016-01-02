@@ -135,15 +135,19 @@ class Signup extends Component {
             backgroundColor: colorUtil.rgbToHex(updateProfile.wormie_red, updateProfile.wormie_green, updateProfile.wormie_blue),
             flexDirection: 'row',
             justifyContent: 'center',
-            width: 150,
+            height: 90,
+            width: 75,
             borderRadius: 10,
             borderColor: 'white',
-            marginBottom: 20,
+            marginBottom: 30,
             flex: 1,
             }]}
           onPress = {this.handleSubmit.bind(this, () => {this.goToHome()})}
           underlayColor = '#88D4f5'>
-          <Text style = {styles.buttonText}> EXPLORE </Text>
+          <Image 
+            style={{height: 120, width: 85}}
+            source = {require('../assets/clearwormie2.png')}
+          />
         </TouchableHighlight>
       </View>
     );
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4CC6EA',
+    backgroundColor: 'white',
   },
   slider: {
     flex: 1,
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#fff'
+    color: '#4CC6EA'
   },
   searchInput: {
     fontFamily: 'Lato-Regular',
@@ -203,9 +207,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#4CC6EA',
     borderRadius: 8,
-    color: 'white'
+    color: '#4CC6EA'
   },
 });
 
