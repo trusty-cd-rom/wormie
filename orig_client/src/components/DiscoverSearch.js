@@ -171,7 +171,7 @@ class DiscoverSearch extends React.Component{
             style={{alignSelf: 'center'}}
           >
             <Text style={styles.ouch}>
-              YEAY!
+              YAY!
             </Text>
             <Image 
               source = {require('../assets/small-red-wormie.png')}
@@ -277,11 +277,8 @@ class DiscoverSearch extends React.Component{
           <View
             style={{alignSelf: 'center'}}
           >
-            <Text style={styles.ouch}>
-              No Data Found
-            </Text>
             <Text style={[styles.ouch, {marginBottom: 10}]}>
-              But Don't Worry
+              Don't Panic
             </Text>
             <Image 
               source = {require('../assets/small-red-wormie.png')}
@@ -295,9 +292,9 @@ class DiscoverSearch extends React.Component{
                   passProps: {coords: this.props.coordinates, google: true}
                 })
               }}
-              style={{alignSelf: 'center'}}
+              style={{alignSelf: 'center', backgroundColor: 'white'}}
             >
-              <Text style={[styles.noMatch, {backgroundColor: '#A88FFF'}]}>Click this and Create Request for it!</Text>
+              <Text style={[styles.noMatch, {backgroundColor: '#A88FFF'}]}>Open Wormhole!</Text>
             </TouchableHighlight>
           </View>
         </View>
