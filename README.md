@@ -1,6 +1,6 @@
 # Wormie
 
-Wormie is a React-Native iOS app to request videos and livestreams at specific locations around the world.
+Wormie is a React Native iOS app to request videos and livestreams at specific locations around the world.
 
 ## Team
 
@@ -21,9 +21,9 @@ Wormie is a React-Native iOS app to request videos and livestreams at specific l
 
 ## Usage
 
-Users can request videos at specific locations. Users who are near a desired location can respond to an open request and capture a video of the content that the other user requested. Once a request is fulfilled, all users of the application can view and browse the videos. Requests can have deadlines associated with them.
+Users can request videos at specific locations with optional deadlines. Users who are near a desired location can respond to an open request and capture a video of the content that the other user requested, creating a "wormhole" connection between those two users. Once a request is fulfilled, all users of the application can view and browse the submitted video wormholes.
 
-Current usecases involve capturing a subject or moment of interest at a specific location (e.g. "Is there a line outside this brunch spot right now?"), or a video between 2 separate points of interest (e.g. "I'd like to see a video of walking across the Golden Gate Bridge.")
+Example use cases for Wormie involve capturing a subject or moment of interest at a specific location (e.g. "Is there a line outside this brunch spot right now?"), or a video between 2 separate points of interest (e.g. "I'd like to see a video of walking across the Golden Gate Bridge.")
 
 ## Requirements
 
@@ -63,28 +63,45 @@ Current usecases involve capturing a subject or moment of interest at a specific
 
 #### Micro-services
 - Node
+- Express
 - GraphicsMagick
 
 ### Deployment
 
 - AWS EC2
-- AWS ElasticBeanstalk
 - Docker
-- iOS Store
+- iOS Store (Wormie is currently in App Review)
 
 ## Development
 
 ### Installing Dependencies
 
-From within the root directory:
-
-EXAMPLE:
+From within the `orig_client` directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
+
+From within the `server` directory:
+```sh
+pip3 install -r requirements.txt
+```
+
+From within the `gm_server` directory:
+```sh
+npm install
+```
+
+From within the `socket_server` directory:
+```sh
+npm install
+```
+
+## Running Locally iOS
+
+1. Download Xcode from the Mac App Store
+2. Navigate to the `Wormie.xcodeprog` in `orig_client/ios` folder
+3. Open it in Xcode and run the project
 
 ### Roadmap
 
