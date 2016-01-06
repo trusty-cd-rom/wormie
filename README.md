@@ -25,6 +25,26 @@ Users can request videos at specific locations with optional deadlines. Users wh
 
 Example use cases for Wormie involve capturing a subject or moment of interest at a specific location (e.g. "Is there a line outside this brunch spot right now?"), or a video between 2 separate points of interest (e.g. "I'd like to see a video of walking across the Golden Gate Bridge.")
 
+### Explore
+
+<img src="./gif/WormieExplore.gif">
+
+### Open new video requests
+
+<img src="./gif/WormieCreate.gif">
+
+### Connect with livestreams
+
+<img src="./gif/WormieLive.gif">
+
+### View completed video requests
+
+<img src="./gif/WormieWatch.gif">
+
+### Discover venues
+
+<img src="./gif/WormieYelp.gif">
+
 ## Requirements
 
 ### Frontend
