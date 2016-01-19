@@ -21,7 +21,7 @@
     "react-native-mapbox-gl": "2.0.0",
     "react-native-material-kit": "0.2.2",
     "react-native-safari-view": "0.1.4",
-    "react-native-scrollable-tab-view": "^0.3.3",
+    "react-native-scrollable-tab-view": "0.3.3",
     "react-native-video": "0.6.1",
     "react-native-webrtc": "0.2.2",
     "react-native-youtube": "0.5.0",
