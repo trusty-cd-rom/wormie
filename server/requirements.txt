@@ -17,7 +17,7 @@ dockerpty==0.3.4
 docopt==0.6.2
 docutils==0.12
 httpie==0.9.2
-httplib2==0.9
+httplib2==0.19.0
 jmespath==0.9.0
 Markdown==2.6.5
 oauth2==1.9.0.post1
