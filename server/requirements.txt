@@ -11,7 +11,7 @@ django-cors-headers==1.1.0
 django-filter==0.11.0
 django-oauth-toolkit==0.9.0
 django-rest-framework-social-oauth2==1.0.2
-djangorestframework==3.3.1
+djangorestframework==3.11.2
 docker-py==1.1.0
 dockerpty==0.3.4
 docopt==0.6.2
