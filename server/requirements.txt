@@ -24,7 +24,7 @@ oauth2==1.9.0.post1
 oauthlib==1.0.1
 pathspec==0.3.3
 psycopg2==2.6.1
-Pygments==2.0.2
+Pygments==2.7.4
 PyJWT==1.4.0
 python-dateutil==2.4.2
 python-social-auth==0.2.13
